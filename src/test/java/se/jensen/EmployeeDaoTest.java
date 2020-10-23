@@ -13,11 +13,12 @@ import java.util.List;
 
 
 public class EmployeeDaoTest {
-    private EmployeeDao employeeDao;
+    private EmployeeFakeDao employeeDao;
+    
     @Before
     public void before() {
         employeeDao = new EmployeeFakeDao();
-        ((EmployeeFakeDao)employeeDao).setTestData();
+        employeeDao.setTestData();
     }
 
     @Test(expected = EntityNotFoundException.class)
