@@ -64,6 +64,9 @@ public class EmployeeDaoTest {
         Employee employeeInStorage = storage.get(employeeId);
         Assert.assertNotNull(employeeInStorage);
         Assert.assertEquals(employeeCreated,employeeInStorage);
-
+        Assert.assertEquals(employee,employeeCreated);
     }
+
+
+
 }

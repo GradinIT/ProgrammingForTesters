@@ -30,7 +30,8 @@ public class EmployeeFakeDao implements EmployeeDao {
     public Employee create(Employee employee) {
         if(storage.containsKey(employee.getEmployeeId()))
             throw new EntityAlreadyInStorageException(employee);
-        return storage.put(employee.getEmployeeId(),employee);
+        storage.put(employee.getEmployeeId(),employee);
+        return getEmployee(employee.getEmployeeId());
     }
 
     @Override
