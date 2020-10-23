@@ -1,5 +1,6 @@
 package se.jensen;
 
+import com.google.common.collect.Maps;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,14 +11,16 @@ import se.jensen.entity.Employee;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 
 public class EmployeeDaoTest {
     private EmployeeFakeDao employeeDao;
-    
+    private Map<Integer, Employee> storage = Maps.newHashMap();
+
     @Before
     public void before() {
-        employeeDao = new EmployeeFakeDao();
+        employeeDao = new EmployeeFakeDao(storage);
         employeeDao.setTestData();
     }
 

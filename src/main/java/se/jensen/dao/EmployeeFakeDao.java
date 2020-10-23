@@ -1,17 +1,22 @@
 package se.jensen.dao;
 
 import com.google.common.collect.Maps;
+import org.springframework.beans.factory.annotation.Autowired;
 import se.jensen.entity.Employee;
 import se.jensen.entity.EmployeeTestBuilder;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 public class EmployeeFakeDao implements EmployeeDao {
-    private final Map<Integer, Employee> storage = Maps.newHashMap();
+    private final Map<Integer, Employee> storage;
 
-    public Employee getEmployee(Integer employeeId) throws EntityNotFoundException {
+    public EmployeeFakeDao(Map<Integer, Employee> storage) {
+        this.storage = Objects.requireNonNull(storage);
+    }
+    public Employee getEmployee(Integer employeeId) {
         if (storage.containsKey(employeeId))
             return storage.get(employeeId);
         throw new EntityNotFoundException(employeeId);
@@ -19,6 +24,34 @@ public class EmployeeFakeDao implements EmployeeDao {
 
     public Collection<Employee> getAllEmployees() {
         return storage.values();
+    }
+
+    @Override
+    public Employee create(Employee employee) {
+        if(storage.containsKey(employee.getEmployeeId()))
+            throw new EntityAlreadyInStorageException(employee);
+        return storage.put(employee.getEmployeeId(),employee);
+    }
+
+    @Override
+    public Employee delete(Employee employee) {
+        if (!storage.containsKey(employee.getEmployeeId()))
+            throw new EntityNotFoundException(employee.getEmployeeId());
+        return storage.remove(employee.getEmployeeId());
+    }
+
+    @Override
+    public Employee update(Employee employee) {
+        if (!storage.containsKey(employee.getEmployeeId()))
+            throw new EntityNotFoundException(employee.getEmployeeId());
+        return storage.replace(employee.getEmployeeId(),employee);
+    }
+
+    @Override
+    public Employee updateOrCreate(Employee employee) {
+        if (!storage.containsKey(employee.getEmployeeId()))
+            return create(employee);
+        return update(employee);
     }
 
     public void setTestData() {
