@@ -18,13 +18,9 @@ public class BeanConfiguration {
         return new EmployeeServiceImpl();
     }
 
-
-    private Map<Integer, Employee> storage() {return Maps.newHashMap();}
-
-
     @Bean
     public EmployeeDao employeeDao() {
-        EmployeeFakeDao employeeFakeDao = new EmployeeFakeDao(storage());
+        EmployeeFakeDao employeeFakeDao = new EmployeeFakeDao(Maps.newHashMap());
         employeeFakeDao.setTestData();
         return employeeFakeDao;
     }
