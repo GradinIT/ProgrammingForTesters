@@ -10,7 +10,10 @@ public interface EmployeeDao {
     Collection<Employee> getAllEmployees();
 
     Employee create(Employee employee);
+
     Employee delete(Employee employee);
+
     Employee update(Employee employee);
+
     Employee updateOrCreate(Employee employee);
 }

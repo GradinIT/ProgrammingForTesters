@@ -29,13 +29,14 @@ public class EmployeeTest {
         Assert.assertEquals(salary,employee.getSalary());
         Assert.assertEquals(fullTime,employee.getFullTime());
     }
+
     @Test(expected = NullPointerException.class)
     public void testThatNullValueNotAllowedForEmployeeID() {
         Employee.builder()
-                .setEmployeeId(null)
+                .setEmployeeId(4)
                 .setFirstName("")
                 .setLastName("")
-                .setSalary(new BigDecimal(0))
+                .setSalary(null)
                 .setFullTime(Boolean.TRUE)
                 .build();
     }
