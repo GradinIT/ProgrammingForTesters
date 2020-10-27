@@ -56,19 +56,26 @@ public class EmployeeFakeDao implements EmployeeDao {
     }
 
     public void setTestData() {
-        storage.put(1, EmployeeTestBuilder.builder()
+        storage.put(1, Employee.builder()
                 .setEmployeeId(1)
                 .setFirstName("One")
                 .setLastName("Onesson")
                 .setSalary(BigDecimal.valueOf(22000))
                 .setFullTime(Boolean.TRUE)
                 .build());
-        storage.put(2, EmployeeTestBuilder.builder()
+        storage.put(2, Employee.builder()
                 .setEmployeeId(2)
                 .setFirstName("Two")
                 .setLastName("Twosson")
                 .setSalary(BigDecimal.valueOf(22000))
                 .setFullTime(Boolean.TRUE)
+                .build());
+        storage.put(3, Employee.builder()
+                .setEmployeeId(3)
+                .setFirstName("Runar")
+                .setLastName("Sörgaard")
+                .setSalary(BigDecimal.valueOf(1000000))
+                .setFullTime(Boolean.FALSE)
                 .build());
     }
 }
