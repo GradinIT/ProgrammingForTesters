@@ -77,5 +77,12 @@ public class EmployeeFakeDao implements EmployeeDao {
                 .setSalary(BigDecimal.valueOf(1000000))
                 .setFullTime(Boolean.FALSE)
                 .build());
+        storage.put(4, Employee.builder()
+                .setEmployeeId(4)
+                .setFirstName("Carola")
+                .setLastName("Häggkvist")
+                .setSalary(BigDecimal.valueOf(90))
+                .setFullTime(Boolean.FALSE)
+                .build());
     }
 }
