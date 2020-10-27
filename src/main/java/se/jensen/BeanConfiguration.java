@@ -17,12 +17,10 @@ public class BeanConfiguration {
     public EmployeeService employeeService() {
         return new EmployeeServiceImpl();
     }
-
     @Bean
     public EmployeeDao employeeDao() {
         EmployeeFakeDao employeeFakeDao = new EmployeeFakeDao(Maps.newHashMap());
         employeeFakeDao.setTestData();
         return employeeFakeDao;
     }
-
 }

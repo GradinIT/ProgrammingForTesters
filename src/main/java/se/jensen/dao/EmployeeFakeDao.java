@@ -1,9 +1,6 @@
 package se.jensen.dao;
 
-import com.google.common.collect.Maps;
-import org.springframework.beans.factory.annotation.Autowired;
 import se.jensen.entity.Employee;
-import se.jensen.entity.EmployeeTestBuilder;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -16,6 +13,7 @@ public class EmployeeFakeDao implements EmployeeDao {
     public EmployeeFakeDao(Map<Integer, Employee> storage) {
         this.storage = Objects.requireNonNull(storage);
     }
+
     public Employee getEmployee(Integer employeeId) {
         if (storage.containsKey(employeeId))
             return storage.get(employeeId);

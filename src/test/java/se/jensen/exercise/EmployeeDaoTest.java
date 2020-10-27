@@ -24,28 +24,19 @@ public class EmployeeDaoTest {
         employeeDao.setTestData();
     }
 
-    @Test
+    @Test(expected = EntityNotFoundException.class)
     public void testThatEntityNotFoundExceptionIsThrown() {
-        try {
             employeeDao.getEmployee(10);
-            fail(); //TODO: if we dont get an exception then fail
-        }
-        catch (EntityNotFoundException e) {
-
-        }
-        catch (Exception e) {
-            fail(); //TODO: if we get any other exeption then fail
-        }
     }
 
     @Test(expected = EntityAlreadyInStorageException.class)
-    public void testThatEntityAlreadyInStorageExceptionIsThrown() {
+    public void testThatEntityAlreadyInStorageExceptionIsThrownWhenCreatingANewRecordInDB() {
         Employee employeeAlreadyInStorage = storage.get(1);
         employeeDao.create(employeeAlreadyInStorage);
     }
 
     @Test
-    public void testThatNewEmployeeIsStore(){
+    public void testThatNewEmployeeIsCreatedInStoreage(){
         Integer employeeId = 10;
         String firstName = "firstName";
         String lastName = "lastName";
@@ -62,11 +53,39 @@ public class EmployeeDaoTest {
 
         Employee employeeCreated = employeeDao.create(employee);
         Employee employeeInStorage = storage.get(employeeId);
+
         Assert.assertNotNull(employeeInStorage);
         Assert.assertEquals(employeeCreated,employeeInStorage);
         Assert.assertEquals(employee,employeeCreated);
-
+        Assert.assertEquals(employee.getEmployeeId(),employeeCreated.getEmployeeId());
     }
+
+
+    @Test
+    public void testThatEmployeeIsDeleted() {
+        Employee runar = storage.get(3);
+        Employee employee = employeeDao.delete(runar);
+        try {
+            employeeDao.getEmployee(employee.getEmployeeId());
+            fail("Runar still alive");
+        }
+        catch (EntityNotFoundException e) {
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
