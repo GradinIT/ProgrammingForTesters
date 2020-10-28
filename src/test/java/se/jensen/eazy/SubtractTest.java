@@ -6,7 +6,7 @@ import org.junit.Test;
 public class SubtractTest {
     @Test
     public void testSubtraction() {
-        Integer result = Subtract.execute(10,4);
+        Integer result = new Subtract().execute(10,4);
         Assert.assertEquals(Integer.valueOf(6),result);
     }
 }
