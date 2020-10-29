@@ -1,4 +1,4 @@
-package se.jensen.eazy;
+package se.jensen.eazy.inteface;
 
 public class Add implements Calculable {
     public Integer execute(Integer number, Integer number2) {

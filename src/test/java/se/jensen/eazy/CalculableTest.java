@@ -3,6 +3,11 @@ package se.jensen.eazy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import se.jensen.eazy.inteface.Add;
+import se.jensen.eazy.inteface.Calculable;
+import se.jensen.eazy.inteface.Divide;
+import se.jensen.eazy.inteface.Multiply;
+import se.jensen.eazy.inteface.Subtract;
 
 import java.util.ArrayList;
 import java.util.List;

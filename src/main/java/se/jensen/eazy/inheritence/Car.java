@@ -1,4 +1,4 @@
-package se.jensen.eazy;
+package se.jensen.eazy.inheritence;
 
 public class Car extends Vehicle {
     private Integer HorsePower;

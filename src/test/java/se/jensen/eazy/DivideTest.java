@@ -2,6 +2,7 @@ package se.jensen.eazy;
 
 import org.junit.Assert;
 import org.junit.Test;
+import se.jensen.eazy.inteface.Divide;
 
 public class DivideTest {
     @Test
