@@ -1,16 +1,26 @@
 package se.jensen.api;
 
-import se.jensen.entity.Employee;
-
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.math.BigDecimal;
+import java.util.Objects;
 
+@ParametersAreNonnullByDefault
 public class EmployeeModel {
 
-    private final Integer employeeId;
-    private final String firstName;
-    private final String lastName;
-    private final BigDecimal salary;
-    private final Boolean fullTime;
+    @Nonnull
+    private Integer employeeId;
+    @Nonnull
+    private String firstName;
+    @Nonnull
+    private String lastName;
+    @Nonnull
+    private BigDecimal salary;
+    @Nonnull
+    private Boolean fullTime;
+
+    private EmployeeModel() {
+    }
 
     private EmployeeModel(Builder builder) {
         this.employeeId = builder.employeeId;
@@ -20,42 +30,48 @@ public class EmployeeModel {
         this.fullTime = builder.fullTime;
     }
 
-    private EmployeeModel() { this(new Builder());}
-
     public static Builder builder() {
         return new Builder();
     }
 
-
     public Integer getEmployeeId() {
         return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public BigDecimal getSalary() {
         return salary;
     }
 
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
     public Boolean getFullTime() {
         return fullTime;
     }
 
-    @Override
-    public String toString() {
-        return "EmployeeModel{" +
-                "employeeId=" + employeeId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", salary=" + salary +
-                ", fullTime=" + fullTime +
-                '}';
+    public void setFullTime(Boolean fullTime) {
+        this.fullTime = fullTime;
     }
 
     public static class Builder {

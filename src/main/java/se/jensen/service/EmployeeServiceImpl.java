@@ -15,4 +15,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeById(Integer employeeId) {
         return employeeDao.getEmployee(employeeId);
     }
+    public Employee createOrUpdateEmployee(Employee employee) {
+        return employeeDao.updateOrCreate(employee);
+    }
 }
