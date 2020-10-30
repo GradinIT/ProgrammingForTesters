@@ -74,6 +74,17 @@ public class EmployeeModel {
         this.fullTime = fullTime;
     }
 
+    @Override
+    public String toString() {
+        return "EmployeeModel{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
+                ", fullTime=" + fullTime +
+                '}';
+    }
+
     public static class Builder {
         private Integer employeeId;
         private String firstName;

@@ -1,10 +1,11 @@
 package se.jensen.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import se.jensen.entity.Employee;
 import se.jensen.dao.EmployeeDao;
-import se.jensen.dao.EmployeeFakeDao;
+import se.jensen.entity.Employee;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -15,7 +16,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeById(Integer employeeId) {
         return employeeDao.getEmployee(employeeId);
     }
+
     public Employee createOrUpdateEmployee(Employee employee) {
         return employeeDao.updateOrCreate(employee);
+    }
+
+    public Employee removeEmployee(Employee employee) {
+        return employeeDao.delete(employee);
+    }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        return employeeDao.update(employee);
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        return employeeDao.getAllEmployees();
     }
 }

@@ -3,9 +3,12 @@ package se.jensen.dao;
 import se.jensen.entity.Employee;
 
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 public class EmployeeFakeDao implements EmployeeDao {
     private final Map<Integer, Employee> storage;
@@ -20,8 +23,8 @@ public class EmployeeFakeDao implements EmployeeDao {
         throw new EntityNotFoundException(employeeId);
     }
 
-    public Collection<Employee> getAllEmployees() {
-        return storage.values();
+    public List<Employee> getAllEmployees() {
+        return storage.values().stream().collect(toList());
     }
 
     @Override

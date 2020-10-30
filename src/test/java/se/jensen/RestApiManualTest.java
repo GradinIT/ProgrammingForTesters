@@ -1,23 +1,29 @@
 package se.jensen;
 
 import com.google.gson.Gson;
-import org.json.JSONObject;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import se.jensen.api.EmployeeModel;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class RestApiManualTest {
     public static void main(String[] args) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/employee/4",
+            ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/employee/",
                     HttpMethod.GET,
                     null,
-                    EmployeeModel.class);
+                    List.class);
 
-            System.out.println((EmployeeModel) responseEntity.getBody());
+            List employeeModels =  (List)responseEntity.getBody();
+            System.out.println(employeeModels);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -33,10 +39,7 @@ public class RestApiManualTest {
                 .build();
         Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
         String json = gson.toJson(model);
-        System.out.println(json);
-        HttpEntity<String> request =
-                new HttpEntity<String>(json, headers);
-
+        HttpEntity<String> request = new HttpEntity<String>(json, headers);
         EmployeeModel employeeModel =
                 restTemplate.postForObject("http://localhost:8080/employee", request, EmployeeModel.class);
         System.out.println(employeeModel);

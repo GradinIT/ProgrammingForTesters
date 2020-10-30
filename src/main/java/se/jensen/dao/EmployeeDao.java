@@ -2,12 +2,12 @@ package se.jensen.dao;
 
 import se.jensen.entity.Employee;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface EmployeeDao {
     Employee getEmployee(Integer employeeId);
 
-    Collection<Employee> getAllEmployees();
+    List<Employee> getAllEmployees();
 
     Employee create(Employee employee);
 
