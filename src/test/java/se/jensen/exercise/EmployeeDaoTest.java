@@ -1,92 +1,35 @@
 package se.jensen.exercise;
 
-import com.google.common.collect.Maps;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import se.jensen.dao.EmployeeFakeDao;
-import se.jensen.dao.EntityAlreadyInStorageException;
-import se.jensen.dao.EntityNotFoundException;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import se.jensen.H2JpaConfig;
+import se.jensen.LiquibaseConfigurer;
+import se.jensen.dao.EmployeeDao;
+import se.jensen.dao.mapper.EmployeePojoMapper;
 import se.jensen.entity.Employee;
+import se.jensen.entity.EmployeeTestBuilder;
 
-import java.math.BigDecimal;
-import java.util.Map;
+import javax.ws.rs.core.Application;
+import java.util.List;
 
-import static org.junit.Assert.fail;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {Application.class, LiquibaseConfigurer.class, H2JpaConfig.class})
 public class EmployeeDaoTest {
-    private EmployeeFakeDao employeeDao;
-    private Map<Integer, Employee> storage = Maps.newHashMap();
 
-    @Before
-    public void before() {
-        employeeDao = new EmployeeFakeDao(storage);
-        employeeDao.setTestData();
-    }
-
-    @Test(expected = EntityNotFoundException.class)
-    public void testThatEntityNotFoundExceptionIsThrown() {
-            employeeDao.getEmployee(10);
-    }
-
-    @Test(expected = EntityAlreadyInStorageException.class)
-    public void testThatEntityAlreadyInStorageExceptionIsThrownWhenCreatingANewRecordInDB() {
-        Employee employeeAlreadyInStorage = storage.get(1);
-        employeeDao.create(employeeAlreadyInStorage);
-    }
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
-    public void testThatNewEmployeeIsCreatedInStoreage(){
-        Integer employeeId = 10;
-        String firstName = "firstName";
-        String lastName = "lastName";
-        BigDecimal salary = BigDecimal.valueOf(10000);
-        Boolean fullTime = Boolean.TRUE;
+    public void testSaveNewEmployee() {
+        Employee employee = EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(
+                EmployeeTestBuilder.build())));
 
-        Employee employee = Employee.builder()
-                .setEmployeeId(employeeId)
-                .setLastName(lastName)
-                .setFirstName(firstName)
-                .setFullTime(fullTime)
-                .setSalary(salary)
-                .build();
-
-        Employee employeeCreated = employeeDao.create(employee);
-        Employee employeeInStorage = storage.get(employeeId);
-
-        Assert.assertNotNull(employeeInStorage);
-        Assert.assertEquals(employeeCreated,employeeInStorage);
-        Assert.assertEquals(employee,employeeCreated);
-        Assert.assertEquals(employee.getEmployeeId(),employeeCreated.getEmployeeId());
+        List<Employee> employees = EmployeePojoMapper.map(employeeDao.findAll());
+        for(Employee e: employees)
+            System.out.println(e);
     }
-
-
-    @Test
-    public void testThatEmployeeIsDeleted() {
-        Employee runar = storage.get(3);
-        Employee employee = employeeDao.delete(runar);
-        try {
-            employeeDao.getEmployee(employee.getEmployeeId());
-            fail("Runar still alive");
-        }
-        catch (EntityNotFoundException e) {
-
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

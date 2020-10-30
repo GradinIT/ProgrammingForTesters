@@ -1,10 +1,10 @@
 package se.jensen.entity;
 
 import java.math.BigDecimal;
-
 import java.util.Objects;
 
 public class Employee {
+
     private final Integer employeeId;
     private final String firstName;
     private final String lastName;
@@ -17,6 +17,10 @@ public class Employee {
         this.lastName = Objects.requireNonNull(builder.lastName, "lastName can't be null");
         this.salary = Objects.requireNonNull(builder.salary, "salary can't be null");
         this.fullTime = Objects.requireNonNull(builder.fullTime, "fullTime can't be null");
+    }
+
+    public Employee() {
+        this(new Builder());
     }
 
     public static Builder builder() {
@@ -46,6 +50,17 @@ public class Employee {
 
     public Boolean getFullTime() {
         return fullTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
+                ", fullTime=" + fullTime +
+                '}';
     }
 
     public static class Builder {

@@ -1,19 +1,9 @@
 package se.jensen.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import se.jensen.entity.Employee;
-
-import java.util.List;
-
-public interface EmployeeDao {
-    Employee getEmployee(Integer employeeId);
-
-    List<Employee> getAllEmployees();
-
-    Employee create(Employee employee);
-
-    Employee delete(Employee employee);
-
-    Employee update(Employee employee);
-
-    Employee updateOrCreate(Employee employee);
+@Repository
+public interface EmployeeDao extends JpaRepository<EmployeePOJO, Integer> {
 }
