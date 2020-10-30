@@ -9,10 +9,12 @@ import se.jensen.entity.Employee;
 import se.jensen.service.EmployeeService;
 import se.jensen.service.EmployeeServiceImpl;
 
+import javax.sql.DataSource;
 import java.util.Map;
 
 @Configuration
 public class BeanConfiguration {
+
     @Bean
     public EmployeeService employeeService() {
         return new EmployeeServiceImpl();

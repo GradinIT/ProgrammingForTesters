@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Joakim Gradin" id="create-employee-table">
+        <createTable catalogName="EMPLOYEE"
+                     schemaName="public"
+                     tableName="EMPLOYEE">
+            <column name="EMPLOYEE_ID" type="number"/>
+            <column name="FIRST_NAME" type="varchar(255)"/>
+            <column name="LAST_NAME" type="varchar(255)"/>
+            <column name="FULL_TIME" type="bool"/>
+            <column name="SALARY" type="currency"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
