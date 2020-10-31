@@ -85,6 +85,30 @@ public class EmployeeModel {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EmployeeModel that = (EmployeeModel) o;
+
+        if (!employeeId.equals(that.employeeId)) return false;
+        if (!firstName.equals(that.firstName)) return false;
+        if (!lastName.equals(that.lastName)) return false;
+        if (!salary.equals(that.salary)) return false;
+        return fullTime.equals(that.fullTime);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = employeeId.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + salary.hashCode();
+        result = 31 * result + fullTime.hashCode();
+        return result;
+    }
+
     public static class Builder {
         private Integer employeeId;
         private String firstName;
