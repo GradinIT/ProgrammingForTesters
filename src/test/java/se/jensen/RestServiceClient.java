@@ -3,10 +3,12 @@ package se.jensen;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import se.jensen.api.EmployeeModel;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +48,28 @@ public class RestServiceClient {
     }
 
     public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
-
+        final String uri = "http://localhost:8080/employee";
+        RestTemplate restTemplate = new RestTemplate();
+        EmployeeModel result = restTemplate.postForObject( uri, employeeModel, EmployeeModel.class);
+        return Optional.of(result);
     }
 
+    public static Optional<EmployeeModel> createEmployee(EmployeeModel employeeModel) {
+        final String uri = "http://localhost:8080/employee";
+        RestTemplate restTemplate = new RestTemplate();
+        EmployeeModel result = restTemplate.postForObject( uri, employeeModel, EmployeeModel.class);
+        return Optional.of(result);
+    }
+    public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            RequestEntity<EmployeeModel> requestEntity  =  new RequestEntity<EmployeeModel>(HttpMethod.DELETE,
+                    new URI("http://localhost:8080/employee/"));
+            restTemplate.delete("http://localhost:8080/employee/",requestEntity);
+            return Optional.empty();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return Optional.empty();
+        }
+    }
 }

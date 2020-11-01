@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.api.EmployeeModel;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class RestApiManualTest {
@@ -26,5 +27,31 @@ public class RestApiManualTest {
             Assert.assertEquals(employeeModel.getLastName(), employeeModel1.getLastName());
             Assert.assertEquals(employeeModel.getFullTime(), employeeModel1.getFullTime());
         }
+    }
+    @Test
+    public void testCreateEmployee() {
+        EmployeeModel newEmployee = EmployeeModel.builder()
+                .setEmployeeId(10)
+                .setFirstName("Number-10")
+                .setLastName("Number-10")
+                .setSalary(BigDecimal.valueOf(10000))
+                .setFullTime(Boolean.TRUE)
+                .build();
+
+        EmployeeModel stored = RestServiceClient.createEmployee(newEmployee).get();
+        Assert.assertNotNull(stored);
+    }
+    @Test
+    public void testDeleteEmployee() {
+        EmployeeModel newEmployee = EmployeeModel.builder()
+                .setEmployeeId(10)
+                .setFirstName("Number-10")
+                .setLastName("Number-10")
+                .setSalary(BigDecimal.valueOf(10000))
+                .setFullTime(Boolean.TRUE)
+                .build();
+
+        EmployeeModel stored = RestServiceClient.deleteEmployee(newEmployee).get();
+        Assert.assertNotNull(stored);
     }
 }

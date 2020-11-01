@@ -1,6 +1,6 @@
 package se.jensen.eazy.inheritence;
 
-public class Vehicle {
+public class Fruit {
     private String id;
 
     public String getId() {
