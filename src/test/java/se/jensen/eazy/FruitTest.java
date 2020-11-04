@@ -3,6 +3,7 @@ package se.jensen.eazy;
 import org.junit.Test;
 import se.jensen.eazy.inheritence.Apple;
 import se.jensen.eazy.inheritence.Fruit;
+import se.jensen.eazy.inheritence.Pear;
 import se.jensen.eazy.inteface.Eatable;
 
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ public class FruitTest {
     public void testFruit() {
         List<Fruit> fruitBag = new ArrayList<>();
         fruitBag.add(new Apple());
+        fruitBag.add(new Pear());
         List<Eatable> bag = new ArrayList<>();
-        bag.add(Eatable.class.cast(fruitBag.get(0)));
+        for(Fruit fruit: fruitBag){
+            bag.add(Eatable.class.cast(fruit));
+        }
     }
 }
