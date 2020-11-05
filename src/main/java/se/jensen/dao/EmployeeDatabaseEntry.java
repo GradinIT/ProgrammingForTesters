@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeePOJO {
+public class EmployeeDatabaseEntry {
     @Id
     private  Integer employeeId;
     private  String firstName;
