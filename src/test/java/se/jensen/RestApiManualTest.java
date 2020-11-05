@@ -1,12 +1,13 @@
 package se.jensen;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import se.jensen.api.EmployeeModel;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Ignore
 public class RestApiManualTest {
     @Test
     public void testGetAllEmployees() {

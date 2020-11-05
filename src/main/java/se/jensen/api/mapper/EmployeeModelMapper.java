@@ -6,11 +6,11 @@ import se.jensen.entity.Employee;
 public class EmployeeModelMapper {
     public static Employee map(EmployeeModel model) {
         return Employee.builder()
-                .setEmployeeId(model.getEmployeeId())
-                .setFirstName(model.getFirstName())
-                .setLastName(model.getLastName())
-                .setSalary(model.getSalary())
-                .setFullTime(model.getFullTime())
+                .employeeId(model.getEmployeeId())
+                .firstName(model.getFirstName())
+                .lastName(model.getLastName())
+                .salary(model.getSalary())
+                .fullTime(model.getFullTime())
                 .build();
     }
 
