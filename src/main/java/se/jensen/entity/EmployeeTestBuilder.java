@@ -3,20 +3,20 @@ package se.jensen.entity;
 import java.math.BigDecimal;
 
 public class EmployeeTestBuilder {
-    private static Employee.Builder builder = Employee.builder();
+    private static Employee.EmployeeBuilder builder = Employee.builder();
 
     public static Employee build() {
         return builder
-                .setEmployeeId(1)
-                .setFirstName("Testare")
-                .setLastName("Testarsson")
-                .setSalary(BigDecimal.valueOf(25000.0))
-                .setFullTime(Boolean.TRUE)
+                .employeeId(1)
+                .firstName("Testare")
+                .lastName("Testarsson")
+                .salary(BigDecimal.valueOf(25000.0))
+                .fullTime(Boolean.TRUE)
                 .build();
     }
 
 
-    public static Employee.Builder builder() {
+    public static Employee.EmployeeBuilder builder() {
         return builder;
     }
 }

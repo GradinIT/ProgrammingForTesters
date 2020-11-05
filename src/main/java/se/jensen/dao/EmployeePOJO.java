@@ -1,9 +1,18 @@
 package se.jensen.dao;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 @Entity(name = "EMPLOYEE")
+@Builder
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeePOJO {
     @Id
     private  Integer employeeId;
@@ -12,43 +21,4 @@ public class EmployeePOJO {
     private  BigDecimal salary;
     private  Boolean fullTime;
 
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
-    public Boolean getFullTime() {
-        return fullTime;
-    }
-
-    public void setFullTime(Boolean fullTime) {
-        this.fullTime = fullTime;
-    }
 }

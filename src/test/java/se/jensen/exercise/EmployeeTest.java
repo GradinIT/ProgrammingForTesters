@@ -16,11 +16,11 @@ public class EmployeeTest {
         Boolean fullTime = Boolean.FALSE;
 
         Employee employee = Employee.builder()
-                .setEmployeeId(employeeId)
-                .setFirstName(firstname)
-                .setLastName(lastName)
-                .setFullTime(fullTime)
-                .setSalary(salary)
+                .employeeId(employeeId)
+                .firstName(firstname)
+                .lastName(lastName)
+                .fullTime(fullTime)
+                .salary(salary)
                 .build();
 
         Assert.assertEquals(employeeId,employee.getEmployeeId());
@@ -33,11 +33,11 @@ public class EmployeeTest {
     @Test(expected = NullPointerException.class)
     public void testThatNullValueNotAllowedForEmployeeID() {
         Employee.builder()
-                .setEmployeeId(4)
-                .setFirstName("")
-                .setLastName("")
-                .setSalary(null)
-                .setFullTime(Boolean.TRUE)
+                .employeeId(4)
+                .firstName("")
+                .lastName("")
+                .salary(null)
+                .fullTime(Boolean.TRUE)
                 .build();
     }
 }

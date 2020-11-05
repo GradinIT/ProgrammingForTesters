@@ -9,21 +9,21 @@ import java.util.List;
 public class EmployeePojoMapper {
     public static Employee map (EmployeePOJO employeePOJO) {
         return Employee.builder()
-                .setEmployeeId(employeePOJO.getEmployeeId())
-                .setFirstName(employeePOJO.getFirstName())
-                .setLastName(employeePOJO.getFirstName())
-                .setFullTime(employeePOJO.getFullTime())
-                .setSalary(employeePOJO.getSalary())
+                .employeeId(employeePOJO.getEmployeeId())
+                .firstName(employeePOJO.getFirstName())
+                .lastName(employeePOJO.getFirstName())
+                .fullTime(employeePOJO.getFullTime())
+                .salary(employeePOJO.getSalary())
                 .build();
     }
     public static EmployeePOJO map (Employee employee) {
-        EmployeePOJO employeePOJO = new EmployeePOJO();
-        employeePOJO.setEmployeeId(employee.getEmployeeId());
-        employeePOJO.setFirstName(employee.getFirstName());
-        employeePOJO.setLastName(employee.getLastName());
-        employeePOJO.setFullTime(employee.getFullTime());
-        employeePOJO.setSalary(employee.getSalary());
-        return  employeePOJO;
+        return EmployeePOJO.builder()
+                .employeeId(employee.getEmployeeId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .build();
     }
 
     public static List<Employee> map(List<EmployeePOJO> all) {
