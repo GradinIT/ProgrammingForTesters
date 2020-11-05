@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 @Entity(name = "EMPLOYEE")
-public class EmployeePOJO {
+public class EmployeeDataBaseEntity {
     @Id
     private  Integer employeeId;
     private  String firstName;
