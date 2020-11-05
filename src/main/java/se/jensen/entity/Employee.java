@@ -1,12 +1,11 @@
 package se.jensen.entity;
 
 import lombok.*;
+import se.jensen.util.GenericToStringBuilder;
 
 import java.math.BigDecimal;
 @Builder
 @Getter
-@Setter
-@ToString
 @EqualsAndHashCode
 public class Employee  {
     private final @NonNull Integer employeeId;
@@ -15,4 +14,8 @@ public class Employee  {
     private final @NonNull BigDecimal salary;
     private final @NonNull Boolean fullTime;
 
+    @Override
+    public String toString() {
+        return GenericToStringBuilder.toString(this);
+    }
 }

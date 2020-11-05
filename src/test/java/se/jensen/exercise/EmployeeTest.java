@@ -28,6 +28,7 @@ public class EmployeeTest {
         Assert.assertEquals(lastName,employee.getLastName());
         Assert.assertEquals(salary,employee.getSalary());
         Assert.assertEquals(fullTime,employee.getFullTime());
+        System.out.println(employee);
     }
 
     @Test(expected = NullPointerException.class)
