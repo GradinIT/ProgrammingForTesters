@@ -3,7 +3,6 @@ package se.jensen;
 import lombok.SneakyThrows;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jensen.api.EmployeeModel;
-import se.jensen.dao.EntityNotFoundException;
 
-import javax.ws.rs.core.Application;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,24 +20,28 @@ import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
-public class RestApiManualTest {
+public class RestApiIntegrationTest {
     private static ConfigurableApplicationContext applicationContext;
+
     @SneakyThrows
     @BeforeClass
     public static void startUp() {
         String[] args = {};
         applicationContext = SpringApplication.run(RestServiceApplication.class, args);
     }
+
     @AfterClass
-    public static void shutDown(){
+    public static void shutDown() {
         SpringApplication.exit(applicationContext);
     }
+
     @Test
     public void testGetAllEmployees() {
         List<EmployeeModel> allEmployees = RestServiceClient.getAllEmployees().get();
         Assert.assertNotNull(allEmployees);
         Assert.assertEquals(4, allEmployees.size());
     }
+
     @Test
     public void testGetEmployeesById() {
         List<EmployeeModel> allEmployees = RestServiceClient.getAllEmployees().get();
@@ -54,6 +55,7 @@ public class RestApiManualTest {
             Assert.assertEquals(employeeModel.getFullTime(), employeeModel1.getFullTime());
         }
     }
+
     @Test
     public void testCreateEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
@@ -67,6 +69,7 @@ public class RestApiManualTest {
         EmployeeModel stored = RestServiceClient.createEmployee(newEmployee).get();
         Assert.assertNotNull(stored);
     }
+
     @Test
     public void testDeleteEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
@@ -82,10 +85,9 @@ public class RestApiManualTest {
         try {
             RestServiceClient.getEmployeeById(stored.getEmployeeId());
             fail();
-        }
-        catch ( HttpClientErrorException e) {
-            Assert.assertEquals(404,e.getRawStatusCode());
-            Assert.assertEquals("404 : [Entity with id 10 not found]",e.getMessage());
+        } catch (HttpClientErrorException e) {
+            Assert.assertEquals(404, e.getRawStatusCode());
+            Assert.assertEquals("404 : [Entity with id 10 not found]", e.getMessage());
         }
     }
 }
