@@ -7,16 +7,13 @@ import se.jensen.api.EmployeeModel;
 
 import java.math.BigDecimal;
 import java.util.List;
-@Ignore
 public class RestApiManualTest {
-    @Test
     public void testGetAllEmployees() {
         List<EmployeeModel> allEmployees = RestServiceClient.getAllEmployees().get();
         Assert.assertNotNull(allEmployees);
         Assert.assertEquals(3, allEmployees.size());
     }
 
-    @Test
     public void testGetEmployeesById() {
         List<EmployeeModel> allEmployees = RestServiceClient.getAllEmployees().get();
         Assert.assertNotNull(allEmployees);
@@ -29,7 +26,6 @@ public class RestApiManualTest {
             Assert.assertEquals(employeeModel.getFullTime(), employeeModel1.getFullTime());
         }
     }
-    @Test
     public void testCreateEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
                 .setEmployeeId(10)
@@ -42,7 +38,6 @@ public class RestApiManualTest {
         EmployeeModel stored = RestServiceClient.createEmployee(newEmployee).get();
         Assert.assertNotNull(stored);
     }
-    @Test
     public void testDeleteEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
                 .setEmployeeId(10)
