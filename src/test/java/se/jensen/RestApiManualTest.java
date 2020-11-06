@@ -1,12 +1,11 @@
 package se.jensen;
 
 import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
 import se.jensen.api.EmployeeModel;
 
 import java.math.BigDecimal;
 import java.util.List;
+
 public class RestApiManualTest {
     public void testGetAllEmployees() {
         List<EmployeeModel> allEmployees = RestServiceClient.getAllEmployees().get();
@@ -26,6 +25,7 @@ public class RestApiManualTest {
             Assert.assertEquals(employeeModel.getFullTime(), employeeModel1.getFullTime());
         }
     }
+
     public void testCreateEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
                 .setEmployeeId(10)
@@ -38,6 +38,7 @@ public class RestApiManualTest {
         EmployeeModel stored = RestServiceClient.createEmployee(newEmployee).get();
         Assert.assertNotNull(stored);
     }
+
     public void testDeleteEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
                 .setEmployeeId(10)

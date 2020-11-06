@@ -5,7 +5,6 @@ import se.jensen.util.GenericToStringBuilder;
 
 import java.math.BigDecimal;
 @Builder
-@Getter
 @EqualsAndHashCode
 public class Employee  {
     private final @NonNull Integer employeeId;
@@ -17,5 +16,25 @@ public class Employee  {
     @Override
     public String toString() {
         return GenericToStringBuilder.toString(this);
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public Boolean getFullTime() {
+        return fullTime;
     }
 }

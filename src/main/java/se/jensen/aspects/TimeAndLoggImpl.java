@@ -3,14 +3,11 @@ package se.jensen.aspects;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.CodeSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import se.jensen.util.GenericToStringBuilder;
-
-import java.util.stream.Collectors;
-
-import static java.util.Optional.ofNullable;
 
 @Aspect
 @Configuration
@@ -38,10 +35,14 @@ public class TimeAndLoggImpl {
     }
 
     private void logMethodeAndParameters(ProceedingJoinPoint joinPoint) {
-        LOGGER.info(joinPoint.getSignature().getName());
-        LOGGER.info("argument:" + GenericToStringBuilder.toString(ofNullable(joinPoint.getArgs())
-                .stream()
-                .collect(Collectors.toList())));
+        CodeSignature methodSignature = (CodeSignature) joinPoint.getSignature();
+        String[] sigParamNames = methodSignature.getParameterNames();
+        Object[] params = joinPoint.getArgs();
+
+        LOGGER.info(joinPoint.getTarget().getClass() + "." + joinPoint.getSignature().getName());
+        for (int i = 0; i < params.length; ++i) {
+            LOGGER.info(String.format("param %s = %s",sigParamNames[i],params[i]));
+        }
 
     }
 
