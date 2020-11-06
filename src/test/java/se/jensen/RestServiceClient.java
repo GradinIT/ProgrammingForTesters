@@ -42,8 +42,7 @@ public class RestServiceClient {
                     EmployeeModel.class);
             return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return Optional.empty();
+            throw e;
         }
     }
 
@@ -63,10 +62,10 @@ public class RestServiceClient {
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
         try {
-            RequestEntity<EmployeeModel> requestEntity  =  new RequestEntity<EmployeeModel>(HttpMethod.DELETE,
+            RequestEntity<EmployeeModel> requestEntity  =  new RequestEntity<EmployeeModel>(employeeModel,HttpMethod.DELETE,
                     new URI("http://localhost:8080/employee/"));
-            restTemplate.delete("http://localhost:8080/employee/",requestEntity);
-            return Optional.empty();
+            employeeModel = restTemplate.exchange(requestEntity,EmployeeModel.class).getBody();
+            return Optional.of(employeeModel);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return Optional.empty();
