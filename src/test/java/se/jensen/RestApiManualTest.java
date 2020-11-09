@@ -11,8 +11,6 @@ public class RestApiManualTest {
         for (EmployeeModel employeeModel : employeeModels) {
             EmployeeModel employeeModelById = RestServiceClient.getEmployeeById(employeeModel.getEmployeeId()).get();
         }
-
-        //TODO: using the RestClient add a new Employee
         EmployeeModel employeeModel = EmployeeModel.builder()
                 .setEmployeeId(80)
                 .setFullTime(Boolean.TRUE)
@@ -20,10 +18,8 @@ public class RestApiManualTest {
                 .setLastName("Andersson")
                 .setFirstName("Mr")
                 .build();
-
         employeeModel = RestServiceClient.createEmployee(employeeModel).get();
         System.out.println("after create before update: "+employeeModel);
-
         EmployeeModel updatedEmployee = EmployeeModel.builder()
                 .setEmployeeId(employeeModel.getEmployeeId())
                 .setLastName(employeeModel.getLastName())
@@ -31,7 +27,6 @@ public class RestApiManualTest {
                 .setFullTime(employeeModel.getFullTime())
                 .setFirstName("Anders")
                 .build();
-        //TODO: using te RestClient update the Employee with new First name
         updatedEmployee = RestServiceClient.updateEmployee(updatedEmployee).get();
         System.out.println("after update "+updatedEmployee);
 
@@ -39,17 +34,11 @@ public class RestApiManualTest {
         for (EmployeeModel e : employeeModels) {
             System.out.println(e);
         }
-
-        //TODO: using te Rest client remove the new Employee
-
         EmployeeModel deletedEmpoyee = RestServiceClient.deleteEmployee(updatedEmployee).get();
-
         System.out.println("was deleted "+deletedEmpoyee);
-
         employeeModels = RestServiceClient.getAllEmployees().get();
         for (EmployeeModel e : employeeModels) {
             System.out.println(e);
         }
-
     }
 }
