@@ -12,13 +12,7 @@ import java.util.Optional;
 
 public class RestApiManualTest {
     public static void main(String[] args) throws Exception {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Car> response = restTemplate.getForEntity("http://localhost:8080/car/TORE", Car.class);
-        System.out.println(response.getBody().getId());
+        //TODO: get all employees using the RestServiceClient , NOTE start the employee server first
 
-
-        ResponseEntity<List> listResponse = restTemplate.exchange("http://localhost:8080/car", HttpMethod.GET,null,List.class);
-        List list = (List) listResponse.getBody();
-        System.out.println(list);
     }
 }
