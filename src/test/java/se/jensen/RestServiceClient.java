@@ -29,7 +29,6 @@ public class RestServiceClient {
             });
             return Optional.ofNullable(employeeModels);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return Optional.empty();
         }
     }
@@ -67,7 +66,6 @@ public class RestServiceClient {
             employeeModel = restTemplate.exchange(requestEntity,EmployeeModel.class).getBody();
             return Optional.of(employeeModel);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return Optional.empty();
         }
     }
