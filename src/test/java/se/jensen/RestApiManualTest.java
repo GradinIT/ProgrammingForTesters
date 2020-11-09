@@ -1,22 +1,21 @@
 package se.jensen;
 
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 import se.jensen.api.EmployeeModel;
-import se.jensen.eazy.inheritence.Car;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class RestApiManualTest {
-    public static void main(String[] args) throws Exception {
-        //TODO: get all employees using the RestServiceClient , NOTE start the employee server first
+    public static void main(String[] args) {
+        List<EmployeeModel> employeeModels = RestServiceClient.getAllEmployees().get();
+        for (EmployeeModel employeeModel : employeeModels) {
+            EmployeeModel employeeModelById = RestServiceClient.getEmployeeById(employeeModel.getEmployeeId()).get();
+        }
 
+        //TODO: using the RestClient add a new Employee
 
-        //TODO: for each employee Using the employeeId and the RestService client , get the Employee by id.
+        //TODO: using te RestClient update the Employee with new First name
 
+        //TODO: using te Rest client remove the new Employee
 
     }
 }
