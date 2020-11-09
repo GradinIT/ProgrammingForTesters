@@ -14,5 +14,9 @@ public class RestApiManualTest {
     public static void main(String[] args) throws Exception {
         //TODO: get all employees using the RestServiceClient , NOTE start the employee server first
 
+
+        //TODO: for each employee Using the employeeId and the RestService client , get the Employee by id.
+
+
     }
 }
