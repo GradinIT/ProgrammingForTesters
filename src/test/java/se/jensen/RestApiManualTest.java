@@ -1,47 +1,20 @@
 package se.jensen;
 
-import com.google.gson.Gson;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import se.jensen.api.EmployeeModel;
+import se.jensen.eazy.inheritence.Car;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class RestApiManualTest {
     public static void main(String[] args) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
-        try {
-            ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/employee/",
-                    HttpMethod.GET,
-                    null,
-                    List.class);
+        ResponseEntity<Car> response = restTemplate.getForEntity("http://localhost:8080/car/TORE", Car.class);
+        System.out.println(response.getBody().getId());
 
-            List employeeModels =  (List)responseEntity.getBody();
-            System.out.println(employeeModels);
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        EmployeeModel model = EmployeeModel.builder()
-                .setEmployeeId(15)
-                .setFirstName("Gunther")
-                .setLastName("Swanson")
-                .setSalary(BigDecimal.valueOf(10000.0))
-                .setFullTime(true)
-                .build();
-        Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(model);
-        HttpEntity<String> request = new HttpEntity<String>(json, headers);
-        EmployeeModel employeeModel =
-                restTemplate.postForObject("http://localhost:8080/employee", request, EmployeeModel.class);
-        System.out.println(employeeModel);
+        ResponseEntity<List> listResponse = restTemplate.exchange("http://localhost:8080/car", HttpMethod.GET,null,List.class);
+        System.out.println(response.getBody());
     }
 }

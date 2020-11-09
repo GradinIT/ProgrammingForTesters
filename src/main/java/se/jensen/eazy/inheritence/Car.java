@@ -9,6 +9,10 @@ public class Car extends Vehicle {
 
     }
 
+    public Car() {
+        super("");
+    }
+
     public Integer getHorsePower() {
         return HorsePower;
     }
