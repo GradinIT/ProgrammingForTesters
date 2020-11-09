@@ -5,13 +5,12 @@ import se.jensen.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeModelsMapper {
     public static List<EmployeeModel> map(List<Employee> employees) {
-        List<EmployeeModel> employeeModels = new ArrayList<>();
-        for (Employee employee : employees) {
-            employeeModels.add(EmployeeModelMapper.map(employee));
-        }
-        return employeeModels;
+        return employees.stream()
+                .map(EmployeeModelMapper::map)
+                .collect(Collectors.toList());
     }
 }

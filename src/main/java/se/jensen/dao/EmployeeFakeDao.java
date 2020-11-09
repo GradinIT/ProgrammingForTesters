@@ -3,6 +3,7 @@ package se.jensen.dao;
 import se.jensen.entity.Employee;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class EmployeeFakeDao implements EmployeeDao {
     }
 
     public List<Employee> getAllEmployees() {
-        return storage.values().stream().collect(toList());
+        return new ArrayList<>(storage.values());
     }
 
     @Override
