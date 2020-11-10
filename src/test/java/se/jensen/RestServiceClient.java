@@ -42,22 +42,32 @@ public class RestServiceClient {
                     EmployeeModel.class);
             return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
         } catch (Exception e) {
-            throw e;
+            return Optional.empty();
         }
     }
 
     public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
-        final String uri = "http://localhost:8080/employee";
-        RestTemplate restTemplate = new RestTemplate();
-        EmployeeModel result = restTemplate.postForObject(uri, employeeModel, EmployeeModel.class);
-        return Optional.of(result);
+        try {
+            final String uri = "http://localhost:8080/employee";
+
+            RestTemplate restTemplate = new RestTemplate();
+            RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.PUT, URI.create(uri));
+            ResponseEntity<EmployeeModel> response = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, EmployeeModel.class);
+            return Optional.of(response.getBody());
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     public static Optional<EmployeeModel> createEmployee(EmployeeModel employeeModel) {
-        final String uri = "http://localhost:8080/employee";
-        RestTemplate restTemplate = new RestTemplate();
-        EmployeeModel result = restTemplate.postForObject(uri, employeeModel, EmployeeModel.class);
-        return Optional.of(result);
+        try {
+            final String uri = "http://localhost:8080/employee";
+            RestTemplate restTemplate = new RestTemplate();
+            EmployeeModel result = restTemplate.postForObject(uri, employeeModel, EmployeeModel.class);
+            return Optional.of(result);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
