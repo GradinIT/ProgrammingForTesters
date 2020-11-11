@@ -4,16 +4,18 @@ import com.google.common.collect.Maps;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import se.jensen.dao.EmployeeFakeDao;
 import se.jensen.dao.EntityAlreadyInStorageException;
 import se.jensen.dao.EntityNotFoundException;
 import se.jensen.entity.Employee;
+import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 import static org.junit.Assert.fail;
-
+@Category(UnitTest.class)
 public class EmployeeDaoTest {
     private EmployeeFakeDao employeeDao;
     private Map<Integer, Employee> storage = Maps.newHashMap();

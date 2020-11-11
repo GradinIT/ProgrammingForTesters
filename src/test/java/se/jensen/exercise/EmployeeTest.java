@@ -2,10 +2,12 @@ package se.jensen.exercise;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import se.jensen.entity.Employee;
+import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;
-
+@Category(UnitTest.class)
 public class EmployeeTest {
     @Test
     public void testThatEmployeeIsCreatedCorrectly() {
