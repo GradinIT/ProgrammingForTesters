@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger LOGGER = Logger.getLogger(EmployeeServiceImpl.class.getSimpleName());
+
     @Autowired
     private EmployeeDao employeeDao;
 

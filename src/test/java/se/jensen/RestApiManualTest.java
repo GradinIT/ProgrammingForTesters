@@ -7,6 +7,7 @@ import se.jensen.test.category.ManualTest;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Category(ManualTest.class)
 public class RestApiManualTest {
     public static void main(String[] args) {
@@ -42,9 +43,11 @@ public class RestApiManualTest {
         System.out.println("------------ listing employees end ------------");
 
     }
+
     private static void updateEmployee(EmployeeModel employeeModel) {
         RestServiceClient.updateEmployee(employeeModel);
     }
+
     private static EmployeeModel createNewEmployee() {
         EmployeeModel employeeModel = EmployeeModel.builder()
                 .setEmployeeId(80)
