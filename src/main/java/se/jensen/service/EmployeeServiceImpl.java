@@ -28,6 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(Employee employee) {
+        System.out.println(employee);
         return employeeDao.update(employee);
     }
 
