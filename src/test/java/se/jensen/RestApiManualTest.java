@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 @Category(ManualTest.class)
 public class RestApiManualTest {
     public static void main(String[] args) {
+
+        System.out.println("Hello");
+
         printAllEmployees();
         List<EmployeeModel> employeeModelsById = getAllEmployees().stream()
                 .map(employeeModel -> {
