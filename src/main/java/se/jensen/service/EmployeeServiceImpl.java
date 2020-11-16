@@ -14,6 +14,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
+    public EmployeeServiceImpl(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
+
     public Employee getEmployeeById(Integer employeeId) {
         return employeeDao.getEmployee(employeeId);
     }

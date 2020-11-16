@@ -12,7 +12,7 @@ import se.jensen.service.EmployeeServiceImpl;
 public class BeanConfiguration {
     @Bean
     public EmployeeService employeeService() {
-        return new EmployeeServiceImpl();
+        return null;
     }
 
     @Bean
