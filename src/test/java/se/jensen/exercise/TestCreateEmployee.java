@@ -9,9 +9,6 @@ import java.math.BigDecimal;
 public class TestCreateEmployee {
     @Test
     public void testThatEmployeeIsCreated() {
-        //TODO: create an Employee Instance
-        //Assert instance is not null
-        //Assert thar all fields ar equal
         Integer EMPLOYEEID = 1;
         String FIRSTNAME = "Firstname";
         String LASTNAME = "Lastname";
