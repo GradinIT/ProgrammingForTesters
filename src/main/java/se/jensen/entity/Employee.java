@@ -1,12 +1,15 @@
 package se.jensen.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import se.jensen.util.GenericToStringBuilder;
 
 import java.math.BigDecimal;
+
 @Builder
 @EqualsAndHashCode
-public class Employee  {
+public class Employee {
     private final @NonNull Integer employeeId;
     private final @NonNull String firstName;
     private final @NonNull String lastName;

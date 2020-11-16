@@ -29,7 +29,6 @@ public class EmployeeDaoTest {
                 EmployeeTestBuilder.build())));
 
         List<Employee> employees = EmployeePojoMapper.map(employeeDao.findAll());
-        for(Employee e: employees)
-            System.out.println(e);
+
     }
 }

@@ -8,10 +8,10 @@ import java.util.List;
 
 public class EmployeePojoMapper {
     public static Employee map (EmployeeDatabaseEntry employeeDatabaseEntry) {
-        return Employee.builder()
+       return Employee.builder()
                 .employeeId(employeeDatabaseEntry.getEmployeeId())
                 .firstName(employeeDatabaseEntry.getFirstName())
-                .lastName(employeeDatabaseEntry.getFirstName())
+                .lastName(employeeDatabaseEntry.getLastName())
                 .fullTime(employeeDatabaseEntry.getFullTime())
                 .salary(employeeDatabaseEntry.getSalary())
                 .build();

@@ -17,6 +17,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger LOGGER = Logger.getLogger(EmployeeServiceImpl.class.getSimpleName());
     @Autowired
     private EmployeeDao employeeDao;
+
+    public EmployeeServiceImpl(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
+
     @TimeAndLogg
     public Employee getEmployeeById(Integer employeeId) {
         Optional<EmployeeDatabaseEntry> employee = employeeDao.findById(employeeId);

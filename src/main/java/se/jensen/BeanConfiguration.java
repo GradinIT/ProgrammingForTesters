@@ -1,18 +1,21 @@
 package se.jensen;
 
-import com.google.common.collect.Maps;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.service.EmployeeService;
 import se.jensen.service.EmployeeServiceImpl;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class BeanConfiguration {
-
+    @Autowired
+    EmployeeDao primaryDataSource;
     @Bean
     public EmployeeService employeeService() {
-        return new EmployeeServiceImpl();
+        return new EmployeeServiceImpl(primaryDataSource);
     }
 
 }
