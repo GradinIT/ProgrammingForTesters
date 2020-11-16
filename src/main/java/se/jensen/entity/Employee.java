@@ -48,6 +48,17 @@ public class Employee {
         return fullTime;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
+                ", fullTime=" + fullTime +
+                '}';
+    }
+
     public static class Builder {
         private Integer employeeId;
         private String firstName;
