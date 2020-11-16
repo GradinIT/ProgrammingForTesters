@@ -27,6 +27,6 @@ public class TestEmployeeService {
     public void testGetAllEmployees() {
         List<Employee> employees = employeeService.getAllEmployees();
         Assert.assertEquals(2,employees.size());
-        //TODO: make shure that the method findAll() is called once ( one time ) 
+        //TODO: make shure that the method findAll() is called once ( one time )
     }
 }
