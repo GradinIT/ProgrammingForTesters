@@ -3,6 +3,10 @@ package se.jensen.exercise;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.entity.Employee;
 import se.jensen.service.EmployeeService;
@@ -19,12 +23,15 @@ import static org.mockito.Mockito.when;
 
 public class TestEmployeeService {
 
-    EmployeeDao employeeDao = mock(EmployeeDao.class);
 
-    EmployeeService employeeService = new EmployeeServiceImpl(employeeDao);
+    private EmployeeDao employeeDao = mock(EmployeeDao.class);
+
+
+    @InjectMocks EmployeeService employeeService = new EmployeeServiceImpl();
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         List<Employee> employees = new ArrayList<>();
         employees.add(Employee.builder()
                 .setEmployeeId(1)
@@ -50,5 +57,9 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).getAllEmployees();
         Employee employeeAllan = employees.get(0);
         Assert.assertEquals("Allan", employeeAllan.getFirstName());
+        Assert.assertEquals("Edvall", employeeAllan.getLastName());
+        Assert.assertEquals(BigDecimal.valueOf(10000), employeeAllan.getSalary());
+        Assert.assertEquals(true, employeeAllan.getFullTime());
+        Assert.assertEquals(Integer.valueOf(1), employeeAllan.getEmployeeId());
     }
 }

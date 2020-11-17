@@ -6,6 +6,7 @@ import se.jensen.entity.Employee;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -13,10 +14,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeDao employeeDao;
-
-    public EmployeeServiceImpl(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
 
     public Employee getEmployeeById(Integer employeeId) {
         return employeeDao.getEmployee(employeeId);
@@ -32,7 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        System.out.println(employee);
         return employeeDao.update(employee);
     }
 
