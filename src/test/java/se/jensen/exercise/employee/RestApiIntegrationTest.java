@@ -1,4 +1,4 @@
-package se.jensen;
+package se.jensen.exercise.employee;
 
 import lombok.SneakyThrows;
 import org.junit.AfterClass;
@@ -11,8 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
+import se.jensen.RestServiceApplication;
 import se.jensen.api.EmployeeModel;
-import se.jensen.exercise.client.EmployeeRestServiceClient;
+import se.jensen.exercise.employee.client.EmployeeRestServiceClient;
 
 import java.math.BigDecimal;
 import java.util.List;

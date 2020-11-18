@@ -1,4 +1,4 @@
-package se.jensen.exercise.client;
+package se.jensen.exercise.employee.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

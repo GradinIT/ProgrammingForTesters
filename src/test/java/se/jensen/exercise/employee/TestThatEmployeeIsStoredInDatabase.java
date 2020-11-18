@@ -1,4 +1,4 @@
-package se.jensen.exercise;
+package se.jensen.exercise.employee;
 
 import liquibase.pro.packaged.I;
 import org.junit.Assert;

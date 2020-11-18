@@ -1,11 +1,10 @@
-package se.jensen.exercise.client;
+package se.jensen.exercise.department.client;
 
 import com.google.gson.Gson;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import se.jensen.api.DepartmentModel;
 import se.jensen.api.DepartmentModel;
 
 import java.net.URI;

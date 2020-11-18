@@ -1,4 +1,4 @@
-package se.jensen.exercise;
+package se.jensen.exercise.employee;
 
 import org.junit.Assert;
 import org.junit.Before;
