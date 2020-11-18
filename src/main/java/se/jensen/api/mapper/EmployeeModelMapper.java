@@ -11,16 +11,18 @@ public class EmployeeModelMapper {
                 .lastName(model.getLastName())
                 .salary(model.getSalary())
                 .fullTime(model.getFullTime())
+                .departmentId(model.getDepartmentId())
                 .build();
     }
 
     public static EmployeeModel map(Employee employee) {
         return EmployeeModel.builder()
-                .setEmployeeId(employee.getEmployeeId())
-                .setFirstName(employee.getFirstName())
-                .setLastName(employee.getLastName())
-                .setSalary(employee.getSalary())
-                .setFullTime(employee.getFullTime())
+                .employeeId(employee.getEmployeeId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .salary(employee.getSalary())
+                .fullTime(employee.getFullTime())
+                .departmentId(employee.getDepartmentId())
                 .build();
     }
 }

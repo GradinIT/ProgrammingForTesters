@@ -21,7 +21,7 @@ public class TimeAndLoggImpl {
             long startTime = System.currentTimeMillis();
             Object returnValue = logResult(joinPoint.proceed());
             long timeTaken = System.currentTimeMillis() - startTime;
-            LOGGER.info("Time Taken by {} is {}", joinPoint, timeTaken);
+            LOGGER.info("Time Taken by {} is {} ms", joinPoint, timeTaken);
             return returnValue;
         } catch (Throwable throwable) {
             logException(throwable);

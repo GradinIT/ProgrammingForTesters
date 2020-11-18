@@ -14,6 +14,7 @@ public class TestThatEmployeeIsCreated {
         String lastName ="lastName";
         BigDecimal salary = BigDecimal.valueOf(10000.0);
         Boolean fullTime = Boolean.FALSE;
+        Integer departmentId = 2;
 
         Employee employee = Employee.builder()
                 .employeeId(employeeId)
@@ -21,6 +22,7 @@ public class TestThatEmployeeIsCreated {
                 .lastName(lastName)
                 .fullTime(fullTime)
                 .salary(salary)
+                .departmentId(departmentId)
                 .build();
 
         Assert.assertEquals(employeeId,employee.getEmployeeId());

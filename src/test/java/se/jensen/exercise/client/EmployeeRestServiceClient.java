@@ -1,4 +1,4 @@
-package se.jensen;
+package se.jensen.exercise.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RestServiceClient {
+public class EmployeeRestServiceClient {
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
     public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();

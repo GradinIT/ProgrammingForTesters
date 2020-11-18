@@ -10,9 +10,8 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.math.BigDecimal;
 
-@Entity(name = "EMPLOYEE")
+@Entity(name = "DEPARTMENT")
 @Builder
 @Getter
 @Setter
@@ -20,13 +19,8 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeDatabaseEntry {
+public class DepartmentDatabaseEntry {
     @Id
-    private Integer employeeId;
-    private String firstName;
-    private String lastName;
-    private BigDecimal salary;
-    private Boolean fullTime;
     private Integer departmentId;
-
+    private String departmentName;
 }

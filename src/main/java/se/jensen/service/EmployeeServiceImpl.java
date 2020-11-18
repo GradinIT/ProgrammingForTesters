@@ -2,6 +2,7 @@ package se.jensen.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import se.jensen.aspects.TimeAndLogg;
+import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.EmployeeDatabaseEntry;
 import se.jensen.dao.EntityNotFoundException;
@@ -15,12 +16,9 @@ import java.util.logging.Logger;
 
 public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger LOGGER = Logger.getLogger(EmployeeServiceImpl.class.getSimpleName());
+
     @Autowired
     private EmployeeDao employeeDao;
-
-    public EmployeeServiceImpl(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
 
     @TimeAndLogg
     public Employee getEmployeeById(Integer employeeId) {
@@ -42,6 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .lastName(employee.getLastName())
                 .fullTime(employee.getFullTime())
                 .salary(employee.getSalary())
+                .departmentId(employee.getDepartmentId())
                 .build();
     }
     @TimeAndLogg

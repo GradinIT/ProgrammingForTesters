@@ -25,6 +25,7 @@ public class EmployeeTest {
                 .firstName(firstname)
                 .lastName(lastName)
                 .fullTime(fullTime)
+                .departmentId(1)
                 .salary(salary)
                 .build();
 
@@ -43,6 +44,7 @@ public class EmployeeTest {
                 .lastName("")
                 .salary(null)
                 .fullTime(Boolean.TRUE)
+                .departmentId(1)
                 .build();
     }
 

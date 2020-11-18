@@ -12,6 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jensen.api.EmployeeModel;
+import se.jensen.exercise.client.EmployeeRestServiceClient;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -37,17 +38,17 @@ public class RestApiIntegrationTest {
 
     @Test
     public void testGetAllEmployees() {
-        List<EmployeeModel> allEmployees = RestServiceClient.getAllEmployees().get();
+        List<EmployeeModel> allEmployees = EmployeeRestServiceClient.getAllEmployees().get();
         Assert.assertNotNull(allEmployees);
         Assert.assertEquals(4, allEmployees.size());
     }
 
     @Test
     public void testGetEmployeesById() {
-        List<EmployeeModel> allEmployees = RestServiceClient.getAllEmployees().get();
+        List<EmployeeModel> allEmployees = EmployeeRestServiceClient.getAllEmployees().get();
         Assert.assertNotNull(allEmployees);
         for (EmployeeModel employeeModel : allEmployees) {
-            EmployeeModel employeeModel1 = RestServiceClient.getEmployeeById(employeeModel.getEmployeeId()).get();
+            EmployeeModel employeeModel1 = EmployeeRestServiceClient.getEmployeeById(employeeModel.getEmployeeId()).get();
             Assert.assertNotNull(employeeModel1);
             Assert.assertEquals(employeeModel.getEmployeeId(), employeeModel1.getEmployeeId());
             Assert.assertEquals(employeeModel.getFirstName(), employeeModel1.getFirstName());
@@ -59,31 +60,33 @@ public class RestApiIntegrationTest {
     @Test
     public void testCreateEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
-                .setEmployeeId(10)
-                .setFirstName("Number-10")
-                .setLastName("Number-10")
-                .setSalary(BigDecimal.valueOf(10000))
-                .setFullTime(Boolean.TRUE)
+                .employeeId(10)
+                .firstName("Number-10")
+                .lastName("Number-10")
+                .salary(BigDecimal.valueOf(10000))
+                .fullTime(Boolean.TRUE)
+                .departmentId(2)
                 .build();
 
-        EmployeeModel stored = RestServiceClient.createEmployee(newEmployee).get();
+        EmployeeModel stored = EmployeeRestServiceClient.createEmployee(newEmployee).get();
         Assert.assertNotNull(stored);
     }
 
     @Test
     public void testDeleteEmployee() {
         EmployeeModel newEmployee = EmployeeModel.builder()
-                .setEmployeeId(10)
-                .setFirstName("Number-10")
-                .setLastName("Number-10")
-                .setSalary(BigDecimal.valueOf(10000))
-                .setFullTime(Boolean.TRUE)
+                .employeeId(10)
+                .firstName("Number-10")
+                .lastName("Number-10")
+                .salary(BigDecimal.valueOf(10000))
+                .fullTime(Boolean.TRUE)
+                .departmentId(2)
                 .build();
 
-        EmployeeModel stored = RestServiceClient.deleteEmployee(newEmployee).get();
+        EmployeeModel stored = EmployeeRestServiceClient.deleteEmployee(newEmployee).get();
         Assert.assertNotNull(stored);
         try {
-            RestServiceClient.getEmployeeById(stored.getEmployeeId());
+            EmployeeRestServiceClient.getEmployeeById(stored.getEmployeeId());
             fail();
         } catch (HttpClientErrorException e) {
             Assert.assertEquals(404, e.getRawStatusCode());
