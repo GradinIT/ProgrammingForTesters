@@ -7,7 +7,10 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.EmployeeFakeDao;
+import se.jensen.dao.EntityAlreadyInStorageException;
+import se.jensen.dao.EntityNotFoundException;
 import se.jensen.entity.Employee;
+import se.jensen.entity.EmployeeTestBuilder;
 import se.jensen.service.EmployeeService;
 import se.jensen.service.EmployeeServiceImpl;
 
@@ -15,6 +18,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -47,6 +52,10 @@ public class TestEmployeeService {
 
         when(mockDao.getAllEmployees()).thenReturn(employees);
         when(mockDao.getEmployee(2)).thenReturn(employees.get(1));
+        when(mockDao.getEmployee(10)).thenThrow(new EntityNotFoundException(10));
+        when(mockDao.updateOrCreate(any())).thenReturn(EmployeeTestBuilder.build());
+        when(mockDao.delete(any())).thenReturn(EmployeeTestBuilder.build());
+        when(mockDao.update(any())).thenReturn(EmployeeTestBuilder.build());
     }
 
     @Test
@@ -65,6 +74,7 @@ public class TestEmployeeService {
     public void testGetEmployeeById() {
         Employee employee = employeeService.getEmployeeById(2);
         Assert.assertNotNull(employee);
+        verify(mockDao,times(1)).getEmployee(2);
         Assert.assertEquals("Inga", employee.getFirstName());
         Assert.assertEquals("Edvall", employee.getLastName());
         Assert.assertEquals(BigDecimal.valueOf(10000), employee.getSalary());
@@ -72,12 +82,55 @@ public class TestEmployeeService {
         Assert.assertEquals(Integer.valueOf(2), employee.getEmployeeId());
     }
 
-    //TODO: create tests for
-    /*
-    Employee createOrUpdateEmployee(Employee employee);
 
-    Employee removeEmployee(Employee employee);
+    @Test
+    public void testCreateOrUpdateEmployee() {
+        Employee createdOrUpdatedEmployee = employeeService.createOrUpdateEmployee(EmployeeTestBuilder.build());
+        Assert.assertNotNull(createdOrUpdatedEmployee);
+        verify(mockDao,times(1)).updateOrCreate(any());
+    }
+    @Test
+    public void testRemoveEmployee() {
+        Employee employee = employeeService.removeEmployee(EmployeeTestBuilder.build());
+        Assert.assertNotNull(employee);
+        verify(mockDao,times(1)).delete(any());
+    }
+    @Test
+    public void testUpdateEmployee() {
+        Employee employee = employeeService.updateEmployee(EmployeeTestBuilder.build());
+        Assert.assertNotNull(employee);
+        verify(mockDao,times(1)).update(any());
+    }
 
-    Employee updateEmployee(Employee employee);
-     */
+    @Test
+    public void testEmployeeByIdNotFound() {
+        try {
+            Employee employee = employeeService.getEmployeeById(10);
+            fail("Exception not thrown");
+        }
+        catch (EntityNotFoundException entityNotFoundException) {
+            Assert.assertEquals("Entity with id 10 not found",entityNotFoundException.getMessage());
+        }
+        catch (Exception exception) {
+            fail("Wrong Exception caught");
+        }
+    }
+    @Test
+    public void testEmployeeAlreadyInStorage() {
+        try {
+            Employee e = EmployeeTestBuilder.builder()
+                    .setEmployeeId(10)
+                    .build();
+            
+            when(mockDao.updateOrCreate(e)).thenThrow( new EntityAlreadyInStorageException(e));
+            Employee employee = employeeService.createOrUpdateEmployee(e);
+            fail("Exception not thrown");
+        }
+        catch (EntityAlreadyInStorageException entityAlreadyInStorageException) {
+            Assert.assertEquals("Entity with id 10 already in storage",entityAlreadyInStorageException.getMessage());
+        }
+        catch (Exception exception) {
+            fail("Wrong Exception caught");
+        }
+    }
 }
