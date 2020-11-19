@@ -1,9 +1,14 @@
-package se.jensen.exercise;
+package se.jensen.exercise.employee;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import se.jensen.entity.Employee;
+import se.jensen.entity.EmployeeTestBuilder;
 import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;
@@ -18,11 +23,12 @@ public class EmployeeTest {
         Boolean fullTime = Boolean.FALSE;
 
         Employee employee = Employee.builder()
-                .setEmployeeId(employeeId)
-                .setFirstName(firstname)
-                .setLastName(lastName)
-                .setFullTime(fullTime)
-                .setSalary(salary)
+                .employeeId(employeeId)
+                .firstName(firstname)
+                .lastName(lastName)
+                .fullTime(fullTime)
+                .departmentId(1)
+                .salary(salary)
                 .build();
 
         Assert.assertEquals(employeeId,employee.getEmployeeId());
@@ -35,11 +41,19 @@ public class EmployeeTest {
     @Test(expected = NullPointerException.class)
     public void testThatNullValueNotAllowedForEmployeeID() {
         Employee.builder()
-                .setEmployeeId(4)
-                .setFirstName("")
-                .setLastName("")
-                .setSalary(null)
-                .setFullTime(Boolean.TRUE)
+                .employeeId(4)
+                .firstName("")
+                .lastName("")
+                .salary(null)
+                .fullTime(Boolean.TRUE)
+                .departmentId(1)
                 .build();
+    }
+
+    @Test
+    public void testThatToStringReturnsProper(){
+        String expectedToString = EmployeeTestBuilder.build().toString();
+        Employee employee = EmployeeTestBuilder.build();
+        Assert.assertEquals(expectedToString,employee.toString());
     }
 }

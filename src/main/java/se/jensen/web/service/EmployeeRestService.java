@@ -31,20 +31,16 @@ public class EmployeeRestService {
     @PostMapping("/employee")
     public ResponseEntity<EmployeeModel> createOrUpdateEmployee(@RequestBody EmployeeModel employeeModel){
         EmployeeModel response = EmployeeModelMapper.map(employeeService.createOrUpdateEmployee(EmployeeModelMapper.map(employeeModel)));
-        return new ResponseEntity<EmployeeModel>(employeeModel,HttpStatus.OK);
+        return new ResponseEntity<EmployeeModel>(response,HttpStatus.OK);
     }
     @PutMapping("/employee")
     public ResponseEntity<EmployeeModel> updateEmployee(@RequestBody EmployeeModel employeeModel){
         EmployeeModel response = EmployeeModelMapper.map(employeeService.updateEmployee(EmployeeModelMapper.map(employeeModel)));
-        return new ResponseEntity<EmployeeModel>(employeeModel,HttpStatus.OK);
+        return new ResponseEntity<EmployeeModel>(response,HttpStatus.OK);
     }
     @DeleteMapping("/employee")
     public ResponseEntity<EmployeeModel> deleteEmployee(@RequestBody EmployeeModel employeeModel){
-        EmployeeModel response = EmployeeModelMapper.map(
-                employeeService.removeEmployee(
-                        EmployeeModelMapper.map(employeeModel)
-                )
-        );
-        return new ResponseEntity<EmployeeModel>(employeeModel,HttpStatus.OK);
+        EmployeeModel response = EmployeeModelMapper.map(employeeService.removeEmployee(EmployeeModelMapper.map(employeeModel)));
+        return new ResponseEntity<EmployeeModel>(response,HttpStatus.OK);
     }
 }
