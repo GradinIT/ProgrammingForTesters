@@ -1,4 +1,4 @@
-package se.jensen.exercise.department.client;
+package se.jensen.exercise.department;
 
 public class TestThatNullPointerExceptionIsThrown {
 }
