@@ -1,7 +1,5 @@
 package se.jensen.exercise.employee;
 
-import ch.qos.logback.classic.jmx.JMXConfigurator;
-import ch.qos.logback.classic.jmx.JMXConfiguratorMBean;
 import lombok.SneakyThrows;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -17,12 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jensen.RestServiceApplication;
 import se.jensen.api.EmployeeModel;
-import se.jensen.entity.Employee;
 import se.jensen.exercise.employee.client.EmployeeRestServiceClient;
 
-import javax.management.JMX;
-import javax.management.ObjectName;
-import java.lang.management.ManagementFactory;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -57,29 +51,29 @@ public class EmployeeRestApiTest {
     public void testGetAllEmployees() {
         Optional<List<EmployeeModel>> employees = EmployeeRestServiceClient.getAllEmployees();
         Assert.assertTrue(employees.isPresent());
-        Assert.assertEquals(3,employees.get().stream().count());
+        Assert.assertEquals(3, employees.get().stream().count());
     }
+
     @Test
     public void testGetEmployeeById() {
         Optional<EmployeeModel> employee = EmployeeRestServiceClient.getEmployeeById(1);
         Assert.assertTrue(employee.isPresent());
-        employee.stream().forEach(employeeModel -> {
-            Assert.assertEquals("firstName1",employeeModel.getFirstName());
-            Assert.assertEquals("lastName1",employeeModel.getLastName());
-            Assert.assertEquals(BigDecimal.valueOf(25000.00).intValue(),employeeModel.getSalary().intValue());
-            Assert.assertEquals(Integer.valueOf(1),employeeModel.getDepartmentId());
-            Assert.assertEquals(true,employeeModel.getFullTime());
-        });
+        EmployeeModel employeeModel = employee.get();
+        Assert.assertEquals("firstName1", employeeModel.getFirstName());
+        Assert.assertEquals("lastName1", employeeModel.getLastName());
+        Assert.assertEquals(BigDecimal.valueOf(25000.00).intValue(), employeeModel.getSalary().intValue());
+        Assert.assertEquals(Integer.valueOf(1), employeeModel.getDepartmentId());
+        Assert.assertEquals(true, employeeModel.getFullTime());
     }
+
     @Test
     public void testErrorHandling() {
         try {
             Optional<EmployeeModel> employee = EmployeeRestServiceClient.getEmployeeById(10);
             fail("Expected Exception Not Thrown");
-        }
-        catch (HttpClientErrorException e) {
-            Assert.assertEquals(HttpStatus.NOT_FOUND,e.getStatusCode());
-            Assert.assertEquals("404 : [Entity with id 10 not found]",e.getMessage());
+        } catch (HttpClientErrorException e) {
+            Assert.assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
+            Assert.assertEquals("404 : [Entity with id 10 not found]", e.getMessage());
         }
     }
 }
