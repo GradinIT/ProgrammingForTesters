@@ -45,7 +45,6 @@ public class EmployeeRestApiTest {
     @AfterClass
     public static void shutDown() {
         SpringApplication.exit(applicationContext);
-        System.out.println("runar");
     }
 
     @Test
