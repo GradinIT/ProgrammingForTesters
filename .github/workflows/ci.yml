@@ -20,6 +20,7 @@ jobs:
           java-version: 15
       - run: mvn clean install
   install:
+    needs: compile
     runs-on: ubuntu-latest
     name: Install
     steps:
