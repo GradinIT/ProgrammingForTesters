@@ -1,0 +1,18 @@
+
+
+   Webb Applikation ( html , javascript )
+
+   Web Tjänst Lager (  REST (JSON) )
+
+   Verksamhets logik tjänst lager ( Java ) själva systemet  logiken som gör att detta system är detta system
+
+   Integration mot underliggande system  ( Dao , Repository ... )
+
+   Databasen , Kön , Systemet , ESB ( Enterprice Service Buss ) , Katalogtjäns ( Active Directory , LDAP )
+
+
+   GET = hämta alla
+   GET + värde = häta specifik
+   POST + värde = skapa / spara
+   PUT + värde = uppdatera
+   DELETE + värde = tabort
