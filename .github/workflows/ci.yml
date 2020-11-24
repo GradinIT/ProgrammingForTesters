@@ -5,6 +5,9 @@ on: [push, pull_request]
 jobs:
   start:
     name: Build Java Maven project
+    steps:
+      - id: Start
+        run: echo "Starting CI Pipeline"
   build:
     runs-on: ubuntu-latest
     needs: compile
