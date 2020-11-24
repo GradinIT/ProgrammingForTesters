@@ -36,7 +36,7 @@ public class EmployeeRestApiTest {
         String[] args = {};
         SpringApplication app = new SpringApplication(RestServiceApplication.class);
         app.setDefaultProperties(Collections
-                .singletonMap("server.port", "18080"));
+                .singletonMap("server.port", "8080"));
         app.setBannerMode(Banner.Mode.CONSOLE);
         app.setLogStartupInfo(false);
         applicationContext = app.run(args);
