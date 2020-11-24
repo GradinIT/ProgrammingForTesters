@@ -3,6 +3,7 @@ package se.jensen.entity;
 import java.math.BigDecimal;
 
 public class EmployeeTestBuilder {
+
     private static Employee.EmployeeBuilder builder = Employee.builder();
 
     public static Employee build() {
