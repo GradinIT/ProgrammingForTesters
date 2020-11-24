@@ -1,5 +1,6 @@
 package se.jensen.exercise.employee;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,6 @@ public class EmployeeDaoTest {
                 EmployeeTestBuilder.build())));
 
         List<Employee> employees = EmployeePojoMapper.map(employeeDao.findAll());
-
+        Assert.assertNotNull(employee);
     }
 }
