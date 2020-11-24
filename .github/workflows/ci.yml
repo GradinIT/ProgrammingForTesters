@@ -3,6 +3,8 @@ name: Build Java Maven project
 on: [push, pull_request]
 
 jobs:
+  start:
+    name: Build Java Maven project
   build:
     runs-on: ubuntu-latest
     needs: compile
