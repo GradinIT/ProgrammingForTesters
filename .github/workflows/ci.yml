@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   start:
+    runs-on: ubuntu-latest
     name: Build Java Maven project
     steps:
       - id: Start
