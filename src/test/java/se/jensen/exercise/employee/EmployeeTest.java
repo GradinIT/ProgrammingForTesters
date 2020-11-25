@@ -28,7 +28,7 @@ public class EmployeeTest {
                 .build();
 
         Assert.assertEquals(employeeId,employee.getEmployeeId());
-        Assert.assertEquals("ove",employee.getFirstName());
+        Assert.assertEquals(firstname,employee.getFirstName());
         Assert.assertEquals(lastName,employee.getLastName());
         Assert.assertEquals(salary,employee.getSalary());
         Assert.assertEquals(fullTime,employee.getFullTime());
