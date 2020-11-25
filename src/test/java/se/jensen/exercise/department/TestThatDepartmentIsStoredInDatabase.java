@@ -28,7 +28,7 @@ public class TestThatDepartmentIsStoredInDatabase {
 }
 @Test
     public void testIsStored(){
-   DepartmentDatabaseEntry  departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
+   DepartmentDatabaseEntry  departmentDatabaseEntry = new DepartmentDatabaseEntry().builder()
             .departmentId(DEPARTMENTID)
             .departmentName(DEPARTMENTNAME)
             .build();
