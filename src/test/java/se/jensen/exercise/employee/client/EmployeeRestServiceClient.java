@@ -16,7 +16,7 @@ public class EmployeeRestServiceClient {
 
     public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:18080/employee/",
+        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
@@ -31,7 +31,7 @@ public class EmployeeRestServiceClient {
 
     public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:18080/employee/" + employeeId,
+        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/employee/" + employeeId,
                 HttpMethod.GET,
                 null,
                 EmployeeModel.class);
@@ -39,7 +39,7 @@ public class EmployeeRestServiceClient {
     }
 
     public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
-        final String uri = "http://localhost:18080/employee";
+        final String uri = "http://localhost:8080/employee";
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.PUT, null);
         ResponseEntity<EmployeeModel> response = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, EmployeeModel.class);
@@ -47,7 +47,7 @@ public class EmployeeRestServiceClient {
     }
 
     public static Optional<EmployeeModel> createEmployee(EmployeeModel employeeModel) {
-        final String uri = "http://localhost:18080/employee";
+        final String uri = "http://localhost:8080/employee";
         RestTemplate restTemplate = new RestTemplate();
         EmployeeModel result = restTemplate.postForObject(uri, employeeModel, EmployeeModel.class);
         return Optional.of(result);
@@ -57,7 +57,7 @@ public class EmployeeRestServiceClient {
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.DELETE,
                 null);
-        employeeModel = restTemplate.exchange("http://localhost:18080/employee/", HttpMethod.DELETE, requestEntity, EmployeeModel.class).getBody();
+        employeeModel = restTemplate.exchange("http://localhost:8080/employee/", HttpMethod.DELETE, requestEntity, EmployeeModel.class).getBody();
         return Optional.of(employeeModel);
     }
 }
