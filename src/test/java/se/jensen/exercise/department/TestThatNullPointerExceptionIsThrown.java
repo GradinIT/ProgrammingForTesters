@@ -1,26 +1,29 @@
 package se.jensen.exercise.department;
 
-
+import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.entity.Department;
+
+import static org.junit.Assert.fail;
 
 public class TestThatNullPointerExceptionIsThrown {
 
     @Test(expected = NullPointerException.class)
     public void testDepartmentIdIsNull(){
-         Department.builder()
+         Department department = Department.builder()
                 .departmentId(null)
                 .departmentName("Finance")
                 .build();
-        //Assert.assertEquals(null,department.getDepartmentId());
+        fail("Exception was not thrown as expected ");
     }
 
     @Test(expected = NullPointerException.class)
     public void testDepartmentNameIsNull(){
-        Department.builder()
+       Department department =  Department.builder()
                 .departmentId(1)
                 .departmentName(null)
                 .build();
-       // Assert.assertEquals(null,department.getDepartmentName());
+       fail("Exception was not thrown as expected ");
     }
+
 }
