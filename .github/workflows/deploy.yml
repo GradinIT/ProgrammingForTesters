@@ -2,9 +2,9 @@ ame: Maven CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ develop ]
   pull_request:
-    branches: [ master ]
+    branches: [ develop ]
 
 jobs:
   build_and_test:
