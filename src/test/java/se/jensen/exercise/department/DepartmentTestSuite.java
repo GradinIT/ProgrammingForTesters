@@ -12,3 +12,4 @@ import org.junit.runners.Suite;
 })
 public class DepartmentTestSuite {
 }
+//only to test git hub things
