@@ -41,6 +41,7 @@ public class TestThatDepartmentIsStoredInDatabase {
 
             Assert.assertEquals(departmentDatabaseEntry.getDepartmentId(),departmentDatabaseEntrySaved.getDepartmentId());
             Assert.assertEquals(departmentDatabaseEntry.getDepartmentName(),departmentDatabaseEntrySaved.getDepartmentName());
+            verify(departmentDao, times(1)).save(any());
+            verify(departmentDao, atLeastOnce()).save(any());
         }
-
 }

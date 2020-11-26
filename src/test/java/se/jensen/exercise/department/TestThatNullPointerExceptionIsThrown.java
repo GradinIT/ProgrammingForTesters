@@ -10,22 +10,10 @@ import se.jensen.test.category.UnitTest;
 
 public class TestThatNullPointerExceptionIsThrown {
 
-    @BeforeClass
-    public static void beforeAllTestMessage()
-    {
-        System.out.println("----- Test of Department properties can be null -----");
-    }
-
-    @Before
-    public void beforeEveryTestMessage ()
-    {
-        System.out.println("Test started");
-    }
-
-    @Test
+    @Test (expected = NullPointerException.class)
     public void testThatDepartmentIdCanBeNull ()
     {
-        System.out.println("Test that department id can be null");
+        System.out.println("Test that department id can't be null");
 
         Department department = Department.builder()
                 .departmentId(null)
@@ -34,27 +22,16 @@ public class TestThatNullPointerExceptionIsThrown {
         Assert.assertEquals(null, department.getDepartmentId());
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void testThatDepartmentNameCanBeNull ()
     {
-        System.out.println("Test that department name can be null");
+        System.out.println("Test that department name can't be null");
 
         Department department = Department.builder()
                 .departmentId(1)
                 .departmentName(null)
                 .build();
         Assert.assertEquals(null, department.getDepartmentName());
-    }
-    @After
-    public void afterEveryTestMessage ()
-    {
-        System.out.println("Test finished\n");
-    }
-
-    @AfterClass
-    public static void afterAllTestsMessage ()
-    {
-        System.out.println("----- All tests finished -----");
     }
 }
 
