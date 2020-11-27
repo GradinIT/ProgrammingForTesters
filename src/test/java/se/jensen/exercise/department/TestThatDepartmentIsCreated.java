@@ -1,24 +1,24 @@
 package se.jensen.exercise.department;
-
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.*;
 import org.junit.Test;
 import se.jensen.entity.Department;
-import se.jensen.entity.DepartmentTestBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestThatDepartmentIsCreated {
+
+    @Test
+    public void testThatDepartmentIsCreated() {
+        Integer DEPARTMENTID = 1;
+        String DEPARTMENTNAME = "Department1";
+
         Department department = Department.builder()
-                .departmentName("Finance")
-                .departmentId(2)
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
                 .build();
 
-        @Test
-        public void testDepartmentIsCreated (){
-            System.out.println("testing whether department finance is created");
-            Assert.assertNotNull(department);
-            assertEquals(2, department.getDepartmentId());
-            assertEquals("Finance", department.getDepartmentName());
-        }
+        Assert.assertNotNull(department);
+        Assert.assertEquals(DEPARTMENTID, department.getDepartmentId());
+        Assert.assertEquals(DEPARTMENTNAME, department.getDepartmentName());
+    }
+
 }
+
