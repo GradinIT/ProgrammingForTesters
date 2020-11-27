@@ -27,10 +27,10 @@ public class TestThatDepartmentIsStoredInDatabase {
                 .departmentId(DEPARTMENTID)
                 .departmentName(DEPARTMENTNAME)
                 .build();
-        System.out.println("start test");
+
         DepartmentDatabaseEntry departmentDatabaseEntrySaved = departmentDao.save(departmentDatabaseEntry);
         Assert.assertEquals(departmentDatabaseEntry.getDepartmentId(),departmentDatabaseEntrySaved.getDepartmentId());
-        System.out.println("Test finish");
-        verify(departmentDao,times(1));
+
+
     }
 }
