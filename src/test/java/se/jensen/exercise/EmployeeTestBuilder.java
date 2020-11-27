@@ -1,4 +1,6 @@
-package se.jensen.entity;
+package se.jensen.exercise;
+
+import se.jensen.entity.Employee;
 
 import java.math.BigDecimal;
 

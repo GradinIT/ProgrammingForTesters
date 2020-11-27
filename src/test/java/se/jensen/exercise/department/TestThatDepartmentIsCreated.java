@@ -1,6 +1,5 @@
 package se.jensen.exercise.department;
 
-import lombok.NonNull;
 import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.entity.Department;
