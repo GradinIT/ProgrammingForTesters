@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class TestThatEmployeeIsCreated {
     @Test
     public void test() {
-        Integer employeeId = 1;
+        Integer employeeId = 5;
         String firstname = "firstName";
         String lastName ="lastName";
         BigDecimal salary = BigDecimal.valueOf(10000.0);
@@ -25,7 +25,7 @@ public class TestThatEmployeeIsCreated {
                 .departmentId(departmentId)
                 .build();
 
-        Assert.assertEquals(employeeId,employee.getEmployeeId());
+        Assert.assertEquals((Integer)5,employee.getEmployeeId());
         Assert.assertEquals(firstname,employee.getFirstName());
         Assert.assertEquals(lastName,employee.getLastName());
         Assert.assertEquals(salary,employee.getSalary());
