@@ -25,7 +25,7 @@ public class TestThatEmployeeIsCreated {
                 .departmentId(departmentId)
                 .build();
 
-        Assert.assertEquals((Integer)5,employee.getEmployeeId());
+        Assert.assertEquals(employeeId,employee.getEmployeeId());
         Assert.assertEquals(firstname,employee.getFirstName());
         Assert.assertEquals(lastName,employee.getLastName());
         Assert.assertEquals(salary,employee.getSalary());
