@@ -10,7 +10,7 @@ public class TestThatEmployeeIsCreated {
     @Test
     public void test() {
         Integer employeeId = 5;
-        String firstname = "firstName"
+        String firstname = "firstName";
         String lastName ="lastName";
         BigDecimal salary = BigDecimal.valueOf(10000.0);
         Boolean fullTime = Boolean.FALSE;
