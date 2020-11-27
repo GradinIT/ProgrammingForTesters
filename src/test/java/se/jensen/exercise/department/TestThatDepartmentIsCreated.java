@@ -41,10 +41,27 @@ public class TestThatDepartmentIsCreated {
         Assert.assertEquals(expectedToString,department.toString());
 
     }
-
     @Test
-    public void testThatMessageInExceptionIsCorrect() {
-        Integer DEPARTMENT_ID = 1;
+        public void testThatLombokMessageIsCorrectForDepartmentName() {
+            Integer DEPARTMENT_ID = 2;
+            String DEPARTMENT_NAME = null;
+
+            try {
+                Department department = Department.builder()
+                        .departmentId(DEPARTMENT_ID)
+                        .departmentName(DEPARTMENT_NAME)
+                        .build();
+                fail("Expected exception not thrown");
+            } catch (NullPointerException nullPointerException) {
+                Assert.assertEquals("departmentName is marked non-null but is null", nullPointerException.getMessage());
+            } catch (Exception e) {
+                fail("Expected exception not thrown");
+            }
+
+    }
+    @Test
+    public void testThatLombokMessageIsCorrectForDepartmentId() {
+        Integer DEPARTMENT_ID = null;
         String DEPARTMENT_NAME = "Junit";
 
         try {
@@ -55,9 +72,10 @@ public class TestThatDepartmentIsCreated {
 
             fail("Expected exception not thrown");
         } catch (NullPointerException nullPointerException) {
-            Assert.assertEquals("Department Name Can't be null", nullPointerException.getMessage());
+            Assert.assertEquals("departmentId is marked non-null but is null", nullPointerException.getMessage());
         } catch (Exception e) {
             fail("Expected exception not thrown");
         }
+
     }
 }
