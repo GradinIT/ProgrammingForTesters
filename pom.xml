@@ -127,7 +127,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        RestServiceApplication
+                                        se.jensen.RestServiceApplication
                                     </mainClass>
                                 </manifest>
                             </archive>
