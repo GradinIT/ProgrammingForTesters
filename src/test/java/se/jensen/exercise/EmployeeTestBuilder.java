@@ -5,6 +5,7 @@ import se.jensen.entity.Employee;
 import java.math.BigDecimal;
 
 public class EmployeeTestBuilder {
+
     private static Employee.EmployeeBuilder builder = Employee.builder();
 
     public static Employee build() {

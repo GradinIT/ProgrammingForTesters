@@ -1,24 +1,28 @@
 package se.jensen.exercise.department;
 
-import org.junit.Assert;
-import org.junit.Test;
 import se.jensen.entity.Department;
+import se.jensen.test.category.UnitTest;
 
-import static org.assertj.core.api.Fail.fail;
+import org.junit.*;
+import org.junit.experimental.categories.Category;
+
+@Category(UnitTest.class)
 
 public class TestThatNullPointerExceptionIsThrown {
+
     @Test(expected = NullPointerException.class)
-    public void testDepartmentIdIsNull(){
-        Department department= Department.builder().departmentId(null)
-                .departmentName("Finance")
+    public void testDepartmentIdNotNull(){
+        Department.builder()
+                .departmentId(null)
+                .departmentName("Department1")
                 .build();
-        fail("exception not thrown");
     }
+
     @Test(expected = NullPointerException.class)
-    public void testDepartmentNameIsNull(){
-        Department department= Department.builder().departmentId(1)
+    public void testDepartmentNameNotNull(){
+        Department.builder()
+                .departmentId(1)
                 .departmentName(null)
                 .build();
-        fail("exception not thrown");
     }
 }
