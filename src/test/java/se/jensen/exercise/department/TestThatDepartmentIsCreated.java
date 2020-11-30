@@ -1,12 +1,7 @@
 package se.jensen.exercise.department;
-
-import se.jensen.entity.Department;
-import se.jensen.test.category.UnitTest;
-
 import org.junit.*;
-import org.junit.experimental.categories.Category;
-
-@Category(UnitTest.class)
+import org.junit.Test;
+import se.jensen.entity.Department;
 
 public class TestThatDepartmentIsCreated {
 
@@ -24,5 +19,6 @@ public class TestThatDepartmentIsCreated {
         Assert.assertEquals(DEPARTMENTID, department.getDepartmentId());
         Assert.assertEquals(DEPARTMENTNAME, department.getDepartmentName());
     }
+
 }
 
