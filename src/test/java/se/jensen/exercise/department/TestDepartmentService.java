@@ -39,10 +39,8 @@ public class TestDepartmentService {
     public void testgetAllDepartments(){
         List<Department> all= departmentService.getDepartments();
         Assert.assertNotNull(all);
-        System.out.println(all);
-        System.out.println(departmentDao.findAll());
         Assert.assertEquals(1,all.size());
-       // verify(departmentDao,times(1)).findAll();
+       verify(departmentDao,times(1)).findAll();
     }
 
 }
