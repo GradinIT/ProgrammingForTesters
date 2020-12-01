@@ -1,15 +1,12 @@
 package se.jensen.entity;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Builder
 @Getter
 @EqualsAndHashCode
 @ToString
 public class Department {
-    private final Integer departmentId;
-    private final String departmentName;
+    private final  @NonNull Integer departmentId;
+    private final  @NonNull String departmentName;
 }
