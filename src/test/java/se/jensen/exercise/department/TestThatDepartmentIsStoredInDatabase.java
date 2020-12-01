@@ -13,8 +13,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class TestThatDepartmentIsStoredInDatabase {
+    // TODO re-do this test with the whole group.
     DepartmentDao departmentDao = mock(DepartmentDao.class);
-
     private final Integer DEPARMENTID = 5 ;
     private final String DEPARTMENTNAME = "Develop";
 
