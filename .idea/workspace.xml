@@ -34,8 +34,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0aba50c-1562-45f2-af1a-cbb0d1d33233" name="Default Changelist" comment="Test department is created">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee.iml" beforeDir="false" afterPath="$PROJECT_DIR$/employee.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
