@@ -1,14 +1,20 @@
 package se.jensen.exercise.department;
+
 import org.junit.*;
-import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import se.jensen.entity.Department;
 
+import se.jensen.test.category.UnitTest;
+
+@Category(UnitTest.class)
 public class TestThatDepartmentIsCreated {
 
     @Test
-    public void testThatDepartmentIsCreated() {
+    public void testThatDepartmentIsCreated()
+    {
+        System.out.println("Test that department is created correctly");
         Integer DEPARTMENTID = 1;
-        String DEPARTMENTNAME = "Department1";
+        String DEPARTMENTNAME= "newDepartment";
 
         Department department = Department.builder()
                 .departmentId(DEPARTMENTID)
