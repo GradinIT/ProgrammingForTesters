@@ -3,12 +3,6 @@ name: Build Java Maven project
 on: [push, pull_request]
 
 jobs:
-  start:
-    runs-on: ubuntu-latest
-    name: Build Java Maven project
-    steps:
-      - id: Start
-        run: echo "Starting CI Pipeline"
   compile:
     runs-on: ubuntu-latest
     name: Java compile
