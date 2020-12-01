@@ -1,14 +1,10 @@
 package se.jensen.exercise.employee;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import se.jensen.entity.Employee;
-import se.jensen.entity.EmployeeTestBuilder;
+import se.jensen.exercise.EmployeeTestBuilder;
 import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;

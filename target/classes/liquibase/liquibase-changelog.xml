@@ -1,0 +1,63 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Joakim Gradin" id="create-employee-table">
+        <createTable tableName="EMPLOYEE">
+            <column name="EMPLOYEEID" type="number"/>
+            <column name="FIRSTNAME" type="varchar(255)"/>
+            <column name="LASTNAME" type="varchar(255)"/>
+            <column name="FULLTIME" type="bool"/>
+            <column name="SALARY" type="currency"/>
+            <column name="DEPARTMENTID" type="number"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add-data" author="Joakim Gradin">
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">1</column>
+            <column name="FIRSTNAME">firstName1</column>
+            <column name="LASTNAME">lastName1</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">25000.00</column>
+            <column name="DEPARTMENTID">1</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">2</column>
+            <column name="FIRSTNAME">firstName2</column>
+            <column name="LASTNAME">lastName2</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">25000.00</column>
+            <column name="DEPARTMENTID">1</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">3</column>
+            <column name="FIRSTNAME">firstName3</column>
+            <column name="LASTNAME">lastName3</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">25000.00</column>
+            <column name="DEPARTMENTID">1</column>
+        </insert>
+    </changeSet>
+    <changeSet id="create-table-department" author="Joakim Gradin">
+        <createTable tableName="DEPARTMENT">
+            <column name="DEPARTMENTID" type="number"/>
+            <column name="DEPARTMENTNAME" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add-data-department" author="Joakim Gradin">
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">1</column>
+            <column name="DEPARTMENTNAME">Development</column>
+        </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">2</column>
+            <column name="DEPARTMENTNAME">Sales</column>
+        </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">3</column>
+            <column name="DEPARTMENTNAME">Management</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
