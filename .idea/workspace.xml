@@ -33,38 +33,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0aba50c-1562-45f2-af1a-cbb0d1d33233" name="Default Changelist" comment="Test department is created">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/build.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/DepartmentTestBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/jensen/BeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/se/jensen/BeanConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/jensen/dao/EmployeeFakeDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/jensen/entity/DepartmentTestBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/jensen/entity/EmployeeTestBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/EmployeeTestBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/department/DepartmentTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/department/DepartmentTestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/department/TestDepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/department/TestDepartmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/department/TestThatDepartmentIsStoredInDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/department/TestThatDepartmentIsStoredInDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/EmployeeDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/EmployeeDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/EmployeeRestApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/EmployeeRestApiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/EmployeeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/EmployeeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/TestEmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/TestEmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/client/EmployeeRestServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/se/jensen/exercise/employee/client/EmployeeRestServiceClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/se/jensen/BeanConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/se/jensen/BeanConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/se/jensen/entity/DepartmentTestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/se/jensen/entity/EmployeeTestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/department/TestDepartmentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/department/TestDepartmentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/EmployeeDaoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/EmployeeDaoTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/EmployeeRestApiTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/EmployeeRestApiTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/EmployeeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/EmployeeTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/TestEmployeeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/TestEmployeeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/client/EmployeeRestServiceClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/se/jensen/exercise/employee/client/EmployeeRestServiceClient.class" afterDir="false" />
-    </list>
+    <list default="true" id="b0aba50c-1562-45f2-af1a-cbb0d1d33233" name="Default Changelist" comment="Test department is created" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

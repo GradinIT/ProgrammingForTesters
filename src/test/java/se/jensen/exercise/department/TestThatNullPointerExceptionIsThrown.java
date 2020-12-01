@@ -5,7 +5,6 @@ import se.jensen.entity.Department;
 
 public class TestThatNullPointerExceptionIsThrown {
     
-
     @Test(expected = NullPointerException.class)
     public void testIdNull(){
 
