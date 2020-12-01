@@ -11,4 +11,5 @@ import org.junit.runners.Suite;
         TestDepartmentService.class
 })
 public class DepartmentTestSuite {
+
 }

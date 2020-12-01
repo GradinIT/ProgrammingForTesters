@@ -1,5 +1,6 @@
 package se.jensen.exercise.employee;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import se.jensen.LiquibaseConfigurer;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.mapper.EmployeePojoMapper;
 import se.jensen.entity.Employee;
-import se.jensen.entity.EmployeeTestBuilder;
+import se.jensen.exercise.EmployeeTestBuilder;
 
 import javax.ws.rs.core.Application;
 import java.util.List;
@@ -29,6 +30,6 @@ public class EmployeeDaoTest {
                 EmployeeTestBuilder.build())));
 
         List<Employee> employees = EmployeePojoMapper.map(employeeDao.findAll());
-
+        Assert.assertNotNull(employee);
     }
 }

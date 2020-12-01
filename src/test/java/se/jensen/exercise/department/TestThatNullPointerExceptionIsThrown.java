@@ -7,6 +7,7 @@ public class TestThatNullPointerExceptionIsThrown {
 
     @Test(expected = NullPointerException.class)
     public void testIdNull(){
+
         Department.builder()
                 .departmentId(null)
                 .departmentName("")
