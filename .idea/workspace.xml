@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b0aba50c-1562-45f2-af1a-cbb0d1d33233" name="Default Changelist" comment="Test department is created">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee.iml" beforeDir="false" afterPath="$PROJECT_DIR$/employee.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/GROUP_SIMON" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1kmGO88UGqNOH1fx6wNpnsmvigz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+  </component>
+  <component name="RunManager" selected="JUnit.DepartmentTestSuite">
+    <configuration name="DepartmentTestSuite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.jensen.exercise.department.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.jensen.exercise.department" />
+      <option name="MAIN_CLASS_NAME" value="se.jensen.exercise.department.DepartmentTestSuite" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDepartmentService.testGetAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.jensen.exercise.department.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.jensen.exercise.department" />
+      <option name="MAIN_CLASS_NAME" value="se.jensen.exercise.department.TestDepartmentService" />
+      <option name="METHOD_NAME" value="testGetAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDepartmentService.testGetById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.jensen.exercise.department.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.jensen.exercise.department" />
+      <option name="MAIN_CLASS_NAME" value="se.jensen.exercise.department.TestDepartmentService" />
+      <option name="METHOD_NAME" value="testGetById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestThatDepartmentIsStoredInDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.jensen.exercise.department.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.jensen.exercise.department" />
+      <option name="MAIN_CLASS_NAME" value="se.jensen.exercise.department.TestThatDepartmentIsStoredInDatabase" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestThatDepartmentIsStoredInDatabase.TestSaveIsStoredInDataBase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.jensen.exercise.department.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.jensen.exercise.department" />
+      <option name="MAIN_CLASS_NAME" value="se.jensen.exercise.department.TestThatDepartmentIsStoredInDatabase" />
+      <option name="METHOD_NAME" value="TestSaveIsStoredInDataBase" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DepartmentTestSuite" />
+        <item itemvalue="JUnit.TestThatDepartmentIsStoredInDatabase" />
+        <item itemvalue="JUnit.TestThatDepartmentIsStoredInDatabase.TestSaveIsStoredInDataBase" />
+        <item itemvalue="JUnit.TestDepartmentService.testGetById" />
+        <item itemvalue="JUnit.TestDepartmentService.testGetAll" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0aba50c-1562-45f2-af1a-cbb0d1d33233" name="Default Changelist" comment="" />
+      <created>1606298321726</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606298321726</updated>
+    </task>
+    <task id="LOCAL−00001" summary="Test department is created">
+      <created>1606308895819</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1606308895819</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Test department is created" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test department is created" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1606393872724">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1606393872724" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1606821142218">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606821142218" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1606821142218">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606821142218" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1606821142218">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606821142218" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1606821142218">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606821142218" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1606313457314">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606313457314" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1606313457314">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606313457314" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1606313457314">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606313457314" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1606313457314">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606313457314" />
+    <state x="147" y="65" key="MergeDialog" timestamp="1606396239476">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="65" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606396239476" />
+    <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1606396239487">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="407" y="174" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606396239487" />
+    <state x="465" y="133" key="RollbackChangesDialog" timestamp="1606396388694">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="133" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606396388694" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606308270143">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606308270143" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606735338090">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606735338090" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/se/jensen/exercise/department/TestThatNullPointerExceptionIsThrown.java</url>
+          <line>8</line>
+          <properties class="se.jensen.exercise.department.TestThatNullPointerExceptionIsThrown" method="testIdNull">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/employee$TestThatNullPointerExceptionIsThrown_testIdNull.ic" NAME="TestThatNullPointerExceptionIsThrown.testIdNull Coverage Results" MODIFIED="1606313457267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>se.jensen.exercise.department.*</FILTER>
+    </SUITE>
+  </component>
+</project>

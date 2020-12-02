@@ -36,7 +36,9 @@ public class TestEmployeeService {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
         EmployeeDatabaseEntry employeeDatabaseEntry = EmployeeDatabaseEntry.builder()
+
                 .employeeId(EMPLOYEEID)
                 .firstName(FIRSTNAME)
                 .lastName(LASTNAME)
