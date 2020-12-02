@@ -49,8 +49,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     @TimeAndLogg
     public Department remove(Department department) {
         Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId());
-        if(departmentDatabaseEntry.isPresent())
+        if(departmentDatabaseEntry.isPresent()) {
             departmentDao.delete(DepartmentDatabaseEntryMapper.map(department));
-        return department;
+            return department;
+        }
+        throw new EntityNotFoundException(department.getDepartmentId());
     }
 }
