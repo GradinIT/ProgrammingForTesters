@@ -7,12 +7,12 @@ import se.jensen.entity.Department;
 import se.jensen.test.category.UnitTest;
 
 @Category(UnitTest.class)
+
 public class TestThatDepartmentIsCreated {
 
     @Test
     public void testThatDepartmentIsCreated()
     {
-        System.out.println("Test that department is created correctly");
         Integer DEPARTMENTID = 1;
         String DEPARTMENTNAME= "newDepartment";
 

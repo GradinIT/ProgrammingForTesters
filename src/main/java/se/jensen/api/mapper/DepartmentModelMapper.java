@@ -4,6 +4,7 @@ import se.jensen.api.DepartmentModel;
 import se.jensen.entity.Department;
 
 public class DepartmentModelMapper {
+
     public static Department map (DepartmentModel model) {
         return Department.builder()
                 .departmentName(model.getDepartmentName())
