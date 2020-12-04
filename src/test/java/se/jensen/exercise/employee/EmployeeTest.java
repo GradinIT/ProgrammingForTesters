@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import se.jensen.entity.Employee;
+import se.jensen.entity.EmployeeID;
 import se.jensen.exercise.EmployeeTestBuilder;
 import se.jensen.test.category.UnitTest;
 
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 public class EmployeeTest {
     @Test
     public void testThatEmployeeIsCreatedCorrectly() {
-        Integer employeeId = 1;
+        EmployeeID employeeId = EmployeeID.builder().build();
         String firstname = "firstName";
         String lastName ="lastName";
         BigDecimal salary = BigDecimal.valueOf(10000.0);
@@ -37,7 +38,7 @@ public class EmployeeTest {
     @Test(expected = NullPointerException.class)
     public void testThatNullValueNotAllowedForEmployeeID() {
         Employee.builder()
-                .employeeId(4)
+                .employeeId(EmployeeID.builder().id(1).build())
                 .firstName("")
                 .lastName("")
                 .salary(null)
@@ -50,6 +51,7 @@ public class EmployeeTest {
     public void testThatToStringReturnsProper(){
         String expectedToString = EmployeeTestBuilder.build().toString();
         Employee employee = EmployeeTestBuilder.build();
+        System.out.println(employee);
         Assert.assertEquals(expectedToString,employee.toString());
     }
 }

@@ -3,6 +3,7 @@ package se.jensen.exercise.employee;
 import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.entity.Employee;
+import se.jensen.entity.EmployeeID;
 
 import java.math.BigDecimal;
 
@@ -17,7 +18,7 @@ public class TestThatEmployeeIsCreated {
         Integer departmentId = 2;
 
         Employee employee = Employee.builder()
-                .employeeId(employeeId)
+                .employeeId(EmployeeID.builder().id(employeeId).build())
                 .firstName(firstname)
                 .lastName(lastName)
                 .fullTime(fullTime)
@@ -25,7 +26,7 @@ public class TestThatEmployeeIsCreated {
                 .departmentId(departmentId)
                 .build();
 
-        Assert.assertEquals((Integer)5,employee.getEmployeeId());
+        Assert.assertEquals((Integer)5,employee.getEmployeeId().getId());
         Assert.assertEquals(firstname,employee.getFirstName());
         Assert.assertEquals(lastName,employee.getLastName());
         Assert.assertEquals(salary,employee.getSalary());

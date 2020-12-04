@@ -8,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.EmployeeDatabaseEntry;
 import se.jensen.entity.Employee;
+import se.jensen.exercise.EmployeeTestBuilder;
 import se.jensen.service.EmployeeService;
 import se.jensen.service.EmployeeServiceImpl;
 
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -49,7 +52,6 @@ public class TestEmployeeService {
 
         when(employeeDao.findAll()).thenReturn(list);
 
-
     }
 
     @Test
@@ -82,6 +84,12 @@ public class TestEmployeeService {
         Assert.assertEquals(LASTNAME, employee.getLastName());
         Assert.assertEquals(FULLTIME, employee.getFullTime());
         Assert.assertEquals(SALARY, employee.getSalary());
-        Assert.assertEquals(employeeId, employee.getEmployeeId());
+        Assert.assertEquals(employeeId, employee.getEmployeeId().getId());
+    }
+
+    @Test
+    public void testDeleteEmployee() {
+        service.removeEmployee(EmployeeTestBuilder.build());
+        verify(employeeDao, atLeastOnce()).delete(any());
     }
 }
