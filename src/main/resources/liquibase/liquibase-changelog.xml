@@ -39,6 +39,14 @@
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>
         </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">4</column>
+            <column name="FIRSTNAME">firstName4</column>
+            <column name="LASTNAME">lastName4</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">35000.00</column>
+            <column name="DEPARTMENTID">1</column>
+        </insert>
     </changeSet>
     <changeSet id="create-table-department" author="Joakim Gradin">
         <createTable tableName="DEPARTMENT">
