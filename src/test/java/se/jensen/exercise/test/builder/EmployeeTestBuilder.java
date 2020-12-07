@@ -1,6 +1,7 @@
-package se.jensen.exercise;
+package se.jensen.exercise.test.builder;
 
 import se.jensen.entity.Employee;
+import se.jensen.entity.EmployeeID;
 
 import java.math.BigDecimal;
 
@@ -10,7 +11,7 @@ public class EmployeeTestBuilder {
 
     public static Employee build() {
         return builder
-                .employeeId(1)
+                .employeeId(EmployeeID.builder().id(1).build())
                 .firstName("Testare")
                 .lastName("Testarsson")
                 .salary(BigDecimal.valueOf(25000.0))
