@@ -1,47 +1,45 @@
 package se.jensen.exercise.department;
 
-import liquibase.pro.packaged.D;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.entity.Department;
+import se.jensen.service.DepartmentService;
+import se.jensen.service.DepartmentServiceImpl;
 
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class TestThatDepartmentIsStoredInDatabase {
-    // TODO re-do this test with the whole group.
+    private final Integer DEPARTMENT_ID = 15;
+    private final String DEPARTMENT_NAME = "name";
+
     DepartmentDao departmentDao = mock(DepartmentDao.class);
-    private final Integer DEPARMENTID = 5 ;
-    private final String DEPARTMENTNAME = "Develop";
 
     @Before
-    public void mockSettings() {
-        when(departmentDao.save(any(DepartmentDatabaseEntry.class)))
-                .thenReturn(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARMENTID)
-                        .departmentName(DEPARTMENTNAME)
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        when(departmentDao.save(any())).thenReturn(DepartmentDatabaseEntry.builder()
+                        .departmentId(DEPARTMENT_ID)
+                        .departmentName(DEPARTMENT_NAME)
+                        .build());
+    }
+    @Test
+    public void test() {
+        departmentDao.save(DepartmentDatabaseEntry.builder()
+                .departmentName(DEPARTMENT_NAME)
+                .departmentId(DEPARTMENT_ID)
                 .build());
 
+        verify(departmentDao,times(1)).save(any());
     }
-
-    @Test
-    public void testToSaveInDatabase() {
-
-        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
-                .departmentId(DEPARMENTID)
-                .departmentName(DEPARTMENTNAME)
-                .build();
-
-        DepartmentDatabaseEntry departmentDatabaseEntrySaved = departmentDao.save(departmentDatabaseEntry);
-        Assert.assertEquals(departmentDatabaseEntry.getDepartmentId(),departmentDatabaseEntrySaved.getDepartmentId());
-        Assert.assertEquals(departmentDatabaseEntry.getDepartmentName(),departmentDatabaseEntrySaved.getDepartmentName());
-    }
-
-
-
-
 }
