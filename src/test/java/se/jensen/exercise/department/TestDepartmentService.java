@@ -119,9 +119,8 @@ public class TestDepartmentService {
                 .departmentId(DEPARTMENT_ID)
                 .departmentName(DEPARTMENT_NAME)
                 .build());
-        Assert.assertNotNull(department);
         verify(departmentDao,times(1)).findById(any());
-
+        verify(departmentDao,times(1)).delete(any());
     }
     @Test // without using mockito
     public void testThatNewDepartmentIsCreated(){

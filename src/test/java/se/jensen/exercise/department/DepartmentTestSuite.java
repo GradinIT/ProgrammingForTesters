@@ -8,8 +8,9 @@ import org.junit.runners.Suite;
         TestThatDepartmentIsCreated.class,
         TestThatNullPointerExceptionIsThrown.class,
         TestThatDepartmentIsStoredInDatabase.class,
-        TestDepartmentService.class
+        TestDepartmentService.class,
+        TestDepartmentServiceExceptions.class
 })
 public class DepartmentTestSuite {
 }
-//only to test git hub things
+
