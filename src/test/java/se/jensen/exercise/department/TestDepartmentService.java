@@ -7,7 +7,7 @@ import se.jensen.entity.Department;
 import se.jensen.test.category.UnitTest;
 import se.jensen.dao.*;
 import se.jensen.service.*;
-import se.jensen.exercise.DepartmentTestBuilder;
+import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 
 import org.junit.experimental.categories.Category;
 import static org.junit.Assert.fail;
@@ -263,3 +263,4 @@ public class TestDepartmentService {
     }
 
 }
+
