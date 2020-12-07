@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import se.jensen.entity.Employee;
 import se.jensen.entity.EmployeeID;
-import se.jensen.exercise.EmployeeTestBuilder;
+import se.jensen.exercise.test.builder.EmployeeTestBuilder;
 import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;

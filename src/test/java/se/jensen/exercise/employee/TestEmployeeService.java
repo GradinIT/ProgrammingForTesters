@@ -8,7 +8,7 @@ import org.mockito.MockitoAnnotations;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.EmployeeDatabaseEntry;
 import se.jensen.entity.Employee;
-import se.jensen.exercise.EmployeeTestBuilder;
+import se.jensen.exercise.test.builder.EmployeeTestBuilder;
 import se.jensen.service.EmployeeService;
 import se.jensen.service.EmployeeServiceImpl;
 
