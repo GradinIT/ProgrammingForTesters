@@ -27,6 +27,7 @@ public class TestDepartmentService {
     DepartmentDao departmentDao = mock(DepartmentDao.class);
     @InjectMocks
     DepartmentService service = new DepartmentServiceImpl();
+    Integer departmentId = Integer.valueOf(1);
     private final Integer DEPARTMENTID = 1;
     private final String DEPARTMENTNAME = "ACCOUNTS";
 
@@ -41,6 +42,14 @@ public class TestDepartmentService {
         List<DepartmentDatabaseEntry> list = new ArrayList<>();
         list.add(departmentDatabaseEntry);
         when(departmentDao.findAll()).thenReturn(list);
+        when(departmentDao.findById(any())).thenReturn((Optional.of(DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build())));
+        when(departmentDao.save(any())).thenReturn(DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build());
     }
 
     @Test
@@ -53,19 +62,71 @@ public class TestDepartmentService {
 
     @Test
     public void testGetById() {
-        Integer departmentId = Integer.valueOf(1);
+       //Integer departmentId = Integer.valueOf(1);
 
-        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder() // setup test reply from database
-                .departmentId(DEPARTMENTID)
-                .departmentName(DEPARTMENTNAME)
-                .build();
 
-        when(departmentDao.findById(departmentId)).thenReturn(Optional.of(departmentDatabaseEntry)); // Mock the call
+
 
         Department department = service.getDepartmentById(departmentId);
         verify(departmentDao, times(1)).findById(departmentId);
         Assert.assertNotNull(department);
-        Assert.assertEquals(DEPARTMENTNAME, department.getDepartmentName());
+        Assert.assertEquals(DEPARTMENTID, department.getDepartmentId());
 
+    }
+    @Test
+    public void testCreate(){
+        when(departmentDao.findById(any()))
+                .thenReturn(Optional.empty())
+              .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build()));
+
+        Department department = Department.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+
+        Department createDepartment = service.create(department);
+        Assert.assertNotNull(createDepartment);
+        verify(departmentDao, times(1)).save(any());
+       Department savedDepartment = service.getDepartmentById(DEPARTMENTID);
+
+        Assert.assertNotNull(savedDepartment);
+        Assert.assertEquals(DEPARTMENTID, savedDepartment.getDepartmentId());
+        Assert.assertEquals(DEPARTMENTNAME, savedDepartment.getDepartmentName());
+System.out.println(savedDepartment.getDepartmentId());
+    }
+    @Test
+    public void testDelete(){
+        Department department = Department.builder()
+                .departmentId(3)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+        System.out.println(department.getDepartmentId());
+        Department departmentDelete = service.remove(department);
+        verify(departmentDao,times(1)).delete(any());
+        //Department deleteDepartment = service.getDepartmentById(DEPARTMENTID);
+
+        //when(departmentDao.existsById(departmentId)).thenReturn(false);
+       // DepartmentDatabaseEntry departmentDatabaseEntrydelete = departmentDao.delete(DepartmentDatabaseEntry);
+//Assert.assertNull(departmentDelete);
+        System.out.println(DEPARTMENTID);
+        System.out.println(departmentDelete.getDepartmentId());
+//Assert.assertNull(department.getDepartmentId());
+System.out.println(department.getDepartmentId());
+    }
+    @Test
+    public void testUpdate(){
+        Department department = Department.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+        Department departmentUpdate = service.update(department);
+        verify(departmentDao,times(1)).save(any());
+        Assert.assertNotNull(departmentUpdate);
+        Assert.assertEquals(DEPARTMENTID, departmentUpdate.getDepartmentId());
+        Assert.assertEquals(DEPARTMENTNAME, departmentUpdate.getDepartmentName());
+        System.out.println("Departments =:"+departmentUpdate.getDepartmentId());
     }
 }

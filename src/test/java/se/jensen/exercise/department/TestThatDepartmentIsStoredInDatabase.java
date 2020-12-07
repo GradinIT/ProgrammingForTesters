@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 public class TestThatDepartmentIsStoredInDatabase {
     DepartmentDao departmentDao= mock(DepartmentDao.class);
     private final Integer DEPARTMENTID = 1;
-    private final String DEPARTMENTNAME = "DepartmentName";
+    private final String DEPARTMENTNAME = "Finance";
 
     @Before
     public void setUpMock() {
