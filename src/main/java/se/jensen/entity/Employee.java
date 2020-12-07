@@ -1,20 +1,19 @@
 package se.jensen.entity;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import se.jensen.util.GenericToStringBuilder;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
-@Builder
+@SuperBuilder
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Employee {
-    private final @NonNull Integer employeeId;
+public class Employee extends Entity<EmployeeID> {
+    private final @NonNull EmployeeID employeeId;
     private final @NonNull String firstName;
     private final @NonNull String lastName;
     private final @NonNull BigDecimal salary;
