@@ -24,9 +24,9 @@ public class TestThatDepartmentIsCreated {
     public void testThatNullValueNotAllowedForDepartmentID() {
         Department.builder()
                 .departmentId(null)
-                .departmentName("Sales")
+                .departmentName(null)
                 .build();
-        fail("Exception was not thrown as expected ");
+
     }
     @Test
     public void testThatToStringReturnsProperly(){
