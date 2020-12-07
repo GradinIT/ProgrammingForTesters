@@ -10,12 +10,13 @@ public class TestThatNullPointerExceptionIsThrown {
 
     @Test(expected = NullPointerException.class)
     public void testDepartmentIdIsNull(){
-        Department.builder()
+        Department department =  Department.builder()
                 .departmentId(null)
-                .departmentName("Finance")
+                .departmentName("Sales")
                 .build();
         fail("Exception was not thrown as expected ");
     }
+
 
     @Test(expected = NullPointerException.class)
     public void testDepartmentNameIsNull(){

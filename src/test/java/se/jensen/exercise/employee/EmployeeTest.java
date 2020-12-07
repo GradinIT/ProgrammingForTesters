@@ -8,6 +8,9 @@ import se.jensen.exercise.EmployeeTestBuilder;
 import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;
+
+import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
+
 @Category(UnitTest.class)
 public class EmployeeTest {
     @Test
@@ -37,13 +40,14 @@ public class EmployeeTest {
     @Test(expected = NullPointerException.class)
     public void testThatNullValueNotAllowedForEmployeeID() {
         Employee.builder()
-                .employeeId(4)
+                .employeeId(null)
                 .firstName("")
                 .lastName("")
                 .salary(null)
                 .fullTime(Boolean.TRUE)
                 .departmentId(1)
                 .build();
+        fail("Expected exception is not thrown");
     }
 
     @Test

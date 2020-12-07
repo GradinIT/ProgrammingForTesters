@@ -3,6 +3,9 @@ package se.jensen.exercise.department;
 import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.entity.Department;
+import se.jensen.exercise.DepartmentTestBuilder;
+
+import static org.junit.Assert.fail;
 
 public class TestThatDepartmentIsCreated {
 
@@ -17,5 +20,19 @@ public class TestThatDepartmentIsCreated {
             Assert.assertEquals(departmentId, department.getDepartmentId());
             Assert.assertEquals(departmentName, department.getDepartmentName());
         }
+    @Test(expected = NullPointerException.class)
+    public void testThatNullValueNotAllowedForDepartmentID() {
+        Department.builder()
+                .departmentId(null)
+                .departmentName("Sales")
+                .build();
+        fail("Exception was not thrown as expected ");
+    }
+    @Test
+    public void testThatToStringReturnsProperly(){
+        String expectedToString = DepartmentTestBuilder.build().toString();
+        Department department = DepartmentTestBuilder.build();
+        Assert.assertEquals(expectedToString,department.toString());
+    }
 
 }
