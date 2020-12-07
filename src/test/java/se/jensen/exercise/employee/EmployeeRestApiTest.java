@@ -51,10 +51,10 @@ public class EmployeeRestApiTest {
     public void testGetAllEmployees() {
         Optional<List<EmployeeModel>> employees = EmployeeRestServiceClient.getAllEmployees();
         Assert.assertTrue(employees.isPresent());
-        Assert.assertEquals(3, employees.get().stream().count());
+        Assert.assertEquals(4, employees.get().stream().count());
     }
 
-   /* @Test
+    @Test
     public void testGetEmployeeById() {
         Optional<EmployeeModel> employee = EmployeeRestServiceClient.getEmployeeById(1);
         Assert.assertTrue(employee.isPresent());
@@ -64,7 +64,7 @@ public class EmployeeRestApiTest {
         Assert.assertEquals(BigDecimal.valueOf(25000.00).intValue(), employeeModel.getSalary().intValue());
         Assert.assertEquals(Integer.valueOf(1), employeeModel.getDepartmentId());
         Assert.assertEquals(true, employeeModel.getFullTime());
-    }*/
+    }
 
     @Test
     public void testErrorHandling() {
