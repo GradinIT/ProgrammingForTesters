@@ -5,6 +5,7 @@ import org.junit.Test;
 import se.jensen.api.DepartmentModel;
 import se.jensen.api.mapper.DepartmentModelMapper;
 import se.jensen.entity.Department;
+import se.jensen.exercise.test.builder.DepartmentModelTestBuilder;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 
 public class TestDepartmentModelMapper {
@@ -17,4 +18,12 @@ public class TestDepartmentModelMapper {
         Assert.assertEquals(expected.getDepartmentName(),departmentModel.getDepartmentName());
     }
 
+    @Test
+    public void testMapFromDepartmentModelToDepartment() {
+        DepartmentModel expected = DepartmentModelTestBuilder.build();
+        Department department = DepartmentModelMapper.map(expected);
+        Assert.assertNotNull(department);
+        Assert.assertEquals(expected.getDepartmentId(),department.getDepartmentId());
+        Assert.assertEquals(expected.getDepartmentName(),department.getDepartmentName());
+    }
 }
