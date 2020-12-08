@@ -11,7 +11,7 @@ import se.jensen.LiquibaseConfigurer;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
 import se.jensen.entity.Department;
-import se.jensen.exercise.DepartmentTestBuilder;
+import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 
 import javax.ws.rs.core.Application;
 import java.util.List;
