@@ -3,7 +3,7 @@ package se.jensen.exercise.department;
 import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.entity.Department;
-import se.jensen.exercise.DepartmentTestBuilder;
+import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 
 import static org.junit.Assert.fail;
 
