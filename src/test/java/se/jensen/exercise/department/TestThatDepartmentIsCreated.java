@@ -21,10 +21,10 @@ public class TestThatDepartmentIsCreated {
             Assert.assertEquals(departmentName, department.getDepartmentName());
         }
     @Test(expected = NullPointerException.class)
-    public void testThatNullValueNotAllowedForDepartmentID() {
+    public void testThatNullValueAllowedForDepartmentID() {
         Department.builder()
                 .departmentId(null)
-                .departmentName(null)
+                .departmentName("Sales")
                 .build();
 
     }
