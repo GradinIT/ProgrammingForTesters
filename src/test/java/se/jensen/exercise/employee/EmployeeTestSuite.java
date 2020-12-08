@@ -9,7 +9,8 @@ import org.junit.runners.Suite;
         TestThatEmployeeIsCreated.class,
         TestThatNullPointerExceptionIsThrown.class,
         TestThatEmployeeIsStoredInDatabase.class,
-        TestEmployeeService.class
+        TestEmployeeService.class,
+        TestEmployeeModelMapper.class
 })
 public class EmployeeTestSuite {
 
