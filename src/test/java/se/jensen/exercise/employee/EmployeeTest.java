@@ -4,7 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import se.jensen.entity.Employee;
-import se.jensen.exercise.EmployeeTestBuilder;
+import se.jensen.entity.EmployeeID;
+import se.jensen.exercise.test.builder.EmployeeTestBuilder;
 import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 public class EmployeeTest {
     @Test
     public void testThatEmployeeIsCreatedCorrectly() {
-        Integer employeeId = 1;
+        EmployeeID employeeId = EmployeeID.builder().build();
         String firstname = "firstName";
         String lastName ="lastName";
         BigDecimal salary = BigDecimal.valueOf(10000.0);

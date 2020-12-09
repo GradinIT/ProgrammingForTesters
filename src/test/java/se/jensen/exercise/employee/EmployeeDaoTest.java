@@ -11,7 +11,7 @@ import se.jensen.LiquibaseConfigurer;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.mapper.EmployeePojoMapper;
 import se.jensen.entity.Employee;
-import se.jensen.exercise.EmployeeTestBuilder;
+import se.jensen.exercise.test.builder.EmployeeTestBuilder;
 
 import javax.ws.rs.core.Application;
 import java.util.List;
