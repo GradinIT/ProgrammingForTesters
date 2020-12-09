@@ -5,11 +5,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import se.jensen.entity.Department;
-import se.jensen.exercise.DepartmentTestBuilder;
 
-<<<<<<< HEAD
+import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+
+
 import static org.junit.Assert.fail;
-=======
 import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 
 public class TestThatDepartmentIsCreated {
@@ -17,14 +17,7 @@ public class TestThatDepartmentIsCreated {
     public void test() {
         Integer departmentId = 1;
         String departmentName = "Accounts";
->>>>>>> feature/GROUP_MUSSE
 
-public class TestThatDepartmentIsCreated {
-
-        @Test
-        public void test() {
-            Integer departmentId = 1;
-            String departmentName = "Accounts";
             Department department = Department.builder()
                     .departmentId(departmentId)
                     .departmentName(departmentName)
@@ -40,7 +33,7 @@ public class TestThatDepartmentIsCreated {
                 .build();
 
     }
-<<<<<<< HEAD
+
     @Test
     public void testThatToStringReturnsProperly(){
         String expectedToString = DepartmentTestBuilder.build().toString();
@@ -48,8 +41,8 @@ public class TestThatDepartmentIsCreated {
         Assert.assertEquals(expectedToString,department.toString());
     }
 
-}
-=======
+
+
 
     @Test
     @DisplayName("Checks if the department is created")
@@ -84,4 +77,4 @@ public class TestThatDepartmentIsCreated {
                 .build();
     }
 }
->>>>>>> feature/GROUP_MUSSE
+
