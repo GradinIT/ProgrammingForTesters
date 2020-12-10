@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
         TestThatDepartmentIsStoredInDatabase.class,
         TestDepartmentService.class,
         TestDepartmentServiceExceptions.class,
-        TestDepartmentModelMapper.class
+        TestDepartmentModelMapper.class,
+        TestDepartmentDatabaseEntryMapper.class
 })
 public class DepartmentTestSuite {
 }
