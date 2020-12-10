@@ -1,11 +1,16 @@
 package se.jensen.exercise.department;
 
-
-import org.junit.Assert;
-import org.junit.Test;
 import se.jensen.api.DepartmentModel;
 import se.jensen.api.mapper.DepartmentModelMapper;
 import se.jensen.entity.Department;
+import se.jensen.test.category.UnitTest;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
+
+@Category(UnitTest.class)
 
 public class TestDepartmentModelMapper {
     @Test
