@@ -1,14 +1,17 @@
 package se.jensen.exercise.department;
 
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
+import se.jensen.test.category.IntegrationTest;
+import se.jensen.test.category.ManualTest;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
 import se.jensen.entity.Department;
 import se.jensen.H2JpaConfig;
 import se.jensen.LiquibaseConfigurer;
-
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+
+import org.junit.FixMethodOrder;
+import org.junit.experimental.categories.Category;
+import org.junit.runners.MethodSorters;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,12 +27,14 @@ import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
+@Category(ManualTest.class)
+
 public class DepartmentDaoTest {
 
     @Autowired
     private DepartmentDao departmentDao;
 
-
+//-------------------------------------------------------------------------------------------------------------
     @Test
     public void a_testSaveNewDepartment()
     {
@@ -49,9 +54,10 @@ public class DepartmentDaoTest {
         Assert.assertNotNull(department);
         Assert.assertEquals(4, departmentsAfterSave.size() );
     }
+//-------------------------------------------------------------------------------------------------------------
 
     @Test
-    public void b_testUpdateNewDepartment()
+    public void b_testUpdateDepartment()
     {
         List<Department> departmentsBeforeUpdate = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
         System.out.println("\n------- Department before update-------");
@@ -69,6 +75,7 @@ public class DepartmentDaoTest {
         Assert.assertNotNull(department);
         Assert.assertEquals(4, departmentsAfterUpdate.size());
     }
+//-------------------------------------------------------------------------------------------------------------
 
     @Test
     public void c_testDeleteNewDepartment()

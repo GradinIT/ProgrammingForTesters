@@ -1,10 +1,15 @@
 package se.jensen.exercise.department;
 
+import se.jensen.api.DepartmentModel;
+import se.jensen.entity.Department;
+import se.jensen.test.category.UnitTest;
 
 import org.junit.Assert;
 import org.junit.Test;
-import se.jensen.api.DepartmentModel;
-import se.jensen.entity.Department;
+import org.junit.experimental.categories.Category;
+
+
+@Category(UnitTest.class)
 
 public class TestDepartmentModelCreated {
     @Test
@@ -21,4 +26,23 @@ public class TestDepartmentModelCreated {
         Assert.assertEquals(departmentId, departmentModel.getDepartmentId());
         Assert.assertEquals(departmentName, departmentModel.getDepartmentName());
     }
+
+    @Test (expected = NullPointerException.class)
+    public void testNonNullExceptionDepartmentId ()
+    {
+        DepartmentModel.builder()
+            .departmentId(null)
+            .departmentName("Department")
+            .build();
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testNonNullExceptionDepartmentName ()
+    {
+        DepartmentModel.builder()
+                .departmentId(1)
+                .departmentName(null)
+                .build();
+    }
+
 }
