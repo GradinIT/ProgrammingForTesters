@@ -11,7 +11,10 @@ import org.junit.runners.Suite;
         TestDepartmentService.class,
         TestDepartmentServiceExceptions.class,
         TestDepartmentModelMapper.class,
-        TestDepartmentDatabaseEntryMapper.class
+        TestDepartmentDatabaseEntryMapper.class,
+        DepartmentRestApiTest.class,
+        TestDepartmentDatabaseEntry.class,
+        TestDepartmentModelCreated.class
 })
 public class DepartmentTestSuite {
 }
