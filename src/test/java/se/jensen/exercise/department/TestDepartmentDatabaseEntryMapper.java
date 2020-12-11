@@ -1,11 +1,17 @@
 package se.jensen.exercise.department;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import se.jensen.dao.DepartmentDatabaseEntry;
 import se.jensen.entity.Department;
 import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
+import se.jensen.test.category.UnitTest;
+
 import java.util.ArrayList;
 import java.util.List;
+
+@Category(UnitTest.class)
+
 public class TestDepartmentDatabaseEntryMapper {
     @Test
     public void testDepartmentDatabaseEntryMapperMethod1()

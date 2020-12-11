@@ -9,11 +9,13 @@ import org.junit.runners.Suite;
         TestThatNullPointerExceptionIsThrown.class,
         TestThatDepartmentIsStoredInDatabase.class,
         TestDepartmentService.class,
-        //TestDepartmentModelCreated.class,
-        //TestDepartmentModelMapper.class,
-        //TestDepartmentModelsMapper.class,
-        //TestDepartmentDatabaseEntryCreated.class,
-        //TestDepartmentTestBuilder.class
+        TestDepartmentModelCreated.class,
+        TestDepartmentModelMapper.class,
+        TestDepartmentModelsMapper.class,
+        TestDepartmentDatabaseEntryCreated.class,
+        TestDepartmentTestBuilder.class,
+        DepartmentDaoTest.class,
+        DepartmentRestApiTest.class
 })
 public class DepartmentTestSuite {
 }
