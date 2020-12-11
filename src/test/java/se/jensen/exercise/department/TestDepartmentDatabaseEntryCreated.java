@@ -1,7 +1,15 @@
 package se.jensen.exercise.department;
+
+import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.test.category.UnitTest;
+
 import org.junit.Assert;
 import org.junit.Test;
-import se.jensen.dao.DepartmentDatabaseEntry;
+import org.junit.experimental.categories.Category;
+
+
+@Category(UnitTest.class)
+
 public class TestDepartmentDatabaseEntryCreated {
     @Test
     public void testDepartmentDatabaseEntryCreated()

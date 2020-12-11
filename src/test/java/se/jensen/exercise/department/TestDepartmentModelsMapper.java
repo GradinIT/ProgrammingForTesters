@@ -1,12 +1,19 @@
 package se.jensen.exercise.department;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+
 import se.jensen.api.DepartmentModel;
 import se.jensen.api.mapper.DepartmentModelsMapper;
 import se.jensen.entity.Department;
+import se.jensen.test.category.UnitTest;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+@Category(UnitTest.class)
 
 public class TestDepartmentModelsMapper {
     @Test
