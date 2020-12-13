@@ -2,8 +2,8 @@ package se.jensen.exercise.department;
 
 import se.jensen.entity.Department;
 import se.jensen.test.category.UnitTest;
-import org.junit.*;
 
+import org.junit.*;
 import org.junit.experimental.categories.Category;
 
 

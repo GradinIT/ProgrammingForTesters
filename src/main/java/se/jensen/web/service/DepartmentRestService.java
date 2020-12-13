@@ -26,7 +26,7 @@ public class DepartmentRestService {
 
     @GetMapping("/department")
     public ResponseEntity<List<DepartmentModel>> getDepartments() {
-        List<DepartmentModel> departmentModels = DepartmentModelsMapper.map(departmentService.getDepartments());
+         List<DepartmentModel> departmentModels = DepartmentModelsMapper.map(departmentService.getDepartments());
         return new ResponseEntity<List<DepartmentModel>>(departmentModels, HttpStatus.OK);
     }
     @GetMapping("/department/{departmentId}")
