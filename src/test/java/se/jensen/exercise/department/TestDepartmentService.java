@@ -10,11 +10,11 @@ import se.jensen.service.*;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 
 import org.junit.experimental.categories.Category;
-import static org.junit.Assert.fail;
 import org.junit.*;
-
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 import static org.mockito.BDDMockito.*;
 
