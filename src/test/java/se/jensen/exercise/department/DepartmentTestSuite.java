@@ -18,4 +18,6 @@ import org.junit.runners.Suite;
         DepartmentRestApiTest.class
 })
 public class DepartmentTestSuite {
+
+
 }

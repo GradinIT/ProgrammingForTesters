@@ -6,7 +6,6 @@ import se.jensen.dao.EntityAlreadyInStorageException;
 import se.jensen.exercise.department.client.DepartmentRestServiceClient;
 import se.jensen.RestServiceApplication;
 import se.jensen.test.category.IntegrationTest;
-import se.jensen.test.category.UnitTest;
 
 import lombok.SneakyThrows;
 import org.junit.*;
@@ -25,8 +24,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
@@ -55,6 +52,8 @@ public class DepartmentRestApiTest {
     public static void shutDown() {
         SpringApplication.exit(applicationContext);
     }
+
+//-------------------------------------------------------------------------------------------
     @Test
     public void a_testGetAllDepartments()
     {
@@ -63,6 +62,8 @@ public class DepartmentRestApiTest {
         Assert.assertEquals(3, department.get().stream().count());
 
     }
+//-------------------------------------------------------------------------------------------
+
     @Test
     public void b_testGetDepartmentById()
     {
@@ -72,6 +73,8 @@ public class DepartmentRestApiTest {
         Assert.assertEquals(Integer.valueOf(3), departmentModel.getDepartmentId());
         Assert.assertEquals("Management", departmentModel.getDepartmentName());
     }
+//-------------------------------------------------------------------------------------------
+
     @Test
     public void c_testCreateNewDepartment()
     {
@@ -88,9 +91,26 @@ public class DepartmentRestApiTest {
 
         Assert.assertEquals(4, DepartmentRestServiceClient.getAllDepartments().get().stream().count());
     }
+//-------------------------------------------------------------------------------------------
 
     @Test
-    public void d_testDeleteDepartment ()
+    public void d_testUpdateDepartment ()
+    {
+        DepartmentModel departmentToUpdate = DepartmentModel.builder()
+                .departmentId(1)
+                .departmentName("Development1")
+                .build();
+
+        Optional<DepartmentModel> updatedDepartment = DepartmentRestServiceClient.updateDepartment(departmentToUpdate);
+        DepartmentModel model = updatedDepartment.get();
+
+        Assert.assertEquals(Integer.valueOf(1), model.getDepartmentId());
+        Assert.assertEquals("Development1", model.getDepartmentName());
+    }
+//-------------------------------------------------------------------------------------------
+
+    @Test
+    public void e_testDeleteDepartment ()
     {
         DepartmentModel departmentToDelete = DepartmentModel.builder()
                 .departmentId(1)
@@ -106,9 +126,10 @@ public class DepartmentRestApiTest {
 
         Assert.assertEquals(3, DepartmentRestServiceClient.getAllDepartments().get().stream().count());
     }
+//-------------------------------------------------------------------------------------------
 
     @Test
-    public void TestErrorHandling()
+    public void f_TestErrorHandling()
     {
         try
         {
