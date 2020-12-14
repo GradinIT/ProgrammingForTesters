@@ -20,7 +20,7 @@ public class TestDepartmentModelMapper {
     public void testMapFromDepartmentModelToDepartment(){
         DepartmentModel expected = DepartmentModelTestBuilder.build();
         Department department = DepartmentModelMapper.map(expected);
-        Assert.assertNotNull(expected);
+        Assert.assertNotNull(department);
         Assert.assertEquals(expected.getDepartmentId(), department.getDepartmentId());
         Assert.assertEquals(expected.getDepartmentName(), department.getDepartmentName());
     }
