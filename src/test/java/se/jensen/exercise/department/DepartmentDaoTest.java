@@ -27,7 +27,7 @@ import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-@Category(ManualTest.class)
+@Category(IntegrationTest.class)
 
 public class DepartmentDaoTest {
 

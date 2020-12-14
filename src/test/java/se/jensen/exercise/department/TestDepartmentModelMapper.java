@@ -23,6 +23,7 @@ public class TestDepartmentModelMapper {
         Assert.assertEquals(Integer.valueOf(1),result.getDepartmentId());
         Assert.assertEquals("Development",result.getDepartmentName());
     }
+
     @Test
     public void testDepartmentModelMapperMethod2(){
         Department department= Department.builder().departmentId(2).departmentName("Sales").build();
