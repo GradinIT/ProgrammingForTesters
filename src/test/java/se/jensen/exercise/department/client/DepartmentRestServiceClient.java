@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+
 public class DepartmentRestServiceClient {
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
@@ -39,23 +41,25 @@ public class DepartmentRestServiceClient {
 
     }
 
-    public static Optional<DepartmentModel> updateDepartment(DepartmentModel DepartmentModel) {
+    public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
         final String uri = "http://localhost:8080/department";
         RestTemplate restTemplate = new RestTemplate();
-        DepartmentModel result = restTemplate.postForObject(uri, DepartmentModel, DepartmentModel.class);
+        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<~>(departmentModel, HttpMethod.PUT, null);
+        ResponseEntity<DepartmentModel> response =restTemplate.exchange(uri,HttpMethod.PUT,requestEntity,DepartmentModel.class);
+       // DepartmentModel result = restTemplate.postForObject(uri, DepartmentModel, DepartmentModel.class);
+        return Optional.of(response.getBody());
+    }
+
+    public static Optional<DepartmentModel> createDepartment(DepartmentModel departmentModel) {
+        final String uri = "http://localhost:8080/department";
+        RestTemplate restTemplate = new RestTemplate();
+        DepartmentModel result = restTemplate.postForObject(uri, departmentModel, DepartmentModel.class);
         return Optional.of(result);
     }
 
-    public static Optional<DepartmentModel> createDepartment(DepartmentModel DepartmentModel) {
-        final String uri = "http://localhost:8080/department";
+    public static Optional<DepartmentModel> deleteDepartment(DepartmentModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
-        DepartmentModel result = restTemplate.postForObject(uri, DepartmentModel, DepartmentModel.class);
-        return Optional.of(result);
-    }
-
-    public static Optional<DepartmentModel> deleteDepartment(DepartmentModel DepartmentModel) {
-        RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(DepartmentModel, HttpMethod.DELETE,
+        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.DELETE,
                 null);
         DepartmentModel = restTemplate.exchange("http://localhost:8080/department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
         return Optional.of(DepartmentModel);
