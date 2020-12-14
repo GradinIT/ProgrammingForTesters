@@ -6,12 +6,11 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import se.jensen.api.DepartmentModel;
+import se.jensen.api.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 public class DepartmentRestServiceClient {
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
@@ -31,9 +30,9 @@ public class DepartmentRestServiceClient {
 
     }
 
-    public static Optional<DepartmentModel> getDepartmentById(Integer DepartmentId) {
+    public static Optional<DepartmentModel> getDepartmentById(Integer departmentId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/department/" + DepartmentId,
+        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/department/" + departmentId,
                 HttpMethod.GET,
                 null,
                 DepartmentModel.class);
@@ -44,9 +43,8 @@ public class DepartmentRestServiceClient {
     public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
         final String uri = "http://localhost:8080/department";
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<~>(departmentModel, HttpMethod.PUT, null);
-        ResponseEntity<DepartmentModel> response =restTemplate.exchange(uri,HttpMethod.PUT,requestEntity,DepartmentModel.class);
-       // DepartmentModel result = restTemplate.postForObject(uri, DepartmentModel, DepartmentModel.class);
+        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.PUT, null);
+        ResponseEntity<DepartmentModel> response = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, DepartmentModel.class);
         return Optional.of(response.getBody());
     }
 
@@ -61,8 +59,8 @@ public class DepartmentRestServiceClient {
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.DELETE,
                 null);
-        DepartmentModel = restTemplate.exchange("http://localhost:8080/department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
-        return Optional.of(DepartmentModel);
+        DepartmentModel result = restTemplate.exchange("http://localhost:8080/department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
+        return Optional.of(result);
 
     }
 }
