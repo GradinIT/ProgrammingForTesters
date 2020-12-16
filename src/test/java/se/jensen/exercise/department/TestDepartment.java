@@ -17,11 +17,4 @@ public class TestDepartment {
         Assert.assertEquals(department_Id,department.getDepartmentId());
         Assert.assertEquals(department_Name,department.getDepartmentName());
     }
-    @Test(expected = NullPointerException.class)
-    public void testNullValueNotAllowedForDepartmentId(){
-        Department.builder()
-                .departmentId(null)
-                .departmentName("Section A")
-                .build();
-    }
 }
