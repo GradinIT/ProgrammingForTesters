@@ -42,7 +42,7 @@ public void b_testFindDepartmentById(){
     Assert.assertEquals(departmentId,department.getDepartmentId());
 }
     @Test
-    public void c_testSaveNewDepartment(){
+    public void testSaveNewDepartment(){
         Department department = DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(
                 DepartmentTestBuilder.build())));
 
@@ -50,7 +50,7 @@ public void b_testFindDepartmentById(){
         Assert.assertNotNull(department);
     }
     @Test
-    public void d_testDeleteDepartment(){
+    public void c_testDeleteDepartment(){
     List<Department> departmentsBeforeDelete = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
     System.out.println("\nDepartment before delete");
     departmentsBeforeDelete.stream().forEach(System.out::println);
