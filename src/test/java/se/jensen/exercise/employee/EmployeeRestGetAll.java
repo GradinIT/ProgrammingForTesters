@@ -24,7 +24,10 @@ import java.util.Optional;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
 @Category(IntegrationTest.class)
-public class EmployeeRestGetAll {
+
+
+public class EmployeeRestGetAll
+{
     private static ConfigurableApplicationContext applicationContext;
 
     @SneakyThrows

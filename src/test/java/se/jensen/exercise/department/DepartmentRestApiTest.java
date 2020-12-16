@@ -31,10 +31,9 @@ import static org.junit.Assert.fail;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
 @Category(IntegrationTest.class)
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DepartmentRestApiTest {
 
     private static ConfigurableApplicationContext applicationContext;
@@ -113,7 +112,20 @@ public class DepartmentRestApiTest {
         Assert.assertEquals(3, DepartmentRestServiceClient.getAllDepartments().get().stream().count());
     }
 //-----------------------------------------------------------------------------------------
+@Test
+public void e_testUpdateDepartment ()
+{
+    DepartmentModel departmentToUpdate = DepartmentModel.builder()
+            .departmentId(2)
+            .departmentName("Development2")
+            .build();
 
+    Optional<DepartmentModel> updatedDepartment = DepartmentRestServiceClient.updateDepartment(departmentToUpdate);
+    DepartmentModel model = updatedDepartment.get();
+
+    Assert.assertEquals(Integer.valueOf(1), model.getDepartmentId());
+    Assert.assertEquals("Development1", model.getDepartmentName());
+}
     @Test
     public void TestErrorHandling()
     {
