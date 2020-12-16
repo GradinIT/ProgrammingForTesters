@@ -6,7 +6,6 @@ import se.jensen.dao.EntityAlreadyInStorageException;
 import se.jensen.exercise.department.client.DepartmentRestServiceClient;
 import se.jensen.RestServiceApplication;
 import se.jensen.test.category.IntegrationTest;
-import se.jensen.test.category.UnitTest;
 
 import lombok.SneakyThrows;
 import org.junit.*;

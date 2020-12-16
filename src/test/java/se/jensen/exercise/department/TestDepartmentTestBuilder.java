@@ -8,8 +8,6 @@ import org.junit.experimental.categories.Category;
 import org.junit.Assert;
 import org.junit.Test;
 
-
-
 @Category(UnitTest.class)
 
     public class TestDepartmentTestBuilder {
