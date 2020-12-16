@@ -8,15 +8,17 @@ import org.mockito.MockitoAnnotations;
 import se.jensen.entity.Department;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 import se.jensen.service.DepartmentService;
 import se.jensen.service.DepartmentServiceImpl;
+import se.jensen.dao.DepartmentDao;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class TestDepartmentService {
     DepartmentDao departmentDao = mock(DepartmentDao.class);
