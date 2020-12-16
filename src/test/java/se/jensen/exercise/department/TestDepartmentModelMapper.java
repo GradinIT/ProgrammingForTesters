@@ -11,18 +11,18 @@ import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 public class TestDepartmentModelMapper {
     @Test
     public void testMappingFromDepartmentToDepartmentModel() {
-        Department expected = DepartmentTestBuilder.build();
-        DepartmentModel departmentModel = DepartmentModelMapper.map(expected);
+        Department departmentExpected = DepartmentTestBuilder.build();
+        DepartmentModel departmentModel = DepartmentModelMapper.map(departmentExpected);
         Assert.assertNotNull(departmentModel);
-        Assert.assertEquals(expected.getDepartmentId(),departmentModel.getDepartmentId());
-        Assert.assertEquals(expected.getDepartmentName(),departmentModel.getDepartmentName());
+        Assert.assertEquals(departmentExpected.getDepartmentId(),departmentModel.getDepartmentId());
+        Assert.assertEquals(departmentExpected.getDepartmentName(),departmentModel.getDepartmentName());
     }
     @Test
     public void testMappingFromDepartmentModelToDepartment() {
-        DepartmentModel expected = DepartmentModelTestBuilder.build();
-        Department department = DepartmentModelMapper.map(expected);
+        DepartmentModel departmentModelExpected = DepartmentModelTestBuilder.build();
+        Department department = DepartmentModelMapper.map(departmentModelExpected);
         Assert.assertNotNull(department);
-        Assert.assertEquals(expected.getDepartmentId(),department.getDepartmentId());
-        Assert.assertEquals(expected.getDepartmentName(),department.getDepartmentName());
+        Assert.assertEquals(departmentModelExpected.getDepartmentId(),department.getDepartmentId());
+        Assert.assertEquals(departmentModelExpected.getDepartmentName(),department.getDepartmentName());
     }
 }
