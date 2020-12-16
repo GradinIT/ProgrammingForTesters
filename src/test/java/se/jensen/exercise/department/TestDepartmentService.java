@@ -67,11 +67,4 @@ public class TestDepartmentService {
         Assert.assertEquals(DEPARTMENTNAME, department.getDepartmentName());
         Assert.assertEquals(DEPARTMENTID, department.getDepartmentId());
     }
-    @Test
-    @DisplayName("Test To Delete Department")
-    public void TestToDeleteDepartment() {
-        doNothing().when(departmentDao).delete(any());
-        service.remove(DepartmentTestBuilder.build());
-        verify(departmentDao, times(1)).delete(any());
-    }
 }
