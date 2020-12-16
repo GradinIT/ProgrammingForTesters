@@ -30,7 +30,7 @@ public class DepartmentDaoTest {
         List<Department> departments = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
 
         Assert.assertNotNull(departments);
-
+        Assert.assertEquals(3,departments.size());
     }
 
     @Test
@@ -38,16 +38,19 @@ public class DepartmentDaoTest {
         Integer departmentId = Integer.valueOf(1);
         Department department = DepartmentDatabaseEntryMapper.map(departmentDao.findById(departmentId).get());
         Assert.assertNotNull(department);
-        Assert.assertEquals(departmentId, department.getDepartmentId());
     }
 
     @Test
     public void testSaveNewDepartment() {
         Department department = DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(
-                DepartmentTestBuilder.build())));
+                Department.builder()
+                        .departmentId(4)
+                        .departmentName("Post")
+                        .build())));
 
         List<Department> departments = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        Assert.assertNotNull(department);
+        Assert.assertNotNull(departments);
+        Assert.assertEquals(4,departments.size());
     }
 
     @Test
@@ -56,13 +59,13 @@ public class DepartmentDaoTest {
         System.out.println("\nDepartment before delete");
         departmentsBeforeDelete.stream().forEach(System.out::println);
         departmentDao.delete(DepartmentDatabaseEntryMapper.map(Department.builder()
-                .departmentId(5)
-                .departmentName("Engineer")
+                .departmentId(4)
+                .departmentName("Post")
                 .build()));
         List<Department> departmentsAfterDelete = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
         System.out.println("Departments after delete");
         departmentsAfterDelete.stream().forEach(System.out::println);
-        Assert.assertEquals(4, departmentsAfterDelete.size());
+        Assert.assertEquals(3, departmentsAfterDelete.size());
 
     }
 }
