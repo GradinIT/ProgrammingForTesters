@@ -5,6 +5,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import se.jensen.RestServiceApplication;
 import se.jensen.api.EmployeeModel;
 import se.jensen.exercise.employee.client.EmployeeRestServiceClient;
+import se.jensen.test.category.IntegrationTest;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
+@Category(IntegrationTest.class)
 public class EmployeeRestGetAll {
     private static ConfigurableApplicationContext applicationContext;
 

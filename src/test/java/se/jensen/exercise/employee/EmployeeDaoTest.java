@@ -2,6 +2,7 @@ package se.jensen.exercise.employee;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ import se.jensen.dao.mapper.EmployeePojoMapper;
 import se.jensen.entity.Employee;
 import se.jensen.entity.EmployeeID;
 import se.jensen.exercise.test.builder.EmployeeTestBuilder;
+import se.jensen.test.category.UnitTest;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
+@Category(UnitTest.class)
 public class EmployeeDaoTest {
 
     @Autowired

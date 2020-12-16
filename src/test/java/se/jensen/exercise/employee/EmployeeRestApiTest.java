@@ -5,6 +5,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import se.jensen.RestServiceApplication;
 import se.jensen.api.EmployeeModel;
 import se.jensen.exercise.employee.client.EmployeeRestServiceClient;
+import se.jensen.test.category.ManualTest;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -27,6 +29,7 @@ import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
+@Category(ManualTest.class)
 public class EmployeeRestApiTest {
     private static ConfigurableApplicationContext applicationContext;
 
