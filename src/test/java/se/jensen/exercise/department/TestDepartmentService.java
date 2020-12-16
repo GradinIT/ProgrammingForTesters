@@ -8,15 +8,17 @@ import org.mockito.MockitoAnnotations;
 import se.jensen.entity.Department;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 import se.jensen.service.DepartmentService;
 import se.jensen.service.DepartmentServiceImpl;
+import se.jensen.dao.DepartmentDao;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class TestDepartmentService {
     DepartmentDao departmentDao = mock(DepartmentDao.class);
@@ -64,5 +66,12 @@ public class TestDepartmentService {
         Assert.assertNotNull(department);
         Assert.assertEquals(DEPARTMENTNAME, department.getDepartmentName());
         Assert.assertEquals(DEPARTMENTID, department.getDepartmentId());
+    }
+    @Test
+    @DisplayName("Test To Delete Department")
+    public void TestToDeleteDepartment() {
+        doNothing().when(departmentDao).delete(any());
+        service.remove(DepartmentTestBuilder.build());
+        verify(departmentDao, times(1)).delete(any());
     }
 }
