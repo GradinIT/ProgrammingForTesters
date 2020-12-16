@@ -92,6 +92,7 @@ public class DepartmentRestApiTest {
 
         Assert.assertEquals(4, DepartmentRestServiceClient.getAllDepartments().get().stream().count());
     }
+
 //-----------------------------------------------------------------------------------------
 
     @Test
@@ -113,6 +114,24 @@ public class DepartmentRestApiTest {
     }
 //-----------------------------------------------------------------------------------------
 
+    @Test
+    public void e_testUpdateDepartment()
+    {
+        DepartmentModel departmentToUpdate = DepartmentModel.builder()
+                .departmentId(1000)
+                .departmentName("Sales")
+                .build();
+
+        Optional <DepartmentModel> updateDepartment = DepartmentRestServiceClient.updateDepartment(departmentToUpdate);
+
+        DepartmentModel model = updateDepartment.get();
+
+        Assert.assertEquals(Integer.valueOf(1000), model.getDepartmentId());
+        Assert.assertEquals("Sales", model.getDepartmentName());
+
+        Assert.assertEquals(3, DepartmentRestServiceClient.getAllDepartments().get().stream().count());
+    }
+//-----------------------------------------------------------------------------------------
     @Test
     public void TestErrorHandling()
     {
