@@ -50,7 +50,6 @@ public class DepartmentDaoTest {
 
         List<Department> departments = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
         Assert.assertNotNull(departments);
-        Assert.assertEquals(4,departments.size());
     }
 
     @Test
@@ -65,7 +64,6 @@ public class DepartmentDaoTest {
         List<Department> departmentsAfterDelete = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
         System.out.println("Departments after delete");
         departmentsAfterDelete.stream().forEach(System.out::println);
-        Assert.assertEquals(3, departmentsAfterDelete.size());
 
     }
 }
