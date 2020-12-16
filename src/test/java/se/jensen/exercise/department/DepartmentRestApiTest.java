@@ -55,6 +55,8 @@ public class DepartmentRestApiTest {
     public static void shutDown() {
         SpringApplication.exit(applicationContext);
     }
+
+//-----------------------------------------------------------------------------------------
     @Test
     public void a_testGetAllDepartments()
     {
@@ -63,6 +65,7 @@ public class DepartmentRestApiTest {
         Assert.assertEquals(3, department.get().stream().count());
 
     }
+//-----------------------------------------------------------------------------------------
     @Test
     public void b_testGetDepartmentById()
     {
@@ -72,6 +75,8 @@ public class DepartmentRestApiTest {
         Assert.assertEquals(Integer.valueOf(3), departmentModel.getDepartmentId());
         Assert.assertEquals("Management", departmentModel.getDepartmentName());
     }
+//-----------------------------------------------------------------------------------------
+
     @Test
     public void c_testCreateNewDepartment()
     {
@@ -88,6 +93,7 @@ public class DepartmentRestApiTest {
 
         Assert.assertEquals(4, DepartmentRestServiceClient.getAllDepartments().get().stream().count());
     }
+//-----------------------------------------------------------------------------------------
 
     @Test
     public void d_testDeleteDepartment ()
@@ -106,6 +112,7 @@ public class DepartmentRestApiTest {
 
         Assert.assertEquals(3, DepartmentRestServiceClient.getAllDepartments().get().stream().count());
     }
+//-----------------------------------------------------------------------------------------
 
     @Test
     public void TestErrorHandling()

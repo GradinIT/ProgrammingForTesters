@@ -38,13 +38,15 @@ public class TestDepartmentService {
     public void setUpp()
     {
         MockitoAnnotations.initMocks(this);
-    }
-//-------------------------------------------------------------------------------------------------------------
 
-    @Test
-    public void  testGetAllDepartments()
-    {
-        // mock departmentDao.findAll()
+    // mock  departmentDao.findById()
+        when(departmentDao.findById(DEPARTMENTID))
+                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
+                        .departmentId(DEPARTMENTID)
+                        .departmentName(DEPARTMENTNAME)
+                        .build()));
+
+    // mock departmentDao.findAll()
         DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
                 .departmentId(DEPARTMENTID)
                 .departmentName(DEPARTMENTNAME)
@@ -53,6 +55,21 @@ public class TestDepartmentService {
         list.add(departmentDatabaseEntry);
         when(departmentDao.findAll()).thenReturn(list);
 
+        // mock departmentDao.save()
+        when(departmentDao.save(any()))
+                .thenReturn(DepartmentDatabaseEntry.builder()
+                        .departmentId(DEPARTMENTID)
+                        .departmentName(DEPARTMENTNAME)
+                        .build());
+
+    // mock departmentDao.delete()
+        doNothing().when(departmentDao).delete(any());
+    }
+//-------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void  testGetAllDepartments()
+    {
         List <Department> allDepartments = departmentServiceImpl.getDepartments(); //findAll()
 
         Assert.assertNotNull(allDepartments);
@@ -64,16 +81,10 @@ public class TestDepartmentService {
         verify(departmentDao, times(1)).findAll();
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testGetDepartmentById ()
     {
-// mock  departmentDao.findById()
-        when(departmentDao.findById(DEPARTMENTID))
-                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build()));
-
         Department department = departmentServiceImpl.getDepartmentById(DEPARTMENTID);  //findById()
 
         Assert.assertNotNull(department);
@@ -84,21 +95,16 @@ public class TestDepartmentService {
         verify(departmentDao, times(1)).findById(any(Integer.class));
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testCreateDepartment()  //findByAll, save
     {
-// mock  departmentDao.findById()
+    // mock  departmentDao.findById()
         when(departmentDao.findById(DEPARTMENTID)).thenReturn(Optional.empty());
 
-// mock departmentDao.save()
-        when(departmentDao.save(any()))
-                .thenReturn(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build());
-
         Department departmentToCreate = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
-        Department createdDepartment = departmentServiceImpl.create(departmentToCreate);
+
+        Department createdDepartment = departmentServiceImpl.create( departmentToCreate);
 
         Assert.assertNotNull(createdDepartment);
         Assert.assertEquals(DEPARTMENTID, createdDepartment.getDepartmentId());
@@ -108,18 +114,12 @@ public class TestDepartmentService {
         verify(departmentDao, times(1)).save(any());
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testUpdateDepartment()  //findById, save
     {
-// mock  departmentDao.findById()
-        when(departmentDao.findById(DEPARTMENTID))
-                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build()));
-
         Integer NEWDEPARTMENTID = Integer.valueOf(2);
-
+    // mock departmentDao.save()
         when(departmentDao.save(any()))
                 .thenReturn(DepartmentDatabaseEntry.builder()
                         .departmentId(NEWDEPARTMENTID)
@@ -137,18 +137,10 @@ public class TestDepartmentService {
         verify(departmentDao, times(1)).save(any());
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testRemoveDepartment()  //findByAll, delete
     {
-        when(departmentDao.findById(DEPARTMENTID))
-                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build()));
-
-// mock departmentDao.delete()
-        doNothing().when(departmentDao).delete(any());
-
         Department departmentToRemove = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
         Department removedDepartment = departmentServiceImpl.remove(departmentToRemove);
 
@@ -156,17 +148,13 @@ public class TestDepartmentService {
         verify(departmentDao, times(1)).delete(any());
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testCreateDepartmentIfDepartmentIsAlreadyInStorage() {
 
-        when(departmentDao.findById(DEPARTMENTID))
-                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build()));
-
         try {
             Department depToCreate = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
+
             Department createDepartment = departmentServiceImpl.create(depToCreate);
             Assert.assertNotNull(createDepartment);
             verify(departmentDao, times(1)).save(any());
@@ -182,18 +170,18 @@ public class TestDepartmentService {
         }
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testDepartmentByIdNotFound()
     {
-        when(departmentDao.findById(DEPARTMENTID))
-                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build()));
+    // mock  departmentDao.findById()
+        when(departmentDao.findById(10)).thenReturn(Optional.empty());
+
         try
         {
             Department department = departmentServiceImpl.getDepartmentById(10);
         }
+
         catch (EntityNotFoundException entityNotFoundException)
         {
             System.out.println("testDepartmentByIdNotFound: Entity with id 10 is not found by Id");
@@ -205,14 +193,12 @@ public class TestDepartmentService {
         }
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testDepartmentToUpdateNotFound ()
     {
-        when(departmentDao.findById(DEPARTMENTID))
-                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build()));
+    // mock  departmentDao.findById()
+        when(departmentDao.findById(10)).thenReturn(Optional.empty());
 
         Department departmentToUpdate = Department.builder()
                 .departmentId(10)
@@ -233,14 +219,12 @@ public class TestDepartmentService {
         }
     }
     //-------------------------------------------------------------------------------------------------------------
+
     @Test
     public void testDepartmentToDeleteNotFound ()
     {
-        when(departmentDao.findById(DEPARTMENTID))
-                .thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENTID)
-                        .departmentName(DEPARTMENTNAME)
-                        .build()));
+    // mock  departmentDao.findById()
+        when(departmentDao.findById(10)).thenReturn(Optional.empty());
 
         Department departmentToDelete = Department.builder()
                 .departmentId(10)
