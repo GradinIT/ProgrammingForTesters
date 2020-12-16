@@ -11,26 +11,20 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpClientErrorException;
 import se.jensen.RestServiceApplication;
 import se.jensen.api.EmployeeModel;
 import se.jensen.exercise.employee.client.EmployeeRestServiceClient;
-import se.jensen.test.category.ManualTest;
+import se.jensen.test.category.IntegrationTest;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.fail;
-
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
-@Category(ManualTest.class)
-public class EmployeeRestApiTest {
+@Category(IntegrationTest.class)
+public class EmployeeRestGetAll {
     private static ConfigurableApplicationContext applicationContext;
 
     @SneakyThrows
@@ -50,15 +44,9 @@ public class EmployeeRestApiTest {
         SpringApplication.exit(applicationContext);
     }
 
-
     @Test
-    public void testErrorHandling() {
-        try {
-            Optional<EmployeeModel> employee = EmployeeRestServiceClient.getEmployeeById(10);
-            fail("Expected Exception Not Thrown");
-        } catch (HttpClientErrorException e) {
-            Assert.assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
-            Assert.assertEquals("404 : [Entity with id 10 not found]", e.getMessage());
-        }
+    public void happyFlow() {
+        Optional<List<EmployeeModel>> employees = EmployeeRestServiceClient.getAllEmployees();
+        Assert.assertTrue(employees.isPresent());
     }
 }

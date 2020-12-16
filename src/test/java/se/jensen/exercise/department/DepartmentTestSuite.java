@@ -21,7 +21,7 @@ import org.junit.runners.Suite;
         DepartmentDaoTest.class,
         DepartmentRestApiTest.class
 })
-public class DepartmentTestSuite {
+public class  DepartmentTestSuite {
 
 
 }
