@@ -5,10 +5,13 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        DepartmentDaoTest.class,
+        DepartmentRestApiTest.class,
+        TestDepartmentModelMapper.class,
+        TestDepartmentService.class,
         TestThatDepartmentIsCreated.class,
-        TestThatNullPointerExceptionIsThrown.class,
         TestThatDepartmentIsStoredInDatabase.class,
-        TestDepartmentService.class
+        TestThatNullPointerExceptionIsThrown.class,
 })
 public class DepartmentTestSuite {
 }
