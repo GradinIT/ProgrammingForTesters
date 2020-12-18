@@ -38,7 +38,6 @@ public class TestDepartmentService {
 
         when(departmentDao.findAll()).thenReturn(departmentList);
         when(departmentDao.findById(any())).thenReturn(Optional.of(departmentDatabaseEntry));
-        when(departmentDao.findById(DEPARTMENTID)).thenReturn(Optional.of(departmentDatabaseEntry));
     }
 
     @Test
@@ -69,31 +68,49 @@ public class TestDepartmentService {
 
     @Test
     public void testToCreateDepartment() {
-        when(departmentDao.findById(any())).thenReturn(Optional.empty());
-        when(departmentDao.save(any())).thenReturn(DepartmentDatabaseEntry.builder()
+        Department department = Department.builder()
                 .departmentId(DEPARTMENTID)
                 .departmentName(DEPARTMENTNAME)
-                .build());
-        Department departmentCreate = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
-        Department departmentSaved = departmentService.create(departmentCreate);
-        verify(departmentDao, times(1)).save(any());
-        Assert.assertNotNull(departmentSaved);
-        Assert.assertEquals(DEPARTMENTID, departmentSaved.getDepartmentId());
-        Assert.assertEquals(DEPARTMENTNAME, departmentSaved.getDepartmentName());
+                .build();
+        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+
+        //setting the rules for the mock
+        when(departmentDao.findById(any())).thenReturn(Optional.empty());
+        when(departmentDao.save(any())).thenReturn(departmentDatabaseEntry);
+
+        //do the service call
+        Department cratedDepartment = departmentService.create(department);
+
+        //verify that everything is ok
+        Assert.assertEquals(department,cratedDepartment);
+        verify(departmentDao, times(1)).findById(department.getDepartmentId());
+        verify(departmentDao, times(1)).save(departmentDatabaseEntry);
     }
 
     @Test
     public void testToUpdateDepartment() {
-        when(departmentDao.save(any())).thenReturn(DepartmentDatabaseEntry.builder()
+        Department department = Department.builder()
                 .departmentId(DEPARTMENTID)
                 .departmentName(DEPARTMENTNAME)
-                .build());
-        Department departmentToBeUpdated = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
-        Department updatedDepartment = departmentService.update(departmentToBeUpdated);
-        verify(departmentDao, times(1)).save(any());
-        Assert.assertNotNull(updatedDepartment);
-        Assert.assertEquals(DEPARTMENTID, updatedDepartment.getDepartmentId());
-        Assert.assertEquals(DEPARTMENTNAME, updatedDepartment.getDepartmentName());
+                .build();
+        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+        //setting the rules for the mock
+        when(departmentDao.findById(any())).thenReturn(Optional.of(departmentDatabaseEntry));
+        when(departmentDao.save(any())).thenReturn(departmentDatabaseEntry);
+
+        //do the service call
+        Department updatedDepartment = departmentService.update(department);
+
+        //check that everything is ok
+        Assert.assertEquals(department,updatedDepartment);
+        verify(departmentDao, times(1)).save(departmentDatabaseEntry);
+
     }
 
     @Test

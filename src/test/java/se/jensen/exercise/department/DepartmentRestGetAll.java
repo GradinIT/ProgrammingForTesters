@@ -1,5 +1,5 @@
 package se.jensen.exercise.department;
 
-public class DepartmentRestApiTest {
+public class DepartmentRestGetAll {
     //TODO @Test for this...
 }
