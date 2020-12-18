@@ -79,7 +79,7 @@ public class TestDepartmentService {
 
         //setting the rules for the mock
         when(departmentDao.findById(any())).thenReturn(Optional.empty());
-        when(departmentDao.save(any())).thenReturn(departmentDatabaseEntry);
+        when(departmentDao.save(departmentDatabaseEntry)).thenReturn(departmentDatabaseEntry);
 
         //do the service call
         Department createdDepartment = departmentService.create(department);
