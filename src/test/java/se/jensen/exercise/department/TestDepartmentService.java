@@ -68,12 +68,30 @@ public class TestDepartmentService {
 
     @Test
     public void testToCreateDepartment() {
-        //TODO
+        Department department = Department.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+        //setting rules for the mock
+        when(departmentDao.findById(any())).thenReturn(Optional.empty());
+        when(departmentDao.save(departmentDatabaseEntry)).thenReturn(departmentDatabaseEntry);
+
+        // do the service call
+        Department createdDepartment = departmentService.create(department);
+
+        // verrifyt that everyting is ok
+        Assert.assertEquals(department,createdDepartment);
+        verify(departmentDao,times(1)).findById(department.getDepartmentId());
+        verify(departmentDao,times(1)).save(departmentDatabaseEntry);
     }
 
     @Test
     public void testToUpdateDepartment() {
-        //TODO
+
     }
 
     @Test
