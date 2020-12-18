@@ -7,6 +7,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         DepartmentDaoTest.class,
         DepartmentRestApiTest.class,
+        DepartmentRestGetAll.class,
+        DepartmentRestGetByIDIT.class,
         TestDepartmentModelMapper.class,
         TestDepartmentService.class,
         TestThatDepartmentIsCreated.class,

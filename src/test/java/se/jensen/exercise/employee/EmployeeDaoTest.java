@@ -1,8 +1,8 @@
 package se.jensen.exercise.employee;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,44 +13,82 @@ import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.EmployeeDatabaseEntry;
 import se.jensen.dao.mapper.EmployeePojoMapper;
 import se.jensen.entity.Employee;
-import se.jensen.entity.EmployeeID;
 import se.jensen.exercise.test.builder.EmployeeTestBuilder;
-import se.jensen.test.category.UnitTest;
 
+import javax.ws.rs.core.Application;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
-@Category(UnitTest.class)
+@SpringBootTest(classes = {Application.class, LiquibaseConfigurer.class, H2JpaConfig.class})
 public class EmployeeDaoTest {
 
     @Autowired
     private EmployeeDao employeeDao;
 
-    private Employee testEmployee = Employee.builder()
-            .employeeId(EmployeeID.builder().id(20).build())
-            .firstName("Runar")
-            .lastName("Soergaard")
-            .fullTime(true)
-            .salary(BigDecimal.valueOf(25000))
-            .departmentId(3)
-            .build();
+    @Before
+    public void setUp() {
+        employeeDao.deleteAll();
+        employeeDao.saveAll(Arrays.asList(EmployeeDatabaseEntry.builder()
+                        .departmentId(1)
+                        .employeeId(1)
+                        .firstName("One")
+                        .lastName("Testing")
+                        .salary(BigDecimal.valueOf(25000))
+                        .fullTime(true)
+                        .build(),
+                EmployeeDatabaseEntry.builder()
+                        .departmentId(1)
+                        .employeeId(2)
+                        .firstName("Two")
+                        .lastName("Testing")
+                        .salary(BigDecimal.valueOf(25000))
+                        .fullTime(true)
+                        .build()));
+    }
+
+    @Test
+    public void testGetAll() {
+        List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
+        Assert.assertEquals(2,employees.size());
+        employees.stream().forEach(System.out::println);
+    }
+
     @Test
     public void testSaveNewEmployee() {
-        Employee employee = EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(
-                testEmployee)));
-        Assert.assertNotNull(employee);
-        Assert.assertEquals(testEmployee.getFirstName(),employee.getFirstName());
+        List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
+        Assert.assertEquals(2,employees.size());
+        employeeDao.saveAndFlush(EmployeeDatabaseEntry.builder()
+                .departmentId(1)
+                .employeeId(15)
+                .firstName("Test15")
+                .lastName("Testing15")
+                .salary(BigDecimal.valueOf(25000))
+                .fullTime(true)
+                .build());
+        employees = employeeDao.findAll();
+        Assert.assertEquals(3,employees.size());
+    }
+
+    @Test
+    public void testDeleteEmployee() {
+        employeeDao.delete(EmployeeDatabaseEntry.builder()
+                .departmentId(1)
+                .employeeId(2)
+                .firstName("Two")
+                .lastName("Testing")
+                .salary(BigDecimal.valueOf(25000))
+                .fullTime(true)
+                .build());
+        List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
+        Assert.assertEquals(1,employees.size());
     }
     @Test
-    public void testGetEmployee() {
-        Optional<EmployeeDatabaseEntry> optional = employeeDao.findById(1);
-        Assert.assertTrue(optional.isPresent());
-
-        Employee employee = EmployeePojoMapper.map(optional.get());
-        Assert.assertNotNull(employee);
+    public void testGetById() {
+        Optional<EmployeeDatabaseEntry> employeeDatabaseEntry = employeeDao.findById(1);
+        Assert.assertTrue(employeeDatabaseEntry.isPresent());
     }
 }
