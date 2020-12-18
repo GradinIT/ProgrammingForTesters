@@ -82,10 +82,10 @@ public class TestDepartmentService {
         when(departmentDao.save(any())).thenReturn(departmentDatabaseEntry);
 
         //do the service call
-        Department cratedDepartment = departmentService.create(department);
+        Department createdDepartment = departmentService.create(department);
 
         //verify that everything is ok
-        Assert.assertEquals(department,cratedDepartment);
+        Assert.assertEquals(department,createdDepartment);
         verify(departmentDao, times(1)).findById(department.getDepartmentId());
         verify(departmentDao, times(1)).save(departmentDatabaseEntry);
     }
