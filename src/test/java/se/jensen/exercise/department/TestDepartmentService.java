@@ -76,7 +76,7 @@ public class TestDepartmentService {
                 .departmentId(DEPARTMENTID)
                 .departmentName(DEPARTMENTNAME)
                 .build();
-
+      
         //setting the rules for the mock
         when(departmentDao.findById(any())).thenReturn(Optional.empty());
         when(departmentDao.save(departmentDatabaseEntry)).thenReturn(departmentDatabaseEntry);
@@ -110,7 +110,6 @@ public class TestDepartmentService {
         //check that everything is ok
         Assert.assertEquals(department,updatedDepartment);
         verify(departmentDao, times(1)).save(departmentDatabaseEntry);
-
     }
 
     @Test
