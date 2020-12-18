@@ -38,6 +38,7 @@ public class TestDepartmentService {
 
         when(departmentDao.findAll()).thenReturn(departmentList);
         when(departmentDao.findById(any())).thenReturn(Optional.of(departmentDatabaseEntry));
+        when(departmentDao.findById(DEPARTMENTID)).thenReturn(Optional.of(departmentDatabaseEntry));
     }
 
     @Test
@@ -68,12 +69,31 @@ public class TestDepartmentService {
 
     @Test
     public void testToCreateDepartment() {
-        //TODO
+        when(departmentDao.findById(any())).thenReturn(Optional.empty());
+        when(departmentDao.save(any())).thenReturn(DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build());
+        Department departmentCreate = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
+        Department departmentSaved = departmentService.create(departmentCreate);
+        verify(departmentDao, times(1)).save(any());
+        Assert.assertNotNull(departmentSaved);
+        Assert.assertEquals(DEPARTMENTID, departmentSaved.getDepartmentId());
+        Assert.assertEquals(DEPARTMENTNAME, departmentSaved.getDepartmentName());
     }
 
     @Test
     public void testToUpdateDepartment() {
-        //TODO
+        when(departmentDao.save(any())).thenReturn(DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build());
+        Department departmentToBeUpdated = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
+        Department updatedDepartment = departmentService.update(departmentToBeUpdated);
+        verify(departmentDao, times(1)).save(any());
+        Assert.assertNotNull(updatedDepartment);
+        Assert.assertEquals(DEPARTMENTID, updatedDepartment.getDepartmentId());
+        Assert.assertEquals(DEPARTMENTNAME, updatedDepartment.getDepartmentName());
     }
 
     @Test
