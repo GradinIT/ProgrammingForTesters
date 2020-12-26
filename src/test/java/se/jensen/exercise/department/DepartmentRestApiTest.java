@@ -6,6 +6,7 @@ import se.jensen.dao.EntityAlreadyInStorageException;
 import se.jensen.exercise.department.client.DepartmentRestServiceClient;
 import se.jensen.RestServiceApplication;
 import se.jensen.test.category.IntegrationTest;
+import se.jensen.test.category.UnitTest;
 
 import lombok.SneakyThrows;
 import org.junit.*;
@@ -30,10 +31,9 @@ import static org.junit.Assert.fail;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
 @Category(IntegrationTest.class)
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DepartmentRestApiTest {
 
     private static ConfigurableApplicationContext applicationContext;
