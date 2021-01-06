@@ -5,9 +5,10 @@ import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import se.jensen.test.category.IntegrationTest;
+import se.jensen.test.category.UnitTest;
 
 @RunWith(Categories.class)
-@Categories.IncludeCategory(IntegrationTest.class)
+@Categories.ExcludeCategory(UnitTest.class)
 @Suite.SuiteClasses({
         TestThatDepartmentIsCreated.class,
         TestThatNullPointerExceptionIsThrown.class,
