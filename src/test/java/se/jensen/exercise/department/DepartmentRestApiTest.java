@@ -46,7 +46,7 @@ public class DepartmentRestApiTest {
     @AfterClass
     public static void shutDown() { SpringApplication.exit(applicationContext); }
 
-    @Test
+    /*@Test
     public void testToCreate() {
         DepartmentModel addDepartment = DepartmentModel.builder()
                 .departmentId(33)
@@ -57,7 +57,7 @@ public class DepartmentRestApiTest {
         Assert.assertEquals(Integer.valueOf(33), newDepartment.getDepartmentId());
         Assert.assertEquals("The NEW Department", newDepartment.getDepartmentName());
         Assert.assertEquals(addDepartment, newDepartment); //can we use this instead of above?
-    }
+    }*/
 
     @Test
     public void testToUpdate() {
