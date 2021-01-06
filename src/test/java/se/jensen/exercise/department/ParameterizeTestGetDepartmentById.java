@@ -73,6 +73,10 @@ public class ParameterizeTestGetDepartmentById {
         Optional<DepartmentModel> department = DepartmentRestServiceClient.getDepartmentById(departmentID);
         Assert.assertTrue(department.isPresent());
         DepartmentModel departmentModel = department.get();
+        System.out.println("\nDepartmentId from parameters: " + departmentID
+                +"\nDepartmentId from element: " + departmentModel.getDepartmentId()
+                + "\nDepartmentName from element: "  + departmentModel.getDepartmentName() );
+        System.out.println("--------------------------------------------------\n");
         Assert.assertEquals(Integer.valueOf(departmentID), departmentModel.getDepartmentId());
         Assert.assertEquals(expectedDepartmentName, departmentModel.getDepartmentName());
     }

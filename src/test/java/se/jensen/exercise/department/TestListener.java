@@ -22,23 +22,23 @@ public class TestListener extends RunListener {
         System.out.println(Colour.RED + "\n-----End of testListener-----\n" + Colour.NO);
     }
 
-    //This method runs before all test -------------------------------------------------
+    //This method runs before all tests -------------------------------------------------
     @Override
     public void testRunStarted(Description description) throws Exception {
-        System.out.println(Colour.RED + "\nTests run" + description.getClassName() + Colour.NO);
+        System.out.println(Colour.RED + "\nTests run  " + Colour.NO);
     }
 
     //This method runs before every method -------------------------------------------------
     @Override
     public void testStarted (Description description) throws Exception
     {
-        System.out.println(Colour.YELLOW + "\nTestListener - test started: "  + Colour.CYAN + description + Colour.NO);
+        System.out.println(Colour.YELLOW + "\nTestListener - tests started: " + Colour.CYAN + description + Colour.NO);
     }
 
     //This method runs after every test method -------------------------------------------------
     @Override
     public void testFinished(Description description) throws Exception {
-        System.out.println(Colour.YELLOW + "Test listener - test finished: " + Colour.CYAN + description + Colour.NO);
+        System.out.println(Colour.YELLOW + "Test listener - tests finished: " + Colour.CYAN + description + Colour.NO);
         System.out.println("--------------------------------------");
     }
 
@@ -46,13 +46,13 @@ public class TestListener extends RunListener {
     @Override
     public void testFailure (Failure failure) throws Exception
     {
-        System.out.println(Colour.YELLOW + "\nTestListener test failure "  + Colour.RED + failure + Colour.NO);
+        System.out.println(Colour.YELLOW + "\nTestListener tests failure "  + Colour.RED + failure + Colour.NO);
     }
 
     //This method runs if test method is ignored -------------------------------------------------
     @Override
     public void testIgnored(Description description) throws Exception {
-        System.out.println(Colour.YELLOW + "Test ignored: " + Colour.GREEN + description + Colour.NO);
+        System.out.println(Colour.YELLOW + "Tests ignored: " + Colour.GREEN + description + Colour.NO);
         System.out.println("--------------------------------------");
     }
 
