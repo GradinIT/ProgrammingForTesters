@@ -1,6 +1,5 @@
 package se.jensen.exercise.department;
 
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class DepartmentDaoTest {
     public void testToGetAll() {
         List<DepartmentDatabaseEntry> departmentsList = departmentDao.findAll();
         Assert.assertEquals(2, departmentsList.size());
-        departmentsList.stream().forEach(System.out::println);
+        departmentsList.stream().forEach(System.out::println); //kan ta bort denna, vi har assert och man skriver inte ut i console på detta vis, man kollar i loggar.
     }
 
     @Test
