@@ -62,7 +62,7 @@ public class TestListener extends RunListener {
 
         System.out.println(Colour.BLUE + "\nResult of the test run: " + Colour.YELLOW + result.wasSuccessful() + Colour.NO);
         System.out.println(Colour.BLUE +"Run time: " + Colour.YELLOW + result.getRunTime() + " ms"+ Colour.NO);
-        System.out.println(Colour.BLUE +"Run count: " +Colour.YELLOW + result.getRunCount() + Colour.YELLOW + Colour.NO);
+        System.out.println(Colour.BLUE +"Number od tests executed: " +Colour.YELLOW + result.getRunCount() + Colour.YELLOW + Colour.NO);
         System.out.println(Colour.BLUE +"Failure count: " + Colour.YELLOW + result.getFailureCount()  + Colour.NO);
         System.out.println(Colour.BLUE +"Ignored count: " + Colour.YELLOW + result.getIgnoreCount()  + Colour.NO);
     }

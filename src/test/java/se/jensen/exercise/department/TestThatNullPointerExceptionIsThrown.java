@@ -10,7 +10,7 @@ import org.junit.experimental.categories.Category;
 
 public class TestThatNullPointerExceptionIsThrown {
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testDepartmentIdNotNull(){
         Department.builder()
                 .departmentId(null)

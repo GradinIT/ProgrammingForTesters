@@ -17,24 +17,6 @@ import java.util.Optional;
 
 public class DepartmentRestApiTestGetAll extends DepartmentRestApiTestsSetUpp {
 
-/*    private static ConfigurableApplicationContext applicationContext;
-
-    @SneakyThrows
-    @BeforeClass
-    public static void startUp() {
-        String[] args = {};
-        SpringApplication app = new SpringApplication(RestServiceApplication.class);
-        app.setDefaultProperties(Collections
-                .singletonMap("server.port", "8080"));
-        app.setBannerMode(Banner.Mode.CONSOLE);
-        app.setLogStartupInfo(false);
-        applicationContext = app.run(args);
-    }*/
-
-/*    @AfterClass
-    public static void shutDown() {
-        SpringApplication.exit(applicationContext);
-    }*/
 
     @Test
     public void testGetAllDepartments()
