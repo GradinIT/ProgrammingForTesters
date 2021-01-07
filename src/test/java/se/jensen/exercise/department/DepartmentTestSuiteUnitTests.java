@@ -22,7 +22,7 @@ import se.jensen.test.category.UnitTest;
         DepartmentDaoTest.class,
         DepartmentRestApiTest.class
 })
-public class DepartmenaTestSuiteUnitTests {
+public class DepartmentTestSuiteUnitTests {
 
 
 }

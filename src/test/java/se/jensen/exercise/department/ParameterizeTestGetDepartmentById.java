@@ -38,6 +38,7 @@ public class ParameterizeTestGetDepartmentById {
 
     //Parameters
     @Parameterized.Parameters(name = "test with departmentId {index}")
+
     public static Iterable<Object[]> dataForTest()
     {
         return Arrays.asList(new Object[][]
@@ -52,6 +53,7 @@ public class ParameterizeTestGetDepartmentById {
     private static ConfigurableApplicationContext applicationContext;
 
     @SneakyThrows
+
     @BeforeClass
     public static void startUp() {
         String[] args = {};
@@ -73,9 +75,9 @@ public class ParameterizeTestGetDepartmentById {
         Optional<DepartmentModel> department = DepartmentRestServiceClient.getDepartmentById(departmentID);
         Assert.assertTrue(department.isPresent());
         DepartmentModel departmentModel = department.get();
-        System.out.println("\nDepartmentId from parameters: " + departmentID
-                +"\nDepartmentId from element: " + departmentModel.getDepartmentId()
-                + "\nDepartmentName from element: "  + departmentModel.getDepartmentName() );
+        System.out.println("\nDepartmentId (parameters): " + departmentID
+                +"\nDepartmentId  (element): " + departmentModel.getDepartmentId()
+                + "\nDepartmentName  (element): "  + departmentModel.getDepartmentName() );
         System.out.println("--------------------------------------------------\n");
         Assert.assertEquals(Integer.valueOf(departmentID), departmentModel.getDepartmentId());
         Assert.assertEquals(expectedDepartmentName, departmentModel.getDepartmentName());
