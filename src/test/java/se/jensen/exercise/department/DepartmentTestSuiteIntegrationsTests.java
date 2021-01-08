@@ -1,10 +1,9 @@
 package se.jensen.exercise.department;
 
 import org.junit.experimental.categories.Categories;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import se.jensen.test.category.IntegrationTest;
+
 import se.jensen.test.category.UnitTest;
 
 @RunWith(Categories.class)
@@ -19,7 +18,6 @@ import se.jensen.test.category.UnitTest;
         TestDepartmentModelsMapper.class,
         TestDepartmentDatabaseEntryCreated.class,
         TestDepartmentDatabaseEntryMapper.class,
-        TestDepartmentTestBuilder.class,
         DepartmentDaoTest.class,
         DepartmentRestApiTest.class
 })

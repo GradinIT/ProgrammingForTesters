@@ -3,6 +3,7 @@ package se.jensen.exercise.department;
 import lombok.SneakyThrows;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,6 +16,7 @@ public class DepartmentRestApiTestsSetUpp {
     private static ConfigurableApplicationContext applicationContext;
 
     @SneakyThrows
+
     @BeforeClass
     public static void startUp() {
         String[] args = {};

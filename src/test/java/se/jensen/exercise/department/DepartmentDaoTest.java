@@ -1,27 +1,28 @@
 package se.jensen.exercise.department;
 
-import se.jensen.test.category.IntegrationTest;
-import se.jensen.test.category.ManualTest;
-import se.jensen.dao.DepartmentDao;
-import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
-import se.jensen.entity.Department;
-import se.jensen.H2JpaConfig;
-import se.jensen.LiquibaseConfigurer;
-import se.jensen.exercise.test.builder.DepartmentTestBuilder;
-
-import org.junit.FixMethodOrder;
-import org.junit.experimental.categories.Category;
-import org.junit.runners.MethodSorters;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import se.jensen.H2JpaConfig;
+import se.jensen.LiquibaseConfigurer;
+import se.jensen.dao.DepartmentDao;
+import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
+import se.jensen.entity.Department;
 import se.jensen.test.category.UnitTest;
 
 import javax.ws.rs.core.Application;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class, LiquibaseConfigurer.class, H2JpaConfig.class})
@@ -35,13 +36,30 @@ public class DepartmentDaoTest {
     @Autowired
     private DepartmentDao departmentDao;
 
+    @Test
+    public void a_testGetDepartmentById()
+    {
+        Optional <DepartmentDatabaseEntry> optionalDepartment = departmentDao.findById(1);
+        Department department = DepartmentDatabaseEntryMapper.map(optionalDepartment.get());
+
+        Assert.assertTrue(optionalDepartment.isPresent());
+        Assert.assertNotNull(department);
+    }
+//-------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void b_testGetAllDepartments()
+    {
+        List<Department> departments = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
+        
+        Assert.assertNotNull(departments);
+        Assert.assertEquals(3, departments.size());
+    }
+
 //-------------------------------------------------------------------------------------------------------------
     @Test
-    public void a_testSaveNewDepartment()
+    public void c_testSaveNewDepartment()
     {
-        List<Department> departmentsBeforeSave = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        System.out.println("\n-------Department before save-------");
-        departmentsBeforeSave.stream().forEach(System.out::println);
 
         Department department = DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(Department.builder()
                 .departmentId(10)
@@ -49,20 +67,20 @@ public class DepartmentDaoTest {
                 .build())));
 
         List<Department> departmentsAfterSave = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        System.out.println("-------Department after save-------");
-        departmentsAfterSave.stream().forEach(System.out::println);
 
         Assert.assertNotNull(department);
+        Assert.assertTrue(departmentDao.findById(10).isPresent());
+
+        Assert.assertEquals("Testers", departmentDao.findById(10).get().getDepartmentName());
+
+        //Assert.assertEquals("Testers", department.getDepartmentName());
         Assert.assertEquals(4, departmentsAfterSave.size() );
     }
 //-------------------------------------------------------------------------------------------------------------
 
     @Test
-    public void b_testUpdateDepartment()
+    public void d_testUpdateDepartment()
     {
-        List<Department> departmentsBeforeUpdate = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        System.out.println("\n------- Department before update-------");
-        departmentsBeforeUpdate.stream().forEach(System.out::println);
 
         Department department = DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(Department.builder()
                 .departmentId(10)
@@ -70,32 +88,26 @@ public class DepartmentDaoTest {
                 .build())));
 
         List<Department> departmentsAfterUpdate = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        System.out.println("-------Department after update-------");
-        departmentsAfterUpdate.stream().forEach(System.out::println);
 
         Assert.assertNotNull(department);
+        Assert.assertTrue(departmentDao.findById(10).isPresent());
+        Assert.assertEquals("Programmers", department.getDepartmentName());
         Assert.assertEquals(4, departmentsAfterUpdate.size());
     }
 //-------------------------------------------------------------------------------------------------------------
 
     @Test
-    public void c_testDeleteNewDepartment()
+    public void e_testDeleteNewDepartment()
     {
-        List<Department> departmentsBeforeDelete = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        System.out.println("\n-------Department before delete-------");
-        departmentsBeforeDelete.stream().forEach(System.out::println);
-
         departmentDao.delete(DepartmentDatabaseEntryMapper.map(Department.builder()
                 .departmentId(10)
                 .departmentName("Programmers")
                 .build()));
 
         List<Department> departmentsAfterDelete = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        System.out.println("-------Department after delete-------");
-        departmentsAfterDelete.stream().forEach(System.out::println);
 
         Assert.assertEquals(3, departmentsAfterDelete.size());
+        Assert.assertFalse(departmentDao.findById(10).isPresent());
     }
-
 }
 

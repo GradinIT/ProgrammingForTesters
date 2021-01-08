@@ -3,8 +3,10 @@ package se.jensen.exercise.department;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import se.jensen.RestServiceApplication;
 import se.jensen.api.DepartmentModel;
 import se.jensen.exercise.department.client.DepartmentRestServiceClient;
@@ -16,7 +18,6 @@ import java.util.Optional;
 @SpringBootTest(classes = {RestServiceApplication.class})
 
 public class DepartmentRestApiTestGetAll extends DepartmentRestApiTestsSetUpp {
-
 
     @Test
     public void testGetAllDepartments()

@@ -1,9 +1,5 @@
 package se.jensen.exercise.department;
 
-import se.jensen.RestServiceApplication;
-import se.jensen.api.DepartmentModel;
-import se.jensen.exercise.department.client.DepartmentRestServiceClient;
-
 import lombok.SneakyThrows;
 
 import org.junit.AfterClass;
@@ -16,8 +12,10 @@ import org.junit.runners.Parameterized;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
+
+import se.jensen.RestServiceApplication;
+import se.jensen.api.DepartmentModel;
+import se.jensen.exercise.department.client.DepartmentRestServiceClient;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,7 +35,7 @@ public class ParameterizeTestGetDepartmentById {
     }
 
     //Parameters
-    @Parameterized.Parameters(name = "test with departmentId {index}")
+    @Parameterized.Parameters(name = "Test with departmentId {index}")
 
     public static Iterable<Object[]> dataForTest()
     {
@@ -75,10 +73,7 @@ public class ParameterizeTestGetDepartmentById {
         Optional<DepartmentModel> department = DepartmentRestServiceClient.getDepartmentById(departmentID);
         Assert.assertTrue(department.isPresent());
         DepartmentModel departmentModel = department.get();
-        System.out.println("\nDepartmentId (parameters): " + departmentID
-                +"\nDepartmentId  (element): " + departmentModel.getDepartmentId()
-                + "\nDepartmentName  (element): "  + departmentModel.getDepartmentName() );
-        System.out.println("--------------------------------------------------\n");
+
         Assert.assertEquals(Integer.valueOf(departmentID), departmentModel.getDepartmentId());
         Assert.assertEquals(expectedDepartmentName, departmentModel.getDepartmentName());
     }

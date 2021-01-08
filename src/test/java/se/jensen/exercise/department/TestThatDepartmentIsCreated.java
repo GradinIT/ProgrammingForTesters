@@ -6,7 +6,6 @@ import se.jensen.test.category.UnitTest;
 import org.junit.*;
 import org.junit.experimental.categories.Category;
 
-
 @Category(UnitTest.class)
 
 public class TestThatDepartmentIsCreated {

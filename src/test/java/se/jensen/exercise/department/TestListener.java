@@ -8,10 +8,7 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
-import java.awt.*;
-
 public class TestListener extends RunListener {
-
 
     public static void main(String[] args) {
 
@@ -22,41 +19,51 @@ public class TestListener extends RunListener {
         System.out.println(Colour.RED + "\n-----End of testListener-----\n" + Colour.NO);
     }
 
-    //This method runs before all tests -------------------------------------------------
+//-----------------------------------------------------------------
+    //Called before any tests have been run.
     @Override
     public void testRunStarted(Description description) throws Exception {
         System.out.println(Colour.RED + "\nTests run  " + Colour.NO);
     }
 
-    //This method runs before every method -------------------------------------------------
+//-----------------------------------------------------------------
+    //Called when an atomic test is about to be started.
     @Override
     public void testStarted (Description description) throws Exception
     {
-        System.out.println(Colour.YELLOW + "\nTestListener - tests started: " + Colour.CYAN + description + Colour.NO);
+        System.out.println(Colour.YELLOW + "\nTestListener - test started: " + Colour.CYAN +
+                description.getMethodName()
+                + Colour.YELLOW + "  class: " + Colour.CYAN
+                + description.getClassName() + Colour.NO);
     }
 
-    //This method runs after every test method -------------------------------------------------
+//-----------------------------------------------------------------
+    // Called when an atomic test has finished, whether the test succeeds or fails.
     @Override
     public void testFinished(Description description) throws Exception {
-        System.out.println(Colour.YELLOW + "Test listener - tests finished: " + Colour.CYAN + description + Colour.NO);
+        System.out.println(Colour.YELLOW + "Test listener - tests finished: " + Colour.CYAN + description.getMethodName()
+                + Colour.NO);
         System.out.println("--------------------------------------");
     }
 
-    //This method runs if test method is failed -------------------------------------------------
+//-----------------------------------------------------------------
+    //Called when an atomic test fails.
     @Override
     public void testFailure (Failure failure) throws Exception
     {
         System.out.println(Colour.YELLOW + "\nTestListener tests failure "  + Colour.RED + failure + Colour.NO);
     }
 
-    //This method runs if test method is ignored -------------------------------------------------
+//-----------------------------------------------------------------
+    //Called when a test will not be run, generally because a test method is annotated with Ignore.
     @Override
     public void testIgnored(Description description) throws Exception {
         System.out.println(Colour.YELLOW + "Tests ignored: " + Colour.GREEN + description + Colour.NO);
         System.out.println("--------------------------------------");
     }
 
-    //This method runs after all test methods -------------------------------------------------
+//-----------------------------------------------------------------
+    //Called when all tests have finished
     @Override
     public void testRunFinished(Result result) throws Exception {
 
