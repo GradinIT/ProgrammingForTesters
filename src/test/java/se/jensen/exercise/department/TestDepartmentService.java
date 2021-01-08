@@ -81,7 +81,7 @@ public class TestDepartmentService {
                 .departmentName(DEPARTMENT_NAME)
                 .build();
         when(departmentDao.findById(any())).thenReturn(Optional.empty());
-        when(departmentDao.save(any())).thenReturn(departmentDatabaseEntry);
+        when(departmentDao.save(any())).thenReturn(departmentDatabaseEntry); //any(DepartmentDatabaseEntry.class)
         Department createDepartment = service.create(Department.builder()
                 .departmentId(DEPARTMENT_ID)
                 .departmentName(DEPARTMENT_NAME)
@@ -89,7 +89,7 @@ public class TestDepartmentService {
         Assert.assertNotNull(createDepartment);
         Assert.assertEquals(DEPARTMENT_ID, createDepartment.getDepartmentId());
         Assert.assertEquals(DEPARTMENT_NAME, createDepartment.getDepartmentName());
-        System.out.println("The Newly created Department is \n" +"DEPARTMENT_ID  "+createDepartment.getDepartmentId() +" \n"+"DEPARTMENT_NAME  "+createDepartment.getDepartmentName());
+       // System.out.println("The Newly created Department is \n" +"DEPARTMENT_ID  "+createDepartment.getDepartmentId() +" \n"+"DEPARTMENT_NAME  "+createDepartment.getDepartmentName());
         verify(departmentDao, times(1)).save(any());
         verify(departmentDao,times(1)).findById(any());
     }
@@ -108,7 +108,7 @@ public class TestDepartmentService {
         Assert.assertNotNull(updateDepartment);
         Assert.assertEquals(DEPARTMENT_ID,updateDepartment.getDepartmentId());
         Assert.assertEquals(DEPARTMENT_NAME2,updateDepartment.getDepartmentName());
-        System.out.println("The newly updated department is " +DEPARTMENT_NAME2);
+        //System.out.println("The newly updated department is " +DEPARTMENT_NAME2);
         verify(departmentDao,times(1)).save(any());
         verify(departmentDao,times(1)).findById(any());
     }
@@ -121,17 +121,5 @@ public class TestDepartmentService {
                 .build());
         verify(departmentDao,times(1)).findById(any());
         verify(departmentDao,times(1)).delete(any());
-    }
-    @Test // without using mockito
-    public void testThatNewDepartmentIsCreated(){
-        Integer DEPARTMENT_ID = 5;
-        String DEPARTMENT_NAME = "Development";
-        Department department = Department.builder()
-                .departmentId(DEPARTMENT_ID)
-                .departmentName(DEPARTMENT_NAME)
-                .build();
-        Assert.assertNotNull(department);
-        Assert.assertEquals(DEPARTMENT_ID,department.getDepartmentId());
-        Assert.assertEquals(DEPARTMENT_NAME,department.getDepartmentName());
     }
 }
