@@ -4,7 +4,6 @@ import lombok.SneakyThrows;
 import org.junit.*;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +11,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
+import se.jensen.H2JpaConfig;
+import se.jensen.LiquibaseConfigurer;
 import se.jensen.RestServiceApplication;
 import se.jensen.api.DepartmentModel;
 import se.jensen.exercise.department.client.DepartmentRestServiceClient;
@@ -24,9 +25,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.fail;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {RestServiceApplication.class})
+@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class})
 @Category(IntegrationTest.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DepartmentRestApiTest {
     private static ConfigurableApplicationContext applicationContext;
 
@@ -44,54 +44,48 @@ public class DepartmentRestApiTest {
     @AfterClass
     public static void shutDown() { SpringApplication.exit(applicationContext); }
 
-    //Failed tests:   a_testToGetAll(se.jensen.exercise.department.DepartmentRestApiTest): expected:<3> but was:<1>
-    /*@Test
-    public void a_testToGetAll() {
+    @Test
+    public void testToGetAll() {
         Optional<List<DepartmentModel>> departments = DepartmentRestServiceClient.getAllDepartments();
         Assert.assertTrue(departments.isPresent());
         Assert.assertEquals(3, departments.get().size());
-        Assert.assertEquals(3, departments.get().stream().count());
-    }*/
+
+    }
 
     @Test
-    public void b_testToGetById() {
+    public void testToGetById() {
         Optional<DepartmentModel> departments = DepartmentRestServiceClient.getDepartmentById(1);
         Assert.assertTrue(departments.isPresent());
     }
 
     @Test
-    public void c_testToCreate() {
+    public void testToCreate() {
         DepartmentModel addDepartment = DepartmentModel.builder()
                 .departmentId(33)
-                .departmentName("The NEW Department")
+                .departmentName("the_new_department") //note to self, does not accept [spaces] (Unterminated)
                 .build();
         DepartmentModel newDepartment = DepartmentRestServiceClient.createDepartment(addDepartment).get();
         Assert.assertNotNull(newDepartment);
         Assert.assertEquals(Integer.valueOf(33), newDepartment.getDepartmentId());
-        Assert.assertEquals("The NEW Department", newDepartment.getDepartmentName());
+        Assert.assertEquals("the_new_department", newDepartment.getDepartmentName());
         Assert.assertEquals(addDepartment, newDepartment); //can we use this instead of above?
-        System.out.println(DepartmentRestServiceClient.getDepartmentById(33));
     }
 
     @Test
-    public void d_testToUpdate() {
+    public void testToUpdate() {
         DepartmentModel toBeUpdatedDepartment = DepartmentModel.builder()
                 .departmentId(33)
-                .departmentName("UPDATED New Department")
+                .departmentName("updated_new_department")
                 .build();
         DepartmentModel updatedDepartment = DepartmentRestServiceClient.updateDepartment(toBeUpdatedDepartment).get();
         Assert.assertNotNull(updatedDepartment);
         Assert.assertEquals(Integer.valueOf(33), updatedDepartment.getDepartmentId());
-        Assert.assertEquals("UPDATED New Department", updatedDepartment.getDepartmentName());
-        Assert.assertEquals(toBeUpdatedDepartment, updatedDepartment); //same as above
+        Assert.assertEquals("updated_new_department", updatedDepartment.getDepartmentName());
+        Assert.assertEquals(toBeUpdatedDepartment, updatedDepartment); //can we use this instead of above?
     }
 
-
-    //Tests in error:
-    //  e_testToDelete(se.jensen.exercise.department.DepartmentRestApiTest): 404 : [Entity with id 2 not found]
-    //Tests run: 41, Failures: 1, Errors: 1, Skipped: 0
-    /*@Test
-    public void e_testToDelete() {
+    @Test
+    public void testToDelete() {
         DepartmentModel toBeDeletedDepartment = DepartmentModel.builder()
                 .departmentId(2)
                 .departmentName("Sales")
@@ -105,10 +99,10 @@ public class DepartmentRestApiTest {
             Assert.assertEquals(404, exception.getRawStatusCode());
             Assert.assertEquals("404 : [Entity with id 2 not found]", exception.getMessage());
         }
-    }*/
+    }
 
     @Test
-    public void f_testErrorHandling() {
+    public void testErrorHandling() {
         try {
             Optional<DepartmentModel> department = DepartmentRestServiceClient.getDepartmentById(10);
             fail("Expected exception not thrown.");

@@ -1,18 +1,10 @@
 package se.jensen.exercise.department;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
-import se.jensen.entity.Department;
-import se.jensen.service.DepartmentService;
-import se.jensen.service.DepartmentServiceImpl;
-
-import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;

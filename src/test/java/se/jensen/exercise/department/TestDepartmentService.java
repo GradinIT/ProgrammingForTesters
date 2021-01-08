@@ -50,7 +50,7 @@ public class TestDepartmentService {
 
     @Test
     public void testToGetDepartmentById() {
-        Integer temporaryDepartmentId = Integer.valueOf(15);
+        Integer temporaryDepartmentId = Integer.valueOf(15); //Could remove "boxing" = 15
 
         DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
                 .departmentId(temporaryDepartmentId)

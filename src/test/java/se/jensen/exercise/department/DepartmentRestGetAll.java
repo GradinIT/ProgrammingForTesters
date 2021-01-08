@@ -45,5 +45,6 @@ public class DepartmentRestGetAll {
     public void getAll() {
         Optional<List<DepartmentModel>> departments = DepartmentRestServiceClient.getAllDepartments();
         Assert.assertTrue(departments.isPresent());
+        Assert.assertEquals(3, departments.get().size());
     }
 }

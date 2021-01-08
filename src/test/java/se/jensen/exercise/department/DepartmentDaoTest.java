@@ -1,7 +1,6 @@
 package se.jensen.exercise.department;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,7 @@ import se.jensen.H2JpaConfig;
 import se.jensen.LiquibaseConfigurer;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
-
 import javax.ws.rs.core.Application;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,48 +21,32 @@ public class DepartmentDaoTest {
     @Autowired
     private DepartmentDao departmentDao;
 
-    @Before
-    public void setUp() {
-        departmentDao.deleteAll();
-        departmentDao.saveAll(Arrays.asList(DepartmentDatabaseEntry.builder()
-                .departmentId(1)
-                .departmentName("Sales")
-                .build(),
-                DepartmentDatabaseEntry.builder()
-                .departmentId(2)
-                .departmentName("Management")
-                .build()));
-    }
-
     @Test
     public void testToGetAll() {
         List<DepartmentDatabaseEntry> departmentsList = departmentDao.findAll();
-        Assert.assertEquals(2, departmentsList.size());
-        departmentsList.stream().forEach(System.out::println); //kan ta bort denna, vi har assert och man skriver inte ut i console på detta vis, man kollar i loggar.
+        Assert.assertEquals(3, departmentsList.size());
     }
 
     @Test
     public void testToSaveNewDepartment() {
         List<DepartmentDatabaseEntry> departmentLit = departmentDao.findAll();
-        Assert.assertEquals(2, departmentLit.size());
-        departmentDao.saveAndFlush(DepartmentDatabaseEntry.builder()
-                .departmentId(3)
+        Assert.assertEquals(3, departmentLit.size());
+        departmentDao.save(DepartmentDatabaseEntry.builder()
+                .departmentId(99)
                 .departmentName("test_department")
                 .build());
         departmentLit = departmentDao.findAll();
-        Assert.assertEquals(3, departmentLit.size());
-        departmentLit.stream().forEach(System.out::println);
+        Assert.assertEquals(4, departmentLit.size());
     }
 
     @Test
     public void testToDeleteDepartment() {
         departmentDao.delete(DepartmentDatabaseEntry.builder()
-                .departmentId(2)
-                .departmentName("Management")
+                .departmentId(99)
+                .departmentName("test_department")
                 .build());
         List<DepartmentDatabaseEntry> departmentList = departmentDao.findAll();
-        Assert.assertEquals(1, departmentList.size());
-        departmentList.stream().forEach(System.out::println);
+        Assert.assertEquals(3, departmentList.size());
     }
 
     @Test
