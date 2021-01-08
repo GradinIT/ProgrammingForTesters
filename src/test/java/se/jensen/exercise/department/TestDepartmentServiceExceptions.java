@@ -57,7 +57,10 @@ public class TestDepartmentServiceExceptions {
     public void testDepartmentCreate() {
         Integer DEPARTMENT_ID = Integer.valueOf(10);
         String DEPARTMENT_NAME = "Finance";
-        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder().build();
+        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENT_ID)
+                .departmentName(DEPARTMENT_NAME)
+                .build();
         when(departmentDao.findById(DEPARTMENT_ID)).thenReturn(Optional.of(departmentDatabaseEntry));
         Department createDepartment = service.create(Department.builder()
                 .departmentId(DEPARTMENT_ID)
