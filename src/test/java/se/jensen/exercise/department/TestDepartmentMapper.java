@@ -5,7 +5,7 @@ import org.junit.Test;
 import se.jensen.api.DepartmentModel;
 import se.jensen.api.mapper.DepartmentModelMapper;
 import se.jensen.entity.Department;
-import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+
 
 public class TestDepartmentMapper {
     @Test
@@ -27,6 +27,7 @@ public class TestDepartmentMapper {
     }
     @Test
     public void TestDepartmentmodelMap (){
+
         String departmentName = "metal";
         Integer departmentId = 2;
 

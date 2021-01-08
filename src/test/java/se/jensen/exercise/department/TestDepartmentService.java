@@ -9,7 +9,7 @@ import se.jensen.dao.DepartmentDatabaseEntry;
 
 
 import se.jensen.dao.EntityAlreadyInStorageException;
-import se.jensen.dao.EntityNotFoundException;
+
 import se.jensen.entity.Department;
 import se.jensen.service.DepartmentService;
 import se.jensen.service.DepartmentServiceImpl;

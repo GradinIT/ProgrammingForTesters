@@ -14,9 +14,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import se.jensen.RestServiceApplication;
 import se.jensen.api.DepartmentModel;
-import se.jensen.api.EmployeeModel;
-import se.jensen.exercise.department.client.DepartmentRestServiceClient;
-import se.jensen.exercise.employee.client.EmployeeRestServiceClient;
+
 import se.jensen.test.category.IntegrationTest;
 
 import java.util.Collections;

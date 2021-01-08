@@ -1,4 +1,4 @@
-/*package se.jensen.exercise.department;
+package se.jensen.exercise.department;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestDepartmentModelsmapper {
+
     @Test
     public void TestDepartmentModelsMap (){
         String departmentName = "metal";
@@ -45,4 +46,4 @@ public class TestDepartmentModelsmapper {
 
 
     }
-}*/
+}
