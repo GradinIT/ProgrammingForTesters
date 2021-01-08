@@ -70,10 +70,7 @@ public class DepartmentDaoTest {
 
         Assert.assertNotNull(department);
         Assert.assertTrue(departmentDao.findById(10).isPresent());
-
         Assert.assertEquals("Testers", departmentDao.findById(10).get().getDepartmentName());
-
-        //Assert.assertEquals("Testers", department.getDepartmentName());
         Assert.assertEquals(4, departmentsAfterSave.size() );
     }
 //-------------------------------------------------------------------------------------------------------------
