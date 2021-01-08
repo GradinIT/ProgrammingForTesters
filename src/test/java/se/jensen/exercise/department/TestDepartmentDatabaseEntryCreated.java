@@ -11,6 +11,7 @@ import org.junit.experimental.categories.Category;
 @Category(UnitTest.class)
 
 public class TestDepartmentDatabaseEntryCreated {
+
     @Test
     public void testDepartmentDatabaseEntryCreated()
     {
@@ -18,6 +19,7 @@ public class TestDepartmentDatabaseEntryCreated {
                 .departmentId(1)
                 .departmentName("NewDevelopment")
                 .build();
+
         Assert.assertNotNull(departmentDatabaseEntry);
         Assert.assertEquals(Integer.valueOf(1), departmentDatabaseEntry.getDepartmentId());
         Assert.assertEquals("NewDevelopment", departmentDatabaseEntry.getDepartmentName());

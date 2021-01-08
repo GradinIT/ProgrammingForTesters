@@ -1,18 +1,18 @@
 package se.jensen.exercise.department;
-import org.junit.experimental.categories.Category;
-import se.jensen.test.category.UnitTest;
-import se.jensen.dao.*;
 
-import liquibase.pro.packaged.I;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
+import org.junit.experimental.categories.Category;
+
+import se.jensen.dao.DepartmentDao;
+import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.test.category.UnitTest;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 @Category(UnitTest.class)
@@ -42,6 +42,7 @@ public class TestThatDepartmentIsStoredInDatabase {
                 .departmentId(DEPARTMENTID)
                 .departmentName(DEPARTMENTNAME)
                 .build();
+
         DepartmentDatabaseEntry departmentDatabaseEntrySaved = departmentDao.save(departmentDatabaseEntry);
 
         Assert.assertEquals(departmentDatabaseEntry.getDepartmentId(),departmentDatabaseEntrySaved.getDepartmentId());

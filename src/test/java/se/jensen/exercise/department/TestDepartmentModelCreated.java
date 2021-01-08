@@ -1,17 +1,16 @@
 package se.jensen.exercise.department;
 
-import se.jensen.api.DepartmentModel;
-import se.jensen.entity.Department;
-import se.jensen.test.category.UnitTest;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import se.jensen.api.DepartmentModel;
+import se.jensen.test.category.UnitTest;
 
 @Category(UnitTest.class)
 
 public class TestDepartmentModelCreated {
+
     @Test
     public void testDepartmentModelCreated(){
         final Integer departmentId = 1;
@@ -44,5 +43,4 @@ public class TestDepartmentModelCreated {
                 .departmentName(null)
                 .build();
     }
-
 }

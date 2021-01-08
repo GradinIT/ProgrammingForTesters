@@ -1,26 +1,29 @@
 package se.jensen.exercise.department;
-import liquibase.pro.packaged.D;
-import net.minidev.json.JSONUtil;
-import java.nio.channels.ScatteringByteChannel;
 
-import se.jensen.entity.Department;
-import se.jensen.test.category.UnitTest;
-import se.jensen.dao.*;
-import se.jensen.service.*;
-import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import org.junit.experimental.categories.Category;
-import org.junit.*;
+import static org.junit.Assert.fail;
+
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.when;
 import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.when;
 
-import java.util.Optional;
+import se.jensen.dao.DepartmentDao;
+import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.dao.EntityAlreadyInStorageException;
+import se.jensen.dao.EntityNotFoundException;
+import se.jensen.entity.Department;
+import se.jensen.service.DepartmentService;
+import se.jensen.service.DepartmentServiceImpl;
+import se.jensen.test.category.UnitTest;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Category(UnitTest.class)
 
@@ -102,7 +105,10 @@ public class TestDepartmentService {
     // mock  departmentDao.findById()
         when(departmentDao.findById(DEPARTMENTID)).thenReturn(Optional.empty());
 
-        Department departmentToCreate = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
+        Department departmentToCreate = Department.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
 
         Department createdDepartment = departmentServiceImpl.create( departmentToCreate);
 
@@ -119,6 +125,7 @@ public class TestDepartmentService {
     public void testUpdateDepartment()  //findById, save
     {
         Integer NEWDEPARTMENTID = Integer.valueOf(2);
+
     // mock departmentDao.save()
         when(departmentDao.save(any()))
                 .thenReturn(DepartmentDatabaseEntry.builder()
@@ -126,7 +133,11 @@ public class TestDepartmentService {
                         .departmentName(DEPARTMENTNAME)
                         .build());
 
-        Department departmentToUpdate = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
+        Department departmentToUpdate = Department.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+
         Department updatedDepartment = departmentServiceImpl.update(departmentToUpdate);
 
         Assert.assertNotNull(updatedDepartment);
@@ -141,7 +152,11 @@ public class TestDepartmentService {
     @Test
     public void testRemoveDepartment()  //findByAll, delete
     {
-        Department departmentToRemove = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
+        Department departmentToRemove = Department.builder()
+                .departmentId(DEPARTMENTID)
+                .departmentName(DEPARTMENTNAME)
+                .build();
+
         Department removedDepartment = departmentServiceImpl.remove(departmentToRemove);
 
         verify(departmentDao, times(1)).findById(any(Integer.class));
@@ -153,7 +168,10 @@ public class TestDepartmentService {
     public void testCreateDepartmentIfDepartmentIsAlreadyInStorage() {
 
         try {
-            Department depToCreate = Department.builder().departmentId(DEPARTMENTID).departmentName(DEPARTMENTNAME).build();
+            Department depToCreate = Department.builder()
+                    .departmentId(DEPARTMENTID)
+                    .departmentName(DEPARTMENTNAME)
+                    .build();
 
             Department createDepartment = departmentServiceImpl.create(depToCreate);
             Assert.assertNotNull(createDepartment);
@@ -161,7 +179,7 @@ public class TestDepartmentService {
             fail();
         }
         catch (EntityAlreadyInStorageException entityAlreadyInStorageException) {
-            System.out.println("testCreateDepartmentIfDepartmentIsAlreadyInStorage: Entity with id 1 is already in storage");
+            //System.out.println("testCreateDepartmentIfDepartmentIsAlreadyInStorage: Entity with id 1 is already in storage");
             Assert.assertEquals("Entity with id 1 already in storage", entityAlreadyInStorageException.getMessage());
         }
         catch (Exception exception)
@@ -184,7 +202,6 @@ public class TestDepartmentService {
 
         catch (EntityNotFoundException entityNotFoundException)
         {
-            System.out.println("testDepartmentByIdNotFound: Entity with id 10 is not found by Id");
             Assert.assertEquals("Entity with id 10 not found", entityNotFoundException.getMessage());
         }
         catch (Exception exception)
@@ -210,7 +227,6 @@ public class TestDepartmentService {
         }
         catch (EntityNotFoundException entityNotFoundException)
         {
-            System.out.println("testDepartmentToUpdateNotFound: Entity with id 10 is not found to update");
             Assert.assertEquals("Entity with id 10 not found", entityNotFoundException.getMessage());
         }
         catch (Exception exception)
@@ -233,11 +249,9 @@ public class TestDepartmentService {
         try
         {
             Department department = departmentServiceImpl.remove(departmentToDelete);
-            //Department department = departmentServiceImpl.getDepartmentById(departmentToDelete.getDepartmentId());
         }
         catch (EntityNotFoundException entityNotFoundException)
         {
-            System.out.println("testDepartmentToDeleteNotFound: Entity with id 10 is not found to delete");
             Assert.assertEquals("Entity with id 10 not found", entityNotFoundException.getMessage());
         }
         catch (Exception exception)
