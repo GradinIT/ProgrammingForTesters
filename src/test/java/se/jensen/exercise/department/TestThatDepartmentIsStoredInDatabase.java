@@ -11,6 +11,8 @@ import se.jensen.entity.Department;
 import se.jensen.service.DepartmentService;
 import se.jensen.service.DepartmentServiceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -27,19 +29,51 @@ public class TestThatDepartmentIsStoredInDatabase {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        when(departmentDao.save(any())).thenReturn(DepartmentDatabaseEntry.builder()
-                        .departmentId(DEPARTMENT_ID)
-                        .departmentName(DEPARTMENT_NAME)
-                        .build());
+        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
+                .departmentId(DEPARTMENT_ID)
+                .departmentName(DEPARTMENT_NAME)
+                .build();
+        List<DepartmentDatabaseEntry> list = new ArrayList<>();
+        list.add(departmentDatabaseEntry);
+
     }
     @Test
-    public void test() {
+    public void testsave() {
         departmentDao.save(DepartmentDatabaseEntry.builder()
                 .departmentName(DEPARTMENT_NAME)
                 .departmentId(DEPARTMENT_ID)
                 .build());
 
         verify(departmentDao,times(1)).save(any());
+    }
+    @Test
+    public void testdelete() {
+       DepartmentDatabaseEntry deleteDataentry = departmentDao.save(DepartmentDatabaseEntry.builder()
+                .departmentName("Delete")
+                .departmentId(100)
+                .build());
+
+        verify(departmentDao,times(1)).save(any());
+
+        departmentDao.delete(deleteDataentry);
+        verify(departmentDao,times(1)).delete(any());
+    }
+
+    @Test
+    public void testFindById() {
+
+        departmentDao.findById(DEPARTMENT_ID);
+        verify(departmentDao,times(1)).findById(any());
+    }
+
+    @Test
+    public void testFindall() {
+        List<DepartmentDatabaseEntry> findAllDataentry = new ArrayList<>();
+        findAllDataentry = departmentDao.findAll();
+
+
+        verify(departmentDao,times(1)).findAll();
+
+
     }
 }
