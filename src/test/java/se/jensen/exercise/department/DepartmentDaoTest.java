@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import se.jensen.H2JpaConfig;
 import se.jensen.LiquibaseConfigurer;
 
+import se.jensen.api.DepartmentModel;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
 import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
@@ -33,12 +34,14 @@ public class DepartmentDaoTest {
     @Test
     public void TestDaoSaveDepartment(){
 
-        Department deparment = DepartmentDatabaseEntryMapper.map(departmentDao.save(
-                DepartmentDatabaseEntryMapper.map(DepartmentTestBuilder.builder().departmentId(1).departmentName("Development").build())));
+        DepartmentDatabaseEntry deparment = departmentDao.save(DepartmentDatabaseEntry.builder()
+                        .departmentId(4)
+                        .departmentName("Development").build());
 
+        Optional<DepartmentDatabaseEntry> deparetmentaerte = departmentDao.findById(4);
 
-        List<Department> list = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
-        Assert.assertNotNull(list);
+        Assert.assertNotNull(deparetmentaerte);
+        Assert.assertEquals(deparment.getDepartmentId(), deparetmentaerte.get().getDepartmentId());
     }
 
     @Test
@@ -84,7 +87,7 @@ public class DepartmentDaoTest {
 
         departmentDao.delete(depExpected.get());
 
-       List <DepartmentDatabaseEntry> allDeparments = departmentDao.findAll();
+        List <DepartmentDatabaseEntry> allDeparments = departmentDao.findAll();
 
         Assert.assertEquals(2, allDeparments.size());
 
