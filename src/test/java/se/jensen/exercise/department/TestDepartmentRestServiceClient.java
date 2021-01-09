@@ -64,7 +64,7 @@ public class TestDepartmentRestServiceClient {
     @Test public void TestUpdate(){
         DepartmentModel departmentModel = DepartmentModel.builder()
                 .departmentName("update")
-                .departmentId(1)
+                .departmentId(2)
                 .build();
         Optional<DepartmentModel> updatemodel = DepartmentRestServiceClient.updateDepartment(departmentModel);
 
@@ -74,7 +74,7 @@ public class TestDepartmentRestServiceClient {
 
     }
     @Test public void GetDepartmentId(){
-        Optional <DepartmentModel> departmentModel = DepartmentRestServiceClient.getDepartmentById(1);
+        Optional <DepartmentModel> departmentModel = DepartmentRestServiceClient.getDepartmentById(2);
         Assert.assertTrue(departmentModel.isPresent());
     }
 
