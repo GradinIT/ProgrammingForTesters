@@ -28,7 +28,7 @@ public class TestEmployeeService {
 
     EmployeeDao employeeDao = mock(EmployeeDao.class);
     @InjectMocks
-    EmployeeService service = new EmployeeServiceImpl();
+    EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
     private final Integer EMPLOYEEID = 10;
     private final String FIRSTNAME = "Arne";
@@ -56,7 +56,7 @@ public class TestEmployeeService {
 
     @Test
     public void testGetAll() {
-        List<Employee> all = service.getAllEmployees();
+        List<Employee> all = systemUnderTest.getAllEmployees();
         verify(employeeDao, times(1)).findAll();
         Assert.assertNotNull(all);
         Assert.assertEquals(1, all.size());
@@ -77,7 +77,7 @@ public class TestEmployeeService {
 
         when(employeeDao.findById(employeeId)).thenReturn(Optional.of(employeeDatabaseEntry)); // Mock the call
 
-        Employee employee = service.getEmployeeById(employeeId);
+        Employee employee = systemUnderTest.getEmployeeById(employeeId);
         verify(employeeDao, times(1)).findById(employeeId);
         Assert.assertNotNull(employee);
         Assert.assertEquals(FIRSTNAME, employee.getFirstName());
@@ -89,7 +89,7 @@ public class TestEmployeeService {
 
     @Test
     public void testDeleteEmployee() {
-        service.removeEmployee(EmployeeTestBuilder.build());
+        systemUnderTest.removeEmployee(EmployeeTestBuilder.build());
         verify(employeeDao, atLeastOnce()).delete(any());
     }
 }

@@ -16,7 +16,6 @@ import java.util.Optional;
 import java.util.logging.Logger;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private static final Logger LOGGER = Logger.getLogger(EmployeeServiceImpl.class.getSimpleName());
     @Autowired
     private EmployeeDao employeeDao;
 

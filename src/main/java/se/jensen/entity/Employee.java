@@ -18,5 +18,5 @@ public class Employee extends Entity<EmployeeID> {
     private final @NonNull String lastName;
     private final @NonNull BigDecimal salary;
     private final @NonNull Boolean fullTime;
-    private final @NonNull Integer departmentId;
+    private final @NonNull Department department;
 }

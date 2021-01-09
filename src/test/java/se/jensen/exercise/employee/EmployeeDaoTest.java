@@ -12,12 +12,15 @@ import se.jensen.H2JpaConfig;
 import se.jensen.LiquibaseConfigurer;
 import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.EmployeeDatabaseEntry;
+import se.jensen.entity.EmployeeID;
 
 import javax.ws.rs.core.Application;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
@@ -50,16 +53,16 @@ public class EmployeeDaoTest {
 
     @Test
     public void testGetAll() {
-        List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
-        Assert.assertEquals(2, employees.size());
-        employees.stream().forEach(System.out::println);
+        Object employees = employeeDao.findAll();
+        Assert.assertEquals(2, ((List)employees).size());
     }
 
     @Test
     public void testSaveNewEmployee() {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assert.assertEquals(2, employees.size());
-        employeeDao.saveAndFlush(EmployeeDatabaseEntry.builder()
+        employeeDao.saveAndFlush(
+                EmployeeDatabaseEntry.builder()
                 .departmentId(1)
                 .employeeId(15)
                 .firstName("Test15")

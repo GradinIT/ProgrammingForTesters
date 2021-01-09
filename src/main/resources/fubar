@@ -1,18 +1,23 @@
 
 
-   Webb Applikation ( html , javascript )
+   Webb Applikation ( html , javascript ) Presentation
+   --------------------------------------
 
-   Web Tjänst Lager (  REST (JSON) )
+   Web Tjänst Lager (  REST (JSON) )      Presentation API
+   --------------------------------------
 
    Verksamhets logik tjänst lager ( Java ) själva systemet  logiken som gör att detta system är detta system
-
-   Integration mot underliggande system  ( Dao , Repository ... )
-
-   Databasen , Kön , Systemet , ESB ( Enterprice Service Buss ) , Katalogtjäns ( Active Directory , LDAP )
+    Business logic
+------------------------------------------------
 
 
-   GET = hämta alla
-   GET + värde = häta specifik
-   POST + värde = skapa / spara
-   PUT + värde = uppdatera
-   DELETE + värde = tabort
+   Integration mot underliggande system  ( Dao , Repository ... )   Integration
+
+   ----------------------------------------
+
+  External dependencies
+   Databasen , Köer, Systemet , ESB ( Enterprice Service Buss ) , Katalogtjäns ( Active Directory , LDAP )
+
+
+
+
