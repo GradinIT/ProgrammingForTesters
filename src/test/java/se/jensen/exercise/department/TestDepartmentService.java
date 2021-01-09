@@ -64,20 +64,16 @@ public class TestDepartmentService {
 
     @Test
     public void testGetById() {
-        Integer DepartmentId = 12;
-        DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()
-                .departmentId(DepartmentId)
-                .departmentName("Security")
-                .build();
-        when(departmentDao.findById(DepartmentId)).thenReturn(Optional.of(departmentDatabaseEntry));
 
-        Department department = departmentService.getDepartmentById(DepartmentId);
 
-        verify(departmentDao, times(1)).findById(DepartmentId);
+
+        Department department = departmentService.getDepartmentById(DEPARTMENTID);
+
+        verify(departmentDao, times(1)).findById(DEPARTMENTID);
 
         Assert.assertNotNull(department);
-        Assert.assertEquals(DepartmentId, department.getDepartmentId());
-        Assert.assertEquals("Security",department.getDepartmentName());
+        Assert.assertEquals(DEPARTMENTID, department.getDepartmentId());
+        Assert.assertEquals(DEPARTMENTNAME,department.getDepartmentName());
     }
 
 

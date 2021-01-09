@@ -23,6 +23,7 @@ public class TestDepartmentDataBaseEntry {
         Assert.assertEquals(databaseEntry.getDepartmentId(),department.getDepartmentId());
         Assert.assertEquals(department.getDepartmentName(),databaseEntry.getDepartmentName());
     }
+
     @Test
     public void TestMapToDatabaseEntry(){
         Department department = Department.builder()
@@ -35,6 +36,7 @@ public class TestDepartmentDataBaseEntry {
         Assert.assertEquals(databaseEntry.getDepartmentName(), department.getDepartmentName());
         Assert.assertEquals(databaseEntry.getDepartmentId(), department.getDepartmentId());
     }
+
     @Test
     public void TestMapListToDepartment(){
         DepartmentDatabaseEntry databaseEntry = DepartmentDatabaseEntry.builder()

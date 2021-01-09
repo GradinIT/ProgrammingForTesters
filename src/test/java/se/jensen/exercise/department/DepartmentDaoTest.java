@@ -16,6 +16,7 @@ import se.jensen.entity.Department;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 
 import javax.ws.rs.core.Application;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -26,15 +27,14 @@ public class DepartmentDaoTest {
     @Autowired
     private DepartmentDao departmentDao;
 
-
-
-
-
     @Test
     public void TestDaoSaveDepartment(){
 
+
         Department deparment = DepartmentDatabaseEntryMapper.map(departmentDao.save(
-                DepartmentDatabaseEntryMapper.map(DepartmentTestBuilder.builder().departmentId(1).departmentName("Development").build())));
+                DepartmentDatabaseEntryMapper.map(DepartmentTestBuilder.builder()
+                        .departmentId(1)
+                        .departmentName("Development").build())));
 
 
         List<Department> list = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
@@ -64,20 +64,7 @@ public class DepartmentDaoTest {
     }
 
 
-    @Test
-    public void TestFindAllDepartment(){
-
-
-        List <DepartmentDatabaseEntry> allDeparments = departmentDao.findAll();
-
-        Assert.assertEquals(3, allDeparments.size());
-
-
-
-
-    }
-
-    @Test
+   @Test
     public void TestDeleteDepartment(){
 
         Optional<DepartmentDatabaseEntry> depExpected = departmentDao.findById(1);

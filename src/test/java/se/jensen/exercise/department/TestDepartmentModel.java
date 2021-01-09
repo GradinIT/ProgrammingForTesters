@@ -9,8 +9,12 @@ public class TestDepartmentModel {
     public void testBuilder(){
         String departmentName = "Helvete!";
         Integer departmentId = 1;
+
         DepartmentModel departmentModel = DepartmentModel.builder()
-                .departmentId(1).departmentName(departmentName).build();
+                .departmentId(departmentId)
+                .departmentName(departmentName)
+                .build();
+
         Assert.assertNotNull(departmentModel);
         Assert.assertEquals(departmentId,departmentModel.getDepartmentId());
         Assert.assertEquals(departmentName,departmentModel.getDepartmentName());
@@ -22,16 +26,21 @@ public class TestDepartmentModel {
         String departmentName = "av";
         Integer departmentId = 1;
 
-        String expected = DepartmentModel.builder()
-                .departmentId(departmentId)
-                .departmentName(departmentName)
-                .build().toString();
-        DepartmentModel departmentModel = DepartmentModel.builder()
+
+        DepartmentModel  expected = DepartmentModel.builder()
                 .departmentName(departmentName)
                 .departmentId(departmentId)
                 .build();
 
-        Assert.assertEquals(expected, departmentModel.toString());
+
+        String departmentModel  = DepartmentModel.builder()
+                .departmentId(departmentId)
+                .departmentName(departmentName)
+                .build().toString();
+
+
+       Assert.assertEquals(expected.toString(),departmentModel);
+        System.out.println(departmentModel + " "+expected);
     }
 
 }
