@@ -2,6 +2,7 @@ package se.jensen.exercise.department;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,12 +11,17 @@ import se.jensen.H2JpaConfig;
 import se.jensen.LiquibaseConfigurer;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.test.category.UnitTest;
+
 import javax.ws.rs.core.Application;
 import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class, LiquibaseConfigurer.class, H2JpaConfig.class})
+
+@Category(UnitTest.class)
+
 public class DepartmentDaoTest {
 
     @Autowired

@@ -23,12 +23,15 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class})
+
 @Category(IntegrationTest.class)
+
 public class DepartmentRestGetByIDIT {
     private static ConfigurableApplicationContext applicationContext;
 
     @SneakyThrows
     @BeforeClass
+
     public static void startUp() {
         String[] args = {};
         SpringApplication springApp = new SpringApplication(RestServiceApplication.class);

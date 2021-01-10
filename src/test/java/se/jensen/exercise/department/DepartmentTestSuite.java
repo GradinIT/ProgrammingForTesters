@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
         TestThatDepartmentIsCreated.class,
         TestThatDepartmentIsStoredInDatabase.class,
         TestThatNullPointerExceptionIsThrown.class,
+        TestThatToStringReturnsProper.class
 })
 public class DepartmentTestSuite {
 }

@@ -26,12 +26,15 @@ import static org.assertj.core.api.Assertions.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class})
+
 @Category(IntegrationTest.class)
+
 public class DepartmentRestApiTest {
     private static ConfigurableApplicationContext applicationContext;
 
     @SneakyThrows
     @BeforeClass
+
     public static void startUp() {
         String[] args = {};
         SpringApplication springApp = new SpringApplication(RestServiceApplication.class);
@@ -88,7 +91,7 @@ public class DepartmentRestApiTest {
     public void testToDelete() {
         DepartmentModel toBeDeletedDepartment = DepartmentModel.builder()
                 .departmentId(2)
-                .departmentName("Sales")
+                .departmentName("sales")
                 .build();
         DepartmentModel removedDepartment = DepartmentRestServiceClient.deleteDepartment(toBeDeletedDepartment).get();
         Assert.assertNotNull(removedDepartment);

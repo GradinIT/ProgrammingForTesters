@@ -2,13 +2,18 @@ package se.jensen.exercise.department;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import se.jensen.api.DepartmentModel;
 import se.jensen.api.mapper.DepartmentModelMapper;
 import se.jensen.entity.Department;
 import se.jensen.exercise.test.builder.DepartmentModelTestBuilder;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+import se.jensen.test.category.UnitTest;
+
+@Category(UnitTest.class)
 
 public class TestDepartmentModelMapper {
+
     @Test
     public void testMappingFromDepartmentToDepartmentModel() {
         Department departmentExpected = DepartmentTestBuilder.build();
@@ -17,6 +22,7 @@ public class TestDepartmentModelMapper {
         Assert.assertEquals(departmentExpected.getDepartmentId(),departmentModel.getDepartmentId());
         Assert.assertEquals(departmentExpected.getDepartmentName(),departmentModel.getDepartmentName());
     }
+
     @Test
     public void testMappingFromDepartmentModelToDepartment() {
         DepartmentModel departmentModelExpected = DepartmentModelTestBuilder.build();

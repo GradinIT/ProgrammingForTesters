@@ -3,6 +3,7 @@ package se.jensen.exercise.department;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import se.jensen.dao.DepartmentDao;
@@ -11,6 +12,7 @@ import se.jensen.entity.Department;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
 import se.jensen.service.DepartmentService;
 import se.jensen.service.DepartmentServiceImpl;
+import se.jensen.test.category.UnitTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +20,16 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
+@Category(UnitTest.class)
+
 public class TestDepartmentService {
+
     DepartmentDao departmentDao = mock(DepartmentDao.class);
     @InjectMocks
     DepartmentService departmentService = new DepartmentServiceImpl();
 
     private final Integer DEPARTMENTID = 1;
-    private final String DEPARTMENTNAME = "Development";
+    private final String DEPARTMENTNAME = "development";
 
     @Before
     public void setUp() {
