@@ -40,35 +40,32 @@ public class DepartmentDaoTest {
     public void a_testGetDepartmentById()
     {
         Optional <DepartmentDatabaseEntry> optionalDepartment = departmentDao.findById(1);
-        Department department = DepartmentDatabaseEntryMapper.map(optionalDepartment.get());
 
         Assert.assertTrue(optionalDepartment.isPresent());
-        Assert.assertNotNull(department);
     }
 //-------------------------------------------------------------------------------------------------------------
 
     @Test
     public void b_testGetAllDepartments()
     {
-        List<Department> departments = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
+        List <DepartmentDatabaseEntry> allDepartments = departmentDao.findAll();
         
-        Assert.assertNotNull(departments);
-        Assert.assertEquals(3, departments.size());
+        Assert.assertNotNull(allDepartments);
+        Assert.assertEquals(3, allDepartments.size());
     }
 
 //-------------------------------------------------------------------------------------------------------------
     @Test
     public void c_testSaveNewDepartment()
     {
-
-        Department department = DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(Department.builder()
+        DepartmentDatabaseEntry departmentSaved = departmentDao.save(DepartmentDatabaseEntry.builder()
                 .departmentId(10)
                 .departmentName("Testers")
-                .build())));
+                .build());
 
-        List<Department> departmentsAfterSave = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
+        List<DepartmentDatabaseEntry> departmentsAfterSave = departmentDao.findAll();
 
-        Assert.assertNotNull(department);
+        Assert.assertNotNull(departmentSaved);
         Assert.assertTrue(departmentDao.findById(10).isPresent());
         Assert.assertEquals("Testers", departmentDao.findById(10).get().getDepartmentName());
         Assert.assertEquals(4, departmentsAfterSave.size() );
@@ -78,15 +75,14 @@ public class DepartmentDaoTest {
     @Test
     public void d_testUpdateDepartment()
     {
-
-        Department department = DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(Department.builder()
+        DepartmentDatabaseEntry departmentUpdated = departmentDao.save(DepartmentDatabaseEntryMapper.map(Department.builder()
                 .departmentId(10)
                 .departmentName("Programmers")
-                .build())));
+                .build()));
 
-        List<Department> departmentsAfterUpdate = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
+        List <DepartmentDatabaseEntry> departmentsAfterUpdate = departmentDao.findAll();
 
-        Assert.assertNotNull(department);
+        Assert.assertNotNull(departmentUpdated);
         Assert.assertTrue(departmentDao.findById(10).isPresent());
         Assert.assertEquals("Programmers", departmentDao.findById(10).get().getDepartmentName());
         Assert.assertEquals(4, departmentsAfterUpdate.size());
@@ -96,12 +92,12 @@ public class DepartmentDaoTest {
     @Test
     public void e_testDeleteNewDepartment()
     {
-        departmentDao.delete(DepartmentDatabaseEntryMapper.map(Department.builder()
+        departmentDao.delete(DepartmentDatabaseEntry.builder()
                 .departmentId(10)
                 .departmentName("Programmers")
-                .build()));
+                .build());
 
-        List<Department> departmentsAfterDelete = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
+        List <DepartmentDatabaseEntry> departmentsAfterDelete = departmentDao.findAll();
 
         Assert.assertEquals(3, departmentsAfterDelete.size());
         Assert.assertFalse(departmentDao.findById(10).isPresent());
