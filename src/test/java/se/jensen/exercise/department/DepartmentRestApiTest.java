@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jensen.RestServiceApplication;
 import se.jensen.api.DepartmentModel;
-import se.jensen.entity.Department;
 import se.jensen.exercise.department.client.DepartmentRestServiceClient;
+import se.jensen.test.category.IntegrationTest;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class DepartmentRestApiTest {
+public class DepartmentRestApiTest implements IntegrationTest {
     private static ConfigurableApplicationContext applicationContext;
 
     @SneakyThrows
@@ -53,17 +53,14 @@ public class DepartmentRestApiTest {
 
         Assert.assertTrue(departments.isPresent());
         Assert.assertEquals(3, departments.get().size());
-        Assert.assertEquals(3, departments.get().stream().count());
     }
 
     @Test
     public void b_testGetDepartmentById () {
         Optional<DepartmentModel> departmentModels = DepartmentRestServiceClient.getDepartmentById(1);
         Assert.assertTrue(departmentModels.isPresent());
-
-        DepartmentModel departmentModel = departmentModels.get();
-        Assert.assertEquals(Integer.valueOf(1), departmentModel.getDepartmentId());
-        Assert.assertEquals("Development", departmentModel.getDepartmentName());
+        Assert.assertEquals(Integer.valueOf(1), departmentModels.get().getDepartmentId());
+        Assert.assertEquals("Development", departmentModels.get().getDepartmentName());
     }
 
     @Test

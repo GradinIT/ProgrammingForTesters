@@ -8,11 +8,12 @@ import se.jensen.api.mapper.DepartmentModelsMapper;
 import se.jensen.entity.Department;
 import se.jensen.exercise.test.builder.DepartmentModelTestBuilder;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+import se.jensen.test.category.UnitTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestDepartmentModelMapper {
+public class TestDepartmentModelMapper implements UnitTest {
 
     @Test
     public void testMapFromDepartmentModelToDepartment() {

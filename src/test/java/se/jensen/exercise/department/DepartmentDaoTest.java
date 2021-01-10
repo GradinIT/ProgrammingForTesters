@@ -12,6 +12,7 @@ import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
 import se.jensen.entity.Department;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+import se.jensen.test.category.UnitTest;
 
 import javax.ws.rs.core.Application;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes ={Application.class, LiquibaseConfigurer.class, H2JpaConfig.class})
 
-public class DepartmentDaoTest {
+public class DepartmentDaoTest implements UnitTest {
     @Autowired
     private DepartmentDao departmentDao;
 
@@ -34,6 +35,7 @@ public class DepartmentDaoTest {
     public void testFindAllDepartments(){
         List<Department> departments = DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
         Assert.assertNotNull(departments);
+        Assert.assertEquals(3, departments.size());
     }
     @Test
     public void testFindDepartmentById(){

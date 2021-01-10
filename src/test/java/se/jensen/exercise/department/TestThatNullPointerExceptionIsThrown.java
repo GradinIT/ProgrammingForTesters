@@ -2,10 +2,10 @@ package se.jensen.exercise.department;
 
 import org.junit.Test;
 import se.jensen.entity.Department;
+import se.jensen.test.category.UnitTest;
 
-import static org.junit.Assert.fail;
 
-public class TestThatNullPointerExceptionIsThrown {
+public class TestThatNullPointerExceptionIsThrown implements UnitTest {
     @Test(expected = NullPointerException.class)
     public void testDepartmentId(){
         Department.builder()

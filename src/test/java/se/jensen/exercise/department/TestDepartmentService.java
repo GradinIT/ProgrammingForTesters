@@ -1,6 +1,5 @@
 package se.jensen.exercise.department;
 
-import liquibase.pro.packaged.S;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,12 +7,10 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
-import se.jensen.dao.EmployeeDao;
 import se.jensen.entity.Department;
 import se.jensen.service.DepartmentService;
 import se.jensen.service.DepartmentServiceImpl;
-import se.jensen.service.EmployeeService;
-import se.jensen.service.EmployeeServiceImpl;
+import se.jensen.test.category.UnitTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +18,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
-public class TestDepartmentService {
+public class TestDepartmentService implements UnitTest {
 
     DepartmentDao departmentDao = mock(DepartmentDao.class);
     @InjectMocks

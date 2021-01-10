@@ -3,8 +3,9 @@ package se.jensen.exercise.department;
 import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.dao.DepartmentDatabaseEntry;
+import se.jensen.test.category.UnitTest;
 
-public class TestDepartmentDatabaseEntry {
+public class TestDepartmentDatabaseEntry implements UnitTest {
     @Test
     public void testThatDepartmentDatabaseEntryCreated(){
         DepartmentDatabaseEntry departmentDatabaseEntry = DepartmentDatabaseEntry.builder()

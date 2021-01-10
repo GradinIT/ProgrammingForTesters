@@ -5,13 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import se.jensen.dao.DepartmentDao;
 import se.jensen.dao.DepartmentDatabaseEntry;
-import se.jensen.entity.Department;
+import se.jensen.test.category.UnitTest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TestThatDepartmentIsStoredInDatabase {
+public class TestThatDepartmentIsStoredInDatabase implements UnitTest {
+
     DepartmentDao departmentDao = mock(DepartmentDao.class);
     private final Integer DEPARTMENT_ID=2;
     private final String DEPARTMENT_NAME="Junit";

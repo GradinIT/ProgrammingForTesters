@@ -4,10 +4,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.entity.Department;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+import se.jensen.test.category.UnitTest;
 
 import static org.junit.Assert.fail;
 
-public class TestThatDepartmentIsCreated {
+public class TestThatDepartmentIsCreated implements UnitTest {
     @Test
     public void toTestThatDepartmentIsCreated() {
         Integer departmentId = 2;

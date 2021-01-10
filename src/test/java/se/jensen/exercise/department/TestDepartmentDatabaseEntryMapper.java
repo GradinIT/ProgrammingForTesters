@@ -5,13 +5,13 @@ import org.junit.Test;
 import se.jensen.dao.DepartmentDatabaseEntry;
 import se.jensen.dao.mapper.DepartmentDatabaseEntryMapper;
 import se.jensen.entity.Department;
-import se.jensen.exercise.test.builder.DepartmentModelTestBuilder;
 import se.jensen.exercise.test.builder.DepartmentTestBuilder;
+import se.jensen.test.category.UnitTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestDepartmentDatabaseEntryMapper {
+public class TestDepartmentDatabaseEntryMapper implements UnitTest {
     private final Integer DEPARTMENT_ID= Integer.valueOf(10);
     private final String DEPARTMENT_NAME= "Test";
     @Test

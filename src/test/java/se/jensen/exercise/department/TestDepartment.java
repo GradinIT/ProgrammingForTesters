@@ -3,8 +3,9 @@ package se.jensen.exercise.department;
 import org.junit.Assert;
 import org.junit.Test;
 import se.jensen.entity.Department;
+import se.jensen.test.category.UnitTest;
 
-public class TestDepartment {
+public class TestDepartment implements UnitTest {
     @Test
     public void testThatDepartmentIsCreatedCorrectly(){
         Integer department_Id = 1;

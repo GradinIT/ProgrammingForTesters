@@ -12,13 +12,14 @@ import se.jensen.dao.EntityNotFoundException;
 import se.jensen.entity.Department;
 import se.jensen.service.DepartmentService;
 import se.jensen.service.DepartmentServiceImpl;
+import se.jensen.test.category.UnitTest;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
-public class TestDepartmentServiceExceptions {
+public class TestDepartmentServiceExceptions implements UnitTest {
     DepartmentDao departmentDao = mock(DepartmentDao.class);
     @InjectMocks
     DepartmentService service = new DepartmentServiceImpl();
