@@ -71,7 +71,7 @@ public class DepartmentRestApiTest {
         Assert.assertNotNull(newDepartment);
         Assert.assertEquals(Integer.valueOf(33), newDepartment.getDepartmentId());
         Assert.assertEquals("the_new_department", newDepartment.getDepartmentName());
-        Assert.assertEquals(addDepartment, newDepartment); //can we use this instead of above?
+        Assert.assertEquals(addDepartment, newDepartment); //can we also use  this together with hardcoded one above?
     }
 
     @Test
@@ -84,7 +84,7 @@ public class DepartmentRestApiTest {
         Assert.assertNotNull(updatedDepartment);
         Assert.assertEquals(Integer.valueOf(3), updatedDepartment.getDepartmentId());
         Assert.assertEquals("administration", updatedDepartment.getDepartmentName());
-        Assert.assertEquals(toBeUpdatedDepartment, updatedDepartment); //can we use this instead of above?
+        Assert.assertEquals(toBeUpdatedDepartment, updatedDepartment); //can we also use  this together with hardcoded one above?
     }
 
     @Test
