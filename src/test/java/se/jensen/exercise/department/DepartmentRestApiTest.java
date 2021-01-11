@@ -77,13 +77,13 @@ public class DepartmentRestApiTest {
     @Test
     public void testToUpdate() {
         DepartmentModel toBeUpdatedDepartment = DepartmentModel.builder()
-                .departmentId(33)
-                .departmentName("updated_new_department")
+                .departmentId(3)
+                .departmentName("administration")
                 .build();
         DepartmentModel updatedDepartment = DepartmentRestServiceClient.updateDepartment(toBeUpdatedDepartment).get();
         Assert.assertNotNull(updatedDepartment);
-        Assert.assertEquals(Integer.valueOf(33), updatedDepartment.getDepartmentId());
-        Assert.assertEquals("updated_new_department", updatedDepartment.getDepartmentName());
+        Assert.assertEquals(Integer.valueOf(3), updatedDepartment.getDepartmentId());
+        Assert.assertEquals("administration", updatedDepartment.getDepartmentName());
         Assert.assertEquals(toBeUpdatedDepartment, updatedDepartment); //can we use this instead of above?
     }
 

@@ -35,14 +35,14 @@ public class DepartmentDaoTest {
 
     @Test
     public void testToSaveNewDepartment() {
-        List<DepartmentDatabaseEntry> departmentLit = departmentDao.findAll();
-        Assert.assertEquals(3, departmentLit.size());
+        List<DepartmentDatabaseEntry> departmentList = departmentDao.findAll();
+        Assert.assertEquals(3, departmentList.size());
         departmentDao.save(DepartmentDatabaseEntry.builder()
                 .departmentId(99)
                 .departmentName("test_department")
                 .build());
-        departmentLit = departmentDao.findAll();
-        Assert.assertEquals(4, departmentLit.size());
+        departmentList = departmentDao.findAll();
+        Assert.assertEquals(4, departmentList.size());
     }
 
     @Test

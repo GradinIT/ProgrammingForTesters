@@ -53,7 +53,6 @@ public class DepartmentRestGetByIDIT {
     @Test
     public void testErrorHandling() {
         try {
-            //departments is never used?
             Optional<DepartmentModel> departments = DepartmentRestServiceClient.getDepartmentById(10);
         }
         catch (HttpClientErrorException exception) {
