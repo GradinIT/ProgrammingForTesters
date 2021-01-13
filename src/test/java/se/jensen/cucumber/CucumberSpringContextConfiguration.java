@@ -3,14 +3,14 @@ package se.jensen.cucumber;
 import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import javax.ws.rs.core.Application;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@ContextConfiguration(classes = Application.class, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = SpringApplication.class, loader = SpringBootContextLoader.class)
 public class CucumberSpringContextConfiguration {
 
   private static final Logger LOG = LoggerFactory.getLogger(CucumberSpringContextConfiguration.class);

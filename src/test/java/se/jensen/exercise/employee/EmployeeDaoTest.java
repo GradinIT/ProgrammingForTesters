@@ -14,7 +14,6 @@ import se.jensen.dao.EmployeeDao;
 import se.jensen.dao.EmployeeDatabaseEntry;
 import se.jensen.entity.EmployeeID;
 
-import javax.ws.rs.core.Application;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;

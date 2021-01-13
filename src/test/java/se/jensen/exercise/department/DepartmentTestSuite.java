@@ -6,9 +6,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         TestThatDepartmentIsCreated.class,
-        TestThatNullPointerExceptionIsThrown.class,
-        TestThatDepartmentIsStoredInDatabase.class,
-        TestDepartmentService.class
+        TestThatNullPointerExceptionIsThrown.class, TestDepartmentService.class
 })
 public class DepartmentTestSuite {
 }

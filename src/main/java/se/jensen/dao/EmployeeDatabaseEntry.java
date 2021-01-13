@@ -28,5 +28,4 @@ public class EmployeeDatabaseEntry {
     private BigDecimal salary;
     private Boolean fullTime;
     private Integer departmentId;
-
 }

@@ -8,8 +8,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         TestThatEmployeeIsCreated.class,
         TestThatNullPointerExceptionIsThrown.class,
-        TestThatEmployeeIsStoredInDatabase.class,
-        TestEmployeeService.class,
         TestEmployeeModelMapper.class
 })
 public class EmployeeTestSuite {
