@@ -35,7 +35,7 @@ public class ParameterizeTestGetDepartmentById {
     }
 
     //Parameters
-    @Parameterized.Parameters(name = "Test with departmentId {index}")
+    @Parameterized.Parameters(name = "Test with departmentId {0}")
 
     public static Iterable<Object[]> dataForTest()
     {
