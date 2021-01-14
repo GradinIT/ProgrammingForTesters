@@ -15,6 +15,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import se.jensen.RestServiceApplication;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -69,7 +70,9 @@ public class SeleniumTestInputForms {
         Assert.assertEquals(SITE_URL, driver.getCurrentUrl());
         sleep(1000);
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         WebElement close = driver.findElement(By.id("at-cv-lightbox-close"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("at-cv-lightbox-close")));
         close.click();
         sleep(1000);
 
@@ -80,7 +83,9 @@ public class SeleniumTestInputForms {
     public void b_isPresent()
     {
        WebElement seleniumEasyPicture =  driver.findElement(By.xpath("//img[@role='presentation']"));
+       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
        WebElement sponsoredBy =  driver.findElement(By.xpath("//img[@class='cbt']"));
+       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(("//img[@class='cbt']"))));
 
        Assert.assertTrue(seleniumEasyPicture.isDisplayed());
        Assert.assertTrue(sponsoredBy.isDisplayed());

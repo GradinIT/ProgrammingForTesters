@@ -1,6 +1,6 @@
 package se.jensen.exercise.department;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 import lombok.SneakyThrows;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
@@ -15,6 +15,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import se.jensen.RestServiceApplication;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -23,7 +25,10 @@ public class SeleniumTestCheckbox {
     private static ConfigurableApplicationContext applicationContext;
 
     String SITE_URL = "https://www.seleniumeasy.com/test/basic-checkbox-demo.html";
-    public static WebDriver driver;
+
+    //declare driver
+    private static WebDriver driver;
+
     public WebDriverWait wait;
 
     private static void sleep(long milliseconds) {
@@ -46,8 +51,14 @@ public class SeleniumTestCheckbox {
         app.setLogStartupInfo(false);
         applicationContext = app.run(args);
 
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
+
+       // set properties with the path to chromedriver
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+
+        //initialize driver
         driver = new ChromeDriver();
+
         driver.manage().window().maximize();
         sleep(1000);
     }
@@ -85,10 +96,54 @@ public class SeleniumTestCheckbox {
     }
 
     @Test
-    public void MultiplyCheckboxCheckAll()
+    public void c_multiplyCheckbox_CheckAllBoxes()
     {
+        WebElement checkButton = driver.findElement(By.id("check1"));
+        checkButton.click();
+        sleep(1000);
+        List<WebElement> checkBoxes = driver.findElements(By.xpath("//input[@class='cb1-element']"));
 
+        checkButton = driver.findElement(By.id("check1"));
+        sleep(1000);
+
+        Assert.assertTrue(checkButton.getAttribute("value").contains("Uncheck All"));
+        Assert.assertTrue(checkBoxes.stream().allMatch(box -> box.isSelected()));
     }
 
+    @Test
+    public void d_multiplyCheckbox_UncheckAllBoxes()
+    {
+        WebElement checkButton = driver.findElement(By.id("check1"));
+        checkButton.click();
+        sleep(1000);
+        List<WebElement> checkBoxes = driver.findElements(By.xpath("//input[@class='cb1-element']"));
+
+        checkButton = driver.findElement(By.id("check1"));
+        sleep(1000);
+
+        Assert.assertTrue(checkButton.getAttribute("value").contains("Check All"));
+        Assert.assertTrue(checkBoxes.stream().noneMatch(box -> box.isSelected()));
+    }
+
+
+    @Test
+    public void e_UncheckTwoBoxes()
+    {
+
+
+        List<WebElement> checkBoxes = driver.findElements(By.xpath("//input[@class='cb1-element']"));
+
+        checkBoxes.stream().forEach(box -> box.click());
+        sleep(1000);
+
+        checkBoxes.stream().limit(2).forEach(box -> box.click());
+
+        sleep(1000);
+
+        WebElement checkButton = driver.findElement(By.id("check1"));
+        sleep(1000);
+
+        Assert.assertTrue(checkButton.getAttribute("value").contains("Check All"));
+    }
 
 }
