@@ -15,8 +15,9 @@ public class TestDepartmentRestAPI extends TestClient {
     Optional<List<DepartmentModel>> departments = null;
     Optional<DepartmentModel> department = null;
 
+
     @When("^the client calls /department$")
-    public void callTheService() throws Throwable {
+    public void getAll() throws Throwable {
         departments = getAllDepartments();
     }
     @Then("^the client receives (\\d+) departments$")
