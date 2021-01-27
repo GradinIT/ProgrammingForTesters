@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = RestServiceApplication.class)
+@SpringBootTest(classes = RestServiceApplication.class,webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+
 public class TestClient {
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
     public static Optional<List<DepartmentModel>> getAllDepartments() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/department/",
+        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8082/department/",
                 HttpMethod.GET,
                 null,
                 List.class);
@@ -36,7 +37,7 @@ public class TestClient {
 
     public static Optional<DepartmentModel> getDepartmentById(Integer departmentId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8080/department/" + departmentId,
+        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8082/department/" + departmentId,
                 HttpMethod.GET,
                 null,
                 DepartmentModel.class);
@@ -45,7 +46,7 @@ public class TestClient {
     }
 
     public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
-        final String uri = "http://localhost:8080/department";
+        final String uri = "http://localhost:8082/department";
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.PUT, null);
         ResponseEntity<DepartmentModel> response = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, DepartmentModel.class);
@@ -53,7 +54,7 @@ public class TestClient {
     }
 
     public static Optional<DepartmentModel> createDepartment(DepartmentModel departmentModel) {
-        final String uri = "http://localhost:8080/department";
+        final String uri = "http://localhost:8082/department";
         RestTemplate restTemplate = new RestTemplate();
         DepartmentModel result = restTemplate.postForObject(uri, departmentModel, DepartmentModel.class);
         return Optional.of(result);
@@ -63,7 +64,7 @@ public class TestClient {
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.DELETE,
                 null);
-        DepartmentModel result = restTemplate.exchange("http://localhost:8080/department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
+        DepartmentModel result = restTemplate.exchange("http://localhost:8082/department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
         return Optional.of(result);
 
     }

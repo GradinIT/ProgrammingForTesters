@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/department")
+@CucumberOptions(strict = true,features = "src/test/resources/department")
 public class TestRunner {
+
 }
