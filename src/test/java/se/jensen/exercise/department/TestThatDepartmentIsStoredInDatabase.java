@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 
 public class TestThatDepartmentIsStoredInDatabase {
     private final Integer DEPARTMENT_ID = 15;
-    private final String DEPARTMENT_NAME = "name";
+    private final String DEPARTMENT_NAME = "back office";
 
     DepartmentDao departmentDao = mock(DepartmentDao.class);
 
