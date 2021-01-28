@@ -7,7 +7,7 @@ public class TestDepartmentModel {
 
     @Test
     public void testBuilder(){
-        String departmentName = "Helvete!";
+        String departmentName = "IT";
         Integer departmentId = 1;
 
         DepartmentModel departmentModel = DepartmentModel.builder()
@@ -23,7 +23,7 @@ public class TestDepartmentModel {
 
     @Test
     public void testToString(){
-        String departmentName = "av";
+        String departmentName = "ekonomi";
         Integer departmentId = 1;
 
 
