@@ -51,7 +51,7 @@ public class TestDepartmentRestServiceClient {
 
     @Test public void TestCreate(){
         DepartmentModel departmentModel = DepartmentModel.builder()
-                .departmentName("new")
+                .departmentName("ekonomi")
                 .departmentId(22)
                 .build();
         Optional<DepartmentModel> createdmodel = DepartmentRestServiceClient.createDepartment(departmentModel);
@@ -63,7 +63,7 @@ public class TestDepartmentRestServiceClient {
     }
     @Test public void TestUpdate(){
         DepartmentModel departmentModel = DepartmentModel.builder()
-                .departmentName("update")
+                .departmentName("sales")
                 .departmentId(2)
                 .build();
         Optional<DepartmentModel> updatemodel = DepartmentRestServiceClient.updateDepartment(departmentModel);
