@@ -9,7 +9,7 @@ public class TestThatDepartmentIsCreated {
     @Test
     public void test() {
         Integer departmentIdvalue = 1;
-        String departmentnameValue = "firstName";
+        String departmentnameValue = "HR";
 
 
         Department department = Department.builder()
