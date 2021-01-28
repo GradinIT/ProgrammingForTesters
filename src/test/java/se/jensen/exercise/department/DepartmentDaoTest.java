@@ -35,7 +35,7 @@ public class DepartmentDaoTest {
 
         DepartmentDatabaseEntry deparment = departmentDao.save(DepartmentDatabaseEntry.builder()
                         .departmentId(4)
-                        .departmentName("Development").build());
+                        .departmentName("Devops").build());
 
         Optional<DepartmentDatabaseEntry> deparetmentaerte = departmentDao.findById(4);
 
@@ -49,7 +49,7 @@ public class DepartmentDaoTest {
         Department depExpected = DepartmentDatabaseEntryMapper.map(departmentDao.save(
                 DepartmentDatabaseEntryMapper.map(DepartmentTestBuilder.builder()
                         .departmentId(2)
-                        .departmentName("Development")
+                        .departmentName("Devops")
                         .build())));
 
 
