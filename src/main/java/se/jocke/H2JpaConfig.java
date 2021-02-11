@@ -18,7 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("se.jocke.dao")
-@EntityScan("se.jensen.entity")
+@EntityScan("se.jocke.entity")
 @EnableTransactionManagement
 public class H2JpaConfig {
     @Bean
@@ -35,7 +35,7 @@ public class H2JpaConfig {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(primaryDataSource());
-        em.setPackagesToScan(new String[] { "se.jensen.dao" });
+        em.setPackagesToScan(new String[] { "se.jocke.dao" });
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
