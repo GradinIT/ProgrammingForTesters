@@ -5,14 +5,13 @@ import se.jocke.api.EmployeeModel;
 import java.math.BigDecimal;
 
 public class EmployeeModelTestBuilder {
-    public static EmployeeModel build() {
+    public static EmployeeModel.EmployeeModelBuilder builder() {
         return EmployeeModel.builder()
-                .employeeId(1)
+                .employeeId(200)
                 .departmentId(1)
                 .firstName("Anders")
                 .lastName("Andersson")
                 .fullTime(Boolean.TRUE)
-                .salary(BigDecimal.valueOf(25000))
-                .build();
+                .salary(BigDecimal.valueOf(25000));
     }
 }

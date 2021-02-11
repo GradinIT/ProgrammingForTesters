@@ -25,7 +25,6 @@ public class CalculatorTest {
         "Regular multiplication should work");          
     }
 
-    @RepeatedTest(5)
     @DisplayName("Ensure correct handling of zero")
     public void testMultiplyWithZero() {
         assertEquals(0, calculator.multiply(0,5), "Multiple with zero should be zero");
