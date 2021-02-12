@@ -3,20 +3,22 @@ package se.jocke.department.api.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.api.DepartmentModel;
+import se.jocke.department.builder.DepartmentModelTestBuilder;
 
 public class TestCreateDepartmentModel {
-    private final String DEPARTMENT_NAME = "Development";
-    private final Integer DEPARTMENT_ID = Integer.valueOf(100);
+    private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
+
 
     @Test
     public void testCreateDepartmentModel() {
         DepartmentModel department = DepartmentModel.builder()
-                .departmentId(DEPARTMENT_ID)
-                .departmentName(DEPARTMENT_NAME)
+                .departmentId(DEPARTMENT_MODEL.getDepartmentId())
+                .departmentName(DEPARTMENT_MODEL.getDepartmentName())
                 .build();
 
-        Assertions.assertEquals(DEPARTMENT_NAME, department.getDepartmentName());
-        Assertions.assertEquals(DEPARTMENT_ID, department.getDepartmentId());
+        Assertions.assertEquals(DEPARTMENT_MODEL.getDepartmentName(), department.getDepartmentName());
+        Assertions.assertEquals(DEPARTMENT_MODEL.getDepartmentId(), department.getDepartmentId());
+        Assertions.assertEquals(DEPARTMENT_MODEL,department);
     }
 
     @Test

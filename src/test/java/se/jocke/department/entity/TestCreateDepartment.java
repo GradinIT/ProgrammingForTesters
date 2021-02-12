@@ -5,18 +5,17 @@ import org.junit.jupiter.api.Test;
 import se.jocke.department.builder.DepartmentTestBuilder;
 
 public class TestCreateDepartment {
-    private final String DEPARTMENT_NAME = "Development";
-    private final Integer DEPARTMENT_ID = Integer.valueOf(100);
+    private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
 
     @Test
     public void testCreateDepartment() {
         Department department = DepartmentTestBuilder.builder()
-                .departmentId(DEPARTMENT_ID)
-                .departmentName(DEPARTMENT_NAME)
+                .departmentId(DEPARTMENT.getDepartmentId())
+                .departmentName(DEPARTMENT.getDepartmentName())
                 .build();
-
-        Assertions.assertEquals(DEPARTMENT_NAME, department.getDepartmentName());
-        Assertions.assertEquals(DEPARTMENT_ID, department.getDepartmentId());
+        Assertions.assertEquals(DEPARTMENT, department);
+        Assertions.assertEquals(DEPARTMENT.getDepartmentName(), department.getDepartmentName());
+        Assertions.assertEquals(DEPARTMENT.getDepartmentId(), department.getDepartmentId());
     }
 
     @Test

@@ -1,4 +1,4 @@
-package se.jocke.builder;
+package se.jocke.employee.builder;
 
 import se.jocke.api.EmployeeModel;
 
