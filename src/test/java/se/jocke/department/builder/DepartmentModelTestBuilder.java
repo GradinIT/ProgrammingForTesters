@@ -1,4 +1,4 @@
-package se.jocke.builder;
+package se.jocke.department.builder;
 
 import se.jocke.api.DepartmentModel;
 

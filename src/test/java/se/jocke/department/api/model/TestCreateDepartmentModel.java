@@ -18,4 +18,11 @@ public class TestCreateDepartmentModel {
         Assertions.assertEquals(DEPARTMENT_NAME, department.getDepartmentName());
         Assertions.assertEquals(DEPARTMENT_ID, department.getDepartmentId());
     }
+
+    @Test
+    public void testCreateDepartmentModelThrowsException() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            DepartmentModel.builder().departmentName("Name").build();
+        });
+    }
 }

@@ -2,7 +2,7 @@ package se.jocke.department.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.builder.DepartmentTestBuilder;
+import se.jocke.department.builder.DepartmentTestBuilder;
 
 public class TestCreateDepartment {
     private final String DEPARTMENT_NAME = "Development";
