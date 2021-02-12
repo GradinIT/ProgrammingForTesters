@@ -1,4 +1,4 @@
-package se.jocke.cucumber.department;
+package se.jocke.department.integrationtest.department;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

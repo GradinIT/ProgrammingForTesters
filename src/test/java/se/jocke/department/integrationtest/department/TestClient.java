@@ -1,4 +1,4 @@
-package se.jocke.cucumber.department;
+package se.jocke.department.integrationtest.department;
 
 import com.google.gson.Gson;
 import io.cucumber.spring.CucumberContextConfiguration;

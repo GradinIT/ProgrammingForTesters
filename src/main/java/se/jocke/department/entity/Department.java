@@ -1,4 +1,4 @@
-package se.jocke.entity;
+package se.jocke.department.entity;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

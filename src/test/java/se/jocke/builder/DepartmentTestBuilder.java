@@ -1,9 +1,9 @@
-package se.jocke.exercise.test.builder;
+package se.jocke.builder;
 
-import se.jocke.entity.Department;
+import se.jocke.department.entity.Department;
 
 public class DepartmentTestBuilder {
-    public Department.DepartmentBuilder builder() {
+    public static Department.DepartmentBuilder builder() {
         return Department.builder()
                 .departmentId(100)
                 .departmentName("Test/QA");

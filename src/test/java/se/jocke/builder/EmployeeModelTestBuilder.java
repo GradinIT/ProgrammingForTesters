@@ -1,4 +1,4 @@
-package se.jocke.exercise.test.builder;
+package se.jocke.builder;
 
 import se.jocke.api.EmployeeModel;
 

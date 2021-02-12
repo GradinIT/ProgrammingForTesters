@@ -18,7 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("se.jocke.dao")
-@EntityScan("se.jocke.entity")
+@EntityScan("se.jocke.department.entity")
 @EnableTransactionManagement
 public class H2JpaConfig {
     @Bean
