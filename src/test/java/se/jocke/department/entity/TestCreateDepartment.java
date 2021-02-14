@@ -21,7 +21,7 @@ public class TestCreateDepartment {
     @Test
     public void testCreateDepartmentThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            Department.builder().departmentName("Name").build();
+            Department.builder().departmentName(DEPARTMENT.getDepartmentName()).build();
         });
     }
 }

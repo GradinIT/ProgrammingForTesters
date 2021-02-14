@@ -2,11 +2,17 @@ package se.jocke.department.integrationtest.department;
 
 import com.google.gson.Gson;
 import io.cucumber.spring.CucumberContextConfiguration;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
+import se.jocke.H2JpaConfig;
+import se.jocke.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
 import se.jocke.api.DepartmentModel;
 
@@ -15,8 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = RestServiceApplication.class,webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-
+@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestClient {
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
