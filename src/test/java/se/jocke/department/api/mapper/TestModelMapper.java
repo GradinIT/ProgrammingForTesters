@@ -24,7 +24,7 @@ public class TestModelMapper {
     }
 
     @Test
-    public void testCreateDepartmentModelToDepartmentMapping() {
+    public void testDepartmentModelToDepartmentMapping() {
         Department department = DepartmentModelMapper.map(DEPARTMENT_MODEL);
         Assertions.assertAll(
                 () -> assertEquals(DEPARTMENT_MODEL.getDepartmentId(), department.getDepartmentId()),
