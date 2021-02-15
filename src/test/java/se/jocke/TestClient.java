@@ -1,4 +1,4 @@
-package se.jocke.department.integrationtest.department;
+package se.jocke;
 
 import com.google.gson.Gson;
 import io.cucumber.spring.CucumberContextConfiguration;
@@ -15,6 +15,7 @@ import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
 import se.jocke.api.DepartmentModel;
+import se.jocke.api.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,12 @@ import java.util.Optional;
 @CucumberContextConfiguration
 @SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestClient {
+    private static final String BASE_URL = "http://localhost:8082/";
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
     public static Optional<List<DepartmentModel>> getAllDepartments() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8082/department/",
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
                 HttpMethod.GET,
                 null,
                 List.class);
@@ -42,7 +44,7 @@ public class TestClient {
 
     public static Optional<DepartmentModel> getDepartmentById(Integer departmentId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange("http://localhost:8082/department/" + departmentId,
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/" + departmentId,
                 HttpMethod.GET,
                 null,
                 DepartmentModel.class);
@@ -51,17 +53,15 @@ public class TestClient {
     }
 
     public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
-        final String uri = "http://localhost:8082/department";
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.PUT, null);
-        ResponseEntity<DepartmentModel> response = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, DepartmentModel.class);
+        ResponseEntity<DepartmentModel> response = restTemplate.exchange(BASE_URL+"department/", HttpMethod.PUT, requestEntity, DepartmentModel.class);
         return Optional.of(response.getBody());
     }
 
     public static Optional<DepartmentModel> createDepartment(DepartmentModel departmentModel) {
-        final String uri = "http://localhost:8082/department";
         RestTemplate restTemplate = new RestTemplate();
-        DepartmentModel result = restTemplate.postForObject(uri, departmentModel, DepartmentModel.class);
+        DepartmentModel result = restTemplate.postForObject(BASE_URL+"department/", departmentModel, DepartmentModel.class);
         return Optional.of(result);
     }
 
@@ -69,8 +69,23 @@ public class TestClient {
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.DELETE,
                 null);
-        DepartmentModel result = restTemplate.exchange("http://localhost:8082/department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
+        DepartmentModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
         return Optional.of(result);
 
+    }
+    public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
+        return null;
+    }
+    public static Optional<EmployeeModel> createEmployee(EmployeeModel employeeModel) {
+        return null;
+    }
+    public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
+        return null;
+    }
+    public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
+        return null;
+    }
+    public static Optional<List<EmployeeModel>> getAllEmployeees(Integer employeeId) {
+        return null;
     }
 }

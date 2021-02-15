@@ -1,4 +1,4 @@
-package se.jocke.department.integrationtest.department;
+package se.jocke.department.integrationtest;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import se.jocke.api.DepartmentModel;
+import se.jocke.TestClient;
 
 import java.util.ArrayList;
 import java.util.List;
