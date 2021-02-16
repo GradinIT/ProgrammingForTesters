@@ -5,12 +5,17 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.api.DepartmentModel;
 import se.jocke.TestClient;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestDepartmentRestAPI extends TestClient {
     Optional<List<DepartmentModel>> departments = null;
@@ -61,12 +66,10 @@ public class TestDepartmentRestAPI extends TestClient {
     }
     @Then("^the department (\\d+) is deleted$")
     public void departmentIsDeleted(Integer departmentId){
-        try {
-            getDepartmentById(departmentId);
-            Assert.fail("department id: " + departmentId + "not deleted");
-        }
-        catch (Exception e){
-            Assert.assertEquals("404 : [Entity with id 55 not found]",e.getMessage());
-        }
+        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            getDepartmentById(departmentId);;
+        });
+
+        assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
     }
 }
