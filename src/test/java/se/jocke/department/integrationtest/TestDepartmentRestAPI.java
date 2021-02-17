@@ -62,14 +62,13 @@ public class TestDepartmentRestAPI extends TestClient {
     }
     @When("^the client deletes department (\\d+)$")
     public void deleteDepartment(Integer departmentId){
-        deleteDepartment(DepartmentModel.builder().departmentId(departmentId).departmentName("").build());
+        deleteDepartment(getDepartmentById(departmentId).get());
     }
     @Then("^the department (\\d+) is deleted$")
     public void departmentIsDeleted(Integer departmentId){
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getDepartmentById(departmentId);;
+            getDepartmentById(departmentId);
         });
-
         assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
     }
 }
