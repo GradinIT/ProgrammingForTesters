@@ -34,6 +34,7 @@ public class TestDepartmentService {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        System.out.println("");
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
                 .departmentId(1)
                 .departmentName("Development")
