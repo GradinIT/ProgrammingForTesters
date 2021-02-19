@@ -15,9 +15,8 @@ public class TestModelMapper {
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
 
-
     @Test
-    public void testEmployeeToEmployeeModelMapping(){
+    public void testEmployeeToEmployeeModelMapping() {
         EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
                 () -> assertEquals(EMPLOYEE.getEmployeeId(), model.getEmployeeId()),
@@ -27,5 +26,19 @@ public class TestModelMapper {
                 () -> assertEquals(EMPLOYEE.getFullTime(), model.getFullTime()),
                 () -> assertEquals(EMPLOYEE.getDepartmentId(), model.getDepartmentId())
         );
+    }
+
+    @Test
+    public void testEmployeeModelToEmployeeMapping() {
+        Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
+        Assertions.assertAll(
+                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),
+                () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),
+                () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary()),
+                () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime()),
+                () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId())
+        );
+
     }
 }
