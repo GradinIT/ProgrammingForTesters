@@ -10,7 +10,7 @@ public class DepartmentModelMapper {
                 .departmentId(model.getDepartmentId())
                 .build();
     }
-    public static DepartmentModel  map (Department department) {
+    public static DepartmentModel map (Department department) {
         return DepartmentModel.builder()
                 .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
