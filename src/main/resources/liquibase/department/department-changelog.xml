@@ -1,0 +1,26 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="create-table-department" author="Joakim Gradin">
+        <createTable tableName="DEPARTMENT">
+            <column name="DEPARTMENTID" type="number"/>
+            <column name="DEPARTMENTNAME" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add-data-department" author="Joakim Gradin">
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">1</column>
+            <column name="DEPARTMENTNAME">Development</column>
+        </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">2</column>
+            <column name="DEPARTMENTNAME">Sales</column>
+        </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">3</column>
+            <column name="DEPARTMENTNAME">Management</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
