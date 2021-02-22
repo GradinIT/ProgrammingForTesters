@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(JUnitPlatform.class)
+
 public class TestEmployeeService {
     @Mock
     private EmployeeDao employeeDao;
