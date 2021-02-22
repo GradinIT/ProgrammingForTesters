@@ -12,7 +12,7 @@ public class TestCreateEmployeeModel {
 
     @Test
     public void testCreateEmployeeModel() {
-        EmployeeModel employeeModel = EmployeeModelMapper.mapEmployeeModelFromAnotherEmployeeModel(EMPLOYEE_MODEL);
+        EmployeeModel employeeModel = EmployeeModelMapper.mapEmployeeModel(EMPLOYEE_MODEL);
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employeeModel.getEmployeeId()),

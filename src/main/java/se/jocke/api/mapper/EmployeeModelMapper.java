@@ -27,7 +27,7 @@ public class EmployeeModelMapper {
                 .build();
     }
 
-    public static EmployeeModel mapEmployeeModelFromAnotherEmployeeModel(EmployeeModel employee) {
+    public static EmployeeModel mapEmployeeModel(EmployeeModel employee) {
         return EmployeeModel.builder()
                 .employeeId(employee.getEmployeeId())
                 .firstName(employee.getFirstName())
