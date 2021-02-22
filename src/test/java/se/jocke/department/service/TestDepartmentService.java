@@ -8,7 +8,6 @@ import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
@@ -24,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(JUnitPlatform.class)
 public class TestDepartmentService {
     @Mock
     private DepartmentDao departmentDao;
@@ -33,7 +31,6 @@ public class TestDepartmentService {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
                 .departmentId(1)
                 .departmentName("Development")
@@ -47,6 +44,6 @@ public class TestDepartmentService {
                 () -> Assertions.assertEquals(1, department.getDepartmentId()),
                 () -> Assertions.assertEquals("Development", department.getDepartmentName())
         );
-        verify(departmentDao,times(1)).findById(1);
+        verify(departmentDao, times(1)).findById(1);
     }
 }

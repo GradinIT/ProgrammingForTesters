@@ -18,7 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("se.jocke.dao")
-@EntityScan("se.jocke.department.entity")
+@EntityScan("se.jocke.dao")
 @EnableTransactionManagement
 public class H2JpaConfig {
     @Bean
@@ -32,15 +32,12 @@ public class H2JpaConfig {
     }
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em
-                = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(primaryDataSource());
         em.setPackagesToScan(new String[] { "se.jocke.dao" });
-
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
-
         return em;
     }
     @Bean
@@ -50,17 +47,12 @@ public class H2JpaConfig {
 
         return transactionManager;
     }
-
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
     Properties additionalProperties() {
         Properties properties = new Properties();
-        //properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        //properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-
-        return properties;
+       return properties;
     }
 }
