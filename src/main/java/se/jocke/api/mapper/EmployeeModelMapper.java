@@ -26,15 +26,4 @@ public class EmployeeModelMapper {
                 .departmentId(employee.getDepartmentId())
                 .build();
     }
-
-    public static EmployeeModel mapEmployeeModel(EmployeeModel employee) {
-        return EmployeeModel.builder()
-                .employeeId(employee.getEmployeeId())
-                .firstName(employee.getFirstName())
-                .lastName(employee.getLastName())
-                .salary(employee.getSalary())
-                .fullTime(employee.getFullTime())
-                .departmentId(employee.getDepartmentId())
-                .build();
-    }
 }

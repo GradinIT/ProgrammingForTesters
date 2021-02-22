@@ -12,7 +12,7 @@ public class TestCreateEmployeeModel {
 
     @Test
     public void testCreateEmployeeModel() {
-        EmployeeModel employeeModel = EmployeeModelMapper.mapEmployeeModel(EMPLOYEE_MODEL);
+        EmployeeModel employeeModel = createEmployeeModelCopy(EMPLOYEE_MODEL);
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employeeModel.getEmployeeId()),
@@ -30,5 +30,17 @@ public class TestCreateEmployeeModel {
         Assertions.assertThrows(NullPointerException.class, () ->
                 EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
     }
+
+    public EmployeeModel createEmployeeModelCopy(EmployeeModel employee) {
+        return EmployeeModel.builder()
+                .employeeId(employee.getEmployeeId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .salary(employee.getSalary())
+                .fullTime(employee.getFullTime())
+                .departmentId(employee.getDepartmentId())
+                .build();
+    }
 }
+
 
