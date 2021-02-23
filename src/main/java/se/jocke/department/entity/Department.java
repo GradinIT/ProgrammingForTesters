@@ -13,4 +13,5 @@ import lombok.ToString;
 public class Department {
     private final @NonNull Integer departmentId;
     private final @NonNull String departmentName;
+
 }

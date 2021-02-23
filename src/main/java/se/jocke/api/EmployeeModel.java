@@ -33,5 +33,4 @@ public class EmployeeModel {
     @Nonnull
     private Integer departmentId;
 
-
 }

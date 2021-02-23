@@ -8,4 +8,5 @@ public class DepartmentTestBuilder {
                 .departmentId(100)
                 .departmentName("Test/QA");
     }
+
 }

@@ -5,16 +5,17 @@ import se.jocke.department.entity.EmployeeID;
 
 import java.math.BigDecimal;
 
+//få fram instanser
 public class EmployeeTestBuilder {
     private static Employee.EmployeeBuilder builder = Employee.builder();
 
     public static Employee.EmployeeBuilder builder() {
         return builder
                 .employeeId(EmployeeID.builder().id(100).build())
-                .firstName("Testare")
-                .lastName("Testarsson")
-                .salary(BigDecimal.valueOf(25000.0))
-                .fullTime(Boolean.TRUE)
-                .departmentId(1);
+                .departmentId(1)
+                .firstName("TestKalle")
+                .lastName("TestPersson")
+                .fullTime(true)
+                .salary(BigDecimal.valueOf(26000.00));
     }
 }
