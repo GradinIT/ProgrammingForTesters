@@ -12,7 +12,14 @@ public class TestCreateEmployeeModel {
 
     @Test
     public void testCreateEmployeeModel() {
-        EmployeeModel employeeModel = createEmployeeModelCopy(EMPLOYEE_MODEL);
+        EmployeeModel employeeModel = EmployeeModel.builder()
+                .employeeId(EMPLOYEE_MODEL.getEmployeeId())
+                .firstName(EMPLOYEE_MODEL.getFirstName())
+                .lastName(EMPLOYEE_MODEL.getLastName())
+                .salary(EMPLOYEE_MODEL.getSalary())
+                .fullTime(EMPLOYEE_MODEL.getFullTime())
+                .departmentId(EMPLOYEE_MODEL.getDepartmentId())
+                .build();
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employeeModel.getEmployeeId()),
@@ -31,16 +38,6 @@ public class TestCreateEmployeeModel {
                 EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
     }
 
-    public EmployeeModel createEmployeeModelCopy(EmployeeModel employee) {
-        return EmployeeModel.builder()
-                .employeeId(employee.getEmployeeId())
-                .firstName(employee.getFirstName())
-                .lastName(employee.getLastName())
-                .salary(employee.getSalary())
-                .fullTime(employee.getFullTime())
-                .departmentId(employee.getDepartmentId())
-                .build();
-    }
 }
 
 
