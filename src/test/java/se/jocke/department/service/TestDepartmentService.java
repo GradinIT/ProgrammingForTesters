@@ -4,14 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
-import se.jocke.department.entity.Department;
+import se.jocke.entity.Department;
 import se.jocke.service.DepartmentService;
 import se.jocke.service.DepartmentServiceImpl;
 

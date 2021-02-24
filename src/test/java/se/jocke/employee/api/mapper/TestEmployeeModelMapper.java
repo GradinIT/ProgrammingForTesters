@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
 import se.jocke.api.mapper.EmployeeModelMapper;
-import se.jocke.department.entity.Employee;
+import se.jocke.entity.Employee;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 

@@ -8,7 +8,7 @@ import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EntityAlreadyInStorageException;
 import se.jocke.dao.EntityNotFoundException;
 import se.jocke.dao.mapper.DepartmentDatabaseEntryMapper;
-import se.jocke.department.entity.Department;
+import se.jocke.entity.Department;
 
 import java.util.List;
 import java.util.Optional;

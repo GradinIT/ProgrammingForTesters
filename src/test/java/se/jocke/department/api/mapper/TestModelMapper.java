@@ -6,7 +6,7 @@ import se.jocke.api.DepartmentModel;
 import se.jocke.api.mapper.DepartmentModelMapper;
 import se.jocke.department.builder.DepartmentModelTestBuilder;
 import se.jocke.department.builder.DepartmentTestBuilder;
-import se.jocke.department.entity.Department;
+import se.jocke.entity.Department;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
