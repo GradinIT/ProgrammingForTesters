@@ -29,22 +29,29 @@ public class TestDepartmentRestAPI extends TestClient {
     Optional<DepartmentModel> department = null;
 
 
-    @When("^the client calls /department$") // När klienten skriver /department i webläsaren?
-    public void getAll() throws Throwable { // används just nu ej
+    @When("^the client calls /department$")
+    // När klienten skriver /department i webläsaren?
+    public void getAll() throws Throwable {
+        // används just nu ej
         departments = getAllDepartments();
     }
-    @Then("^the client receives (\\d+) departments$") // Vilket språk/vad kommunicerar med vad?
-    public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable { // Varifrån kommer numberOfDepartments? används ej
+    @Then("^the client receives (\\d+) departments$")
+    // Vilket språk/vad kommunicerar med vad? Gherkin
+    public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
+        // Varifrån kommer numberOfDepartments? används ej
         Assert.assertEquals(numberOfDepartments, departments.get().size());
     }
-    @When("^the client updates name for department to (.+)$") // (.+)$ ?
-    public void updateNameOfDepartment(String departmentName) throws Throwable { // När petar jag in departmentName?
-        updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build()); // Vart kommer ettan ifrån? Bara testexempel?
+    @When("^the client updates name for department to (.+)$")
+    public void updateNameOfDepartment(String departmentName) throws Throwable {
+        // När petar jag in departmentName?
+        updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
+        // Vart kommer ettan ifrån? Bara testexempel?
     }
 
     @Then("the name is updated to (.+)$")
     public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
-        Optional<DepartmentModel> department = getDepartmentById(1); // Varför skapa en ny när den finns som klassvariabel?
+        Optional<DepartmentModel> department = getDepartmentById(1);
+        // Varför skapa en ny när den finns som klassvariabel?
         Assert.assertEquals(departmentName, department.get().getDepartmentName());
     }
 
@@ -55,7 +62,7 @@ public class TestDepartmentRestAPI extends TestClient {
 
     @Then("^the name is$")
     public void nameOfDepartmentIs() throws Throwable {
-        Assert.assertEquals("Coding", department.get().getDepartmentName()); // Varifrån ska Coding komma?
+        Assert.assertEquals("Coding", department.get().getDepartmentName());
     }
 
     @Given("^the departments$")

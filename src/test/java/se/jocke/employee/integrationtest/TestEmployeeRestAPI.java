@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends TestClient {
+    /*
     Optional<List<EmployeeModel>> optionalEmpModels = null; // Bytt till ett tydligare namn
     Optional<EmployeeModel> optionalEmpModel = null;
 
@@ -72,4 +73,5 @@ public class TestEmployeeRestAPI extends TestClient {
         });
         assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage()); // Varifrån kommer 55?
     }
+    */
 }
