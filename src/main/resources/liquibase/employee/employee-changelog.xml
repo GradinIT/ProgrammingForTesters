@@ -38,5 +38,37 @@
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>
         </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">4</column>
+            <column name="FIRSTNAME">Jacob</column>
+            <column name="LASTNAME">Bolghari</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">30000.00</column>
+            <column name="DEPARTMENTID">2</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">5</column>
+            <column name="FIRSTNAME">Hasse</column>
+            <column name="LASTNAME">Hansson</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">60000.00</column>
+            <column name="DEPARTMENTID">5</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">6</column>
+            <column name="FIRSTNAME">Hans</column>
+            <column name="LASTNAME">Hassesson</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">50000.00</column>
+            <column name="DEPARTMENTID">6</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">7</column>
+            <column name="FIRSTNAME">Test</column>
+            <column name="LASTNAME">Testsson</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">50000.00</column>
+            <column name="DEPARTMENTID">4</column>
+        </insert>
     </changeSet>
 </databaseChangeLog>

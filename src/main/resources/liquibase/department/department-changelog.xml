@@ -22,5 +22,17 @@
             <column name="DEPARTMENTID">3</column>
             <column name="DEPARTMENTNAME">Management</column>
         </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">4</column>
+            <column name="DEPARTMENTNAME">Secretaries</column>
+        </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">5</column>
+            <column name="DEPARTMENTNAME">Controllers</column>
+        </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">6</column>
+            <column name="DEPARTMENTNAME">Backoffice</column>
+        </insert>
     </changeSet>
 </databaseChangeLog>
