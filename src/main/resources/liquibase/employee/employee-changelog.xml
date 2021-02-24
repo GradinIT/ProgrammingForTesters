@@ -38,5 +38,13 @@
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>
         </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">4</column>
+            <column name="FIRSTNAME">Greger</column>
+            <column name="LASTNAME">Greger</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">25000.00</column>
+            <column name="DEPARTMENTID">1</column>
+        </insert>
     </changeSet>
 </databaseChangeLog>
