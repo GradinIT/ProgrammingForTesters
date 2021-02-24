@@ -12,9 +12,12 @@ import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 
+import javax.swing.plaf.basic.BasicOptionPaneUI;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -29,7 +32,12 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getEmployeeId())
+                () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getEmployeeId()),
+                () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
+                () -> assertEquals(Boolean.TRUE, optionalEmployeeDatabaseEntry.get().getFullTime()),
+                () -> assertEquals(new BigDecimal("25000.00"), optionalEmployeeDatabaseEntry.get().getSalary()),
+                () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getDepartmentId())
 
         );
     }
