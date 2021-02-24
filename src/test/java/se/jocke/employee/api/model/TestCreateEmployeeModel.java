@@ -12,7 +12,6 @@ public class TestCreateEmployeeModel {
 
     @Test
     public void testCreateEmployeeModel() {
-        //EmployeeModel emp = new EmployeeModel();
 
         EmployeeModel employeeModel = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @SuperBuilder
 @Getter
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @ToString
 public class Employee extends Entity<EmployeeID> {
     private final @NonNull EmployeeID employeeId;
