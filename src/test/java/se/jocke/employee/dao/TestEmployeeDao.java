@@ -1,5 +1,6 @@
 package se.jocke.employee.dao;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import se.jocke.dao.EmployeeDatabaseEntry;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -54,13 +56,13 @@ public class TestEmployeeDao {
 
     @Test
     public void testGetEmployeeBySalary() {
+        BigDecimal bd1 = new BigDecimal(25000.00);
+
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(BigDecimal.valueOf(25000),optionalEmployeeDatabaseEntry.get().getSalary())
-                //Skriver med.00 men den tar emot den som .0?? Kört utan BigDecimal
-                //Ändrat i liquibase 25000
+                () -> assertThat(bd1, Matchers.comparesEqualTo(optionalEmployeeDatabaseEntry.get().getSalary()))
         );
     }
 

@@ -30,7 +30,7 @@ public class TestEmployeeService {
     private EmployeeDao employeeDao;
 
     @InjectMocks
-    private EmployeeService systemUndertest = new EmployeeServiceImpl();
+    private final EmployeeService systemUndertest = new EmployeeServiceImpl();
 
     @BeforeEach
     public void setUp() {
@@ -55,9 +55,10 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(2, employee.getDepartmentId()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
                 () -> Assertions.assertEquals(BigDecimal.valueOf(25000.00), employee.getSalary()));
-        //Kolla så att anropar har kommit till den metoden, speciellt eftersom vi har injectad
-        //så att den anropar rätt metod
+        //Kollar så att anropet har kommit till den metoden, speciellt eftersom vi har injectad
+        //(så att den anropar rätt metod)
         verify(employeeDao,times(1)).findById(1);
     }
+
 
 }
