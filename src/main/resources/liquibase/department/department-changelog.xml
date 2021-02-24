@@ -23,8 +23,8 @@
             <column name="DEPARTMENTNAME">Management</column>
         </insert>
         <insert tableName="DEPARTMENT">
-            <column name="DEPARTMENTID">4</column>
-            <column name="DEPARTMENTNAME">PR</column>
+            <column name="DEPARTMENTID">1450</column>
+            <column name="DEPARTMENTNAME">Printing</column>
         </insert>
     </changeSet>
 </databaseChangeLog>
