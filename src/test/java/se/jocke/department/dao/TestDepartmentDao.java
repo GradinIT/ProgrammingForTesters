@@ -40,7 +40,13 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () ->assertEquals(3,departments.size())
+                () ->assertEquals(/*3*/ 4,departments.size())
         );
-    }
+    } /* Test outcome:
+            expected: <3> but was: <4>
+            Comparison Failure:
+            Expected :3
+            Actual   :4
+                // test fails due to that I have added a new
+                // Department "PR" via changeset employee-changelog.xml/resources, thus the department.size is 4, not 3.*/
 }

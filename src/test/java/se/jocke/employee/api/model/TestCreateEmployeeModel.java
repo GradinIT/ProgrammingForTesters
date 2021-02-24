@@ -7,12 +7,14 @@ import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {
 
-    /*  private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
+    /* MALL
+    private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
      */
 
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
-    /* @Test
+    /* MALL
+    @Test
     public void testCreateDepartmentModel() {
         DepartmentModel department = DepartmentModel.builder()
                 .departmentId(DEPARTMENT_MODEL.getDepartmentId())
@@ -36,7 +38,8 @@ public class TestCreateEmployeeModel {
         Assertions.assertEquals(EMPLOYEE_MODEL, employee);
     }
 
-    /*  @Test
+    /*  MALL
+    @Test
     public void testCreateDepartmentModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
             DepartmentModel.builder().departmentName(DEPARTMENT_MODEL.getDepartmentName()).build();
