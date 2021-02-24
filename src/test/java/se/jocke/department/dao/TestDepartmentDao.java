@@ -40,7 +40,7 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () ->assertEquals(3,departments.size())
+                () ->assertEquals(4,departments.size())
         );
     }
 }
