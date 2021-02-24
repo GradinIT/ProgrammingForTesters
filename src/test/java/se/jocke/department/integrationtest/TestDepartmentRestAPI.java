@@ -41,15 +41,18 @@ public class TestDepartmentRestAPI extends TestClient {
     public void updateNameOfDepartment(String departmentName) throws Throwable { // När petar jag in departmentName?
         updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build()); // Vart kommer ettan ifrån? Bara testexempel?
     }
+
     @Then("the name is updated to (.+)$")
     public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
         Optional<DepartmentModel> department = getDepartmentById(1); // Varför skapa en ny när den finns som klassvariabel?
         Assert.assertEquals(departmentName, department.get().getDepartmentName());
     }
+
     @When("^the client gets department (\\d+)$")
     public void getTheDepartmentById(Integer departmentId) throws Throwable {
-         department = getDepartmentById(departmentId);
+        department = getDepartmentById(departmentId);
     }
+
     @Then("^the name is$")
     public void nameOfDepartmentIs() throws Throwable {
         Assert.assertEquals("Coding", department.get().getDepartmentName()); // Varifrån ska Coding komma?
@@ -60,22 +63,25 @@ public class TestDepartmentRestAPI extends TestClient {
         List<DepartmentModel> listOfDepartments = makeDepartmentList(departments.asList());
         listOfDepartments.stream().forEach(department -> createDepartment(department));
     }
+
     private List<DepartmentModel> makeDepartmentList(List<String> given) {
         List<DepartmentModel> deps = new ArrayList<>();
-        for(int i = 0 ; i < given.size() - 1 ; i +=2) {
-            deps.add(DepartmentModel.builder().departmentId(Integer.parseInt(given.get(i))).departmentName(given.get(i+1)).build());
+        for (int i = 0; i < given.size() - 1; i += 2) {
+            deps.add(DepartmentModel.builder().departmentId(Integer.parseInt(given.get(i))).departmentName(given.get(i + 1)).build());
         }
         return deps;
     }
+
     @When("^the client deletes department (\\d+)$")
     public void deleteDepartment(Integer departmentId){
         deleteDepartment(getDepartmentById(departmentId).get()); // Varför ropar den på sig själv?
     }
+
     @Then("^the department (\\d+) is deleted$")
-    public void departmentIsDeleted(Integer departmentId){
+    public void departmentIsDeleted(Integer departmentId) {
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getDepartmentById(departmentId);
         });
-        assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
+        assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage());
     }
 }
