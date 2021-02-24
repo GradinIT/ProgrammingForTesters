@@ -6,3 +6,6 @@
 **/out/*
 **/logs/*
 **/.idea/*
+*.BAT
+*.bat
+*.DS_Store
