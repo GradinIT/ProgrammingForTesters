@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
 public class TestDepartmentDao {
-    @Autowired
+    @Autowired // ?
     DepartmentDao departmentDao;
 
     @Test

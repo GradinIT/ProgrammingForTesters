@@ -17,27 +17,34 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Många metoder som inte används ännu, kanske senare i
+ * IntegrationTest, TestClient eller TestDepartmentSuit?
+ *
+ * Använder sig på något sätt av departmentTest.feature (i resources), men HUR?
+ */
+
 public class TestDepartmentRestAPI extends TestClient {
     Optional<List<DepartmentModel>> departments = null;
     Optional<DepartmentModel> department = null;
 
 
-    @When("^the client calls /department$")
-    public void getAll() throws Throwable {
+    @When("^the client calls /department$") // När klienten skriver /department i webläsaren?
+    public void getAll() throws Throwable { // används just nu ej
         departments = getAllDepartments();
     }
-    @Then("^the client receives (\\d+) departments$")
-    public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
+    @Then("^the client receives (\\d+) departments$") // Vilket språk/vad kommunicerar med vad?
+    public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable { // Varifrån kommer numberOfDepartments? används ej
         Assert.assertEquals(numberOfDepartments, departments.get().size());
     }
-    @When("^the client updates name for department to (.+)$")
-    public void updateNameOfDepartment(String departmentName) throws Throwable {
-        updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
+    @When("^the client updates name for department to (.+)$") // (.+)$ ?
+    public void updateNameOfDepartment(String departmentName) throws Throwable { // När petar jag in departmentName?
+        updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build()); // Vart kommer ettan ifrån? Bara testexempel?
     }
     @Then("the name is updated to (.+)$")
     public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
-        Optional<DepartmentModel> department = getDepartmentById(1);
-        Assert.assertEquals(departmentName,department.get().getDepartmentName());
+        Optional<DepartmentModel> department = getDepartmentById(1); // Varför skapa en ny när den finns som klassvariabel?
+        Assert.assertEquals(departmentName, department.get().getDepartmentName());
     }
     @When("^the client gets department (\\d+)$")
     public void getTheDepartmentById(Integer departmentId) throws Throwable {
@@ -45,7 +52,7 @@ public class TestDepartmentRestAPI extends TestClient {
     }
     @Then("^the name is$")
     public void nameOfDepartmentIs() throws Throwable {
-        Assert.assertEquals("Coding",department.get().getDepartmentName());
+        Assert.assertEquals("Coding", department.get().getDepartmentName()); // Varifrån ska Coding komma?
     }
 
     @Given("^the departments$")
@@ -62,7 +69,7 @@ public class TestDepartmentRestAPI extends TestClient {
     }
     @When("^the client deletes department (\\d+)$")
     public void deleteDepartment(Integer departmentId){
-        deleteDepartment(getDepartmentById(departmentId).get());
+        deleteDepartment(getDepartmentById(departmentId).get()); // Varför ropar den på sig själv?
     }
     @Then("^the department (\\d+) is deleted$")
     public void departmentIsDeleted(Integer departmentId){

@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
 @SelectPackages({
-        "se.jocke.department"
+        "se.jocke.employee"
 })
-public class TestDepartmentSuit {
-    // Kör alla tester i department
+public class TestEmployeeSuit {
+    // Kör alla tester i employee
 }

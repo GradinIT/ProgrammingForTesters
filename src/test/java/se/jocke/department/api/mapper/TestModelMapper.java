@@ -14,7 +14,7 @@ public class TestModelMapper {
     // Bygger en department model av DepartmentModelTestBuilder
     private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
     // Bygger ett department av DepartmentTestBuilder
-    private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
+    private final Department DEPARTMENT = DepartmentTestBuilder.builderMethod().build();
 
     @Test
     public void testDepartmentToDepartmentModelMapping() {

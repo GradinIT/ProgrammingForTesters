@@ -5,7 +5,7 @@ import se.jocke.api.EmployeeModel;
 import java.math.BigDecimal;
 
 public class EmployeeModelTestBuilder {
-    public static EmployeeModel.EmployeeModelBuilder builder() {
+    public static EmployeeModel.EmployeeModelBuilder builderMethod() {
         return EmployeeModel.builder()
                 .employeeId(200)
                 .departmentId(1)

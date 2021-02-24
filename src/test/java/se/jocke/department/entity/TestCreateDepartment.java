@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import se.jocke.department.builder.DepartmentTestBuilder;
 
 public class TestCreateDepartment {
-    private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
+    private final Department DEPARTMENT = DepartmentTestBuilder.builderMethod().build();
 
     @Test
     public void testCreateDepartment() {
-        Department department = DepartmentTestBuilder.builder()
+        Department department = DepartmentTestBuilder.builderMethod()
                 .departmentId(DEPARTMENT.getDepartmentId())
                 .departmentName(DEPARTMENT.getDepartmentName())
                 .build();

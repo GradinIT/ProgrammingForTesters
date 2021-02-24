@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Vid spring-boot:run - TestClient uses unchecked or unsafe operations
+ */
 @CucumberContextConfiguration
 @SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestClient {
@@ -99,7 +102,7 @@ public class TestClient {
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
-    public static Optional<List<EmployeeModel>> getAllEmployeees(Integer employeeId) {
+    public static Optional<List<EmployeeModel>> getAllEmployeees(Integer employeeId) { // Varför ange ETT id som parameter för att hämta ALLA?
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
                 HttpMethod.GET,

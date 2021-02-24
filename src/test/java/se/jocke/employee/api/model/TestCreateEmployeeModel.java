@@ -7,9 +7,9 @@ import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builderMethod().build();
 
-
+    // Eget tillägg, brutit ut buildern av någon anledning (typ om vi vill dela upp assertions i fler metoder)
     public EmployeeModel employeeModelBuilder() {
         return EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
