@@ -20,7 +20,7 @@ public class TestCreateEmployee {
                 .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
 
-        Assertions.assertEquals(EMPLOYEE.getEmployeeId(),emp.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE.getEmployeeId().getId(),emp.getEmployeeId().getId());
         Assertions.assertEquals(EMPLOYEE.getFirstName(),emp.getFirstName());
         Assertions.assertEquals(EMPLOYEE.getLastName(),emp.getLastName());
         Assertions.assertEquals(EMPLOYEE.getSalary(),emp.getSalary());
