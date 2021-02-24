@@ -49,6 +49,10 @@
             <scope>test</scope>
             <exclusions>
                 <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>org.junit.vintage</groupId>
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
@@ -60,18 +64,15 @@
             <artifactId>jackson-core</artifactId>
             <version>2.12.1</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.12.1</version>
-
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.12.1</version>
-
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
         <dependency>
@@ -117,6 +118,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>6.9.1</version>
@@ -137,7 +144,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.28.2</version>
+            <version>3.7.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -41,5 +41,4 @@ public class TestModelMapper {
                 () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary())
         );
     }
-
 }
