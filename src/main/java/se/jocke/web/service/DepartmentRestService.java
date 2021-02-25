@@ -37,12 +37,12 @@ public class DepartmentRestService {
         return new ResponseEntity<DepartmentModel>(response,HttpStatus.OK);
     }
     @PutMapping("/department")
-    public ResponseEntity<DepartmentModel> updateEmployee(@RequestBody DepartmentModel departmentModel){
+    public ResponseEntity<DepartmentModel> update(@RequestBody DepartmentModel departmentModel){
         DepartmentModel response = DepartmentModelMapper.map(departmentService.update(DepartmentModelMapper.map(departmentModel)));
         return new ResponseEntity<DepartmentModel>(response,HttpStatus.OK);
     }
     @DeleteMapping("/department")
-    public ResponseEntity<DepartmentModel> deleteEmployee(@RequestBody DepartmentModel departmentModel){
+    public ResponseEntity<DepartmentModel> delete(@RequestBody DepartmentModel departmentModel){
         DepartmentModel response = DepartmentModelMapper.map(departmentService.remove(DepartmentModelMapper.map(departmentModel)));
         return new ResponseEntity<DepartmentModel>(response,HttpStatus.OK);
     }
