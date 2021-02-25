@@ -1,10 +1,11 @@
-package se.jocke.department.entity;
+package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.department.builder.DepartmentTestBuilder;
+import se.jocke.department.entity.Department;
 
-public class TestCreateDepartment {
+public class TestCreateEmployee {
     private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
 
     @Test
