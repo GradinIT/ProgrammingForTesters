@@ -72,6 +72,8 @@ public class TestClient {
         DepartmentModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
         return Optional.of(result);
 
+
+        //metoder för employee IntegrationTest som jag ska använda
     }
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
@@ -99,7 +101,7 @@ public class TestClient {
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
-    public static Optional<List<EmployeeModel>> getAllEmployeees(Integer employeeId) {
+    public static Optional<List<EmployeeModel>> getAllEmployees(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
                 HttpMethod.GET,
