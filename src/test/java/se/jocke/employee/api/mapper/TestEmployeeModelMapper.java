@@ -18,13 +18,12 @@ public class TestEmployeeModelMapper {
     public void testEmployeeToEmployeeModelMapping() {
         EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
-                () -> assertEquals(EMPLOYEE.getEmployeeId(), model.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
                 () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()),
                 () -> assertEquals(EMPLOYEE.getLastName(), model.getLastName()),
                 () -> assertEquals(EMPLOYEE.getSalary(), model.getSalary()),
                 () -> assertEquals(EMPLOYEE.getFullTime(), model.getFullTime()),
                 () -> assertEquals(EMPLOYEE.getDepartmentId(), model.getDepartmentId())
-
         );
     }
 
@@ -32,7 +31,7 @@ public class TestEmployeeModelMapper {
     public void testEmployeeModelToEmployeeMapping() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertAll(
-                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),
                 () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName())
         );
     }

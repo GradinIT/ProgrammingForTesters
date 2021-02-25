@@ -44,7 +44,7 @@ public class TestEmployeeService {
     public void findById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, employee.getEmployeeId()),
+                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("firstName1", employee.getFirstName())
         );
         verify(employeeDao, times(1)).findById(1);

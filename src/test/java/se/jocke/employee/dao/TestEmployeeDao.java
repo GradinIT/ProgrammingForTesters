@@ -11,6 +11,7 @@ import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +33,9 @@ public class TestEmployeeDao {
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
                 () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
                 () -> assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
-                () -> assertEquals(25000.0, optionalEmployeeDatabaseEntry.get().getSalary()),
+                () -> assertEquals(new BigDecimal(25000).setScale(2), optionalEmployeeDatabaseEntry.get().getSalary()),
                 () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime()),
-                () -> assertEquals(5, optionalEmployeeDatabaseEntry.get().getDepartmentId())
+                () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }
 

@@ -13,6 +13,10 @@ public class TestCreateEmployee {
         Employee employee = EmployeeTestBuilder.builder()
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .firstName(EMPLOYEE.getFirstName())
+                .lastName(EMPLOYEE.getLastName())
+                .salary(EMPLOYEE.getSalary())
+                .fullTime(EMPLOYEE.getFullTime())
+                .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
         Assertions.assertEquals(EMPLOYEE, employee);
         Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
