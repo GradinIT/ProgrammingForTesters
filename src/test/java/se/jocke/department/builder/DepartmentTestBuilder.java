@@ -3,7 +3,7 @@ package se.jocke.department.builder;
 import se.jocke.department.entity.Department;
 
 public class DepartmentTestBuilder {
-    public static Department.DepartmentBuilder builderMethod() {
+    public static Department.DepartmentBuilder builder() {
         return Department.builder()
                 .departmentId(100)
                 .departmentName("Test/QA");
