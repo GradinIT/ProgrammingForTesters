@@ -8,3 +8,4 @@
 **/.idea/*
 *.BAT
 *.bat
+*.DS_Store
