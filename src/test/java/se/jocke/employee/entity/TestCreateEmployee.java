@@ -38,7 +38,7 @@ public class TestCreateEmployee {
     @Test
     @DisplayName("Test create employee throws NullPointerException")
     public void testCreateEmployeeThrowsNullPointerException() {
-        
+
         assertThrows(NullPointerException.class,
                 () -> Employee.builder().employeeId(EmployeeID.builder().id(1).build()).build());
     }
