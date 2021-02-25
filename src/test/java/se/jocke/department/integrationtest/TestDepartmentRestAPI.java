@@ -71,7 +71,7 @@ public class TestDepartmentRestAPI extends TestClient {
     @When("the client deletes department {int}")
     public void deleteDepartment(Integer departmentId) {
         if (getDepartmentById(departmentId).isPresent())
-            deleteDepartment(getDepartmentById(departmentId).get());
+            deleteEmployee(getDepartmentById(departmentId).get());
     }
     Throwable exceptionThatWasThrown;
     @Then("the department {int} is deleted")

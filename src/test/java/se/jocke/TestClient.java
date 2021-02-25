@@ -2,23 +2,17 @@ package se.jocke;
 
 import com.google.gson.Gson;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
-import se.jocke.H2JpaConfig;
-import se.jocke.LiquibaseConfigurer;
-import se.jocke.RestServiceApplication;
 import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @CucumberContextConfiguration
@@ -29,16 +23,17 @@ public class TestClient {
 
     public static Optional<List<DepartmentModel>> getAllDepartments() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
+        ResponseEntity<List> responseEntity = restTemplate.exchange(BASE_URL+"department/",
                 HttpMethod.GET,
                 null,
                 List.class);
-        List list = (List) responseEntity.getBody();
+        List<?> list = (List<?>) responseEntity.getBody();
         List<DepartmentModel> departmentModels = new ArrayList<>();
-        list.stream().forEach(o -> {
+        assert list != null;
+        list.forEach(o -> {
             departmentModels.add(gson.fromJson(o.toString(), DepartmentModel.class));
         });
-        return Optional.ofNullable(departmentModels);
+        return Optional.of(departmentModels);
 
     }
 
@@ -54,62 +49,70 @@ public class TestClient {
 
     public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.PUT, null);
+        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<>(departmentModel, HttpMethod.PUT, null);
         ResponseEntity<DepartmentModel> response = restTemplate.exchange(BASE_URL+"department/", HttpMethod.PUT, requestEntity, DepartmentModel.class);
-        return Optional.of(response.getBody());
+        return Optional.ofNullable(response.getBody());
     }
 
     public static Optional<DepartmentModel> createDepartment(DepartmentModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
         DepartmentModel result = restTemplate.postForObject(BASE_URL+"department/", departmentModel, DepartmentModel.class);
+        assert result != null;
         return Optional.of(result);
     }
 
-    public static Optional<DepartmentModel> deleteDepartment(DepartmentModel departmentModel) {
+    public static Optional<DepartmentModel> deleteEmployee(DepartmentModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.DELETE,
+        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<>(departmentModel, HttpMethod.DELETE,
                 null);
         DepartmentModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
+        assert result != null;
         return Optional.of(result);
 
     }
+
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.DELETE,
+        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<>(employeeModel, HttpMethod.DELETE,
                 null);
         EmployeeModel result = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.DELETE, requestEntity, EmployeeModel.class).getBody();
+        assert result != null;
         return Optional.of(result);
     }
     public static Optional<EmployeeModel> createEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
         EmployeeModel result = restTemplate.postForObject(BASE_URL+"employee/", employeeModel, EmployeeModel.class);
+        assert result != null;
         return Optional.of(result);
     }
     public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.PUT, null);
+        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<>(employeeModel, HttpMethod.PUT, null);
         ResponseEntity<EmployeeModel> response = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.PUT, requestEntity, EmployeeModel.class);
-        return Optional.of(response.getBody());
+        return Optional.of(Objects.requireNonNull(response.getBody()));
     }
+
     public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
+        ResponseEntity<EmployeeModel> responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
                 HttpMethod.GET,
                 null,
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
-    public static Optional<List<EmployeeModel>> getAllEmployees(Integer employeeId) {
+
+    public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
+        ResponseEntity<List> responseEntity = restTemplate.exchange(BASE_URL+"employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
-        List list = (List) responseEntity.getBody();
-        List<EmployeeModel> departmentModels = new ArrayList<>();
-        list.stream().forEach(o -> {
-            departmentModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
-        });
-        return Optional.ofNullable(departmentModels);
+        List<?> list =  (List<?>) responseEntity.getBody();
+        List<EmployeeModel> employeeModels = new ArrayList<>();
+
+        assert list != null;
+        list.forEach(o -> employeeModels.add(gson.fromJson(o.toString(), EmployeeModel.class)));
+
+        return Optional.of(employeeModels);
     }
 }
