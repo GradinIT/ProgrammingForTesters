@@ -1,10 +1,12 @@
 package se.jocke.department.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.api.DepartmentModel;
 import se.jocke.TestClient;
@@ -64,11 +66,16 @@ public class TestDepartmentRestAPI extends TestClient {
     public void deleteDepartment(Integer departmentId){
         deleteDepartment(getDepartmentById(departmentId).get());
     }
+    Throwable exceptionThatWasThrown;
     @Then("^the department (\\d+) is deleted$")
     public void departmentIsDeleted(Integer departmentId){
-        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getDepartmentById(departmentId);
         });
         assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
+    }
+    @And("the error message is {int} : [Entity with id {int} not found]")
+    public void checkErrorMessage(Integer errorCode, Integer departmentId) {
+        Assertions.assertEquals(errorCode + " : [Entity with id " + departmentId + " not found]", exceptionThatWasThrown.getMessage());
     }
 }
