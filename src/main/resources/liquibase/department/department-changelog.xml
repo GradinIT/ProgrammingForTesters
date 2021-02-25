@@ -23,8 +23,13 @@
             <column name="DEPARTMENTNAME">Management</column>
         </insert>
         <insert tableName="DEPARTMENT">
+<<<<<<< HEAD
             <column name="DEPARTMENTID">4</column>
             <column name="DEPARTMENTNAME">DevOps</column>
+=======
+            <column name="DEPARTMENTID">1450</column>
+            <column name="DEPARTMENTNAME">Printing</column>
+>>>>>>> develop
         </insert>
     </changeSet>
 </databaseChangeLog>
