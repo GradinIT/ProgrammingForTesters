@@ -1,9 +1,6 @@
 package se.jocke.employee.builder;
 
 import se.jocke.api.EmployeeModel;
-import se.jocke.department.entity.Employee;
-import se.jocke.department.entity.EmployeeID;
-import se.jocke.department.entity.EntityID;
 
 import java.math.BigDecimal;
 

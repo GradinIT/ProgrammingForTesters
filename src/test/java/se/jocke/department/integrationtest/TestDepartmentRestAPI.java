@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.api.DepartmentModel;
 import se.jocke.TestClient;
+import se.jocke.api.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class TestDepartmentRestAPI extends TestClient {
     Optional<List<DepartmentModel>> departments = null;
     Optional<DepartmentModel> department = null;
 
-
+    //1
     @When("^the client calls /department$")
     public void getAll() throws Throwable {
         departments = getAllDepartments();
@@ -30,15 +31,17 @@ public class TestDepartmentRestAPI extends TestClient {
     public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
         Assert.assertEquals(numberOfDepartments, departments.get().size());
     }
+    //2
     @When("^the client updates name for department to (.+)$")
     public void updateNameOfDepartment(String departmentName) throws Throwable {
         updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
     }
-    @Then("the name is updated to (.+)$")
+    @Then("^the name is updated to (.+)$")
     public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
         Optional<DepartmentModel> department = getDepartmentById(1);
         Assert.assertEquals(departmentName,department.get().getDepartmentName());
     }
+    //3
     @When("^the client gets department (\\d+)$")
     public void getTheDepartmentById(Integer departmentId) throws Throwable {
          department = getDepartmentById(departmentId);
@@ -48,6 +51,7 @@ public class TestDepartmentRestAPI extends TestClient {
         Assert.assertEquals("Coding",department.get().getDepartmentName());
     }
 
+    //4
     @Given("^the departments$")
     public void givenDepartments(DataTable departments) {
         List<DepartmentModel> listOfDepartments = makeDepartmentList(departments.asList());
@@ -64,6 +68,7 @@ public class TestDepartmentRestAPI extends TestClient {
     public void deleteDepartment(Integer departmentId){
         deleteDepartment(getDepartmentById(departmentId).get());
     }
+
     @Then("^the department (\\d+) is deleted$")
     public void departmentIsDeleted(Integer departmentId){
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {

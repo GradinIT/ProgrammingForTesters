@@ -10,13 +10,15 @@ import se.jocke.employee.builder.EmployeeTestBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//Main role is to map objects by determining how one object model is mapped
+//to another called DTO(Data Transformation Object).
 public class TestModelMapper {
 
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
     @Test
-    public void testEmployeeToEmployeeModelMapping() {
+    public void testEmployeeModelToEmployeeModelMapping() {
         EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
                 () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
@@ -29,9 +31,8 @@ public class TestModelMapper {
     }
 
     @Test
-    public void testEmployeeModelToEmployeeMapping() {
+    public void testEmployeeToEmployeeModelMapping() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
-
                 Assertions.assertAll(
                 () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId()),
                 () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),

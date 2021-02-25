@@ -9,7 +9,7 @@ public class TestCreateEmployee {
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
     @Test
-    public void testCreateDepartment() {
+    public void testCreateEmployee() {
         Employee employee = EmployeeTestBuilder.builder()
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .departmentId(EMPLOYEE.getDepartmentId())
@@ -18,6 +18,7 @@ public class TestCreateEmployee {
                 .fullTime(EMPLOYEE.getFullTime())
                 .salary(EMPLOYEE.getSalary())
                 .build();
+
         Assertions.assertEquals(EMPLOYEE, employee);
         Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
         Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());

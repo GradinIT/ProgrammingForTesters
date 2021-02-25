@@ -1,12 +1,12 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 
 import java.util.ArrayList;
@@ -15,62 +15,94 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static se.jocke.TestClient.*;
 
 public class TestEmployeeRestAPI {
-//    Optional<List<EmployeeModel>> departments = null;
-//    Optional<DepartmentModel> department = null;
-//
-//    Optional<List<EmployeeModel>> employees = null;
-//    Optional<EmployeeModel> employee = null;
-//
-//
-//    @When("^the client calls /department$")
-//    public void getAll() throws Throwable {
-//        employees = ;
-//    }
-//    @Then("^the client receives (\\d+) departments$")
-//    public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
-//        Assert.assertEquals(numberOfDepartments, employees.get().size());
-//    }
-//    @When("^the client updates name for department to (.+)$")
-//    public void updateNameOfDepartment(String departmentName) throws Throwable {
-//        updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
-//    }
-//    @Then("the name is updated to (.+)$")
-//    public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
-//        Optional<DepartmentModel> department = getDepartmentById(1);
-//        Assert.assertEquals(departmentName,department.get().getDepartmentName());
-//    }
-//    @When("^the client gets department (\\d+)$")
-//    public void getTheDepartmentById(Integer departmentId) throws Throwable {
-//        department = getDepartmentById(departmentId);
-//    }
-//    @Then("^the name is$")
-//    public void nameOfDepartmentIs() throws Throwable {
-//        Assert.assertEquals("Coding",department.get().getDepartmentName());
-//    }
-//
-//    @Given("^the departments$")
-//    public void givenDepartments(DataTable departments) {
-//        List<DepartmentModel> listOfDepartments = makeDepartmentList(departments.asList());
-//        listOfDepartments.stream().forEach(department -> createDepartment(department));
-//    }
-//    private List<DepartmentModel> makeDepartmentList(List<String> given) {
-//        List<DepartmentModel> deps = new ArrayList<>();
-//        for(int i = 0 ; i < given.size() - 1 ; i +=2) {
-//            deps.add(DepartmentModel.builder().departmentId(Integer.parseInt(given.get(i))).departmentName(given.get(i+1)).build());
-//        }
-//        return deps;
-//    }
-//    @When("^the client deletes department (\\d+)$")
-//    public void deleteDepartment(Integer departmentId){
-//        deleteDepartment(getDepartmentById(departmentId).get());
-//    }
-//    @Then("^the department (\\d+) is deleted$")
-//    public void departmentIsDeleted(Integer departmentId){
-//        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-//            getDepartmentById(departmentId);
-//        });
-//        assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
-//    }
+    Optional<List<EmployeeModel>> employees = null;
+    Optional<EmployeeModel> employee = null;
+
+    //Om den innehåller den här infon, ska detta köras
+    //mappar emot when annotationen i departmenttest.feature, då vet cucumber motorna att det är den som ska köras
+
+    //CHECK!
+    @When("^the client calls /employees$")
+    public void getAll() throws Throwable {
+        //get kommer från testclient, finns även en koppling från service mappen(tjänsten körs)
+        //är en globen, kollar i feature efter annotationer, tar med infon, stämmer det? Ja det stämmer,
+        //då är det denna metod som ska köras. Innehåller den samma integer, då blir det rätt eller fel
+        employees = getAllEmployees();
+
+    }
+
+    //reguljärt uttryck, läser ut integern i strängen, då kommer fyran in
+    //sedan hämtar vi den.
+    @Then("^the client receives (\\d+) employees$")
+    public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
+        Assert.assertEquals(numberOfEmployees, employees.get().size());
+    }
+
+
+    //ERROR
+
+    //first name "([^"]*)" and , first name "([^"]*)" and "([^"]*)"$
+    @When("now the client updates the last name <Carlsson>")
+    public void updateNameOfEmployee(String employeeLastName) throws Throwable {
+
+//      updateEmployee(EmployeeModel.builder().employeeId(1).firstName(employeeFirstName).build());
+        updateEmployee(EmployeeModel.builder().employeeId(1).lastName(employeeLastName).build());
+
+
+    }
+
+    //first name "([^"]*)" and
+    @Then("now the name is updated to (.+)$")
+    public void nameOfEmployeeIsUpdated(String employeeLastName) throws Throwable {
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+//        Assert.assertEquals(employeeFirstName, employee.get().getFirstName());
+        Assert.assertEquals(employeeLastName, employee.get().getLastName());
+
+    }
+    
+    //CHECK!
+    @When("^now the client gets employees (\\d+)$")
+    public void getTheEmployeeById(Integer employeeId) throws Throwable {
+        employee = getEmployeeById(employeeId);
+    }
+
+    @Then("^now the name of employee is$")
+    public void nameOfEmployeeIs() throws Throwable {
+        Assert.assertEquals("firstName1", employee.get().getFirstName());
+
+    }
+
+    //Ska denna kasta ett exception??
+    @Given("^the employees$")
+    public void givenEmployees(DataTable employees) {
+        List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());
+        listOfEmployees.stream().forEach(employee -> createEmployee(employee));
+    }
+
+    private List<EmployeeModel> makeEmployeeList(List<String> given) {
+        List<EmployeeModel> employee = new ArrayList<>();
+        for(int i = 0 ; i < given.size() - 1 ; i +=2) {
+            employee.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(1))).firstName(given.get(i+1)).lastName(given.get(i+1)).build());
+        }
+        return employee;
+    }
+
+    @When("^the client deletes employee (\\d+)$")
+    public void deleteEmployee(Integer employeeId) {
+        deleteEmployee(getEmployeeById(employeeId).get());
+    }
+
+    private void deleteEmployee(EmployeeModel model) {
+    }
+
+    @Then("^the employee (\\d+) is deleted$")
+    public void employeeIsDeleted(Integer employeeId){
+        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            getEmployeeById(employeeId);
+        });
+        assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
+    }
 }
