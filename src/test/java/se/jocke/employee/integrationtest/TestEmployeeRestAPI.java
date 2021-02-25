@@ -13,9 +13,9 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
 
-    @When("^the client calls /employees$")
+    @When("^the client calls /employee$")
     public void getAll() throws Throwable {
-        employees = getAllEmployeees(1);
+        employees = getAllEmployees();
     }
     @Then("the client receives {int} employees")
     public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
