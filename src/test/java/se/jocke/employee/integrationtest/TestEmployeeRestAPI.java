@@ -47,7 +47,6 @@ public class TestEmployeeRestAPI {
     //first name "([^"]*)" and , first name "([^"]*)" and "([^"]*)"$
     @When("now the client updates the last name <Carlsson>")
     public void updateNameOfEmployee(String employeeLastName) throws Throwable {
-
 //      updateEmployee(EmployeeModel.builder().employeeId(1).firstName(employeeFirstName).build());
         updateEmployee(EmployeeModel.builder().employeeId(1).lastName(employeeLastName).build());
 
