@@ -13,6 +13,7 @@ import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,12 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getEmployeeId())
+                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getEmployeeId()),
+                () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
+                () -> assertEquals(BigDecimal.valueOf(25000).setScale(2), optionalEmployeeDatabaseEntry.get().getSalary().setScale(2)),
+                () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime()),
+                () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }
     @Test
