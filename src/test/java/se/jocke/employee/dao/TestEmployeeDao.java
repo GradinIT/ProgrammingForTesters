@@ -1,9 +1,7 @@
 package se.jocke.employee.dao;
 
-import liquibase.pro.packaged.D;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,13 @@ import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.department.entity.Employee;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
@@ -26,25 +28,32 @@ public class TestEmployeeDao {
     @Autowired
     private EmployeeDao employeeDao;
 
+    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
-    @Test
-    @DisplayName("Given that we want to add an employee")
-    public void testCreateEmployee() {
-
-    }
 
     @Test
     @DisplayName("Given that we want employee by id")
     public void testGetEmployeeById() {
         Optional<EmployeeDatabaseEntry> employeeByID = employeeDao.findById(1);
-        Assertions.assertEquals(1, employeeByID.get().getEmployeeId());
+        Assertions.assertAll(
+                () -> assertTrue(employeeByID.isPresent()),
+                () -> assertEquals(1, employeeByID.get().getEmployeeId()),
+                () -> assertEquals("firstName1", employeeByID.get().getFirstName()),
+                () -> assertEquals("lastName1", employeeByID.get().getLastName()),
+                () -> assertTrue(employeeByID.get().getFullTime()),
+                () -> assertEquals(new BigDecimal("25000.00"), employeeByID.get().getSalary()),
+                () -> assertEquals(1, employeeByID.get().getDepartmentId())
+        );
     }
 
     @Test
     @DisplayName("Given that we want all employees")
     public void testGetAllEmployees() {
         List<EmployeeDatabaseEntry> allEmployees = employeeDao.findAll();
-        Assertions.assertEquals(3, allEmployees.size());
+        Assertions.assertAll(
+                () -> assertFalse(allEmployees.isEmpty()),
+                () -> assertEquals(3, allEmployees.size())
+        );
     }
 
 }
