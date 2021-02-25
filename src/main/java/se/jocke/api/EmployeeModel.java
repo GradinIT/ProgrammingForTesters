@@ -32,6 +32,4 @@ public class EmployeeModel {
     private Boolean fullTime;
     @Nonnull
     private Integer departmentId;
-
-
 }
