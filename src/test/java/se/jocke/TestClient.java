@@ -16,7 +16,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestClient {
     private static final String BASE_URL = "http://localhost:8082/";
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
@@ -101,6 +102,7 @@ public class TestClient {
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
 
+    public static Optional<List<EmployeeModel>> getAllEmployees() {
     public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List> responseEntity = restTemplate.exchange(BASE_URL+"employee/",
