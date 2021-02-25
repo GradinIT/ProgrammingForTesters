@@ -20,46 +20,31 @@ import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
-@DisplayName("Test employee DAO (CRUD)")
+@DisplayName("Test employee DAO")
 public class TestEmployeeDao {
 
     @Autowired
     private EmployeeDao employeeDao;
 
-    @Nested
-    @DisplayName("Test to create employee")
-    class testPostFunction {
 
-        @Test
-        @DisplayName("Given that we want to add an employee")
-        public void testCreateEmployee() {
-
-        }
-    }
-
-    @Nested
-    @DisplayName("Test to GET employee")
-    class testGetFunctions {
-
-        @Test
-        @DisplayName("Given that we want employee by id")
-        public void testGetEmployeeById() {
-            Optional<EmployeeDatabaseEntry> employeeByID = employeeDao.findById(1);
-            Assertions.assertEquals(1, employeeByID.get().getEmployeeId());
-        }
-
-        @Test
-        @DisplayName("Given that we want all employees")
-        public void testGetAllEmployees() {
-            List<EmployeeDatabaseEntry> allEmployees = employeeDao.findAll();
-            Assertions.assertEquals(3, allEmployees.size());
-        }
+    @Test
+    @DisplayName("Given that we want to add an employee")
+    public void testCreateEmployee() {
 
     }
 
     @Test
-    public void testGetAllEmployees() {
+    @DisplayName("Given that we want employee by id")
+    public void testGetEmployeeById() {
+        Optional<EmployeeDatabaseEntry> employeeByID = employeeDao.findById(1);
+        Assertions.assertEquals(1, employeeByID.get().getEmployeeId());
+    }
 
+    @Test
+    @DisplayName("Given that we want all employees")
+    public void testGetAllEmployees() {
+        List<EmployeeDatabaseEntry> allEmployees = employeeDao.findAll();
+        Assertions.assertEquals(3, allEmployees.size());
     }
 
 }
