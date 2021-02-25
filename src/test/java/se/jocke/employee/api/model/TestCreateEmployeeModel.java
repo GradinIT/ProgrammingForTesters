@@ -31,10 +31,12 @@ public class TestCreateEmployeeModel {
     @Test
     public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
+            EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
             EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
             EmployeeModel.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();
-            //  EmployeeModel.builder().fullTime(EMPLOYEE_MODEL.getfullTime()).build();
-            EmployeeModel.builder().salary(EMPLOYEE_MODEL.getSalary()).build(); //Testar man bara det som kan kasta en null
+            EmployeeModel.builder().salary(EMPLOYEE_MODEL.getSalary()).build();
+            EmployeeModel.builder().fullTime(EMPLOYEE_MODEL.getFullTime()).build();
+            EmployeeModel.builder().departmentId(EMPLOYEE_MODEL.getDepartmentId()).build();
         });
     }
 }
