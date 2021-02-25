@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestDepartmentRestAPI extends TestClient {
@@ -72,16 +71,19 @@ public class TestDepartmentRestAPI extends TestClient {
     public void deleteDepartment(Integer departmentId) {
         deleteDepartment(getDepartmentById(departmentId).get());
     }
+
     Throwable exceptionThatWasThrown;
+
     @Then("the department {int} is deleted")
     public void departmentIsDeleted(Integer departmentId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getDepartmentById(departmentId);
         });
     }
+
     @And("the error message is {int} : [Entity with id {int} not found]")
     public void checkErrorMessage(Integer errorCode, Integer departmentId) {
-        Assertions.assertEquals(errorCode+" : [Entity with id " + departmentId +" not found]",exceptionThatWasThrown.getMessage());
+        Assertions.assertEquals(errorCode + " : [Entity with id " + departmentId + " not found]", exceptionThatWasThrown.getMessage());
     }
 
 }
