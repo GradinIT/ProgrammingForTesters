@@ -1,10 +1,12 @@
 package se.jocke.department.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.DepartmentModel;
@@ -66,15 +68,21 @@ public class TestDepartmentRestAPI extends TestClient {
         return deps;
     }
 
-    @When("^the client deletes department (\\d+)$")
+    @When("the client deletes department {int}")
     public void deleteDepartment(Integer departmentId) {
         if (getDepartmentById(departmentId).isPresent())
             deleteDepartment(getDepartmentById(departmentId).get());
     }
-
-    @Then("^the department (\\d+) is deleted$")
+    Throwable exceptionThatWasThrown;
+    @Then("the department {int} is deleted")
     public void departmentIsDeleted(Integer departmentId) {
-        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> getDepartmentById(departmentId));
-        assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage());
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            getDepartmentById(departmentId);
+        });
     }
+    @And("the error message is {int} : [Entity with id {int} not found]")
+    public void checkErrorMessage(Integer errorCode, Integer departmentId) {
+        Assertions.assertEquals(errorCode+" : [Entity with id " + departmentId +" not found]",exceptionThatWasThrown.getMessage());
+    }
+
 }
