@@ -8,7 +8,7 @@ import lombok.ToString;
 
 @Builder
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(cacheStrategy= EqualsAndHashCode.CacheStrategy.LAZY)
 @ToString
 public class Department {
     private final @NonNull Integer departmentId;

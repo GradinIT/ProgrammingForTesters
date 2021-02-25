@@ -16,7 +16,9 @@ import se.jocke.dao.DepartmentDatabaseEntry;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
@@ -38,10 +40,7 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () -> assertEquals(4,departments.size())
+                () ->assertEquals(4,departments.size())
         );
     }
-
-    //När man ska lägga till i pom.file (insert + ny department), error blev för att den expected 3 fast jag angav 4 i pomfilen.
-    //Error försvann när jag ändrade i expected
 }
