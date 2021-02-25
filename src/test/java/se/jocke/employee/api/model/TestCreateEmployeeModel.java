@@ -7,11 +7,11 @@ import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builderMethod().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builderMethod().build(); // använder TESTBUILDER
 
-    // Eget tillägg, brutit ut buildern av någon anledning (typ om vi vill dela upp assertions i fler metoder)
-    public EmployeeModel employeeModelBuilder() {
-        return EmployeeModel.builder()
+    @Test
+    public void testCreateEmployeeModel() {
+        EmployeeModel employee = EmployeeModel.builder() // avnänder EMPLOYEEMODEL
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
                 .lastName(EMPLOYEE_MODEL.getLastName())
@@ -19,11 +19,6 @@ public class TestCreateEmployeeModel {
                 .fullTime(EMPLOYEE_MODEL.getFullTime())
                 .departmentId(EMPLOYEE_MODEL.getDepartmentId())
                 .build();
-    }
-
-    @Test
-    public void testCreateEmployeeModel() {
-        EmployeeModel employee = employeeModelBuilder();
 
         Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId());
         Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName());
