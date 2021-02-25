@@ -49,13 +49,13 @@ public class TestDepartmentRestAPI extends TestClient {
 
     @Then("^the name is$")
     public void nameOfDepartmentIs() throws Throwable {
-        Assert.assertEquals("Coding", department.get().getDepartmentName());
+        department.ifPresent(departmentModel -> Assert.assertEquals("Coding", departmentModel.getDepartmentName()));
     }
 
     @Given("^the departments$")
     public void givenDepartments(DataTable departments) {
         List<DepartmentModel> listOfDepartments = makeDepartmentList(departments.asList());
-        listOfDepartments.stream().forEach(department -> createDepartment(department));
+        listOfDepartments.forEach(TestClient::createDepartment);
     }
 
     private List<DepartmentModel> makeDepartmentList(List<String> given) {
@@ -68,14 +68,13 @@ public class TestDepartmentRestAPI extends TestClient {
 
     @When("^the client deletes department (\\d+)$")
     public void deleteDepartment(Integer departmentId) {
-        deleteDepartment(getDepartmentById(departmentId).get());
+        if (getDepartmentById(departmentId).isPresent())
+            deleteDepartment(getDepartmentById(departmentId).get());
     }
 
     @Then("^the department (\\d+) is deleted$")
     public void departmentIsDeleted(Integer departmentId) {
-        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getDepartmentById(departmentId);
-        });
+        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> getDepartmentById(departmentId));
         assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage());
     }
 }
