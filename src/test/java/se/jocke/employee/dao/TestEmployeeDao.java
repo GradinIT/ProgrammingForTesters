@@ -1,5 +1,6 @@
 package se.jocke.employee.dao;
 
+import liquibase.pro.packaged.B;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,9 @@ import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
 import java.math.BigDecimal;
@@ -27,9 +30,6 @@ public class TestEmployeeDao {
 
     @Autowired
     private EmployeeDao employeeDao;
-
-    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
-
 
     @Test
     @DisplayName("Given that we want employee by id")
