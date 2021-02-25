@@ -99,9 +99,9 @@ public class TestClient {
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
-    public static Optional<List<EmployeeModel>> getAllEmployeees(Integer employeeId) {
+    public static Optional<List<EmployeeModel>> getAllEmployees(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
