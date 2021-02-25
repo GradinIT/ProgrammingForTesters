@@ -1,10 +1,12 @@
 package se.jocke.department.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.api.DepartmentModel;
 import se.jocke.TestClient;
@@ -13,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
@@ -38,7 +39,6 @@ public class TestDepartmentRestAPI extends TestClient {
     @Then("^the client receives (\\d+) departments$")
     // Vilket språk/vad kommunicerar med vad? Gherkin
     public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
-        // Varifrån kommer numberOfDepartments? används ej
         Assert.assertEquals(numberOfDepartments, departments.get().size());
     }
     @When("^the client updates name for department to (.+)$")
@@ -82,13 +82,21 @@ public class TestDepartmentRestAPI extends TestClient {
     @When("^the client deletes department (\\d+)$")
     public void deleteDepartment(Integer departmentId){
         deleteDepartment(getDepartmentById(departmentId).get()); // Varför ropar den på sig själv?
+
     }
 
-    @Then("^the department (\\d+) is deleted$")
+    Throwable exceptionThatWasThrown;
+
+    @Then("the department {int} is deleted")
     public void departmentIsDeleted(Integer departmentId) {
-        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getDepartmentById(departmentId);
         });
-        assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage());
     }
+
+    @And("the error message is {int} : [Entity with id {int} not found]")
+    public void checkErrorMessage(Integer errorCode, Integer departmentId) {
+        Assertions.assertEquals(errorCode + " : [Entity with id " + departmentId + " not found]", exceptionThatWasThrown.getMessage());
+    }
+
 }
