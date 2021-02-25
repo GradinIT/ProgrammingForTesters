@@ -23,7 +23,7 @@ public class TestEmployeeService {
     @Mock
     private EmployeeDao employeeDao;
     @InjectMocks
-    private EmployeeService systemUnderTest = new EmployeeServiceImpl();
+    private final EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
     @BeforeEach
     public void setUp() {
@@ -32,8 +32,8 @@ public class TestEmployeeService {
                 .firstName("MockTest")
                 .lastName("MockTest2")
                 .fullTime(true)
-                .salary(BigDecimal.valueOf(25000.00))
-                .departmentId(1)
+                .salary(BigDecimal.valueOf(45000.00))
+                .departmentId(15)
                 .build()));
     }
 
@@ -45,10 +45,11 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals("MockTest", employee.getFirstName()),
                 () -> Assertions.assertEquals("MockTest2", employee.getLastName()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
-                () -> Assertions.assertEquals((BigDecimal.valueOf(25000.00)), employee.getSalary()),
-                () -> Assertions.assertEquals(1, employee.getDepartmentId())
+                () -> Assertions.assertEquals((BigDecimal.valueOf(45000.00)), employee.getSalary()),
+                () -> Assertions.assertEquals(15, employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
     }
+
 }
 

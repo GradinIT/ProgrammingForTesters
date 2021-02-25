@@ -101,7 +101,7 @@ public class TestClient {
     }
     public static Optional<List<EmployeeModel>> getAllEmployeees(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
