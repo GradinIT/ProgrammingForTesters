@@ -16,7 +16,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @When("^the client calls /employee$")
     public void getAll() throws Throwable{
-        employees = getAllEmployees();
+        employees = getAllEmployees(1);
     }
     @Then("^the client recieves (\\e+) employees$")
     public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable{
