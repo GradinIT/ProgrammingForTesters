@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestClient {
     private static final String BASE_URL = "http://localhost:8082/";
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
@@ -72,8 +73,6 @@ public class TestClient {
         DepartmentModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
         return Optional.of(result);
 
-
-        //metoder för employee IntegrationTest som jag ska använda
     }
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
@@ -101,9 +100,9 @@ public class TestClient {
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
-    public static Optional<List<EmployeeModel>> getAllEmployees(Integer employeeId) {
+    public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
