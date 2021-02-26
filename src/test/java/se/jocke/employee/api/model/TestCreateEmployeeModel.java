@@ -5,15 +5,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
 import se.jocke.department.entity.Employee;
+import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
 public class TestCreateEmployeeModel {
 
-    private final Employee EMPLOYEE_MODEL = EmployeeTestBuilder.builder().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
     @Test
     public void testBuildEmployeeModel() {
-        Employee empModel = Employee.builder()
+        EmployeeModel empModel = EmployeeModelTestBuilder.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
                 .lastName(EMPLOYEE_MODEL.getLastName())

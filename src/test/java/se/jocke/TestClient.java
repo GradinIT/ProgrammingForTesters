@@ -100,17 +100,17 @@ public class TestClient {
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
-    public static Optional<List<EmployeeModel>> getAllEmployees(Integer employeeId) {
+    public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
         List list = (List) responseEntity.getBody();
-        List<EmployeeModel> departmentModels = new ArrayList<>();
+        List<EmployeeModel> employeeModels = new ArrayList<>();
         list.stream().forEach(o -> {
-            departmentModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
+            employeeModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
         });
-        return Optional.ofNullable(departmentModels);
+        return Optional.ofNullable(employeeModels);
     }
 }

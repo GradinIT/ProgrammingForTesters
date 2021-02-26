@@ -16,27 +16,51 @@
     <changeSet id="add-data-employee" author="Joakim Gradin">
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">1</column>
-            <column name="FIRSTNAME">firstName1</column>
-            <column name="LASTNAME">lastName1</column>
-            <column name="FULLTIME">true</column>
-            <column name="SALARY">25000.00</column>
-            <column name="DEPARTMENTID">1</column>
+            <column name="FIRSTNAME">Isabell</column>
+            <column name="LASTNAME">Adsell</column>
+            <column name="FULLTIME">false</column>
+            <column name="SALARY">28000.00</column>
+            <column name="DEPARTMENTID">1450</column>
         </insert>
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">2</column>
-            <column name="FIRSTNAME">firstName2</column>
-            <column name="LASTNAME">lastName2</column>
-            <column name="FULLTIME">true</column>
-            <column name="SALARY">25000.00</column>
-            <column name="DEPARTMENTID">1</column>
+            <column name="FIRSTNAME">Michael</column>
+            <column name="LASTNAME">Nilsson</column>
+            <column name="FULLTIME">false</column>
+            <column name="SALARY">26000.00</column>
+            <column name="DEPARTMENTID">1450</column>
         </insert>
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">3</column>
-            <column name="FIRSTNAME">firstName3</column>
-            <column name="LASTNAME">lastName3</column>
-            <column name="FULLTIME">true</column>
-            <column name="SALARY">25000.00</column>
+            <column name="FIRSTNAME">Anita</column>
+            <column name="LASTNAME">Hellberg</column>
+            <column name="FULLTIME">false</column>
+            <column name="SALARY">19000.00</column>
             <column name="DEPARTMENTID">1</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">7</column>
+            <column name="FIRSTNAME">Kim</column>
+            <column name="LASTNAME">Hellberg</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">30000.00</column>
+            <column name="DEPARTMENTID">2</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">4</column>
+            <column name="FIRSTNAME">Linda</column>
+            <column name="LASTNAME">Furu</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">32000.00</column>
+            <column name="DEPARTMENTID">2</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">5</column>
+            <column name="FIRSTNAME">Linus</column>
+            <column name="LASTNAME">Hellberg</column>
+            <column name="FULLTIME">false</column>
+            <column name="SALARY">20000.00</column>
+            <column name="DEPARTMENTID">3</column>
         </insert>
     </changeSet>
 </databaseChangeLog>
