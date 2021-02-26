@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -26,8 +27,6 @@ public class TestEmployeeService {
     private EmployeeDao employeeDao;
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
-/*    @InjectMocks
-    private Entity entity = new EntityID<Integer>();*/
 
     @BeforeEach
     public void setUp() {
@@ -41,19 +40,17 @@ public class TestEmployeeService {
                 .build()));
     }
 
-/*    @Test
+    @Test
     public void findById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, employee.getEmployeeId()),
+                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
                 () -> Assertions.assertEquals("lastName1", employee.getLastName()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
-                () -> Assertions.assertEquals(BigDecimal.valueOf(25000), employee.getSalary())
-                //() -> Assertions.assertEquals(1, employee.getDepartmentId())
-        );*/
-/*
-
-        verify(employeeDao, times(1)).findById(1);*/
-/*    }*/
+                () -> Assertions.assertEquals(BigDecimal.valueOf(25000), employee.getSalary()),
+                () -> Assertions.assertEquals(1, employee.getDepartmentId())
+        );
+        verify(employeeDao, times(1)).findById(1);
+    }
 }

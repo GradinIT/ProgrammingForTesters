@@ -1,2 +1,4 @@
-package se.jocke.employee.entity;public class TestCreateEmployee {
+package se.jocke.employee.entity;
+
+public class TestCreateEmployee {
 }
