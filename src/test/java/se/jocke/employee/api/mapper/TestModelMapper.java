@@ -1,4 +1,5 @@
 package se.jocke.employee.api.mapper;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
@@ -38,7 +39,5 @@ public class TestModelMapper {
                 () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId())
         );
     }
-
-
 
 }

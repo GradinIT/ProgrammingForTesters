@@ -1,4 +1,5 @@
 package se.jocke.employee.entity;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.department.entity.Employee;
@@ -33,7 +34,3 @@ public class TestCreateEmployee {
         });
     }
 }
-
-
-
-
