@@ -2,27 +2,35 @@ package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.builder.DepartmentTestBuilder;
-import se.jocke.department.entity.Department;
+import se.jocke.department.entity.Employee;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 
 public class TestCreateEmployee {
-    private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
+    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
     @Test
-    public void testCreateDepartment() {
-        Department department = DepartmentTestBuilder.builder()
-                .departmentId(DEPARTMENT.getDepartmentId())
-                .departmentName(DEPARTMENT.getDepartmentName())
+    public void testCreateEmployee() {
+        Employee employee = EmployeeTestBuilder.builder()
+                .employeeId(EMPLOYEE.getEmployeeId())
+                .firstName(EMPLOYEE.getFirstName())
+                .lastName(EMPLOYEE.getLastName())
+                .salary(EMPLOYEE.getSalary())
+                .fullTime(EMPLOYEE.getFullTime())
+                .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
-        Assertions.assertEquals(DEPARTMENT, department);
-        Assertions.assertEquals(DEPARTMENT.getDepartmentName(), department.getDepartmentName());
-        Assertions.assertEquals(DEPARTMENT.getDepartmentId(), department.getDepartmentId());
+        Assertions.assertEquals(EMPLOYEE, employee);
+        Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
+        Assertions.assertEquals(EMPLOYEE.getLastName(), employee.getLastName());
+        Assertions.assertEquals(EMPLOYEE.getSalary(), employee.getSalary());
+        Assertions.assertEquals(EMPLOYEE.getFullTime(), employee.getFullTime());
+        Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
     }
 
     @Test
-    public void testCreateDepartmentThrowsException() {
+    public void testCreateEmployeeThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            Department.builder().departmentName(DEPARTMENT.getDepartmentName()).build();
+            Employee.builder().employeeId(EMPLOYEE.getEmployeeId()).build();
         });
     }
 }
