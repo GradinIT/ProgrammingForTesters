@@ -14,11 +14,8 @@ import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private EmployeeDao employeeDao;
-
-    public EmployeeServiceImpl(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
+    @Autowired
+    private EmployeeDao employeeDao; // IntelliJ thinks an Constructor would be better
 
     @TimeAndLogg
     public Employee getEmployeeById(Integer employeeId) {
