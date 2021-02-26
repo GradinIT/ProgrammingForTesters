@@ -28,7 +28,7 @@ public class TestEmployeeService {
     @Mock
     private EmployeeDao employeeDao;
     @InjectMocks
-    private EmployeeService crudOperation = new EmployeeServiceImpl();
+    private EmployeeService crudOperation = new EmployeeServiceImpl(employeeDao);
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);

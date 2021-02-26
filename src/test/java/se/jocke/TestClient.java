@@ -47,6 +47,14 @@ public class TestClient {
         return Optional.ofNullable(DepartmentModel.class.cast(responseEntity.getBody()));
 
     }
+    /*public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
+                HttpMethod.GET,
+                null,
+                EmployeeModel.class);
+        return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
+    }*/
 
     public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
@@ -95,14 +103,13 @@ public class TestClient {
 
     public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<EmployeeModel> responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
                 HttpMethod.GET,
                 null,
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
 
-    public static Optional<List<EmployeeModel>> getAllEmployees() {
     public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List> responseEntity = restTemplate.exchange(BASE_URL+"employee/",

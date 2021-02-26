@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends TestClient {
-    Optional<List<EmployeeModel>> employees = Optional.empty();
-    Optional<EmployeeModel> employee = Optional.empty();
+    Optional<List<EmployeeModel>> employees = null;
+    Optional<EmployeeModel> employee = null;
 
 
     @When("^the client calls /employees$")
@@ -38,11 +38,16 @@ public class TestEmployeeRestAPI extends TestClient {
     public void updateNameOfEmployee(String employeeName) {
         Optional <List<EmployeeModel>> employees = getAllEmployees();
         updateEmployee(EmployeeModel.builder()
-                .employeeId(employees.get().get(1).getEmployeeId())
-                .firstName(employeeName).build());
+                .employeeId(employees.get().get(0).getEmployeeId())
+                .firstName(employeeName)
+                .lastName(employees.get().get(0).getLastName())
+                .salary(employees.get().get(0).getSalary())
+                .fullTime(employees.get().get(0).getFullTime())
+                .departmentId(employees.get().get(0).getDepartmentId())
+                .build());
     }
 
-    @Then("the name is updated to (.+)$")
+    @Then("the first name is updated to (.+)$")
     public void nameOfEmployeeIsUpdated(String employeeName) {
         Optional<EmployeeModel> employee = getEmployeeById(1);
         Assert.assertEquals(employeeName, employee.get().getFirstName());
@@ -53,9 +58,9 @@ public class TestEmployeeRestAPI extends TestClient {
         employee = getEmployeeById(employeeId);
     }
 
-    @Then("^the name is$")
+    @Then("^the first name is$")
     public void nameOfEmployeeIs() {
-        employee.ifPresent(employeeModel -> Assert.assertEquals("firstName1", employeeModel.getFirstName()));
+        employee.ifPresent(employeeModel -> Assert.assertEquals("Kalle", employeeModel.getFirstName()));
     }
 
     @Given("^the employees$")
@@ -66,14 +71,14 @@ public class TestEmployeeRestAPI extends TestClient {
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 2) {
+        for (int i = 0; i < given.size() - 1; i += 6) {
             emps.add(EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
                     .lastName(given.get(i + 2))
-                    .salary(BigDecimal.valueOf(Long.parseLong(given.get(i+3))))
+                    .salary(new BigDecimal(given.get(i+3)).setScale(2))
                     .fullTime(Boolean.valueOf(given.get(i+4)))
-                    .departmentId(i+5).build());
+                    .departmentId(Integer.parseInt(given.get(i+5))).build());
         }
         return emps;
     }
@@ -84,11 +89,11 @@ public class TestEmployeeRestAPI extends TestClient {
             TestEmployeeRestAPI.deleteEmployee(getEmployeeById(employeeId).get());
     }
     Throwable exceptionThatWasThrown;
-    @Then("the department {int} is deleted")
-    public void departmentIsDeleted(Integer departmentId) {
+    @Then("the employee {int} is deleted")
+    public void employeeIsDeleted(Integer departmentId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> getEmployeeById(departmentId));
     }
-    @And("the error message is {int} : [Entity with id {int} not found]")
+    @And("the error message for employee is {int} : [Entity with id {int} not found]")
     public void checkErrorMessage(Integer errorCode, Integer departmentId) {
         Assertions.assertEquals(errorCode+" : [Entity with id " + departmentId +" not found]",exceptionThatWasThrown.getMessage());
     }
