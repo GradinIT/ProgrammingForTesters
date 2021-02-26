@@ -28,7 +28,7 @@ public class TestDepartmentDao {
 
     @Test
     public void testGetDepartmentById() {
-        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
+        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1); //Dålig namngivning?
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),

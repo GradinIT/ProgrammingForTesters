@@ -18,6 +18,7 @@ public class TestCreateDepartment {
         Assertions.assertEquals(DEPARTMENT.getDepartmentId(), department.getDepartmentId());
     }
 
+    //Varför testas inte id?
     @Test
     public void testCreateDepartmentThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
