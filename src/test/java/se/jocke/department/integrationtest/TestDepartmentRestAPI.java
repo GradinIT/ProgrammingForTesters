@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestDepartmentRestAPI extends TestClient {
@@ -40,7 +39,7 @@ public class TestDepartmentRestAPI extends TestClient {
 
     @Then("the name is updated to (.+)$")
     public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
-        Optional<DepartmentModel> department = getDepartmentById(1);
+        Optional<DepartmentModel> department = getDepartmentById(1);  //var kommer den här ettan ifrån?
         Assert.assertEquals(departmentName, department.get().getDepartmentName());
     }
 
