@@ -2,10 +2,13 @@ package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.DataTableType;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.sl.In;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 import se.jocke.department.entity.Employee;
@@ -30,16 +33,6 @@ public class TestEmployeeRestAPI extends TestClient {
         Assertions.assertEquals(numOfEmployees, employees.get().size());
     }
 
-    @When("the client request employee id {int}")
-    public void employeeById(Integer employeeId) {
-        employee = getEmployeeById(employeeId);
-    }
-
-    @Then("the client get employee {int}")
-    public void employeeNameIs(Integer employeeId) {
-        Assertions.assertEquals(employeeId, employee.get().getEmployeeId());
-    }
-
     @When("the client updates name for employee {int} to {}")
     public void updateNameOfEmployee(Integer employeeId, String name) {
         employee = getEmployeeById(employeeId);
@@ -57,6 +50,17 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @Then("the name of employee is updated to {}")
     public void theNameIsUpdatedTo(String name) {
+        Assertions.assertEquals(name, employee.get().getFirstName());
+    }
+
+    @When("the client request employee id {int}")
+    public void employeeById(Integer employeeId) {
+        employee = getEmployeeById(employeeId);
+    }
+
+    @Then("the client get employee {int} and the name is {}")
+    public void employeeNameIs(Integer employeeId, String name) {
+        Assertions.assertEquals(employeeId, employee.get().getEmployeeId());
         Assertions.assertEquals(name, employee.get().getFirstName());
     }
 
@@ -82,6 +86,25 @@ public class TestEmployeeRestAPI extends TestClient {
             );
         }
         return employeeModels;
+    }
+
+    @When("the client delete employee {int}")
+    public void deleteEmployee(Integer employeeId) {
+        TestClient.deleteEmployee(getEmployeeById(employeeId).get());
+    }
+
+    Throwable exception;
+
+    @Then("the employee {int} is deleted")
+    public void employeeIsDeleted(Integer employeeId) {
+        exception = Assertions.assertThrows(HttpClientErrorException.class,
+                () -> deleteEmployee(getEmployeeById(employeeId).get()));
+    }
+
+    @And("error message is {int} : [Entity with id {int} not found]")
+    public void testErrorMessage(Integer errorCode, Integer id) {
+        Assertions.assertEquals(errorCode + " : [Entity with id " + id + " not found]"
+                , exception.getMessage());
     }
 
 }
