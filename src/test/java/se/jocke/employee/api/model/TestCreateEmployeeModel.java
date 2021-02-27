@@ -6,11 +6,11 @@ import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builderMethod().build(); // använder TESTBUILDER
 
     @Test
     public void testCreateEmployeeModel() {
-        EmployeeModel employee = EmployeeModel.builder()
+        EmployeeModel employee = EmployeeModel.builder() // avnänder EMPLOYEEMODEL
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
                 .lastName(EMPLOYEE_MODEL.getLastName())
@@ -19,8 +19,12 @@ public class TestCreateEmployeeModel {
                 .departmentId(EMPLOYEE_MODEL.getDepartmentId())
                 .build();
 
-        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName());
         Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId());
         Assertions.assertEquals(EMPLOYEE_MODEL, employee);
     }
 
