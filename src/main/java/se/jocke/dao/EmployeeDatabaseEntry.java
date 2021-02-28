@@ -1,5 +1,6 @@
 package se.jocke.dao;
 
+import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class EmployeeDatabaseEntry {
     @Id
+
     private Integer employeeId;
     private String firstName;
     private String lastName;
