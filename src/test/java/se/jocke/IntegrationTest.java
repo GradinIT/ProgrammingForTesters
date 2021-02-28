@@ -5,6 +5,8 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/resources/department/departmentTest.feature"} ) // Lägg till sökväg till employee
+@CucumberOptions(features = {"src/test/resources/department/departmentTest.feature"} )
+// Lägg till sökväg till employee
+
 public class IntegrationTest {
 }
