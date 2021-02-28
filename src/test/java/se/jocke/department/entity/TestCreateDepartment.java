@@ -9,7 +9,7 @@ public class TestCreateDepartment {
 
     @Test
     public void testCreateDepartment() {
-        Department department = DepartmentTestBuilder.builder()
+        Department department = Department.builder()
                 .departmentId(DEPARTMENT.getDepartmentId())
                 .departmentName(DEPARTMENT.getDepartmentName())
                 .build();
