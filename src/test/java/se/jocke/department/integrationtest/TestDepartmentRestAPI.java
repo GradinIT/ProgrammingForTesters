@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.api.DepartmentModel;
+import se.jocke.api.DepartmentModel; // Den enda mainklassen som körs här
 import se.jocke.TestClient;
 
 import java.util.ArrayList;
@@ -41,13 +41,12 @@ public class TestDepartmentRestAPI extends TestClient {
     public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
         Assert.assertEquals(numberOfDepartments, departments.get().size());
     }
+
     @When("^the client updates name for department to (.+)$")
     public void updateNameOfDepartment(String departmentName) throws Throwable {
-        // När petar jag in departmentName?
         updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
         // Vart kommer ettan ifrån? Bara testexempel?
     }
-
     @Then("the name is updated to (.+)$")
     public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
         Optional<DepartmentModel> department = getDepartmentById(1);
