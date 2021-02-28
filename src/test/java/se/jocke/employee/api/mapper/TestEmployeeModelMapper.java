@@ -11,8 +11,8 @@ import se.jocke.department.entity.Employee;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEmployeeModelMapper {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
-    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builderMethod().build();
+    private final Employee EMPLOYEE = EmployeeTestBuilder.builderMethod().build();
 
     @Test
     public void testEmployeeToEmployeeModelMapping() {

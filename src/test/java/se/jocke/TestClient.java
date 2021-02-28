@@ -40,7 +40,6 @@ public class TestClient {
             departmentModels.add(gson.fromJson(o.toString(), DepartmentModel.class));
         });
         return Optional.ofNullable(departmentModels);
-
     }
 
     public static Optional<DepartmentModel> getDepartmentById(Integer departmentId) {
@@ -50,7 +49,6 @@ public class TestClient {
                 null,
                 DepartmentModel.class);
         return Optional.ofNullable(DepartmentModel.class.cast(responseEntity.getBody()));
-
     }
 
     public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
@@ -72,7 +70,6 @@ public class TestClient {
                 null);
         DepartmentModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
         return Optional.of(result);
-
     }
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
@@ -81,17 +78,20 @@ public class TestClient {
         EmployeeModel result = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.DELETE, requestEntity, EmployeeModel.class).getBody();
         return Optional.of(result);
     }
+
     public static Optional<EmployeeModel> createEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
         EmployeeModel result = restTemplate.postForObject(BASE_URL+"employee/", employeeModel, EmployeeModel.class);
         return Optional.of(result);
     }
+
     public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.PUT, null);
         ResponseEntity<EmployeeModel> response = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.PUT, requestEntity, EmployeeModel.class);
         return Optional.of(response.getBody());
     }
+
     public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
@@ -100,6 +100,7 @@ public class TestClient {
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
+
     public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
