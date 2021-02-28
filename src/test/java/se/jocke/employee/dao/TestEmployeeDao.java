@@ -56,9 +56,9 @@ public class TestEmployeeDao {
         EmployeeDatabaseEntry edbeSaved = employeeDao.save(
                 new EmployeeDatabaseEntry().builder()
                         .employeeId(4)
-                        .firstName("Mio")
-                        .lastName("Tholerus")
-                        .salary(new BigDecimal(27000))
+                        .firstName("Carpe")
+                        .lastName("Diem")
+                        .salary(new BigDecimal(37000))
                         .fullTime(false)
                         .departmentId(4)
                         .build()
@@ -67,9 +67,9 @@ public class TestEmployeeDao {
         //assertions(edbeSaved);
         assertNotNull(edbeSaved);
         assertEquals(4, edbeSaved.getEmployeeId());
-        assertEquals("Mio", edbeSaved.getFirstName());
-        assertEquals("Tholerus", edbeSaved.getLastName());
-        assertEquals(new BigDecimal("27000"), edbeSaved.getSalary());
+        assertEquals("Carpe", edbeSaved.getFirstName());
+        assertEquals("Diem", edbeSaved.getLastName());
+        assertEquals(new BigDecimal("37000"), edbeSaved.getSalary());
         assertEquals(false, edbeSaved.getFullTime());
         assertEquals(4, edbeSaved.getDepartmentId());
     }
