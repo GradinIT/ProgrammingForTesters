@@ -3,18 +3,18 @@ Feature: test employee api
     When the client calls /employees
     Then  the client receives 3 employees
     Scenario: client updates name of employee 1
-      When the client updated name for employee to <string>
-      Then the name updated to <string>
+      When the client updated name for employee to Tyr
+      Then the name updated to Tyr
       Scenario: client gets employee 1
         When the client gets employee 1
         Then the name is
         Scenario: client updates name of employee 1
-          When the client updated name for employee to <string>
-          Then the name updated to <string>
+          When the client updated name for employee to FirstName1
+          Then the name updated to FirstName1
           Scenario: client deletes employee
             Given the Employees
-            | 56 | Jean | Picard | 25000 | false |
-            | 57 | bibidi  | Hopidi | 30000 | true |
+            | 56 | Rang | HammerFell | 25000 | false |
+            | 57 | Bibidi  | Hopidi | 30000 | false |
             | 58 | Bob | Builder | 27000 | false |
             When the client deletes employee 56
             When the client deletes employee 57

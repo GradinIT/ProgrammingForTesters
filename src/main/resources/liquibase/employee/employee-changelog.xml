@@ -16,24 +16,24 @@
     <changeSet id="add-data-employee" author="Joakim Gradin">
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">1</column>
-            <column name="FIRSTNAME">firstName1</column>
-            <column name="LASTNAME">lastName1</column>
+            <column name="FIRSTNAME">FirstName1</column>
+            <column name="LASTNAME">LastName1</column>
             <column name="FULLTIME">true</column>
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>
         </insert>
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">2</column>
-            <column name="FIRSTNAME">firstName2</column>
-            <column name="LASTNAME">lastName2</column>
+            <column name="FIRSTNAME">FirstName2</column>
+            <column name="LASTNAME">LastName2</column>
             <column name="FULLTIME">true</column>
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>
         </insert>
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">3</column>
-            <column name="FIRSTNAME">firstName3</column>
-            <column name="LASTNAME">lastName3</column>
+            <column name="FIRSTNAME">FirstName3</column>
+            <column name="LASTNAME">LastName3</column>
             <column name="FULLTIME">true</column>
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>

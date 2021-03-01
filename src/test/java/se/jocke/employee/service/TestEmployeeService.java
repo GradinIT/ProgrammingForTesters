@@ -35,6 +35,7 @@ public class TestEmployeeService {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
         .employeeId(1)
         .firstName("FirstName1")
+        .lastName("LastName1")
         .build()));
     }
 
