@@ -1,6 +1,3 @@
-# new feature
-# Tags: optional
-
 Feature: test employee api
   Scenario: client gets all employees
     When the client calls /employees
@@ -16,9 +13,9 @@ Feature: test employee api
           Then the name updated to <string>
           Scenario: client deletes employee
             Given the Employees
-            | 56 | Slacker |
-            | 57 | RageQuiter |
-            | 58 | Noob |
+            | 56 | Jean | Picard | 25000 | false |
+            | 57 | bibidi  | Hopidi | 30000 | true |
+            | 58 | Bob | Builder | 27000 | false |
             When the client deletes employee 56
             When the client deletes employee 57
             When the client deletes employee 58
@@ -28,7 +25,3 @@ Feature: test employee api
             And the error message is 404 : [Entity with id 57 not found!]
             When the employee 58 was deleted
             And the error message is 404 : [Entity with id 58 not found!]
-
-
-  Scenario: A scenario
-    Given something..

@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.hibernate.type.BigDecimalType;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
@@ -12,7 +13,7 @@ import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 
 
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,11 @@ private List<EmployeeModel> makeEmployeesList(List<String> given) {
     List<EmployeeModel> emps = new ArrayList<>();
     for(int i = 0; i < given.size(); i+=2){
         emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i)))
-        .firstName(given.get(i + 1)).build());
+        .firstName(given.get(i + 1))
+                .lastName(given.get(i+2))
+                .salary(BigDecimal.valueOf(Long.parseLong(given.get(i + 3))))
+                .fullTime(Boolean.valueOf(given.get(i + 4)))
+                .build());
     }
     return emps;
 }
