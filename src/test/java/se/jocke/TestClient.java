@@ -72,7 +72,6 @@ public class TestClient {
                 null);
         DepartmentModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
         return Optional.of(result);
-
     }
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
