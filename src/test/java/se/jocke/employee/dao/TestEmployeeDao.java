@@ -33,9 +33,9 @@ public class TestEmployeeDao {
         assertTrue(optionalEmployeeDatabaseEntry.isPresent());
         assertNotNull(optionalEmployeeDatabaseEntry.get());
         assertEquals(4, optionalEmployeeDatabaseEntry.get().getEmployeeId());
-        assertEquals("Mio", optionalEmployeeDatabaseEntry.get().getFirstName());
-        assertEquals("Tholerus", optionalEmployeeDatabaseEntry.get().getLastName());
-        assertEquals(new BigDecimal("27000"), optionalEmployeeDatabaseEntry.get().getSalary());
+        assertEquals("Carpe", optionalEmployeeDatabaseEntry.get().getFirstName());
+        assertEquals("Diem", optionalEmployeeDatabaseEntry.get().getLastName());
+        assertEquals(new BigDecimal("37000"), optionalEmployeeDatabaseEntry.get().getSalary());
         assertEquals(false, optionalEmployeeDatabaseEntry.get().getFullTime());
         assertEquals(4, optionalEmployeeDatabaseEntry.get().getDepartmentId());
     }
