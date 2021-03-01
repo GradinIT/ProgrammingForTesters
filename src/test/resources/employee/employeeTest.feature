@@ -1,6 +1,6 @@
 Feature: test employee api
   Scenario: client gets all employees
-    When client calls /employee
+    When client calls all employees
     Then client receives 3 employees
   Scenario: client updates name for employee 1
     When client updates name for employee to Gunnar
@@ -9,8 +9,8 @@ Feature: test employee api
     When client gets employee 1
     Then employee first name is
   Scenario: client updates name for employee 1
-    When client updates name for employee to Magnus
-    Then the name of employee is updated to Magnus
+    When client updates name for employee to firstName1
+    Then the name of employee is updated to firstName1
   Scenario: client deletes employee
     Given all employees
       | 20 | Erik | Svensson | 0 | false | 2 |

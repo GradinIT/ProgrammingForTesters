@@ -25,9 +25,8 @@ public class TestEmployeeRestAPI extends TestClient {
 
 
 
-
-    @When("client calls /employee")
-    public void addAllEmployees() {
+    @When("client calls all employees")
+    public void clientCallsEmployee() throws Throwable {
         employees = getAllEmployees();
     }
 
@@ -41,8 +40,8 @@ public class TestEmployeeRestAPI extends TestClient {
         updateEmployee(EmployeeModel.builder()
                 .employeeId(1)
                 .firstName(employeeName)
-                .lastName("Gunnarsson")
-                .salary(BigDecimal.valueOf(25000))
+                .lastName("lastName1")
+                .salary(BigDecimal.valueOf(25000).setScale(2))
                 .fullTime(true)
                 .departmentId(1)
                 .build());
@@ -105,4 +104,5 @@ public class TestEmployeeRestAPI extends TestClient {
     public void errorMessageIsEntityWithIdNotFound(int arg0, int arg1) {
         assertEquals(arg0 + " : [Entity with id " + arg1 +" not found]", exceptionThatWasThrown.getMessage());
     }
+
 }
