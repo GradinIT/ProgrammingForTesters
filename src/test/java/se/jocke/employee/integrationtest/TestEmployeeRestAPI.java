@@ -47,7 +47,7 @@ public class TestEmployeeRestAPI extends TestClient{
                 .build());
     }
 
-    @Then("the firstName is updated to (.+)$")
+    @Then("^the firstName is updated to (.+)$")
     public void firstNameOfEmployeeIsUpdated(String firstName) throws Throwable {
         Optional<EmployeeModel> employee = getEmployeeById(1);
         Assert.assertEquals(firstName, employee.get().getFirstName());
@@ -76,8 +76,8 @@ public class TestEmployeeRestAPI extends TestClient{
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
                     .lastName(given.get(i + 2))
-                    .salary(new BigDecimal(given.get(i + 3)).setScale(2))
-                    .fullTime(Boolean.valueOf(given.get(i + 4)))
+                    .fullTime(Boolean.valueOf(given.get(i + 3)))
+                    .salary(new BigDecimal(given.get(i + 4)))
                     .departmentId(Integer.parseInt(given.get(i+5)))
                     .build());
         }
@@ -90,7 +90,7 @@ public class TestEmployeeRestAPI extends TestClient{
         deleteEmployee(getEmployeeById(employeeId).get());
     }
 
-    @Then("the employee (\\d+) is deleted")
+    @Then("the employee {int} is deleted")
     public void employeeIsDeleted(Integer employeeId) {
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
