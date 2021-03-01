@@ -11,7 +11,6 @@ import se.jocke.service.EmployeeService;
 
 import java.util.List;
 
-
 @RestController
 public class EmployeeRestService {
 
