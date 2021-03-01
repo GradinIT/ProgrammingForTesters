@@ -12,6 +12,7 @@ import se.jocke.department.entity.Department;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
     @Autowired

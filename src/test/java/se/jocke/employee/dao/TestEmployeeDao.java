@@ -27,16 +27,16 @@ public class TestEmployeeDao {
 
     @Test
     public void testGetEmployeeById() {
-        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
-        Assertions.assertAll(
-                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
-                () -> assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
-                () -> assertEquals(new BigDecimal(25000).setScale(2), optionalEmployeeDatabaseEntry.get().getSalary()),
-                () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime()),
-                () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getDepartmentId())
-        );
+        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(4); // Varför Optional? För att vi kan hitta ingen
+
+        assertTrue(optionalEmployeeDatabaseEntry.isPresent());
+        assertNotNull(optionalEmployeeDatabaseEntry.get());
+        assertEquals(4, optionalEmployeeDatabaseEntry.get().getEmployeeId());
+        assertEquals("Carpe", optionalEmployeeDatabaseEntry.get().getFirstName());
+        assertEquals("Diem", optionalEmployeeDatabaseEntry.get().getLastName());
+        assertEquals(new BigDecimal("37000"), optionalEmployeeDatabaseEntry.get().getSalary());
+        assertEquals(false, optionalEmployeeDatabaseEntry.get().getFullTime());
+        assertEquals(4, optionalEmployeeDatabaseEntry.get().getDepartmentId());
     }
 
     @Test
@@ -44,7 +44,32 @@ public class TestEmployeeDao {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),
-                () -> assertEquals(3, employees.size())
+                () -> assertEquals(3, employees.size()),
+                () -> assertEquals(4,employees.size())
         );
+    }
+
+    @Test
+    public void testSave() {
+        // <S extends T> S save(S var1);
+        EmployeeDatabaseEntry edbeSaved = employeeDao.save(
+                new EmployeeDatabaseEntry().builder()
+                        .employeeId(4)
+                        .firstName("Carpe")
+                        .lastName("Diem")
+                        .salary(new BigDecimal(37000))
+                        .fullTime(false)
+                        .departmentId(4)
+                        .build()
+        );
+
+        //assertions(edbeSaved);
+        assertNotNull(edbeSaved);
+        assertEquals(4, edbeSaved.getEmployeeId());
+        assertEquals("Carpe", edbeSaved.getFirstName());
+        assertEquals("Diem", edbeSaved.getLastName());
+        assertEquals(new BigDecimal("37000"), edbeSaved.getSalary());
+        assertEquals(false, edbeSaved.getFullTime());
+        assertEquals(4, edbeSaved.getDepartmentId());
     }
 }
