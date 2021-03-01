@@ -11,11 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
-import se.jocke.H2JpaConfig;
-import se.jocke.LiquibaseConfigurer;
-import se.jocke.RestServiceApplication;
-import se.jocke.api.DepartmentModel;
-import se.jocke.api.EmployeeModel;
+import se.jocke.H2JpaConfig; // Körs inte?
+import se.jocke.LiquibaseConfigurer; // Körs inte?
+import se.jocke.RestServiceApplication; // Körs inte?
+import se.jocke.api.DepartmentModel; // Klass från main som testas
+import se.jocke.api.EmployeeModel; // Klass från main som testas
 
 import java.util.ArrayList;
 import java.util.List;

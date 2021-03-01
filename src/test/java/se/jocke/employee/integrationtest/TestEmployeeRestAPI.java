@@ -7,8 +7,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.web.client.HttpClientErrorException;
+//import org.junit.Assert;
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import se.jocke.TestClient;
-import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 
 import java.math.BigDecimal;
@@ -98,4 +100,30 @@ public class TestEmployeeRestAPI extends TestClient {
             getDepartmentById(employeeId);
         });
     }
+    @When("^the client updates first name of employee (.+) to (\\+d)$")
+    public void updateFirstName(int employeeId, String firstName) {
+        optionalEmployeeModel = getEmployeeById(employeeId);
+
+        if (optionalEmployeeModel.isPresent()) {
+            EmployeeModel empModel = optionalEmployeeModel.get();
+            //updateEmployee()
+            EmployeeModel newEmpModel = EmployeeModel.builder()
+                    .employeeId(empModel.getEmployeeId())
+                    .firstName(firstName)
+                    .lastName(empModel.getLastName())
+                    .salary(empModel.getSalary())
+                    .fullTime(empModel.getFullTime())
+                    .departmentId(empModel.getDepartmentId())
+                    .build();
+
+            updateEmployee(newEmpModel);
+
+        }
+
+        //departments = getAllDepartments();
+        //Assert.assertEquals(4, departments.get().size());
+
+    }
+
+
 }
