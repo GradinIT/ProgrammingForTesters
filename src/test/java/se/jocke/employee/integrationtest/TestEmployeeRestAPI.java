@@ -80,7 +80,6 @@ public class TestEmployeeRestAPI extends TestClient {
                     .salary(new BigDecimal(emp.get(i + 4)))
                     .departmentId(Integer.parseInt(emp.get(i + 5)))
                     .build()
-                    
             );
         }
         return employeeModels;
