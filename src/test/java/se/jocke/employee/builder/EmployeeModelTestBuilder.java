@@ -3,6 +3,7 @@ package se.jocke.employee.builder;
 import se.jocke.api.EmployeeModel;
 
 import java.math.BigDecimal;
+// Hej test!
 
 public class EmployeeModelTestBuilder {
     public static EmployeeModel.EmployeeModelBuilder builder() {
