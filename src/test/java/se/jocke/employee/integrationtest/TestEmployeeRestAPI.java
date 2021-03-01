@@ -1,17 +1,14 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.sl.In;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
-import se.jocke.department.entity.Employee;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -83,6 +80,7 @@ public class TestEmployeeRestAPI extends TestClient {
                     .salary(new BigDecimal(emp.get(i + 4)))
                     .departmentId(Integer.parseInt(emp.get(i + 5)))
                     .build()
+                    
             );
         }
         return employeeModels;
@@ -93,18 +91,18 @@ public class TestEmployeeRestAPI extends TestClient {
         TestClient.deleteEmployee(getEmployeeById(employeeId).get());
     }
 
-    Throwable exception;
+    Throwable notFoundException;
 
     @Then("the employee {int} is deleted")
     public void employeeIsDeleted(Integer employeeId) {
-        exception = Assertions.assertThrows(HttpClientErrorException.class,
+        notFoundException = Assertions.assertThrows(HttpClientErrorException.class,
                 () -> deleteEmployee(getEmployeeById(employeeId).get()));
     }
 
-    @And("error message is {int} : [Entity with id {int} not found]")
-    public void testErrorMessage(Integer errorCode, Integer id) {
+    @And("error code is {int} : [Entity with id {int} not found]")
+    public void testNotFoundErrorMessage(Integer errorCode, Integer id) {
         Assertions.assertEquals(errorCode + " : [Entity with id " + id + " not found]"
-                , exception.getMessage());
+                , notFoundException.getMessage());
     }
 
 }
