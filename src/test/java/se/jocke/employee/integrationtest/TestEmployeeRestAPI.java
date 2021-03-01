@@ -33,7 +33,7 @@ public class TestEmployeeRestAPI extends TestClient{
                 Assert.assertEquals(numberOfEmployees, employees.get().size());
     }
 
-@When("^the clinent updated name for employee to (.+)$")
+@When("^the client updated name for employee to (.+)$")
     public void nameOfEmployeeUpdated(String firstName) throws Throwable{
         updateEmployee(EmployeeModel.builder().employeeId(1).firstName(firstName).build());
 }
@@ -69,7 +69,7 @@ private List<EmployeeModel> makeEmployeesList(List<String> given) {
     return emps;
 }
 
-@When("when client deletes employee {int}")
+@When("the client deletes employee {int}")
     public void deleteEmployee(Integer employeeId) { deleteEmployee(getEmployeeById(employeeId).get()); }
 
     Throwable exceptionThatWasThrown;
@@ -81,9 +81,9 @@ private List<EmployeeModel> makeEmployeesList(List<String> given) {
     });
 }
 
-@And("the error message is {int} : [Entity with id {int} not found]")
+@And("the error message is {int} : [Entity with id {int} not found!]")
     public void checkErrorMessage(Integer errorCode, Integer employeeId){
-    Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]",
+    Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found!]",
             exceptionThatWasThrown.getMessage());
 }
 }
