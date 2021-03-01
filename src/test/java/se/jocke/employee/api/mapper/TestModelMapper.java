@@ -18,12 +18,12 @@ public class TestModelMapper {
     public void testEmployeeToEmployeeModelMapping(){
         EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
-                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), model.getEmployeeId()),
-                () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), model.getFirstName()),
-                () -> assertEquals(EMPLOYEE_MODEL.getLastName(), model.getLastName()),
-                () -> assertEquals(EMPLOYEE_MODEL.getSalary(), model.getSalary()),
-                () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), model.getFullTime()),
-                () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), model.getDepartmentId())
+                () -> assertEquals(EMPLOYEE.getEmployeeId(), model.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()),
+                () -> assertEquals(EMPLOYEE.getLastName(), model.getLastName()),
+                () -> assertEquals(EMPLOYEE.getSalary(), model.getSalary()),
+                () -> assertEquals(EMPLOYEE.getFullTime(), model.getFullTime()),
+                () -> assertEquals(EMPLOYEE.getDepartmentId(), model.getDepartmentId())
         );
     }
 
@@ -31,12 +31,12 @@ public class TestModelMapper {
     public void testEmployeeModelToEmployeeMapping(){
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertAll(
-                ()-> assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId()),
-                () -> assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName()),
-                () -> assertEquals(EMPLOYEE.getLastName(), employee.getLastName()),
-                () -> assertEquals(EMPLOYEE.getSalary(), employee.getSalary()),
-                () -> assertEquals(EMPLOYEE.getFullTime(), employee.getFullTime()),
-                () -> assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId())
+                ()-> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),
+                () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),
+                () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary()),
+                () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime()),
+                () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId())
         );
 
     }
