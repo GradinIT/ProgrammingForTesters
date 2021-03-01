@@ -1,4 +1,108 @@
 package se.jocke.employee.integrationtest;
 
-public class TestEmployeeRestAPI {
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
+import org.springframework.web.client.HttpClientErrorException;
+import se.jocke.TestClient;
+import se.jocke.api.EmployeeModel;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class TestEmployeeRestAPI extends TestClient {
+
+    Optional<List<EmployeeModel>> employees = null;
+    Optional <EmployeeModel> employee = null;
+
+    @When("^the client calls /employee$")
+    public void getAll() {
+        employees = getAllEmployees();
+    }
+
+    @Then("the client receives {int} employees")
+    public void theClientGetAllEmployees(Integer numOfEmployees) {
+        Assertions.assertEquals(numOfEmployees, employees.get().size());
+    }
+
+    @When("the client updates name for employee {int} to {}")
+    public void updateNameOfEmployee(Integer employeeId, String name) {
+        employee = getEmployeeById(employeeId);
+
+        employee = updateEmployee(EmployeeModel.builder()
+                .employeeId(employee.get().getEmployeeId())
+                .firstName(name)
+                .lastName(employee.get().getLastName())
+                .fullTime(employee.get().getFullTime())
+                .salary(employee.get().getSalary())
+                .departmentId(employee.get().getDepartmentId())
+                .build()
+        );
+    }
+
+    @Then("the name of employee is updated to {}")
+    public void theNameIsUpdatedTo(String name) {
+        Assertions.assertEquals(name, employee.get().getFirstName());
+    }
+
+    @When("the client request employee id {int}")
+    public void employeeById(Integer employeeId) {
+        employee = getEmployeeById(employeeId);
+    }
+
+    @Then("the client get employee {int} and the name is {}")
+    public void employeeNameIs(Integer employeeId, String name) {
+        Assertions.assertEquals(employeeId, employee.get().getEmployeeId());
+        Assertions.assertEquals(name, employee.get().getFirstName());
+    }
+
+    @Given("^the employees$")
+    public void createEmployees(DataTable employees) {
+        List<EmployeeModel> listOfEmployees = makeList(employees.asList());
+        listOfEmployees.stream().forEach(TestClient::createEmployee);
+    }
+
+    private List<EmployeeModel> makeList(List<String> emp) {
+        List<EmployeeModel> employeeModels = new ArrayList<>();
+
+        for (int i = 0; i < emp.size(); i += 6) {
+            employeeModels.add(
+                    EmployeeModel.builder()
+                    .employeeId(Integer.parseInt(emp.get(i)))
+                    .firstName(emp.get(i +1))
+                    .lastName(emp.get(i + 2))
+                    .fullTime(Boolean.valueOf(emp.get(i +3)))
+                    .salary(new BigDecimal(emp.get(i + 4)))
+                    .departmentId(Integer.parseInt(emp.get(i + 5)))
+                    .build()
+                    
+            );
+        }
+        return employeeModels;
+    }
+
+    @When("the client delete employee {int}")
+    public void deleteEmployee(Integer employeeId) {
+        TestClient.deleteEmployee(getEmployeeById(employeeId).get());
+    }
+
+    Throwable notFoundException;
+
+    @Then("the employee {int} is deleted")
+    public void employeeIsDeleted(Integer employeeId) {
+        notFoundException = Assertions.assertThrows(HttpClientErrorException.class,
+                () -> deleteEmployee(getEmployeeById(employeeId).get()));
+    }
+
+    @And("error code is {int} : [Entity with id {int} not found]")
+    public void testNotFoundErrorMessage(Integer errorCode, Integer id) {
+        Assertions.assertEquals(errorCode + " : [Entity with id " + id + " not found]"
+                , notFoundException.getMessage());
+    }
+
 }
