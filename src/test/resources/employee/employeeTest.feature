@@ -14,3 +14,7 @@ Feature: test employee api
     | 10 | Jonas | Svensson | 27000 | 1 | 2 |
     When the client deletes employee 10
     Then employee 10 is deleted
+
+  Scenario: searching for non existent employee
+    When the client tries to get Employee 42
+    Then "not found" exception is thrown

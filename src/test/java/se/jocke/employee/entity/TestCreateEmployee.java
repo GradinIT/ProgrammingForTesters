@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
-public class TestCreateEmployee extends EmployeeTestBuilder{
+public class TestCreateEmployee /*extends EmployeeTestBuilder*/{
     private final Employee EMPLOYEE = EmployeeTestBuilder.builderMethod().build();
 
     @Test

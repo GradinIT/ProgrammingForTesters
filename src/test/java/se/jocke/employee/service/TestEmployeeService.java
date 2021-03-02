@@ -28,8 +28,11 @@ public class TestEmployeeService {
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
-    @BeforeEach
+    // Utöka med att testa de andra metoderna i EmployeeServiceImpl?
+
+    @BeforeEach // Forska lite kring detta - en setup för varje test eller köra samma flera gånger?
     public void setUp() {
+        // När vi anropar findById() med vilket id som helst skapas istället en påhittad employee
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("firstName1")
