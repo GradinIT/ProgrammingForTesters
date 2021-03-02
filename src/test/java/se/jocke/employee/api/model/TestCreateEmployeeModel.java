@@ -31,8 +31,7 @@ public class TestCreateEmployeeModel {
     @Test
     public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            EmployeeModel.builder().firstName(EMPLOYEE_MODEL_WITH_TESTBUILDER.getFirstName()).build();
-            // Varför blir du null?
+            EmployeeModel.builder().build();
         });
     }
 }

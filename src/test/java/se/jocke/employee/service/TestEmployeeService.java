@@ -41,7 +41,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void findById() {
+    public void testGetEmployeeById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
