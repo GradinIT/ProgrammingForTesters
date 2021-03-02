@@ -7,9 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.web.client.HttpClientErrorException;
-//import org.junit.Assert;
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 
@@ -58,10 +55,9 @@ public class TestEmployeeRestAPI extends TestClient {
         optionalEmployeeModelList = getAllEmployees();
         EmployeeModel updatedEmployee = theClientUpdatesFirstName(employeeId, firstName);
         Assert.assertEquals(updatedEmployee, getEmployeeById(employeeId).get());
-
     }
 
-    @And("^number of employees is checked$")
+    @And("^the total number of employees is unchanged$")
     public void checkTheListSizeOfEmployees() {
         Assert.assertEquals(3, optionalEmployeeModelList.get().size());
     }
@@ -72,16 +68,16 @@ public class TestEmployeeRestAPI extends TestClient {
             employees.add(se.jocke.api.EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
-                    .lastName(given.get(i + 1))
-                    .salary(new BigDecimal(given.get(i+3)))
-                    .fullTime(Boolean.valueOf(given.get(i+4)))
-                    .departmentId(Integer.parseInt(given.get(i+5)))
+                    .lastName(given.get(i + 2))
+                    .salary(new BigDecimal(given.get(i + 3)))
+                    .fullTime(Boolean.valueOf(given.get(i + 4)))
+                    .departmentId(Integer.parseInt(given.get(i + 5)))
                     .build());
         }
         return employees;
     }
 
-    @Given("the employee")
+    @Given("^the employee$")
     public void givenEmployees(DataTable employeeDataTable) {
         List<EmployeeModel> listOfEmployees = makeEmployeesList(employeeDataTable.asList());
         listOfEmployees.stream().forEach(employee -> createEmployee(employee));
@@ -106,7 +102,6 @@ public class TestEmployeeRestAPI extends TestClient {
 
         if (optionalEmployeeModel.isPresent()) {
             EmployeeModel empModel = optionalEmployeeModel.get();
-            //updateEmployee()
             EmployeeModel newEmpModel = EmployeeModel.builder()
                     .employeeId(empModel.getEmployeeId())
                     .firstName(firstName)
@@ -117,13 +112,8 @@ public class TestEmployeeRestAPI extends TestClient {
                     .build();
 
             updateEmployee(newEmpModel);
-
-        }
-
+                    }
         //departments = getAllDepartments();
         //Assert.assertEquals(4, departments.get().size());
-
     }
-
-
 }

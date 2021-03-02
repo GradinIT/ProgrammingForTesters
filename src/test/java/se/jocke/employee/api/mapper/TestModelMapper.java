@@ -10,18 +10,13 @@ import se.jocke.department.entity.Employee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * Mio
- *
- * Kopierat och ändrat från Department, alla test failar
- */
 public class TestModelMapper {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builderMethod().build();
     private final Employee EMPLOYEE = EmployeeTestBuilder.builderMethod().build();
 
     @Test
     public void testEmployeeToEmployeeModelMapping() {
-        EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE); // konverterar en riktig employee till
+        EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
                 () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
                 () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()),
@@ -35,7 +30,7 @@ public class TestModelMapper {
     @Test
     public void testEmployeeModelToEmployeeMapping() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
-        Assertions.assertAll( //
+        Assertions.assertAll(
                 () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),
                 () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),
                 () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),
