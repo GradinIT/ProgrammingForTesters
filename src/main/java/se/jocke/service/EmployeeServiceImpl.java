@@ -26,7 +26,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @TimeAndLogg
     public Employee createOrUpdateEmployee(Employee employee) {
-        return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
+        return EmployeePojoMapper.map(
+                employeeDao.save(
+                        EmployeePojoMapper.map(
+                                employee
+                        )
+                )
+        );
     }
     @TimeAndLogg
     public Employee removeEmployee(Employee employee) {
