@@ -28,20 +28,6 @@ public class TestClient {
     private static final String BASE_URL = "http://localhost:8082/";
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
-    /*public static Optional<List<EmployeeModel>> getAllEmployees(){
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
-                HttpMethod.GET,
-                null,
-                List.class);
-        List list = (List) responseEntity.getBody();
-        List<EmployeeModel> employeeModels = new ArrayList<>();
-        list.stream().forEach(o -> {
-            employeeModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
-        });
-        return Optional.ofNullable(employeeModels);
-    }*/
-
     public static Optional<List<DepartmentModel>> getAllDepartments() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
