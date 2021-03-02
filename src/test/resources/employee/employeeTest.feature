@@ -19,5 +19,5 @@ Feature: test employee api
     Then employee 20 is deleted
     And error message is 404 : [Entity with id 20 not found]
     When client deletes employee 21
-    Then employee 22 is deleted
+    Then employee 21 is deleted
     And error message is 404 : [Entity with id 21 not found]
