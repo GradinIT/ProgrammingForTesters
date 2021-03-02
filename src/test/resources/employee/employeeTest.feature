@@ -13,15 +13,11 @@ Feature: test employee api
     Then the employee is updated to firstName1
   Scenario: client deletes employee
     Given the employees
-      | 77 | hej |
-      | 78 | hello |
-      | 79 | hi |
-    When the client deletes employee 77
-    When the client deletes employee 78
-    When the client deletes employee 79
-    Then the employee 77 is deleted
-    And  the error is 404 : [Entity with id 77 not found]
-    Then the employee 78 is deleted
-    And  the error is 404 : [Entity with id 78 not found]
-    Then the employee 79 is deleted
-    And  the error is 404 : [Entity with id 79 not found]
+      | 10 | Anders | Hellman | true | 1000000.00 | 22 |
+      | 11 | Mnders | Helman | true | 1000000.00 | 23 |
+    When the client deletes employee 10
+    Then the employee 10 is deleted
+    And  the error is 404 : [Entity with id 10 not found]
+    When the client deletes employee 11
+    Then the employee 11 is deleted
+    And  the error is 404 : [Entity with id 11 not found]

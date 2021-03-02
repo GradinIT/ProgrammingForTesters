@@ -22,7 +22,7 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
 
-        @When("^the client calls /employee$")
+    @When("^the client calls /employee$")
     public void getALL() throws Throwable {
         employees = getAllEmployees();
     }
@@ -33,21 +33,21 @@ public class TestEmployeeRestAPI extends TestClient {
     }
 
     @When("^the client updates everything for employee to (.+)$")
-    public void updateNameOfEmployee(String employeeName) throws Throwable {
+    public void updateNameOfEmployee(String employeeFirstName) throws Throwable {
         updateEmployee(EmployeeModel.builder()
                 .employeeId(1)
-                .firstName(employeeName)
-                .lastName(employeeName)
-                .salary(BigDecimal.valueOf(2500000, 2))
+                .firstName(employeeFirstName)
+                .lastName("lastName1")
                 .fullTime(true)
+                .salary(BigDecimal.valueOf(2500000, 2))
                 .departmentId(1)
                 .build());
     }
 
     @Then("^the employee is updated to (.+)$")
-    public void nameOfEmployeeIsUpdated(String employeeName) throws Throwable {
+    public void nameOfEmployeeIsUpdated(String employeeFirstName) throws Throwable {
         Optional<EmployeeModel> employee = getEmployeeById(1);
-        Assert.assertEquals(employeeName, employee.get().getFirstName());
+        Assert.assertEquals(employeeFirstName, employee.get().getFirstName());
     }
 
     @When("^the client gets employee (\\d+)$")
@@ -68,14 +68,14 @@ public class TestEmployeeRestAPI extends TestClient {
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 2) {
+        for (int i = 0; i < given.size() - 1; i += 6) {
             emps.add(EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
-                    .lastName(given.get(i + 1))
-                    .salary(BigDecimal.valueOf(2500000, 2))
-                    .fullTime(true)
-                    .departmentId(1)
+                    .lastName(given.get(i + 2))
+                    .fullTime(Boolean.valueOf(given.get(i +3)))
+                    .salary(BigDecimal.valueOf(Double.parseDouble(given.get(i + 4))))
+                    .departmentId(Integer.parseInt(given.get(i + 5)))
                     .build());
         }
         return emps;
