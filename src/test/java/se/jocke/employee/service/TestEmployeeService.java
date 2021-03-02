@@ -1,5 +1,6 @@
 package se.jocke.employee.service;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
@@ -23,10 +25,12 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
-    @Mock
+    @Mock // Varför
     private EmployeeDao employeeDao;
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
+
+    Employee exampleEmployee;
 
     // Utöka med att testa de andra metoderna i EmployeeServiceImpl?
 
@@ -35,8 +39,8 @@ public class TestEmployeeService {
         // När vi anropar findById() med vilket id som helst skapas istället en påhittad employee
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
-                .firstName("firstName1")
-                .lastName("lastName")
+                .firstName("Mock")
+                .lastName("Mockesson")
                 .salary(BigDecimal.valueOf(22000))
                 .fullTime(true)
                 .departmentId(5)
@@ -46,10 +50,49 @@ public class TestEmployeeService {
     @Test
     public void testGetEmployeeById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
-        Assertions.assertAll(
-                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("firstName1", employee.getFirstName())
-        );
-        verify(employeeDao, times(1)).findById(1);
+
+        Assertions.assertEquals(1, employee.getEmployeeId().getId());
+        Assertions.assertEquals("Mock", employee.getFirstName());
+
+        verify(employeeDao, times(1)).findById(1); // Vad gör verify? Varför vill vi veta hur många gånger findById körs?
+    }
+
+//    @Before
+//    public void employeeToAdd() {
+//        exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(1).build())
+//                .firstName("Mock")
+//                .lastName("Mockesson")
+//                .salary(BigDecimal.valueOf(22000))
+//                .fullTime(true)
+//                .departmentId(5)
+//                .build();
+//    }
+    @Test
+    public void testCreateOrUpdateEmployee() {
+        exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(1).build())
+                .firstName("Mock")
+                .lastName("Mockesson")
+                .salary(BigDecimal.valueOf(22000))
+                .fullTime(true)
+                .departmentId(5)
+                .build();
+
+        Employee addedEmployee = systemUnderTest.createOrUpdateEmployee(exampleEmployee);
+
+        Assertions.assertNotNull(addedEmployee);
+        Assertions.assertEquals(1, addedEmployee.getEmployeeId().getId());
+        Assertions.assertEquals("Mock", addedEmployee.getFirstName());
+    }
+
+    public void testRemoveEmployee() {
+
+    }
+
+    public void testUpdateEmployee() {
+
+    }
+
+    public void testGetAllEmployee() {
+
     }
 }
