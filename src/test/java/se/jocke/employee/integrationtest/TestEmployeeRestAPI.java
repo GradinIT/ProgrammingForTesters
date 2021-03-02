@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends TestClient {
-    Optional<List<EmployeeModel>> employees = null;
-    Optional<EmployeeModel> employee = null;
+    Optional<List<EmployeeModel>> employees = Optional.empty();
+    Optional<EmployeeModel> employee = Optional.empty();
 
 
     @When("^the client calls /employees$")
@@ -34,23 +34,23 @@ public class TestEmployeeRestAPI extends TestClient {
         employees.ifPresent(employeeModels -> Assert.assertEquals(numberOfDepartments, employeeModels.size()));
     }
 
-    @When("^the client updates name for employee to (.+)$")
+    @When("^the client updates first name for employee to (.+)$")
     public void updateNameOfEmployee(String employeeName) {
         Optional <List<EmployeeModel>> employees = getAllEmployees();
-        updateEmployee(EmployeeModel.builder()
-                .employeeId(employees.get().get(0).getEmployeeId())
+        employees.ifPresent(employeeModels -> updateEmployee(EmployeeModel.builder()
+                .employeeId(employeeModels.get(0).getEmployeeId())
                 .firstName(employeeName)
-                .lastName(employees.get().get(0).getLastName())
-                .salary(employees.get().get(0).getSalary())
-                .fullTime(employees.get().get(0).getFullTime())
-                .departmentId(employees.get().get(0).getDepartmentId())
-                .build());
+                .lastName(employeeModels.get(0).getLastName())
+                .salary(employeeModels.get(0).getSalary())
+                .fullTime(employeeModels.get(0).getFullTime())
+                .departmentId(employeeModels.get(0).getDepartmentId())
+                .build()));
     }
 
     @Then("the first name is updated to (.+)$")
     public void nameOfEmployeeIsUpdated(String employeeName) {
         Optional<EmployeeModel> employee = getEmployeeById(1);
-        Assert.assertEquals(employeeName, employee.get().getFirstName());
+        employee.ifPresent(employeeModel -> Assert.assertEquals(employeeName, employeeModel.getFirstName()));
     }
 
     @When("^the client gets employee (\\d+)$")
