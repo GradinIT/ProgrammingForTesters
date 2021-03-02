@@ -30,8 +30,8 @@ public class TestEmployeeRestAPI extends TestClient {
     }
 
     @Then("^the client receives (\\d+) employees$")
-    public void theClientGotAllEmployees(int numberOfDepartments) {
-        employees.ifPresent(employeeModels -> Assert.assertEquals(numberOfDepartments, employeeModels.size()));
+    public void theClientGotAllEmployees(int nrOfEmployees) {
+        employees.ifPresent(employeeModels -> Assert.assertEquals(nrOfEmployees, employeeModels.size()));
     }
 
     @When("^the client updates first name for employee to (.+)$")

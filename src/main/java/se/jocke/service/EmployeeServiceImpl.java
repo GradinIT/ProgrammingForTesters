@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
-    private EmployeeDao employeeDao; // IntelliJ thinks an Constructor would be better
+    private EmployeeDao employeeDao; // IntelliJ thinks a Constructor would be better
 
     @TimeAndLogg
     public Employee getEmployeeById(Integer employeeId) {
@@ -25,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         else throw new EntityNotFoundException(employeeId);
     }
     @TimeAndLogg
-    public Employee createOrUpdateEmployee(Employee employee) {
+    public Employee createEmployee(Employee employee) {
         return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
     }
     @TimeAndLogg
