@@ -47,7 +47,7 @@ public class TestEmployeeRestAPI extends TestClient{
                 .build());
     }
 
-    @Then("the firstName is updated to (.+)$")
+    @Then("^the firstName is updated to (.+)$")
     public void firstNameOfEmployeeIsUpdated(String firstName) throws Throwable {
         Optional<EmployeeModel> employee = getEmployeeById(1);
         Assert.assertEquals(firstName, employee.get().getFirstName());
@@ -77,7 +77,7 @@ public class TestEmployeeRestAPI extends TestClient{
                     .firstName(given.get(i + 1))
                     .lastName(given.get(i + 2))
                     .fullTime(Boolean.valueOf(given.get(i + 3)))
-                    .salary(BigDecimal.valueOf(Double.parseDouble(given.get(i + 4))))
+                    .salary(new BigDecimal(given.get(i + 4)))
                     .departmentId(Integer.parseInt(given.get(i+5)))
                     .build());
         }
@@ -98,7 +98,7 @@ public class TestEmployeeRestAPI extends TestClient{
         assertEquals( "404 : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
 
-//    @And("the error message is {int} : [Entity with id {int} not found]")
+    //    @And("the error message is {int} : [Entity with id {int} not found]")
 //    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
 //        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
 //    }
