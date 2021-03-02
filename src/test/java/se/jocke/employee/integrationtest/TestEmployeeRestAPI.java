@@ -5,7 +5,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
@@ -24,7 +23,6 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<EmployeeModel> employee = null;
 
 
-
     @When("client calls all employees")
     public void clientCallsEmployee() throws Throwable {
         employees = getAllEmployees();
@@ -35,33 +33,37 @@ public class TestEmployeeRestAPI extends TestClient {
         assertEquals(numberOfEmployees, employees.get().size());
     }
 
-    @When("^client updates name for employee to (.+)$")
-    public void updateNameOfEmployee(String employeeName) {
+    @When("^client updates name for employee to (.+) lastname (.+)$")
+    public void updateNameOfEmployee(String firstName, String lastName) {
         updateEmployee(EmployeeModel.builder()
                 .employeeId(1)
-                .firstName(employeeName)
-                .lastName("lastName1")
+                .firstName(firstName)
+                .lastName(lastName)
                 .salary(BigDecimal.valueOf(25000).setScale(2))
                 .fullTime(true)
                 .departmentId(1)
                 .build());
+        //System.out.println("HÄR ÄR ALLA" + getAllEmployees());
     }
 
-    @Then("^the name of employee is updated to (.+)$")
-    public void nameOfEmployeeUsUpdated(String employeeName) {
+    @Then("^the name of employee is updated to (.+) lastname (.+)$")
+    public void nameOfEmployeeUsUpdated(String firstName, String lastName) {
         Optional<EmployeeModel> employee = getEmployeeById(1);
-        assertEquals(employeeName, employee.get().getFirstName());
+        Assertions.assertAll(
+                () -> assertEquals(firstName, employee.get().getFirstName()),
+                () -> assertEquals(lastName, employee.get().getLastName())
+        );
     }
 
 
     @When("client gets employee {int}")
-    public void clientGetsEmployee(int arg0) {
-        employee = getEmployeeById(arg0);
+    public void clientGetsEmployee(int employeeID) {
+        employee = getEmployeeById(employeeID);
     }
 
-    @Then("employee first name is")
-    public void employeeFirstNameIs() {
-        assertEquals("Gunnar", employee.get().getFirstName());
+    @Then("^employee first name is (.+)$")
+    public void employeeFirstNameIs(String firstName) {
+        assertEquals(firstName, employee.get().getFirstName());
     }
 
     @Given("all employees")
@@ -92,17 +94,18 @@ public class TestEmployeeRestAPI extends TestClient {
         deleteEmployee(getEmployeeById(employeeId).get());
     }
 
-    Throwable exceptionThatWasThrown;
+    Throwable thrownException;
+
     @Then("employee {int} is deleted")
     public void employeeIsDeleted(int employeeId) {
-        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+        thrownException = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
     }
 
     @And("error message is {int} : [Entity with id {int} not found]")
     public void errorMessageIsEntityWithIdNotFound(int arg0, int arg1) {
-        assertEquals(arg0 + " : [Entity with id " + arg1 +" not found]", exceptionThatWasThrown.getMessage());
+        assertEquals(arg0 + " : [Entity with id " + arg1 +" not found]", thrownException.getMessage());
     }
 
 }

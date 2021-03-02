@@ -26,7 +26,6 @@ public class SeleniumTest {
         } catch (Exception e) {
             System.out.println("Not able to load Chrome web browser " + e.getMessage());
         }
-
     }
 
     public static Resource getChromeWebDriver() {
