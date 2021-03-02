@@ -1,6 +1,7 @@
 package se.jocke.employee.service;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import se.jocke.api.EmployeeModel;
 import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
@@ -18,6 +20,7 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -56,8 +59,42 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
-
-
     }
 
+    @Test
+    public void createEmployee() {
+        //1 Skapa en ny employee med employeeID 77
+        //2 Kalla på metoden createEmployee-metoden i TestClient
+        //3 Skriv assertions
+    }
+
+    @Test
+    public void updateEmployee() {
+        //1 hitta en employee
+        //2 uppdatera mha updateEmployee-metoden i TestClient
+    }
+
+    @Test
+    public void removeEmployee() {
+        //1 hitta en employee
+        Employee employee = systemUnderTest.getEmployeeById(1);
+        //använder removeEmployee från EmployeeServiceImpl
+        systemUnderTest.removeEmployee(employee);
+        verify(employeeDao,times(1)).delete(any(EmployeeDatabaseEntry.class));
+    }
+
+    @Test
+    public void listAllEmployees() {
+        Employee employee = systemUnderTest.getEmployeeById(1);
+        List<Employee> employees = systemUnderTest.getAllEmployees();
+        employees.add(employee);
+        employees.add(employee);
+        employees.add(employee);
+        verify(employeeDao, times(1)).findAll();
+    }
 }
+//1 Lista alla employees mha getAllEmployees-metoden i EmployeeServiceImpl
+// systemUnderTest.getAllEmployees();
+//2 skriv assertions?
+
+
