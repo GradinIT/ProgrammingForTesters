@@ -34,7 +34,8 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(optionalEmployeeDatabaseEntry,optionalEmployeeDatabaseEntry.get().getEmployeeId())
+                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getEmployeeId())
+               // () FORTSÄTT MED NAMN OSV
         );
     }
     @Test

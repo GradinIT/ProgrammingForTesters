@@ -21,6 +21,7 @@ public class TestCreateEmployee {
                 .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
 
+
         Assertions.assertEquals(EMPLOYEE, employee);
         Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
         Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
