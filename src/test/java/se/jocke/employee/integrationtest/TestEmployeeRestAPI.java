@@ -102,5 +102,16 @@ public class TestEmployeeRestAPI extends TestClient{
 //    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
 //        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
 //    }
+@Test
+public void testGetAllEmployees() {​​
 
+    List<EmployeeDatabaseEntry> employees = new ArrayList<>();
+    employees.add(empDbE);
+    employees.add(empDbE);
+    employees.add(empDbE);
+    when(employeeDao.findAll()).thenReturn(employees);
+    List<Employee> tempEmpList = SYSTEM_UNDER_TEST.getAllEmployees();
+    Assertions.assertEquals(3, tempEmpList.size());
+    verify(employeeDao, times(1)).findAll();
+}​​
 }
