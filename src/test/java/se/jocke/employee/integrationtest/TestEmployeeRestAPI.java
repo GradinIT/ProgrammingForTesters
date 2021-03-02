@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
+import se.jocke.department.entity.Employee;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,48 +26,48 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<EmployeeModel> employee = null;
 
     @When("^the client calls all employees$")
-            public void getAll() {
+        public void getAll() {
                 employees = getAllEmployees();
             };
 
     @Then("^the client receives (\\d+) employee$")
-            public void receviedAllEmployess(int numberOfEmployees) throws Throwable {
-                Assert.assertEquals(numberOfEmployees,employees.get().size());
-            }
+        public void receviedAllEmployess(int numberOfEmployees) throws Throwable {
+            Assert.assertEquals(numberOfEmployees,employees.get().size());
+    }
 
     @When("^the client calls employee by id (\\d+)$")
-            public void receiveEmployee(int employeeId) throws Throwable {
-                employee = getEmployeeById(employeeId);
+        public void receiveEmployee(int employeeId) throws Throwable {
+            employee = getEmployeeById(employeeId);
     };
 
     @Then("^the client receives name (.+)$")
-            public void receviedEmployee(String name) throws Throwable {
-                Assert.assertEquals(name,employee.get().getFirstName());
+        public void receviedEmployee(String name) throws Throwable {
+            Assert.assertEquals(name,employee.get().getFirstName());
     }
 
     @Given("^the employees$")
-            public void givenEmployees(DataTable employees) {
-                List<EmployeeModel> modelEmployees = makeEmployeeList(employees.asList());
-                modelEmployees.stream().forEach(E -> createEmployee(E));
+        public void givenEmployees(DataTable employees) {
+            List<EmployeeModel> modelEmployees = makeEmployeeList(employees.asList());
+            modelEmployees.stream().forEach(E -> createEmployee(E));
     }
 
     @When("^the client deletes employee with ID (\\d+)$")
-            public void deleteEmployee(Integer employeeID) {
-                deleteEmployee(getEmployeeById(employeeID).get());
+        public void deleteEmployee(Integer employeeID) {
+            deleteEmployee(getEmployeeById(employeeID).get());
     }
 
     Throwable exceptionThatWasThrown;
 
     @Then("the employee {int} is deleted")
-    public void employeeIsDeleted(Integer employeeId) {
-        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+        public void employeeIsDeleted(Integer employeeId) {
+            exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
     }
 
     @And("the error message is {int} : [Employee with id {int} not found]")
-    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
-        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
+        public void checkErrorMessage(Integer errorCode, Integer employeeId) {
+            Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
@@ -83,5 +84,16 @@ public class TestEmployeeRestAPI extends TestClient {
         }
 
         return empModels;
+    }
+
+    @When("^the client updates firstname to (.+) on employee by id (\\d+)$")
+        public void updateEmployeeName(String firstname, Integer employeeId) {
+            updateEmployee(EmployeeModel.builder().employeeId(employeeId).firstName(firstname).build());
+    }
+
+    @Then("^name is changed to (.+) on employee id (\\d+)$")
+        public void verifyName(String name, Integer employeeId) {
+            Optional<EmployeeModel> empM = getEmployeeById(employeeId);
+            Assert.assertEquals(name,empM.get().getFirstName());
     }
 }
