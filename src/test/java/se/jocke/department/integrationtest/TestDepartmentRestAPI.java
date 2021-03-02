@@ -37,7 +37,7 @@ public class TestDepartmentRestAPI extends TestClient {
         updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
     }
 
-    @Then("the name is updated to (.+)$")
+    @Then("^the name is updated to (.+)$")
     public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
         Optional<DepartmentModel> department = getDepartmentById(1);
         Assert.assertEquals(departmentName, department.get().getDepartmentName());

@@ -11,6 +11,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,14 +28,21 @@ public class TestEmployeeRestAPI extends TestClient {
         employees = getAllEmployees();
     }
 
-    @Then("^the client receives (\\d+) employees$")
+    @Then("^the client receives (\\d+) employee$")
     public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
         Assert.assertEquals(numberOfEmployees, employees.get().size());
     }
 
     @When("^the client updates firstname for employee to (.+)$")
     public void updateFirstNameOfEmployee(String firstName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(firstName).build());
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(1)
+                .firstName(firstName)
+                .lastName(("lastName1"))
+                .salary(BigDecimal.valueOf(25000.00))
+                .fullTime(Boolean.TRUE)
+                .departmentId(1)
+                .build());
     }
 
     @Then("the firstname is updated to (.+)$")
@@ -50,7 +58,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @Then("^the firstname is$")
     public void nameOfEmployeeIs() throws Throwable {
-        Assert.assertEquals("Coding", employee.get().getFirstName());
+        Assert.assertEquals("Kalle", employee.get().getFirstName());
     }
 
     @Given("^the employees$")
@@ -62,7 +70,14 @@ public class TestEmployeeRestAPI extends TestClient {
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
         for (int i = 0; i < given.size() - 1; i += 6) {
-            emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).firstName(given.get(i + 1)).build());
+            emps.add(EmployeeModel.builder()
+                    .employeeId(Integer.parseInt(given.get(i)))
+                    .firstName(given.get(i + 1))
+                    .lastName(given.get(i + 2))
+                    .fullTime(Boolean.valueOf(given.get(i+3)))
+                    .salary(new BigDecimal(given.get(i + 4)))
+                    .departmentId(Integer.parseInt(given.get(i + 5)))
+                    .build());
         }
         return emps;
     }
