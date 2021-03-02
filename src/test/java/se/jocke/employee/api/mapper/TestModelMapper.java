@@ -21,9 +21,8 @@ public class TestModelMapper {
 
     @Test
     public void testEmployeeToEmployeeModelMapping() {
-        EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
+        EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE); // konverterar en riktig employee till
         Assertions.assertAll(
-                // expected: <EntityID(id=100)> but was: <100> - varför behövs .getId() på EMPLOYEE men funkar ej på model?
                 () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
                 () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()),
                 () -> assertEquals(EMPLOYEE.getLastName(), model.getLastName()),
@@ -34,10 +33,9 @@ public class TestModelMapper {
     }
 
     @Test
-    public void testDepartmentModelToDepartmentMapping() {
+    public void testEmployeeModelToEmployeeMapping() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
-        Assertions.assertAll(
-                // Varför behövs .getId() på employee men funkar ej på EMPLOYEE_MODEL?
+        Assertions.assertAll( //
                 () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),
                 () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),
                 () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),

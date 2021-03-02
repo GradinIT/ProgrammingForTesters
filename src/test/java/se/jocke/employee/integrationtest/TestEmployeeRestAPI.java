@@ -68,22 +68,22 @@ public class TestEmployeeRestAPI extends TestClient {
 
     private List<EmployeeModel> makeEmployeesList(List<String> given) {
         List<se.jocke.api.EmployeeModel> employees = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 2) {
+        for (int i = 0; i < given.size() - 1; i += 6) {
             employees.add(se.jocke.api.EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
                     .lastName(given.get(i + 1))
-                    .salary(BigDecimal.valueOf(25000))
-                    .fullTime(false)
-                    .departmentId(2)
+                    .salary(new BigDecimal(given.get(i+3)))
+                    .fullTime(Boolean.valueOf(given.get(i+4)))
+                    .departmentId(Integer.parseInt(given.get(i+5)))
                     .build());
         }
         return employees;
     }
 
     @Given("the employee")
-    public void givenEmployees(DataTable employees) {
-        List<EmployeeModel> listOfEmployees = makeEmployeesList(employees.asList());
+    public void givenEmployees(DataTable employeeDataTable) {
+        List<EmployeeModel> listOfEmployees = makeEmployeesList(employeeDataTable.asList());
         listOfEmployees.stream().forEach(employee -> createEmployee(employee));
     }
 

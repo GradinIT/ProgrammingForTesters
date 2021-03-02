@@ -30,7 +30,7 @@ public class TestClient {
 
     public static Optional<List<DepartmentModel>> getAllDepartments() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/", // -> DepartmentRestService
                 HttpMethod.GET,
                 null,
                 List.class);
