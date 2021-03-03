@@ -77,11 +77,22 @@ public class TestEmployeeService {
                 .departmentId(5)
                 .build();
 
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
+                .employeeId(exampleEmployee.getEmployeeId().getId())
+                .firstName(exampleEmployee.getFirstName())
+                .lastName(exampleEmployee.getLastName())
+                .salary(exampleEmployee.getSalary())
+                .fullTime(exampleEmployee.getFullTime())
+                .departmentId(exampleEmployee.getDepartmentId())
+                .build());
+
         Employee addedEmployee = systemUnderTest.createEmployee(exampleEmployee);
 
         Assertions.assertNotNull(addedEmployee);
         Assertions.assertEquals(100, addedEmployee.getEmployeeId().getId());
         Assertions.assertEquals("Mock", addedEmployee.getFirstName());
+        verify(employeeDao,times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     public void testRemoveEmployee() {
