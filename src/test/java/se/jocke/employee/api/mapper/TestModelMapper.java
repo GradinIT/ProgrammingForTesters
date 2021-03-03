@@ -10,7 +10,8 @@ import se.jocke.employee.builder.EmployeeTestBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestModelMapper {
+public class TestModelMapper {  // Test passed 28/2 after adding .getId() to both methods. No Mocking yet
+//    MALL
 //    private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
 //    private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
 //    /*  @Test
@@ -29,8 +30,12 @@ public class TestModelMapper {
         public void testEmployeeToEmployeeModelMapping() {
                 EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
                 Assertions.assertAll(
-                        () -> assertEquals(EMPLOYEE.getEmployeeId(), model.getEmployeeId()),
-                        () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName())
+                        () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
+                        () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()),
+                        () -> assertEquals(EMPLOYEE.getLastName(), model.getLastName()),
+                        () -> assertEquals(EMPLOYEE.getSalary(), model.getSalary()),
+                        () -> assertEquals(EMPLOYEE.getFullTime(), model.getFullTime()),
+                        () -> assertEquals(EMPLOYEE.getDepartmentId(), model.getDepartmentId())
                 );
         }
 
@@ -49,9 +54,12 @@ public class TestModelMapper {
         public void testEmployeeModelToEmployeeMapping() {
                 Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
                 Assertions.assertAll(
-                        () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), 200/*employee.getEmployeeId()*/),
-                        () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName())
-
+                        () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),
+                        () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),
+                        () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),
+                        () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary()),
+                        () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime()),
+                        () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId())
                 );
         }
 }

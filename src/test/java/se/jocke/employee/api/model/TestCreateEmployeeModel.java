@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
-public class TestCreateEmployeeModel {
+public class TestCreateEmployeeModel { //passed 3/1 by default, no Mocking yet
 
     /* MALL
     private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
@@ -31,10 +31,18 @@ public class TestCreateEmployeeModel {
         EmployeeModel employee = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
+                .lastName(EMPLOYEE_MODEL.getLastName())
+                .salary(EMPLOYEE_MODEL.getSalary())
+                .fullTime(EMPLOYEE_MODEL.getFullTime())
+                .departmentId(EMPLOYEE_MODEL.getDepartmentId())
                 .build();
 
-        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName());
         Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId());
         Assertions.assertEquals(EMPLOYEE_MODEL, employee);
     }
 

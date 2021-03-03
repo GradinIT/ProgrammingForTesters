@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
-public class TestCreateEmployee {
+public class TestCreateEmployee {  // 2/3-21 Test past by default values. No Mocking done yet.
     /* MALL
     private final Department DEPARTMENT = DepartmentTestBuilder.builder().build(); */
 
@@ -29,17 +29,18 @@ public class TestCreateEmployee {
                 .departmentId(EMPLOYEE.getDepartmentId())
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .firstName(EMPLOYEE.getFirstName())
-                .fullTime(EMPLOYEE.getFullTime())
                 .lastName(EMPLOYEE.getLastName())
                 .salary(EMPLOYEE.getSalary())
+                .fullTime(EMPLOYEE.getFullTime())
+                .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
         Assertions.assertEquals(EMPLOYEE, employee);
-        Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
         Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
         Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
-        Assertions.assertEquals(EMPLOYEE.getFullTime(), employee.getFullTime());
         Assertions.assertEquals(EMPLOYEE.getLastName(), employee.getLastName());
         Assertions.assertEquals(EMPLOYEE.getSalary(), employee.getSalary());
+        Assertions.assertEquals(EMPLOYEE.getFullTime(), employee.getFullTime());
+        Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
     }
         /* MALL
         * @Test

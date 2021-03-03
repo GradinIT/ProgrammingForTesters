@@ -25,7 +25,7 @@ public class TestDepartmentDao {
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
-public class TestEmployeeDao {
+public class TestEmployeeDao { // No Mocking done yet, 2/3-21 Added all parameters, methods corrected, tests passed with all default values,
     @Autowired
     EmployeeDao employeeDao;
 
@@ -40,14 +40,17 @@ public class TestEmployeeDao {
         );
     } */
 
-    @Test
-    public void testGetEmployeeById() { // test failed. Expected:null, Actual:EmployeeDatabaseEntry(employeeId=1, firstName=firstName1, lastName=lastName1, salary=25000.00, fullTime=true, departmentId=1)
-
+    @Test   //Test passed 28/2-21 when only 2 parameters. Row 49: typo of assertNull, corrected to assertNotNull,
+    public void testGetEmployeeById() {
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1); // return value should be Optional if the requested object is of Optional type.
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getFirstName())
+                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
+                () -> assertEquals("firstName1",optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("lastName1",optionalEmployeeDatabaseEntry.get().getLastName()),
+                () -> assertEquals(25000.00,optionalEmployeeDatabaseEntry.get().getSalary().longValue()),
+                () -> assertEquals(true,optionalEmployeeDatabaseEntry.get().getFullTime()),
+                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }
 
