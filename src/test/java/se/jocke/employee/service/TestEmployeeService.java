@@ -77,7 +77,7 @@ public class TestEmployeeService {
 
     @Test
     public void removeEmployee() {
-        //1 hitta en employee
+        //hitta en employee
         Employee employee = systemUnderTest.getEmployeeById(1);
         //använder removeEmployee från EmployeeServiceImpl
         systemUnderTest.removeEmployee(employee);
@@ -91,11 +91,11 @@ public class TestEmployeeService {
         employees.add(employee);
         employees.add(employee);
         employees.add(employee);
+//            when(employeeDao.findAll()).thenReturn(employees);
+//            List<Employee> tempEmpList = SYSTEM_UNDER_TEST.getAllEmployees();
+//            Assertions.assertEquals(3, tempEmpList.size());
         verify(employeeDao, times(1)).findAll();
 
-//        @Test
-//        public void testGetAllEmployees() {
-//
 //            List<EmployeeDatabaseEntry> employees = new ArrayList<>();
 //            employees.add(empDbE);
 //            employees.add(empDbE);
@@ -104,7 +104,7 @@ public class TestEmployeeService {
 //            List<Employee> tempEmpList = SYSTEM_UNDER_TEST.getAllEmployees();
 //            Assertions.assertEquals(3, tempEmpList.size());
 //            verify(employeeDao, times(1)).findAll();
-//        }
+
     }
 }
 //1 Lista alla employees mha getAllEmployees-metoden i EmployeeServiceImpl
