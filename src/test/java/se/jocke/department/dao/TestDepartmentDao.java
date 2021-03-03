@@ -28,6 +28,7 @@ public class TestDepartmentDao {
 
     @Test
     public void testGetDepartmentById() {
+        Integer departmentId = 1;
         Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),

@@ -75,7 +75,7 @@ public class TestEmployeeService {
         when(e.getFullTime()).thenReturn(true);
         when(e.getSalary()).thenReturn(BigDecimal.valueOf(25000));
         when(e.getDepartmentId()).thenReturn(1);
-        Employee employee = systemUnderTest.createOrUpdateEmployee(e);
+        Employee employee = systemUnderTest.createEmployee(e);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(5, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("firstName1", employee.getFirstName()),

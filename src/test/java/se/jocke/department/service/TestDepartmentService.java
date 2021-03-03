@@ -11,16 +11,18 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
+import se.jocke.dao.EntityAlreadyInStorageException;
+import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
 import se.jocke.service.DepartmentService;
 import se.jocke.service.DepartmentServiceImpl;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestDepartmentService {
@@ -31,19 +33,76 @@ public class TestDepartmentService {
 
     @BeforeEach
     public void setUp() {
-        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                .departmentId(1)
-                .departmentName("Development")
-                .build()));
+
     }
 
     @Test
     public void findById() {
+        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
+                .departmentId(1)
+                .departmentName("Development")
+                .build()));
+
         Department department = systemUnderTest.getDepartmentById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, department.getDepartmentId()),
                 () -> Assertions.assertEquals("Development", department.getDepartmentName())
         );
         verify(departmentDao, times(1)).findById(1);
+    }
+
+    @Test
+    public void getAllDepartments(){
+        when(departmentDao.findAll()).thenReturn(Arrays.asList(DepartmentDatabaseEntry.builder()
+                .departmentName("Development")
+                .departmentId(1)
+                 .build()));
+
+        List<Department> departmentList = systemUnderTest.getDepartments();
+        Assertions.assertAll(
+                () ->  Assertions.assertNotNull(departmentList),
+                () -> Assertions.assertEquals(1, departmentList.size())
+        );
+    }
+
+    @Test
+    public void createDepartmentHappyFlow(){
+        Department department = DepartmentTestBuilder.builder().build();
+
+        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        when(departmentDao.save(any(DepartmentDatabaseEntry.class))).thenReturn(DepartmentDatabaseEntry.builder()
+                .departmentId(department.getDepartmentId())
+                .departmentName(department.getDepartmentName())
+                .build());
+
+        Department createDepartment = systemUnderTest.create(department);
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(createDepartment),
+                () -> Assertions.assertEquals(department.getDepartmentId(), createDepartment.getDepartmentId()),
+                () -> Assertions.assertEquals(department.getDepartmentName(), createDepartment.getDepartmentName())
+        );
+        verify(departmentDao, times(1)).findById(any(Integer.class));
+        verify(departmentDao, times(1)).save(any(DepartmentDatabaseEntry.class));
+    }
+
+    @Test
+    public void createDepartmentError(){
+        Department department = DepartmentTestBuilder.builder().build();
+
+        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(
+                DepartmentDatabaseEntry.builder()
+                        .departmentId(department.getDepartmentId())
+                        .departmentName(department.getDepartmentName())
+                        .build()
+        ));
+
+        Throwable exceptions = Assertions.assertThrows(EntityAlreadyInStorageException.class, () ->{
+            systemUnderTest.create(department);
+        });
+        Assertions.assertEquals("Entity with id " + department.getDepartmentId()+ " already in storage",
+                exceptions.getMessage());
+        verify(departmentDao, times(1)).findById(any(Integer.class));
+        verifyNoMoreInteractions(departmentDao);
+
     }
 }
