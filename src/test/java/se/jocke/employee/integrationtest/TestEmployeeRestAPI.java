@@ -8,6 +8,7 @@ import org.junit.Assert;
 import se.jocke.api.EmployeeModel;
 import se.jocke.TestClient;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,18 +46,26 @@ public class TestEmployeeRestAPI extends TestClient {
         Assert.assertEquals("Coding",employee.get().getLastName());
     }
 
-    @Given("^the employees")
+    @Given("^the employees$")
     public void givenEmployees(DataTable employees) {
         List<EmployeeModel> listOfEmployee = makeEmployeeList(employees.asList());
         listOfEmployee.stream().forEach(employee -> createEmployee(employee));
     }
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
-        List<EmployeeModel> deps = new ArrayList<>();
+        List<EmployeeModel> employeeModelList = new ArrayList<>();
+
         for(int i = 0 ; i < given.size() - 1 ; i +=2) {
-            deps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).firstName(given.get(i+1)).lastName(given.get(i+1)).build());
+            employeeModelList.add(EmployeeModel.builder()
+                    .employeeId(Integer.parseInt(given.get(i)))
+                    .firstName(given.get(i+1))
+                    .lastName(given.get(i+2))
+                    .salary(BigDecimal.valueOf(i+3))
+                    .fullTime(Boolean.valueOf(given.get(i+4)))
+                    .departmentId(i+5)
+                    .build());
 
         }
-        return deps;
+        return employeeModelList;
     }
     @When("^the client deletes employee (\\d+)$")
     public void deleteEmployee(Integer employeeId){
