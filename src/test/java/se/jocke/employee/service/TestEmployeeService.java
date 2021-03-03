@@ -68,8 +68,8 @@ public class TestEmployeeService {
 //                .build();
 //    }
     @Test
-    public void testCreateOrUpdateEmployee() {
-        exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(1).build())
+    public void testCreateEmployee() {
+        exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(100).build())
                 .firstName("Mock")
                 .lastName("Mockesson")
                 .salary(BigDecimal.valueOf(22000))
@@ -77,10 +77,10 @@ public class TestEmployeeService {
                 .departmentId(5)
                 .build();
 
-        Employee addedEmployee = systemUnderTest.createOrUpdateEmployee(exampleEmployee);
+        Employee addedEmployee = systemUnderTest.createEmployee(exampleEmployee);
 
         Assertions.assertNotNull(addedEmployee);
-        Assertions.assertEquals(1, addedEmployee.getEmployeeId().getId());
+        Assertions.assertEquals(100, addedEmployee.getEmployeeId().getId());
         Assertions.assertEquals("Mock", addedEmployee.getFirstName());
     }
 
