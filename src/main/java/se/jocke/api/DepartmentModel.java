@@ -20,4 +20,5 @@ public class DepartmentModel {
     private  Integer departmentId;
     @Nonnull
     private  String departmentName;
+
 }
