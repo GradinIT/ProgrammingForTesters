@@ -28,11 +28,13 @@ public class TestDepartmentDao {
 
     @Test
     public void testGetDepartmentById() {
-        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
+        Integer departmentId = 1;
+        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(departmentId);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
+                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName()),
+                () -> assertEquals(departmentId, optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }
     @Test
