@@ -31,7 +31,7 @@ public class TestModelMapper {
     public void testEmployeeModelToEmployeeMapping(){
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertAll(
-                ()-> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
                 () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),
                 () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),
                 () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary()),

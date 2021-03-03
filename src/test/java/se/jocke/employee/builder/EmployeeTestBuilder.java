@@ -9,22 +9,22 @@ import java.math.BigDecimal;
 public class EmployeeTestBuilder {
     private static Employee.EmployeeBuilder builder = Employee.builder();
 
-    /*public static Employee.EmployeeBuilder builder() {
+    public static Employee.EmployeeBuilder builder() {
         return builder
                 .employeeId(EmployeeID.builder().id(100).build())
                 .firstName("Testare")
                 .lastName("Testarsson")
-                .salary(BigDecimal.valueOf(25000.0))
+                .salary(BigDecimal.valueOf(25000))
                 .fullTime(Boolean.TRUE)
                 .departmentId(1);
-    }*/
-    public static Employee.EmployeeBuilder builder() {
+    }
+    /*public static Employee.EmployeeBuilder builder() {
         return Employee.builder()
-                .employeeId(EmployeeID.builder().id(100).build())
+                .employeeId(100)
                 .departmentId(1)
                 .firstName("Testare")
                 .lastName("Testarsson")
                 .fullTime(Boolean.TRUE)
                 .salary(BigDecimal.valueOf(25000));
-    }
+    } */
 }
