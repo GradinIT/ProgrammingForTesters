@@ -35,7 +35,7 @@ public class TestEmployeeService {
                 .firstName("Hanna")
                 .lastName("test")
                 .fullTime(true)
-                .salary(BigDecimal.valueOf(40000))
+                .salary(BigDecimal.valueOf(4000))
                 .departmentId(1)
                 .build()));
     }
@@ -48,7 +48,7 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals("Hanna", employee.getFirstName()),
                 () -> Assertions.assertEquals("test", employee.getLastName()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
-                () -> Assertions.assertEquals(4000,employee.getSalary()),
+                () -> Assertions.assertEquals(BigDecimal.valueOf(4000),employee.getSalary()),
                 () -> Assertions.assertEquals(1,employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
