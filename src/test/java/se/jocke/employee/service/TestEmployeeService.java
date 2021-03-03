@@ -42,7 +42,10 @@ public class TestEmployeeService {
     @Test
     public void findById(){
         Employee employee = systemUnderTest.getEmployeeById(1);
+        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
+                () -> Assertions.assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
+                () -> Assertions.assertNotNull(optionalEmployeeDatabaseEntry.get()),
                 () -> Assertions.assertEquals(1, employee.getEmployeeId()),
                 () -> Assertions.assertEquals("FirstName1", employee.getFirstName())
         );
