@@ -35,6 +35,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @TimeAndLogg
     public Employee removeEmployee(Employee employee) {
+        Optional<EmployeeDatabaseEntry> e = employeeDao.findById(employee.getEmployeeId().getId());
+        if(!e.isPresent()) {
+            throw new EntityNotFoundException(employee.getEmployeeId().getId());
+        }
         employeeDao.delete(EmployeePojoMapper.map(employee));
         return employee;
     }
