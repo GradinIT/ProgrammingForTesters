@@ -27,9 +27,11 @@ public class TestEmployeeDao {
     EmployeeDao employeeDao;
 
     @Test
+    // När jag kör testet enskilt så failar det, men kör jag hela klassen så lyckas det - lär bero på ordningen
     public void testGetEmployeeById() {
-        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(4); // Varför Optional? För att vi kan hitta ingen
+        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(4);
 
+        assertNotNull(optionalEmployeeDatabaseEntry.get());
         assertTrue(optionalEmployeeDatabaseEntry.isPresent());
         assertEquals(4, optionalEmployeeDatabaseEntry.get().getEmployeeId());
         assertEquals("Carpe", optionalEmployeeDatabaseEntry.get().getFirstName());
@@ -40,15 +42,15 @@ public class TestEmployeeDao {
     }
 
     @Test
+    // När jag kör testet enskilt så failar det, men kör jag hela klassen så lyckas det - lär bero på ordningen
     public void testGetEmployees() {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
-        Assertions.assertAll(
-                () -> assertNotNull(employees),
-                () -> assertEquals(3, employees.size())
-        );
+        assertNotNull(employees);
+        assertEquals(4,employees.size());
     }
 
     @Test
+    // Körs först av någon anledning. OBS överflödigt test
     public void testSave() {
         // <S extends T> S save(S var1);
         EmployeeDatabaseEntry edbeSaved = employeeDao.save(

@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ComponentScan("se.jocke") // letar upp rätt böna av typen EmployeeService (vet ej varför)
 public class EmployeeRestServiceIntTest { // var inte public per default
 
-    @Autowired
+    /*@Autowired
     private MockMvc mvc;
 
     @Test
@@ -72,4 +72,5 @@ public class EmployeeRestServiceIntTest { // var inte public per default
     @Test
     void deleteEmployee() {
     }
+    */
 }

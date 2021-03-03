@@ -9,12 +9,14 @@ import org.junit.Assert;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
+import se.jocke.dao.EntityNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends TestClient {
@@ -30,6 +32,8 @@ public class TestEmployeeRestAPI extends TestClient {
     public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
         Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
     }
+
+
 
     @When("the client updates first name of employee (\\d+) to (.+)$")
     public EmployeeModel theClientUpdatesFirstName(int employeeId, String firstName) {
@@ -61,6 +65,8 @@ public class TestEmployeeRestAPI extends TestClient {
     public void checkTheListSizeOfEmployees() {
         Assert.assertEquals(3, optionalEmployeeModelList.get().size());
     }
+
+
 
     private List<EmployeeModel> makeEmployeesList(List<String> given) {
         List<se.jocke.api.EmployeeModel> employees = new ArrayList<>();
@@ -96,24 +102,22 @@ public class TestEmployeeRestAPI extends TestClient {
             getDepartmentById(employeeId);
         });
     }
-    @When("^the client updates first name of employee (.+) to (\\+d)$")
-    public void updateFirstName(int employeeId, String firstName) {
-        optionalEmployeeModel = getEmployeeById(employeeId);
 
-        if (optionalEmployeeModel.isPresent()) {
-            EmployeeModel empModel = optionalEmployeeModel.get();
-            EmployeeModel newEmpModel = EmployeeModel.builder()
-                    .employeeId(empModel.getEmployeeId())
-                    .firstName(firstName)
-                    .lastName(empModel.getLastName())
-                    .salary(empModel.getSalary())
-                    .fullTime(empModel.getFullTime())
-                    .departmentId(empModel.getDepartmentId())
-                    .build();
 
-            updateEmployee(newEmpModel);
-                    }
-        //departments = getAllDepartments();
-        //Assert.assertEquals(4, departments.get().size());
+    Throwable exceptionThatWasThrown2;
+
+    @When("the client tries to get employee {int}")
+    public void searchForNonExistentEmployee(Integer employeeId) {
+        try {
+            optionalEmployeeModel = getEmployeeById(employeeId);
+        } catch (Throwable e) {
+            exceptionThatWasThrown2 = e;
+        }
+    }
+    // Hur kan jag testa att rätt exceptions kastades när det redan kastas i When-satsen?
+    @Then("the not found exception is thrown")
+    public void throwNotFoundException() {
+
+        //assertThrows(HttpClientErrorException.class, () -> exceptionThatWasThrown);
     }
 }

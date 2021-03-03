@@ -19,15 +19,15 @@ public class TestCreateEmployee /*extends EmployeeTestBuilder*/{
                 .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
 
-        Assertions.assertSame(EMPLOYEE, employee);
-        Assertions.assertEquals(EMPLOYEE, employee);
+
+
         Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
         Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
         Assertions.assertEquals(EMPLOYEE.getLastName(), employee.getLastName());
         Assertions.assertEquals(EMPLOYEE.getSalary(), employee.getSalary());
         Assertions.assertEquals(EMPLOYEE.getFullTime(), employee.getFullTime());
         Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
-        Assertions.assertEquals(EMPLOYEE, employee);
+
     }
 
     @Test

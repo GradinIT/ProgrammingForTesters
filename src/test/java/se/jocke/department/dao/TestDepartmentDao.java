@@ -29,7 +29,6 @@ public class TestDepartmentDao {
         Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
                 () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
         );
     }
