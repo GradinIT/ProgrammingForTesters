@@ -8,17 +8,28 @@ import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
+import se.jocke.api.EmployeeModel;
+import se.jocke.api.mapper.EmployeeModelMapper;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
+import se.jocke.employee.builder.EmployeeModelTestBuilder;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -39,32 +50,83 @@ public class TestEmployeeService {
     //Körs före varje annoterad metod @test.
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+
+    }
+
+   //Testar getEmployeeById(Integer employee)
+    @Test
+    public void findByEmployeeId() {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .departmentId(2)
-                .firstName("TestKalle")
-                .lastName("TestPersson")
+                .firstName("firstName1")
+                .lastName("lastName1")
                 .fullTime(true)
                 .salary(BigDecimal.valueOf(25000.00))
                 .build()));
-    }
-
-    //Junit test
-    @Test
-    public void findByEmployeeId() {
+        
         Employee employee = systemUndertest.getEmployeeById(1);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("TestKalle", employee.getFirstName()),
-                () -> Assertions.assertEquals("TestPersson", employee.getLastName()),
-                () -> Assertions.assertEquals(2, employee.getDepartmentId()),
-                () -> Assertions.assertEquals(true, employee.getFullTime()),
-                () -> Assertions.assertEquals(BigDecimal.valueOf(25000.00), employee.getSalary()));
+                () -> assertEquals(1, employee.getEmployeeId().getId()),
+                () -> assertEquals("firstName1", employee.getFirstName()),
+                () -> assertEquals("lastName1", employee.getLastName()),
+                () -> assertEquals(2, employee.getDepartmentId()),
+                () -> assertEquals(true, employee.getFullTime()),
+                () -> assertEquals(BigDecimal.valueOf(25000.00), employee.getSalary()));
         //Kollar så att anropet har kommit till den metoden,
         //speciellt eftersom vi har injectad
         verify(employeeDao, times(1)).findById(1);
     }
 
+//  Testar List<Employee> getAllEmployees()
+    @Test
+    public void testListOfEmployees() {
+        //Sätt upp regel
+        when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeeDatabaseEntry.builder()
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .fullTime(true)
+                .departmentId(2)
+                .salary(BigDecimal.valueOf(25000.00))
+                .employeeId(1)
+                .build()));
+
+        List<Employee> employees = systemUndertest.getAllEmployees();
+        Assertions.assertAll(
+                ()-> assertNotNull(employees),
+                ()-> assertEquals(1, employees.size())
+        );
+//        List<Employee> mockedList = mock(List.class);
+//        mockedList.size();
+//        verify(mockedList, times(1)).size();
+    }
+
+    //Testar updateEmployee(Employee employee), normalflödet (Happy flow)
+    @Test
+    public void createOrUpdateEmployee() {
+        Employee employee = EmployeeTestBuilder.builder().build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .departmentId(employee.getDepartmentId())
+                .build());
+
+        Employee createEmployee = systemUndertest.createOrUpdateEmployee(employee);
+        Assertions.assertAll(
+                () -> assertNotNull(createEmployee),
+                () -> assertEquals(employee.getEmployeeId().getId(), createEmployee.getEmployeeId()),
+                () -> assertEquals(employee.getLastName(), createEmployee.getLastName()),
+                () -> assertEquals(employee.getFirstName(), createEmployee.getFirstName()),
+                () -> assertEquals(employee.getDepartmentId(), createEmployee.getDepartmentId()),
+                () -> assertEquals(employee.getFullTime(), createEmployee.getFullTime()),
+                () -> assertEquals(employee.getSalary(), createEmployee.getSalary()));
+        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+
+    }
 
 }

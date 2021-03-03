@@ -83,7 +83,7 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getDepartmentId())
+                () -> assertEquals(2,optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
    }
 }
