@@ -121,4 +121,31 @@ public class TestEmployeeService {
 
     }
 
+//    @Test
+//    public void updateEmployee() {
+//        Employee employee = EmployeeTestBuilder.builder().build();
+//        Employee updateEmployee = systemUndertest.updateEmployee(employee);
+//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+//        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
+//                .employeeId(employee.getEmployeeId().getId())
+//                .firstName(employee.getFirstName())
+//                .lastName(employee.getLastName())
+//                .fullTime(employee.getFullTime())
+//                .salary(employee.getSalary())
+//                .departmentId(employee.getDepartmentId())
+//                .build());
+//
+//        Assertions.assertAll(
+//                () -> assertNotNull(updateEmployee),
+//                () -> assertEquals(employee.getEmployeeId().getId(), updateEmployee.getEmployeeId().getId()),
+//                () -> assertEquals(employee.getLastName(), updateEmployee.getLastName()),
+//                () -> assertEquals(employee.getFirstName(), updateEmployee.getFirstName()),
+//                () -> assertEquals(employee.getDepartmentId(), updateEmployee.getDepartmentId()),
+//                () -> assertEquals(employee.getFullTime(), updateEmployee.getFullTime()),
+//                () -> assertEquals(employee.getSalary(), updateEmployee.getSalary()));
+//        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
+//        verify(employeeDao, times(2)).findById(any(Integer.class));
+//
+//    }
+
 }
