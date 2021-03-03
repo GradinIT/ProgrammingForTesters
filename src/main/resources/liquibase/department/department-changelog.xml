@@ -11,11 +11,11 @@
     </changeSet>
     <changeSet id="add-data-department" author="Joakim Gradin">
         <insert tableName="DEPARTMENT">
-            <column name="DEPARTMENTID">17</column>
+            <column name="DEPARTMENTID">1</column>
             <column name="DEPARTMENTNAME">Development</column>
         </insert>
         <insert tableName="DEPARTMENT">
-            <column name="DEPARTMENTID">1</column>
+            <column name="DEPARTMENTID">2</column>
             <column name="DEPARTMENTNAME">Sales</column>
         </insert>
         <insert tableName="DEPARTMENT">
