@@ -20,7 +20,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TestEmployeeRestAPI extends TestClient{
+public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
 
@@ -78,7 +78,7 @@ public class TestEmployeeRestAPI extends TestClient{
                     .lastName(given.get(i + 2))
                     .fullTime(Boolean.valueOf(given.get(i + 3)))
                     .salary(new BigDecimal(given.get(i + 4)))
-                    .departmentId(Integer.parseInt(given.get(i+5)))
+                    .departmentId(Integer.parseInt(given.get(i + 5)))
                     .build());
         }
         return emps;
@@ -95,23 +95,12 @@ public class TestEmployeeRestAPI extends TestClient{
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
-        assertEquals( "404 : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
+        assertEquals("404 : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
+}
 
 //    @And("the error message is {int} : [Entity with id {int} not found]")
 //    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
 //        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
 //    }
-@Test
-public void testGetAllEmployees() {​​
 
-    List<EmployeeDatabaseEntry> employees = new ArrayList<>();
-    employees.add(empDbE);
-    employees.add(empDbE);
-    employees.add(empDbE);
-    when(employeeDao.findAll()).thenReturn(employees);
-    List<Employee> tempEmpList = SYSTEM_UNDER_TEST.getAllEmployees();
-    Assertions.assertEquals(3, tempEmpList.size());
-    verify(employeeDao, times(1)).findAll();
-}​​
-}

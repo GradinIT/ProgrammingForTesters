@@ -92,6 +92,19 @@ public class TestEmployeeService {
         employees.add(employee);
         verify(employeeDao, times(1)).findAll();
     }
+    //@Test
+//public void testGetAllEmployees() }
+//
+//    List<EmployeeDatabaseEntry> employees = new ArrayList<>();
+//    employees.add(empDbE);
+//    employees.add(empDbE);
+//    employees.add(empDbE);
+//    when(employeeDao.findAll()).thenReturn(employees);
+//    List<Employee> tempEmpList = SYSTEM_UNDER_TEST.getAllEmployees();
+//    Assertions.assertEquals(3, tempEmpList.size());
+//    verify(employeeDao, times(1)).findAll();
+//}
+//}
 }
 //1 Lista alla employees mha getAllEmployees-metoden i EmployeeServiceImpl
 // systemUnderTest.getAllEmployees();
