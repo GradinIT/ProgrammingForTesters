@@ -97,7 +97,7 @@ public class TestDepartmentService {
             ));
 
             Assertions.assertThrows(EntityAlreadyInStorageException.class, () ->systemUnderTest.create(department));
-            verify(departmentDao, times(1))
+
 
     }
 
