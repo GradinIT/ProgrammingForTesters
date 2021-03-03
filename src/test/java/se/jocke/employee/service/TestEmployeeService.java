@@ -2,6 +2,7 @@ package se.jocke.employee.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -9,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.dao.EntityNotFoundException;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
@@ -50,6 +52,7 @@ public class TestEmployeeService {
     }
 
     @Test
+    @DisplayName("When we get employee by ID")
     public void testFindEmployee() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
 
@@ -63,6 +66,18 @@ public class TestEmployeeService {
                 () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(testEmp.getEmployeeId().getId());
+    }
+
+    @Test
+    @DisplayName("When employee isn't represent")
+    public void testFindEmployeeThrowsEntityNotFindException() {
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
+
+        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.getEmployeeById(1));
+
+        assertEquals("Entity with id " + 1  + " not found", exception.getMessage());
+
+        verify(employeeDao, times(1)).findById(anyInt());
     }
 
     @Test
