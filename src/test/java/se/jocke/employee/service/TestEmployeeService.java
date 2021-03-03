@@ -64,7 +64,7 @@ public class TestEmployeeService {
                 .fullTime(true)
                 .salary(BigDecimal.valueOf(25000.00))
                 .build()));
-        
+
         Employee employee = systemUndertest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> assertEquals(1, employee.getEmployeeId().getId()),
