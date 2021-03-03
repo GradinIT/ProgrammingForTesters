@@ -24,7 +24,7 @@ public class TestEmployeeDao {      //Här gör vi JUnit tester mot den lokala r
     EmployeeDao employeeDao;
 
     @Test
-    public void testGetEmployeeById(){  //Denna test kikar i h2 databasen efter inserts
+    public void testGetEmployeeById(){  //Denna test kikar i h2 databasen efter expected insert
         Integer employeeId = 1;
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(employeeId);
         Assertions.assertAll(
@@ -34,7 +34,7 @@ public class TestEmployeeDao {      //Här gör vi JUnit tester mot den lokala r
                 () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
                 () -> assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
                 () -> assertEquals(Boolean.TRUE, optionalEmployeeDatabaseEntry.get().getFullTime()),
-                () -> assertEquals (25000.0, optionalEmployeeDatabaseEntry.get().getSalary()),
+                () -> assertEquals (BigDecimal.valueOf(25000.0), optionalEmployeeDatabaseEntry.get().getSalary()),
                 () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }
