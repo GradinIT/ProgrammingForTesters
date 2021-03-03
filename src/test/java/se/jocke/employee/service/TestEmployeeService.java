@@ -6,10 +6,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import se.jocke.api.mapper.EmployeeModelMapper;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.mapper.EmployeePojoMapper;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.entity.Employee;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
@@ -33,7 +36,7 @@ public class TestEmployeeService {
 
     @BeforeEach
     public void setUp() {
-         databaseEntryOptional = Optional.of(EmployeeDatabaseEntry.builder()
+        databaseEntryOptional = Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("Hanna")
                 .lastName("Olsson")
@@ -42,12 +45,12 @@ public class TestEmployeeService {
                 .departmentId(1)
                 .build());
         MockitoAnnotations.initMocks(this);
-        when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
-
     }
 
     @Test
     public void findById() {
+        when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
+
         Employee employee = crudOperation.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -63,9 +66,11 @@ public class TestEmployeeService {
 
     @Test
     public void create() {
+
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(databaseEntryOptional.get());
 
-        Employee employee = crudOperation.createEmployee(crudOperation.getEmployeeById(1));
+        Employee employee = crudOperation.createEmployee(EmployeeTestBuilder.builder().build());
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -76,14 +81,14 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(true, employee.getFullTime())
         );
 
-        verify(employeeDao, times(1)).save(EmployeePojoMapper.map(employee));
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
     public void update() {
-
+        when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(databaseEntryOptional.get());
-
 
         Employee employee = EmployeeModelMapper.map(EmployeeModelMapper.map(crudOperation.updateEmployee(crudOperation.getEmployeeById(1))));
 
@@ -96,12 +101,14 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(true, employee.getFullTime())
         );
 
+        verify(employeeDao, times(2)).findById(anyInt());
         verify(employeeDao, times(1)).save(EmployeePojoMapper.map(employee));
     }
 
     @Test
     public void remove() {
-        Employee employee = EmployeeModelMapper.map(EmployeeModelMapper.map(crudOperation.removeEmployee(crudOperation.getEmployeeById(1))));
+
+        Employee employee = EmployeeModelMapper.map(EmployeeModelMapper.map(crudOperation.removeEmployee(EmployeePojoMapper.map(databaseEntryOptional.get()))));
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -112,7 +119,8 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(true, employee.getFullTime())
         );
 
-        verify(employeeDao, times(1)).delete(EmployeePojoMapper.map(employee));
+        verify(employeeDao, times(1)).findById(anyInt());
+        verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
     }
 
     @Test

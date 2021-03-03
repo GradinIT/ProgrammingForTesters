@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @TimeAndLogg
     public Employee updateEmployee(Employee employee) {
         Optional<EmployeeDatabaseEntry> e = employeeDao.findById(employee.getEmployeeId().getId());
-        if(!e.isPresent()) {
+        if(e.isEmpty()) {
             throw new EntityNotFoundException(employee.getEmployeeId().getId());
         }
         return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
