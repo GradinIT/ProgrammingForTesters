@@ -2,7 +2,11 @@ package se.jocke;
 
 import com.google.gson.Gson;
 import io.cucumber.spring.CucumberContextConfiguration;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
@@ -21,13 +25,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.when;
+
 @CucumberContextConfiguration
 @SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestClient {
     private static final String BASE_URL = "http://localhost:8082/";
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
+
     public static Optional<List<DepartmentModel>> getAllDepartments() {
+
+
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
                 HttpMethod.GET,
@@ -39,7 +48,6 @@ public class TestClient {
             departmentModels.add(gson.fromJson(o.toString(), DepartmentModel.class));
         });
         return Optional.ofNullable(departmentModels);
-
     }
 
     public static Optional<DepartmentModel> getDepartmentById(Integer departmentId) {
@@ -99,17 +107,17 @@ public class TestClient {
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
-    public static Optional<List<EmployeeModel>> getAllEmployeees(Integer employeeId) {
+    public static Optional<List<EmployeeModel>> getAllEmployeees() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
         List list = (List) responseEntity.getBody();
-        List<EmployeeModel> departmentModels = new ArrayList<>();
+        List<EmployeeModel> employeeModels = new ArrayList<>();
         list.stream().forEach(o -> {
-            departmentModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
+            employeeModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
         });
-        return Optional.ofNullable(departmentModels);
+        return Optional.ofNullable(employeeModels);
     }
 }

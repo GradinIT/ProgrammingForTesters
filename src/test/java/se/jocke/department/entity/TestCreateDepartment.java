@@ -2,9 +2,11 @@ package se.jocke.department.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Spy;
 import se.jocke.department.builder.DepartmentTestBuilder;
 
 public class TestCreateDepartment {
+    @Spy
     private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
 
     @Test

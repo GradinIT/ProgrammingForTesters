@@ -17,6 +17,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentDao departmentDao;
 
+
+
     @TimeAndLogg
     public List<Department> getDepartments() {
         return DepartmentDatabaseEntryMapper.map(departmentDao.findAll());

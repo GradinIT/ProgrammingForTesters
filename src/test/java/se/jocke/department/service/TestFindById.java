@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,12 +16,11 @@ import se.jocke.service.DepartmentServiceImpl;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestDepartmentService {
+public class TestFindById {
+
     @Mock
     private DepartmentDao departmentDao;
     @InjectMocks
@@ -31,11 +28,13 @@ public class TestDepartmentService {
 
     @BeforeEach
     public void setUp() {
+
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
                 .departmentId(1)
                 .departmentName("Development")
                 .build()));
     }
+
 
     @Test
     public void findById() {

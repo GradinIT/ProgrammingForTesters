@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeModel {
+public class EmployeeModel  {
 
     @Nonnull
     private Integer employeeId;

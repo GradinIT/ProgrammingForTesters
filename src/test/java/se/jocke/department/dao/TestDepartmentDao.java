@@ -3,6 +3,7 @@ package se.jocke.department.dao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +13,8 @@ import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
+import se.jocke.department.entity.Employee;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,13 +29,14 @@ public class TestDepartmentDao {
     @Autowired
     DepartmentDao departmentDao;
 
+
     @Test
     public void testGetDepartmentById() {
-        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
+        Optional<DepartmentDatabaseEntry> optionalDepartmentDatabaseEntry = departmentDao.findById(1);
         Assertions.assertAll(
-                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
+                () -> assertTrue(optionalDepartmentDatabaseEntry.isPresent()),
+                () -> assertNotNull(optionalDepartmentDatabaseEntry.get()),
+                () -> assertEquals("Development",optionalDepartmentDatabaseEntry.get().getDepartmentName())
         );
     }
     @Test
@@ -40,7 +44,7 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () ->assertEquals(3,departments.size())
+                () ->assertEquals(4,departments.size())
         );
     }
 }
