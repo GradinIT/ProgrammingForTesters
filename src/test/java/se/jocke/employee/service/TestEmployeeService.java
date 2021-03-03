@@ -69,7 +69,7 @@ public class TestEmployeeService {
     public void testCreateEmployee() {
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(empDbE);
 
-        tempEmp = SYSTEM_UNDER_TEST.createOrUpdateEmployee(testEmp);
+        tempEmp = SYSTEM_UNDER_TEST.createEmployee(testEmp);
         Assertions.assertAll(
                 () -> assertEquals(testEmp.getEmployeeId().getId(), tempEmp.getEmployeeId().getId()),
                 () -> assertEquals(testEmp.getFirstName(), tempEmp.getFirstName()),
