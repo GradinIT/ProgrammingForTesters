@@ -33,12 +33,15 @@ public class TestDepartmentService {
     private DepartmentDao departmentDao;
     @InjectMocks
     private DepartmentService systemUnderTest = new DepartmentServiceImpl();
-
+/*
     @BeforeEach
     public void setUp() {
-
+        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
+                .departmentId(1)
+                .departmentName("Development")
+                .build()));
     }
-
+*/
     @Test
     public void findById() {
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
@@ -55,7 +58,11 @@ public class TestDepartmentService {
     }
     @Test
     public void getAllDepartments() {
-        when(departmentDao.findAll()).thenReturn(Arrays.asList(DepartmentDatabaseEntry.builder().build()));
+        when(departmentDao.findAll()).thenReturn(Arrays.asList(DepartmentDatabaseEntry.builder()
+        .departmentName("Development")
+        .departmentId(1)
+        .build()
+        ));
 
         List<Department> departments = systemUnderTest.getDepartments();
         Assertions.assertAll(
