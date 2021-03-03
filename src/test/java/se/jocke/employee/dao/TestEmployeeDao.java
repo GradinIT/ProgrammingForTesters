@@ -1,6 +1,8 @@
 package se.jocke.employee.dao;
 
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestEmployeeDao {
     @Autowired
     EmployeeDao employeeDao;
+
 
     @Test
     public void testGetEmployeeById() {
