@@ -107,4 +107,8 @@ public class TestDepartmentService {
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verifyNoMoreInteractions(departmentDao);
     }
+    @Test
+    public void deleteDepartment() {
+
+    }
 }

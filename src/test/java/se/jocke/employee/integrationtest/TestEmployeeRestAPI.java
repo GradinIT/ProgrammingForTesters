@@ -26,26 +26,32 @@ public class TestEmployeeRestAPI extends TestClient {
     public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
         Assert.assertEquals(numberOfEmployees, employees.get().size());
     }
-    @When("^the client updates name for employee to (.+)$")
+    @When("^updates lastname for employee to (.+)$")
     public void updateNameOfEmployee(String employeeName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(employeeName).build());
+        EmployeeModel employeeModel = getEmployeeById(1).get();
+
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employeeModel.getEmployeeId())
+                .firstName(employeeModel.getFirstName())
+                .lastName(employeeName)
+                .fullTime(employeeModel.getFullTime())
+                .salary(employeeModel.getSalary())
+                .departmentId(employeeModel.getDepartmentId())
+                .build());
     }
-    @Then("the name is updated to (.+)$")
+    @Then("the lastname is updated to (.+)$")
     public void nameOfEmployeeIsUpdated(String employeeName) throws Throwable {
         Optional<EmployeeModel> employee = getEmployeeById(1);
-        Assert.assertEquals(employeeName,employee.get().getFirstName());
         Assert.assertEquals(employeeName,employee.get().getLastName());
     }
     @When("^the client gets employee (\\d+)$")
     public void getTheEmployeeById(Integer employeeId) throws Throwable {
         employee = getEmployeeById(employeeId);
     }
-    @Then("^the name is$")
+    @Then("^the lastname is$")
     public void nameOfEmployeeIs() throws Throwable {
-        Assert.assertEquals("Coding",employee.get().getFirstName());
         Assert.assertEquals("Coding",employee.get().getLastName());
     }
-
 
     @Given("^the employees$")
     public void givenEmployees(DataTable employees) {
@@ -55,7 +61,7 @@ public class TestEmployeeRestAPI extends TestClient {
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> employeeModelList = new ArrayList<>();
 
-        for(int i = 0 ; i < given.size() - 1 ; i +=2) {
+        for(int i = 0 ; i < given.size() - 1 ; i +=6) {
             employeeModelList.add(EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i+1))
@@ -70,7 +76,13 @@ public class TestEmployeeRestAPI extends TestClient {
     }
     @When("^the client deletes employee (\\d+)$")
     public void deleteEmployee(Integer employeeId){
-        deleteEmployee(EmployeeModel.builder().employeeId(employeeId).firstName("").lastName("").build());
+        deleteEmployee(EmployeeModel.builder().employeeId(employeeId)
+                .firstName("")
+                .lastName("")
+                .departmentId(1234)
+                .salary(BigDecimal.ONE)
+                .fullTime(false)
+                .build());
     }
     @Then("^the employee (\\d+) is deleted$")
     public void employeeIsDeleted(Integer employeeId){
