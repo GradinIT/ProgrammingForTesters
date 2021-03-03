@@ -81,7 +81,7 @@ public class TestDepartmentRestAPI extends TestClient {
         });
     }
 
-    @And("the error message is {int} : [Entity with id {int} not found]")
+    @And("the department error message is {int} : [Entity with id {int} not found]")
     public void checkErrorMessage(Integer errorCode, Integer departmentId) {
         Assertions.assertEquals(errorCode + " : [Entity with id " + departmentId + " not found]", exceptionThatWasThrown.getMessage());
     }

@@ -3,7 +3,7 @@ Scenario: client gets all employees
     When the client calls /employee
     Then the client receives 3 employee
 
-  Scenario: client updates firstname for employee 1
+  Scenario: the client updates firstname for employee 1
     When the client updates firstname for employee to Kalle
     Then the firstname is updated to Kalle
 

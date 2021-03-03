@@ -4,7 +4,8 @@ import se.jocke.department.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface
+EmployeeService {
     Employee getEmployeeById(Integer employeeId);
 
     Employee createEmployee(Employee employee);
