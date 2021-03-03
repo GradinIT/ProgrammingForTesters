@@ -51,4 +51,17 @@ public class TestEmployeeService {
         System.out.println(employee);
         verify(employeeDao, times(1)).findById(1);
     }
+
+    @Test
+    public void remove() {
+//        Employee employee = systemUnderTest.removeEmployee(EmployeeDatabaseEntry.builder()
+//                .employeeId(1)
+//                .firstName("Gunnar")
+//                .lastName("Svensson")
+//                .fullTime(true)
+//                .salary(BigDecimal.valueOf(25000))
+//                .departmentId(1)
+//                .build()));
+
+    }
 }

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestCreateEmployee {
     public final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
@@ -34,10 +36,34 @@ public class TestCreateEmployee {
 
     @Test
     public void testCreateEmployeeThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            Employee.builder().build();
-        }, "What is going on?");
+        assertThrows(NullPointerException.class, () -> {
+            // Jag skapar en employee men "glömmer" att lägga till lastName.
+            // Detta kommer att producera en NullPoinerException
+            Employee.builder()
+                    .employeeId(EMPLOYEE.getEmployeeId())
+                    .firstName(EMPLOYEE.getFirstName())
+                    .salary(EMPLOYEE.getSalary())
+                    .fullTime(EMPLOYEE.getFullTime())
+                    .departmentId(EMPLOYEE.getDepartmentId())
+                    .build();
+        });
+
     }
 
+    @Test
+    public void testCreateEmployeeThrowsExceptionVersion2() {
+        String message = String.valueOf(Assertions.assertThrows(NullPointerException.class,
+                () -> {
+                    Employee.builder()
+                            .employeeId(EMPLOYEE.getEmployeeId())
+                            .firstName(EMPLOYEE.getFirstName())
+                            .salary(EMPLOYEE.getSalary())
+                            .fullTime(EMPLOYEE.getFullTime())
+                            .departmentId(EMPLOYEE.getDepartmentId())
+                            .build();
+                }));
+        assertEquals("java.lang.NullPointerException: lastName is marked non-null but is null", message);
 
+
+    }
 }

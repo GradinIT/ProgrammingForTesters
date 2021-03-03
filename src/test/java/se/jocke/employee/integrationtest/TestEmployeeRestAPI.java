@@ -98,7 +98,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @Then("employee {int} is deleted")
     public void employeeIsDeleted(int employeeId) {
-        thrownException = assertThrows(HttpClientErrorException.class, () -> {
+            thrownException = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
     }
