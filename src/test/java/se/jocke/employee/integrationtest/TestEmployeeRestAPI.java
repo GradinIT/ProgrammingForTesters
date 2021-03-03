@@ -11,12 +11,14 @@ import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 import se.jocke.department.entity.Employee;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
@@ -35,7 +37,15 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @When("^the client updates first name for employee to (.+)$")
     public void updateNameOfEmployee(String firstName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(firstName).build());
+        Optional<List<EmployeeModel>> employees = getAllEmployees();
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(1)
+                .firstName(firstName)
+                .lastName(employees.get().get(1).getLastName())
+                .salary(employees.get().get(1).getSalary())
+                .fullTime(employees.get().get(1).getFullTime())
+                .departmentId(employees.get().get(1).getDepartmentId())
+                .build());
     }
 
     @Then("the employee first name is updated to (.+)$")
@@ -51,7 +61,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @Then("^the name of employee is$")
     public void firstNameOfEmployeeIs() throws Throwable {
-        Assert.assertEquals("firstName1", employee.get().getFirstName());
+        Assert.assertEquals("firstName", employee.get().getFirstName());
     }
 
     @Given("^the employees$")
@@ -63,7 +73,14 @@ public class TestEmployeeRestAPI extends TestClient {
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
         for (int i = 0; i < given.size() - 1; i += 2) {
-            emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).firstName(given.get(i + 1)).build());
+            emps.add(EmployeeModel.builder()
+                    .employeeId(Integer.parseInt(given.get(i)))
+                    .firstName(given.get(i + 1))
+                    .lastName(given.get(i + 1))
+                    .salary(BigDecimal.valueOf(9))
+                    .fullTime(true)
+                    .departmentId(1)
+                    .build());
         }
         return emps;
     }
