@@ -8,22 +8,14 @@ import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Pageable;
-import se.jocke.api.EmployeeModel;
-import se.jocke.api.mapper.EmployeeModelMapper;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.department.entity.Employee;
-import se.jocke.department.entity.EmployeeID;
-import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -103,7 +95,7 @@ public class TestEmployeeService {
 
     //Testar updateEmployee(Employee employee), normalflödet (Happy flow)
     @Test
-    public void createOrUpdateEmployee() {
+    public void createEmployee() {
         Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
@@ -115,10 +107,10 @@ public class TestEmployeeService {
                 .departmentId(employee.getDepartmentId())
                 .build());
 
-        Employee createEmployee = systemUndertest.createOrUpdateEmployee(employee);
+        Employee createEmployee = systemUndertest.createEmployee(employee);
         Assertions.assertAll(
                 () -> assertNotNull(createEmployee),
-                () -> assertEquals(employee.getEmployeeId().getId(), createEmployee.getEmployeeId()),
+                () -> assertEquals(employee.getEmployeeId().getId(), createEmployee.getEmployeeId().getId()),
                 () -> assertEquals(employee.getLastName(), createEmployee.getLastName()),
                 () -> assertEquals(employee.getFirstName(), createEmployee.getFirstName()),
                 () -> assertEquals(employee.getDepartmentId(), createEmployee.getDepartmentId()),

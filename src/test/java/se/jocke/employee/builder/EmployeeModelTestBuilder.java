@@ -10,8 +10,8 @@ public class EmployeeModelTestBuilder {
 
     public static EmployeeModel.EmployeeModelBuilder builder() {
         return builder
-                .employeeId(100)
-                .departmentId(1)
+                .employeeId(1)
+                .departmentId(2)
                 .firstName("TestKalle")
                 .lastName("TestPersson")
                 .fullTime(true)
