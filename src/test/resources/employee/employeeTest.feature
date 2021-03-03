@@ -17,4 +17,4 @@ Feature: test employee api
 
   Scenario: searching for non-existent employee
     When the client tries to get employee 42
-    Then the not found exception is thrown
+    Then employee 42 not found exception is thrown

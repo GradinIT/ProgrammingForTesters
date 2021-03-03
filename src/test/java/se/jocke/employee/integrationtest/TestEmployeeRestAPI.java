@@ -103,21 +103,20 @@ public class TestEmployeeRestAPI extends TestClient {
         });
     }
 
-
     Throwable exceptionThatWasThrown2;
 
     @When("the client tries to get employee {int}")
     public void searchForNonExistentEmployee(Integer employeeId) {
         try {
             optionalEmployeeModel = getEmployeeById(employeeId);
-        } catch (Throwable e) {
-            exceptionThatWasThrown2 = e;
+        } catch (Throwable ex) {
+            exceptionThatWasThrown2 = ex;
         }
     }
     // Hur kan jag testa att rätt exceptions kastades när det redan kastas i When-satsen?
-    @Then("the not found exception is thrown")
-    public void throwNotFoundException() {
-
+    @Then("employee {int} not found exception is thrown")
+    public void throwNotFoundException(Integer employeeId) {
+        assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown2.getMessage());
         //assertThrows(HttpClientErrorException.class, () -> exceptionThatWasThrown);
     }
 }

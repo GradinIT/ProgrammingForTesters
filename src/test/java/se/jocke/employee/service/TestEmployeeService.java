@@ -25,14 +25,14 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
-    @Mock // Varför
+    @Mock // Vi har en mockad dao för att vi vill isolera funktionaliteten i Service-klassen och BARA testa metoderna där
     private EmployeeDao employeeDao;
-    @InjectMocks
+    @InjectMocks // Vi injecerar vår mockade dao i vårt service-objekt
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
     Employee exampleEmployee;
 
-    @BeforeEach // Forska lite kring detta - en setup för varje test eller köra samma flera gånger?
+    @BeforeEach
     public void setUp() {
         // När vi anropar findById() med vilket id som helst skapas istället en påhittad employee
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
