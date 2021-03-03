@@ -8,6 +8,9 @@ Feature: test employee api
   Scenario: client gets Employee 2
     When the client gets employees 2
     Then the information on the employee is
+  Scenario: client updates information for employee 2
+    When the client updates information for employee to firstName2, lastName2, 25000.00, true and 1
+    Then the employee information is updated to firstName2, lastName2, 25000.00, true and 1
   Scenario: client deletes employee
     Given the employees
       | 101 | Test    | Testarsson | true | 100 | 78000 |

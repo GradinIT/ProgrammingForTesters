@@ -44,45 +44,21 @@ public class TestDepartmentService {
 
     @Test
     public void findById() {
-<<<<<<< HEAD
-=======
 
->>>>>>> develop
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
                 .departmentId(1)
                 .departmentName("Development")
                 .build()));
-<<<<<<< HEAD
+
         Department department = systemUnderTest.getDepartmentById(1);
         Assertions.assertAll(
-                () -> assertEquals(1, department.getDepartmentId()),
-                () -> assertEquals("Development", department.getDepartmentName())
+                () -> Assertions.assertEquals(1, department.getDepartmentId()),
+                () -> Assertions.assertEquals("Development", department.getDepartmentName())
         );
         verify(departmentDao, times(1)).findById(1);
     }
 
     @Test
-    public void getAllDepartments() {
-        when(departmentDao.findAll()).thenReturn(Arrays.asList(DepartmentDatabaseEntry.builder()
-                .departmentName("Development")
-                .departmentId(1)
-                .build()));
-
-        List<Department> departments = systemUnderTest.getDepartments();
-=======
-
-        Department department = systemUnderTest.getDepartmentById(1);
-
-        Assertions.assertAll(
-                () -> assertNotNull(departments),
-                () -> assertEquals(1, departments.size())
-        );
-    }
-
-    @Test
-
-    public void createDepartment() {
-=======
     public void getAllDepartments() {
         when(departmentDao.findAll()).thenReturn(Arrays.asList(DepartmentDatabaseEntry.builder()
                 .departmentName("Development")
@@ -98,44 +74,18 @@ public class TestDepartmentService {
 
     @Test
     public void createDepartmentHappyFlow() {
->>>>>>> develop
         Department department = DepartmentTestBuilder.builder().build();
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(departmentDao.save(any(DepartmentDatabaseEntry.class))).thenReturn(DepartmentDatabaseEntry.builder()
                 .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
                 .build());
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
         Department createdDepartment = systemUnderTest.create(department);
         Assertions.assertAll(
                 () -> assertNotNull(createdDepartment),
                 () -> assertEquals(department.getDepartmentId(), createdDepartment.getDepartmentId()),
                 () -> assertEquals(department.getDepartmentName(), createdDepartment.getDepartmentName())
         );
-<<<<<<< HEAD
-        verify(departmentDao,times(1)).findById(any(Integer.class));
-        verify(departmentDao,times(1)).save(any(DepartmentDatabaseEntry.class));
-    }
-        @Test
-        public void createDepartmentError() {
-            Department department = DepartmentTestBuilder.builder().build();
-            when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(
-                    DepartmentDatabaseEntry.builder()
-                    .departmentId(department.getDepartmentId())
-                    .departmentName(department.getDepartmentName())
-                    .build()
-            ));
-
-            Assertions.assertThrows(EntityAlreadyInStorageException.class, () ->systemUnderTest.create(department));
-
-
-    }
-
-
-=======
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verify(departmentDao, times(1)).save(any(DepartmentDatabaseEntry.class));
     }
@@ -157,5 +107,4 @@ public class TestDepartmentService {
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verifyNoMoreInteractions(departmentDao);
     }
->>>>>>> develop
 }
