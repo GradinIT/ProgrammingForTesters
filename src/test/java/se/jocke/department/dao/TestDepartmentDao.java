@@ -12,7 +12,7 @@ import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
-
+//den blir blå här, varför?
 import java.util.List;
 import java.util.Optional;
 

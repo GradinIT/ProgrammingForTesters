@@ -4,14 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
+import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +33,8 @@ public class TestEmployeeDao {
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
                 () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getEmployeeId()),
-                () -> assertEquals("firstName",optionalEmployeeDatabaseEntry.get().getFirstName()),
-                () -> assertEquals("lastName",optionalEmployeeDatabaseEntry.get().getLastName()),
+                () -> assertEquals("firstName1",optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("lastName1",optionalEmployeeDatabaseEntry.get().getLastName()),
                 () -> assertEquals(new BigDecimal("25000").setScale(2),optionalEmployeeDatabaseEntry.get().getSalary()),
                 () -> assertEquals(true,optionalEmployeeDatabaseEntry.get().getFullTime()),
                 () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getDepartmentId())
@@ -46,7 +46,7 @@ public class TestEmployeeDao {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),
-                () ->assertEquals(4,employees.size())
+                () ->assertEquals(3,employees.size())
         );
     }
 }
