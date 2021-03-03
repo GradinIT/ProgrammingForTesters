@@ -25,7 +25,7 @@ public class TestModelMapper {
                 () -> assertEquals(EMPLOYEE.getFullTime(), model.getFullTime())
         );
     }
-            // KOLLA HUR DU SKA LÖSA ENTITY ID = 100 vs ID = 100
+
     @Test
     public void testEmployeeModelToEmployeeMapping() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
