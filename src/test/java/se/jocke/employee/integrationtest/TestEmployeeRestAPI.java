@@ -1,4 +1,4 @@
 package se.jocke.employee.integrationtest;
 
-public class TestEmployeeRestAPI {
+public class   TestEmployeeRestAPI {
 }
