@@ -11,6 +11,7 @@ import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +31,6 @@ public class TestEmployeeDao {
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(4); // Varför Optional? För att vi kan hitta ingen
 
         assertTrue(optionalEmployeeDatabaseEntry.isPresent());
-        assertNotNull(optionalEmployeeDatabaseEntry.get());
         assertEquals(4, optionalEmployeeDatabaseEntry.get().getEmployeeId());
         assertEquals("Carpe", optionalEmployeeDatabaseEntry.get().getFirstName());
         assertEquals("Diem", optionalEmployeeDatabaseEntry.get().getLastName());
@@ -44,8 +44,7 @@ public class TestEmployeeDao {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),
-                () -> assertEquals(3, employees.size()),
-                () -> assertEquals(4,employees.size())
+                () -> assertEquals(3, employees.size())
         );
     }
 
@@ -62,7 +61,6 @@ public class TestEmployeeDao {
                         .departmentId(4)
                         .build()
         );
-
         //assertions(edbeSaved);
         assertNotNull(edbeSaved);
         assertEquals(4, edbeSaved.getEmployeeId());
