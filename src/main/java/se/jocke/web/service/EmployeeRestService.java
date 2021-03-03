@@ -28,7 +28,7 @@ public class EmployeeRestService {
         return new ResponseEntity<List<EmployeeModel>>(employeeModels, HttpStatus.OK);
     }
     @PostMapping("/employee")
-    public ResponseEntity<EmployeeModel> createOrUpdateEmployee(@RequestBody EmployeeModel employeeModel){
+    public ResponseEntity<EmployeeModel> createEmployee(@RequestBody EmployeeModel employeeModel){
         EmployeeModel response = EmployeeModelMapper.map(employeeService.createEmployee(EmployeeModelMapper.map(employeeModel)));
         return new ResponseEntity<EmployeeModel>(response,HttpStatus.OK);
     }
