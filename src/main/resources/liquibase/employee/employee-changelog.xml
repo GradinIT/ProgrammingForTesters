@@ -3,7 +3,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-
     <changeSet author="Joakim Gradin" id="create-employee-table">
         <createTable tableName="EMPLOYEE">
             <column name="EMPLOYEEID" type="number"/>
@@ -14,7 +13,7 @@
             <column name="DEPARTMENTID" type="number"/>
         </createTable>
     </changeSet>
-    <changeSet id="add-data" author="Joakim Gradin">
+    <changeSet id="add-data-employee" author="Joakim Gradin">
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">1</column>
             <column name="FIRSTNAME">firstName1</column>
