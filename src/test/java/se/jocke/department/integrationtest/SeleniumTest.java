@@ -2,6 +2,7 @@ package se.jocke.department.integrationtest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.SpringApplication;
@@ -18,11 +19,14 @@ public class SeleniumTest {
             System.setProperty("webdriver.chrome.driver", getChromeWebDriver().getFile().getPath());
             ChromeOptions capabilities = new ChromeOptions();
             webdriver = new ChromeDriver(capabilities);
-            System.out.println("&&&&&&&&&&&&&&&&&&&&&");
             SpringApplication.run(SeleniumTest.class, args);
-            webdriver.navigate().to("http://www.melpa-jocke.com");
-            webdriver.findElement(By.id("DrpDwnMn03linkElement")).click();
-            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%");
+            webdriver.navigate().to("http://www.google.com");
+            WebElement search = webdriver.findElement(By.name("q"));
+            search.sendKeys("Mokito JUnit5 tutorials");
+            Thread.sleep(5000);
+            search.submit();
+
+
         } catch (Exception e) {
             System.out.println("Not able to load Chrome web browser " + e.getMessage());
         }
