@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.dao.EntityAlreadyInStorageException;
 import se.jocke.dao.EntityNotFoundException;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
@@ -52,7 +53,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When we get employee by ID")
+    @DisplayName("When client get employee by ID")
     public void testFindEmployee() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
 
@@ -81,10 +82,14 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void testCreateEmployee() {
+    @DisplayName("When client create employee")
+    public void testCreateEmployeeHappyFlow() {
+
+        when(employeeDao.findById(testEmp.getEmployeeId().getId())).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(empDbE);
 
         tempEmp = SYSTEM_UNDER_TEST.createEmployee(testEmp);
+
         Assertions.assertAll(
                 () -> assertEquals(testEmp.getEmployeeId().getId(), tempEmp.getEmployeeId().getId()),
                 () -> assertEquals(testEmp.getFirstName(), tempEmp.getFirstName()),
@@ -93,17 +98,55 @@ public class TestEmployeeService {
                 () -> assertEquals(testEmp.getFullTime(), tempEmp.getFullTime()),
                 () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
         );
+        verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
-    public void testRemoveEmployee() {
-        SYSTEM_UNDER_TEST.removeEmployee(testEmp);
+    @DisplayName("When client try to create employee that already exists")
+    public void testCreateEmployeeEntityAlreadyInStorageException() {
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
+
+        Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> SYSTEM_UNDER_TEST.createEmployee(testEmp));
+        Assertions.assertEquals("Entity with id " + testEmp.getEmployeeId().getId() + " already in storage", exception.getMessage());
+
+        verify(employeeDao, times(1)).findById(anyInt());
+        verifyNoMoreInteractions(employeeDao);
+    }
+
+    @Test
+    @DisplayName("When client delete employee")
+    public void testRemoveEmployeeHappyFlow() {
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
+
+        tempEmp = SYSTEM_UNDER_TEST.removeEmployee(testEmp);
+
+        Assertions.assertAll(
+                () -> assertEquals(testEmp.getEmployeeId().getId(), tempEmp.getEmployeeId().getId()),
+                () -> assertEquals(testEmp.getFirstName(), tempEmp.getFirstName()),
+                () -> assertEquals(testEmp.getLastName(), tempEmp.getLastName()),
+                () -> assertEquals(testEmp.getSalary(), tempEmp.getSalary()),
+                () -> assertEquals(testEmp.getFullTime(), tempEmp.getFullTime()),
+                () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
+        );
+        verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
-    public void testUpdateEmployee() {
+    @DisplayName("When client try to delete employee that not exists")
+    public void testRemoveEmployeeEntityNotFoundException() {
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
+        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.removeEmployee(testEmp));
+        assertEquals("Entity with id " + testEmp.getEmployeeId().getId() + " not found", exception.getMessage());
+        verify(employeeDao, times(1)).findById(anyInt());
+        verifyNoMoreInteractions(employeeDao);
+    }
+
+    @Test
+    @DisplayName("When client update employee")
+    public void testUpdateEmployeeHappyFlow() {
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(empDbE);
 
         tempEmp = SYSTEM_UNDER_TEST.updateEmployee(testEmp);
@@ -116,10 +159,22 @@ public class TestEmployeeService {
                 () -> assertEquals(testEmp.getFullTime(), tempEmp.getFullTime()),
                 () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
         );
+        verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
+    @DisplayName("When client try to update employee that not exists")
+    public void testUpdateEmployeeEntityNotFoundException() {
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
+        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.updateEmployee(testEmp));
+        assertEquals("Entity with id " + testEmp.getEmployeeId().getId() + " not found", exception.getMessage());
+        verify(employeeDao, times(1)).findById(anyInt());
+        verifyNoMoreInteractions(employeeDao);
+    }
+
+    @Test
+    @DisplayName("When client get list with all employees")
     public void testGetAllEmployees() {
         List<EmployeeDatabaseEntry> employees = new ArrayList<>();
         employees.add(empDbE);
