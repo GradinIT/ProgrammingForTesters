@@ -65,12 +65,9 @@ public class TestEmployeeService {
 //                .departmentId(5)
 //                .build();
 //    }
-
     @Test
-    // Cannot invoke "se.jocke.dao.EmployeeDatabaseEntry.getEmployeeId()" because "employeeDatabaseEntry" is null
     public void testCreateEmployee() {
-
-        /*exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(1).build())
+        exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(100).build())
                 .firstName("Mock")
                 .lastName("Mockesson")
                 .salary(BigDecimal.valueOf(22000))
@@ -78,11 +75,22 @@ public class TestEmployeeService {
                 .departmentId(5)
                 .build();
 
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
+                .employeeId(exampleEmployee.getEmployeeId().getId())
+                .firstName(exampleEmployee.getFirstName())
+                .lastName(exampleEmployee.getLastName())
+                .salary(exampleEmployee.getSalary())
+                .fullTime(exampleEmployee.getFullTime())
+                .departmentId(exampleEmployee.getDepartmentId())
+                .build());
+
         Employee addedEmployee = systemUnderTest.createEmployee(exampleEmployee);
 
         Assertions.assertNotNull(addedEmployee);
         Assertions.assertEquals(100, addedEmployee.getEmployeeId().getId());
-        Assertions.assertEquals("Mock", addedEmployee.getFirstName());*/
+        Assertions.assertEquals("Mock", addedEmployee.getFirstName());
+        verify(employeeDao,times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     public void testRemoveEmployee() {
