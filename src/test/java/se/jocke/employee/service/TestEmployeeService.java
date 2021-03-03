@@ -77,10 +77,10 @@ public class TestEmployeeService {
                 .departmentId(5)
                 .build();
 
-        Employee addedEmployee = systemUnderTest.createOrUpdateEmployee(exampleEmployee);
+        Employee addedEmployee = systemUnderTest.createEmployee(exampleEmployee);
 
         Assertions.assertNotNull(addedEmployee);
-        Assertions.assertEquals(1, addedEmployee.getEmployeeId().getId());
+        Assertions.assertEquals(100, addedEmployee.getEmployeeId().getId());
         Assertions.assertEquals("Mock", addedEmployee.getFirstName());
     }*/
 

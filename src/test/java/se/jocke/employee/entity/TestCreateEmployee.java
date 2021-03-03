@@ -33,7 +33,7 @@ public class TestCreateEmployee /*extends EmployeeTestBuilder*/{
     @Test
     public void testCreateEmployeeThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            Employee.builder().firstName(EMPLOYEE.getFirstName()).build();
+            Employee.builder().build();
         });
     }
 }

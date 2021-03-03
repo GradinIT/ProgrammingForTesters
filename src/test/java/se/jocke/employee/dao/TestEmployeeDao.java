@@ -11,6 +11,7 @@ import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class TestEmployeeDao {
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(4);
 
         assertNotNull(optionalEmployeeDatabaseEntry.get());
+        assertTrue(optionalEmployeeDatabaseEntry.isPresent());
         assertEquals(4, optionalEmployeeDatabaseEntry.get().getEmployeeId());
         assertEquals("Carpe", optionalEmployeeDatabaseEntry.get().getFirstName());
         assertEquals("Diem", optionalEmployeeDatabaseEntry.get().getLastName());
@@ -61,7 +63,6 @@ public class TestEmployeeDao {
                         .departmentId(4)
                         .build()
         );
-
         //assertions(edbeSaved);
         assertNotNull(edbeSaved);
         assertEquals(4, edbeSaved.getEmployeeId());
