@@ -9,8 +9,8 @@ public class EmployeeModelTestBuilder {
         return EmployeeModel.builder()
                 .employeeId(200)
                 .departmentId(1)
-                .firstName("Anders")
-                .lastName("Andersson")
+                .firstName("Max")
+                .lastName("Martin")
                 .fullTime(Boolean.TRUE)
                 .salary(BigDecimal.valueOf(25000));
     }

@@ -4,23 +4,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
+import se.jocke.dao.EntityAlreadyInStorageException;
+import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
 import se.jocke.service.DepartmentService;
 import se.jocke.service.DepartmentServiceImpl;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestDepartmentService {
@@ -45,5 +45,40 @@ public class TestDepartmentService {
                 () -> Assertions.assertEquals("Development", department.getDepartmentName())
         );
         verify(departmentDao, times(1)).findById(1);
+    }
+
+    @Test
+    public void createDepartment () {   //Detta testar vårt Happy Flow :D
+        Department department = DepartmentTestBuilder.builder().build();
+        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        when(departmentDao.save(any(DepartmentDatabaseEntry.class))).thenReturn(DepartmentDatabaseEntry.builder()
+                .departmentId(department.getDepartmentId())
+                .departmentName(department.getDepartmentName())
+                .build());
+        Department createdDepartment = systemUnderTest.create(department);
+        Assertions.assertAll(
+                () -> assertNotNull(createdDepartment),
+                () -> assertEquals(department.getDepartmentId(), createdDepartment.getDepartmentId()),
+                () -> assertEquals(department.getDepartmentName(), createdDepartment.getDepartmentName())
+        );
+        verify(departmentDao, times(1)).findById(any(Integer.class));
+        verify(departmentDao, times(1)).save(any(DepartmentDatabaseEntry.class));
+    }
+
+    @Test
+    public void createDepartmentError () {
+        Department department = DepartmentTestBuilder.builder().build();
+        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
+                .departmentId(department.getDepartmentId())
+                .departmentName(department.getDepartmentName())
+                .build()
+        ));
+        Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> {
+            systemUnderTest.create(department);
+        });
+        Assertions.assertEquals("Entity with id "+department.getDepartmentId() + " already in storage",
+                exception.getMessage());
+        verify(departmentDao,times(1)).findById(any(Integer.class));
+        verify(departmentDao, never()).save(any()); //Dubbelkollar med verify att testet avslutas (Denna kod var vackrare än NoMoreInteractions)
     }
 }

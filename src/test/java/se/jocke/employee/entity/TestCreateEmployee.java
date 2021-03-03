@@ -10,13 +10,21 @@ public class TestCreateEmployee {
 
     @Test
     public void testCreateEmployee() {
-        Employee department = EmployeeTestBuilder.builder()
+        Employee employee = EmployeeTestBuilder.builder()
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .firstName(EMPLOYEE.getFirstName())
+                .lastName(EMPLOYEE.getLastName())
+                .salary(EMPLOYEE.getSalary())
+                .fullTime(EMPLOYEE.getFullTime())
+                .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
-        Assertions.assertEquals(EMPLOYEE, department);
-        Assertions.assertEquals(EMPLOYEE.getFirstName(), department.getFirstName());
-        Assertions.assertEquals(EMPLOYEE.getEmployeeId(), department.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE, employee);
+        Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
+        Assertions.assertEquals(EMPLOYEE.getLastName(), employee.getLastName());
+        Assertions.assertEquals(EMPLOYEE.getSalary(), employee.getSalary());
+        Assertions.assertEquals(EMPLOYEE.getFullTime(), employee.getFullTime());
+        Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
     }
 
     @Test

@@ -11,8 +11,8 @@ public class EmployeeTestBuilder {
     public static Employee.EmployeeBuilder builder() {
         return builder
                 .employeeId(EmployeeID.builder().id(100).build())
-                .firstName("Testare")
-                .lastName("Testarsson")
+                .firstName("Max")
+                .lastName("Martin")
                 .salary(BigDecimal.valueOf(25000.0))
                 .fullTime(Boolean.TRUE)
                 .departmentId(1);
