@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import se.jocke.api.mapper.EmployeeModelMapper;
+import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.mapper.EmployeePojoMapper;
@@ -18,6 +19,8 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +52,7 @@ public class TestEmployeeService {
 
     @Test
     public void findById() {
+
         when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
 
         Employee employee = crudOperation.getEmployeeById(1);
@@ -74,6 +78,7 @@ public class TestEmployeeService {
         Employee employee = crudOperation.createEmployee(EmployeeTestBuilder.builder().build());
 
         Assertions.assertAll(
+                () -> Assertions.assertNotNull(employee),
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("Hanna", employee.getFirstName()),
                 () -> Assertions.assertEquals("Olsson", employee.getLastName()),
@@ -92,7 +97,7 @@ public class TestEmployeeService {
 
         databaseEntryOptional.ifPresent(employeeDatabaseEntry -> when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry));
 
-        Employee employee = EmployeeModelMapper.map(EmployeeModelMapper.map(crudOperation.updateEmployee(crudOperation.getEmployeeById(1))));
+        Employee employee = crudOperation.updateEmployee(crudOperation.getEmployeeById(1));
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -113,7 +118,7 @@ public class TestEmployeeService {
         when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
 
         if (databaseEntryOptional.isPresent()) {
-            Employee employee = EmployeeModelMapper.map(EmployeeModelMapper.map(crudOperation.removeEmployee(EmployeePojoMapper.map(databaseEntryOptional.get()))));
+            Employee employee = crudOperation.removeEmployee(EmployeePojoMapper.map(databaseEntryOptional.get()));
 
             Assertions.assertAll(
                     () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -132,13 +137,17 @@ public class TestEmployeeService {
     @Test
     public void getAll() {
 
+        databaseEntryOptional.ifPresent(employeeDatabaseEntry -> when(employeeDao.findAll()).thenReturn(Collections.singletonList(employeeDatabaseEntry)));
+
         List<Employee> employees = crudOperation.getAllEmployees();
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(crudOperation.getAllEmployees().size(), employees.size()),
-                () -> Assertions.assertEquals(crudOperation.getAllEmployees(), employees));
+                () -> Assertions.assertNotNull(employees),
+                () -> Assertions.assertEquals(1, employees.size())
+        );
 
-        verify(employeeDao, times(3)).findAll();
+
+        verify(employeeDao, times(1)).findAll();
 
     }
 

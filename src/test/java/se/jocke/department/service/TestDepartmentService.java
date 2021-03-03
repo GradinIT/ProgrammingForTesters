@@ -75,11 +75,14 @@ public class TestDepartmentService {
     @Test
     public void createDepartmentHappyFlow() {
         Department department = DepartmentTestBuilder.builder().build();
+
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+
         when(departmentDao.save(any(DepartmentDatabaseEntry.class))).thenReturn(DepartmentDatabaseEntry.builder()
                 .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
                 .build());
+
         Department createdDepartment = systemUnderTest.create(department);
         Assertions.assertAll(
                 () -> assertNotNull(createdDepartment),
