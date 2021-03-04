@@ -42,6 +42,18 @@ public class TestEmployeeDao {
     }
 
     @Test
+    @DisplayName("Given that employee ID is null")
+    public void testGetEmployeeByIdThrowsException() {
+
+        Integer id = null;
+
+        Assertions.assertThrows(org.springframework.dao.InvalidDataAccessApiUsageException.class, () -> {
+           employeeDao.findById(id);
+        });
+
+    }
+
+    @Test
     @DisplayName("Given that we want all employees")
     public void testGetAllEmployees() {
         List<EmployeeDatabaseEntry> allEmployees = employeeDao.findAll();
