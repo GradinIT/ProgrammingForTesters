@@ -36,7 +36,7 @@ public class TestEmployeeRestAPI extends TestClient{
 
     @When("^the client updates firstName for employee to (.+)$")
     public void updateFirstNameOfEmployee(String firstName) throws Throwable {
-        //den här måste innehålla samtliga parameter eftersom den skall bygga ett objekt
+
         updateEmployee(EmployeeModel.builder()
                 .employeeId(1)
                 .firstName(firstName)
@@ -71,7 +71,7 @@ public class TestEmployeeRestAPI extends TestClient{
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 6) { // nullpointer
+        for (int i = 0; i < given.size() - 1; i += 6) {
             emps.add(EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
@@ -83,7 +83,6 @@ public class TestEmployeeRestAPI extends TestClient{
         }
         return emps;
     }
-
 
     @When("the client deletes employee {int}")
     public void deleteEmployee(Integer employeeId) {
@@ -97,10 +96,5 @@ public class TestEmployeeRestAPI extends TestClient{
         });
         assertEquals( "404 : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
-
-    //    @And("the error message is {int} : [Entity with id {int} not found]")
-//    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
-//        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
-//    }
 
 }
