@@ -60,7 +60,7 @@ public class TestEmployeeService {
         Assertions.assertAll(
                 () -> Assertions.assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> Assertions.assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> Assertions.assertEquals(1, employee.getEmployeeId()),
+                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("FirstName1", employee.getFirstName()),
                 () -> Assertions.assertEquals("LastName1", employee.getLastName()),
                 () -> Assertions.assertEquals(Boolean.TRUE, employee.getFullTime()),
