@@ -9,12 +9,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
-import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
-import se.jocke.department.entity.Employee;
-import se.jocke.employee.builder.EmployeeModelTestBuilder;
-
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.*;
 
