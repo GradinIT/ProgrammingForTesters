@@ -16,4 +16,3 @@ Feature: test employee api
       | 10 | Eva | Ek | true | 100000 | 1 |
     When the client deletes employee 10
     Then the employee 10 is deleted
-

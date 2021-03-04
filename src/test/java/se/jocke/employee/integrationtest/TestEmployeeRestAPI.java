@@ -36,7 +36,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @When("^the client updates firstName for employee to (.+)$")
     public void updateFirstNameOfEmployee(String firstName) throws Throwable {
-        //den här måste innehålla samtliga parameter eftersom den skall bygga ett objekt
+
         updateEmployee(EmployeeModel.builder()
                 .employeeId(1)
                 .firstName(firstName)
@@ -71,14 +71,14 @@ public class TestEmployeeRestAPI extends TestClient {
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 6) { // nullpointer
+        for (int i = 0; i < given.size() - 1; i += 6) {
             emps.add(EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
                     .lastName(given.get(i + 2))
                     .fullTime(Boolean.valueOf(given.get(i + 3)))
                     .salary(new BigDecimal(given.get(i + 4)))
-                    .departmentId(Integer.parseInt(given.get(i + 5)))
+                    .departmentId(Integer.parseInt(given.get(i+5)))
                     .build());
         }
         return emps;
@@ -95,12 +95,7 @@ public class TestEmployeeRestAPI extends TestClient {
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
-        assertEquals("404 : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
+        assertEquals( "404 : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
+
 }
-
-//    @And("the error message is {int} : [Entity with id {int} not found]")
-//    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
-//        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
-//    }
-
