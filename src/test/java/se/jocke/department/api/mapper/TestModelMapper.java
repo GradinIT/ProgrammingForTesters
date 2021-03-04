@@ -11,11 +11,13 @@ import se.jocke.department.entity.Department;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestModelMapper {
+
     private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
     private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
 
     @Test
     public void testDepartmentToDepartmentModelMapping() {
+
         DepartmentModel model = DepartmentModelMapper.map(DEPARTMENT);
         Assertions.assertAll(
                 () -> assertEquals(DEPARTMENT.getDepartmentId(), model.getDepartmentId()),

@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 
 public class TestModelMapper {
 
-
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
     @Test
@@ -20,7 +19,7 @@ public class TestModelMapper {
 
         EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
-                () -> assertEquals(EMPLOYEE.getEmployeeId(), model.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
                 () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()),
                 () -> assertEquals(EMPLOYEE.getLastName(), model.getLastName()),
                 () -> assertEquals(EMPLOYEE.getSalary(), model.getSalary()),
@@ -35,7 +34,7 @@ public class TestModelMapper {
 
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertAll(
-                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId() ,employee.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId() ,employee.getEmployeeId().getId()),
                 () -> assertEquals(EMPLOYEE_MODEL.getFirstName() ,employee.getFirstName()),
                 () -> assertEquals(EMPLOYEE_MODEL.getLastName() ,employee.getLastName()),
                 () -> assertEquals(EMPLOYEE_MODEL.getSalary() ,employee.getSalary()),
