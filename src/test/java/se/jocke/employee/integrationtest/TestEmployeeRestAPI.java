@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
+import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 
 import java.math.BigDecimal;
@@ -21,7 +22,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
-    Optional<EmployeeModel> employee = null;
+    Optional<EmployeeModel> employee = null; /*Optional.ofNullable(EmployeeModel.builder()  //23 | Kebne  | Kajse   | 45000 | true  | 1 |
+            .employeeId(23)
+            .firstName("Kebne")
+            .lastName("Kajse")
+            .salary(BigDecimal.valueOf(45000.00))
+            .fullTime(true)
+            .departmentId(1)
+            .build());*/
 
     /* MALL
     public class TestDepartmentRestAPI extends TestClient {
@@ -57,15 +65,30 @@ public class TestEmployeeRestAPI extends TestClient {
     } */
 
     @When("^updates lastName for employee to (.+)$")
-    public void updateNameOfEmployee(String employeeFirstName) throws Throwable{
+    public void updateNameOfEmployee(String employeeLastName) throws Throwable{
+
+        EmployeeModel employeeModel = getEmployeeById(1).get();
+
         updateEmployee(EmployeeModel.builder()
-                .employeeId(1)
-                .firstName(employeeFirstName)
-                .lastName(employee.get().getLastName())
-                .salary(employee.get().getSalary())
-                .fullTime(employee.get().getFullTime())
-                .departmentId(employee.get().getDepartmentId())
+                .employeeId(employeeModel.getEmployeeId())
+                .firstName(employeeModel.getFirstName())
+                .lastName(employeeLastName)         //Error: java.lang.NullPointerException: Cannot invoke "java.util.Optional.get()" because "this.employee" is null
+                .salary(employeeModel.getSalary())                 // Why: employee given null when created. I have to build a client in this method to use. First I tried to build
+                .fullTime(employeeModel.getFullTime())              // an instance at the top where employee was declared, but it did not work, or I changed course in the middle.
+                .departmentId(employeeModel.getDepartmentId())      //I try it this way instead.
                 .build());
+    }
+
+    /* MALL
+    * @Then("the name is updated to (.+)$")
+    public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
+    Optional<DepartmentModel> department = getDepartmentById(1);
+        Assert.assertEquals(departmentName, department.get().getDepartmentName());  */
+
+    @Then("the lastName is updated to (.+)$")
+    public void nameOfEmployeeIsUpdated(String employeeLastName) throws Throwable{
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+        Assert.assertEquals(employeeLastName, employee.get().getLastName());
     }
 
     /*MALL
@@ -74,7 +97,7 @@ public class TestEmployeeRestAPI extends TestClient {
         department = getDepartmentById(departmentId);
     }*/
 
-    @When("^gets employee (\\d+)$")
+    @When("^the client gets employee (\\d+)$")
     public void getTheEmployeeById(Integer employeeId) throws Throwable{
         employee = getEmployeeById(employeeId);
     }
@@ -85,8 +108,8 @@ public class TestEmployeeRestAPI extends TestClient {
         Assert.assertEquals("Coding", department.get().getDepartmentName());
     }*/
 
-    @When("^the lastName of employee is$")
-    public void nameOfEmployeeIs() throws Throwable{
+    @Then("^the lastName is$")               //Error: org.junit.ComparisonFailure:  Expected :lastName1 Actual:Development
+    public void nameOfEmployeeIs() throws Throwable{            //Why?: Because I had written the wrong annotation @When instead of @Then
         Assert.assertEquals("Everest", employee.get().getLastName());
     }
 
@@ -125,7 +148,7 @@ public class TestEmployeeRestAPI extends TestClient {
                     .lastName(given.get(i+2))
                     .salary(BigDecimal.valueOf(Long.parseLong(given.get(i+3))))
                     .fullTime(Boolean.parseBoolean(given.get(i+4)))
-                    .departmentId(Integer.parseInt(given.get(i+5)))
+                    .departmentId(i+5)
                     .build());
         }
         return emps;
@@ -139,11 +162,21 @@ public class TestEmployeeRestAPI extends TestClient {
 
     Throwable exceptionThatWasThrown;*/
 
-    @When("deletes employee {int}")
+    @When("deletes employee {int}") // correct lines: Scenario: deletes employee 55 When deletes employee 56 When deletes employee 57 Then the employee 1 is deleted
     public void deleteEmployee(Integer employeeId){
-        deleteEmployee(getEmployeeById(employeeId).get());
+
+        //deleteEmployee(getEmployeeById(employeeId).get()); Error. Why? The program
+                                                            //Still error, correcting the command after @When
+        deleteEmployee(EmployeeModel.builder()
+                .employeeId(employeeId)
+                .firstName("")
+                .lastName("")
+                .departmentId(1234)
+                .salary(BigDecimal.ONE)
+                .fullTime(false)
+                .build());
     }
-    Throwable exceptionThatWasThrown;
+     Throwable exceptionThatWasThrown; //Jocke changed this in Lindas method to a try-catch block instead
 
     /*MALL
     * @Then("the department {int} is deleted")
@@ -152,15 +185,28 @@ public class TestEmployeeRestAPI extends TestClient {
             getDepartmentById(departmentId);
         });
     }*/
+/*
 
-    @Then("employee {int} is deleted")
-    public void employeeIsDeleted(Integer emploeeId){
+    @Then("the employee {int} is deleted")  //Replacing this with Lindas try-catch-block instead
+    public void employeeIsDeleted(Integer employeeId){
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () ->{
-            getTheEmployeeById(emploeeId);
+            getTheEmployeeById(employeeId);
         });
     }
-
-    @And("error message for employee is {int} : [Entity with id {int} not found]")
+*/
+    @Then("the employee {int} is deleted")  //Correct line: Then the employee 55 is deleted
+    public void employeeIsDeleted(Integer employeeId){
+        try {
+            getEmployeeById(employeeId);
+            Assert.fail("employee id: " + employeeId + "not deleted");
+        }
+        catch (Exception e){
+            exceptionThatWasThrown = e;
+            Assert.assertEquals("404 : [Entity with id 55 not found]",e.getMessage());
+        }
+    }
+   // For comparison, not to activate @Then("the employee error message is {int} : [Entity with id {int} not found]")
+    @And("the employee error message is {int} : [Entity with id {int} not found]")  // Deal with this later
     public void checkErrorMessage(Integer errorCode, Integer employeeId) {
         Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }

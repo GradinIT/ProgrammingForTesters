@@ -68,11 +68,11 @@ public class TestEmployeeService { // Bygg ut med alla "CRUD"-kommandon, finn de
         verify(departmentDao, times(1)).findById(1);
     }*/
 
-    @Test // My own test to understand where the EntityID comes from.
+    /*@Test // My own test to understand where the EntityID comes from.
     public void test(){
         Employee employee = systemUnderTest.getEmployeeById(1);
         System.out.println(employee.getEmployeeId());
-    }
+    }*/
 
     /* MALL
     Employee getEmployeeById(Integer employeeId);

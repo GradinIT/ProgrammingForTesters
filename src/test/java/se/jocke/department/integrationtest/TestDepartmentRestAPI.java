@@ -38,7 +38,7 @@ public class TestDepartmentRestAPI extends TestClient {
     }
 
     @Then("the name is updated to (.+)$")
-    public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
+    public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {    /*  org.junit.ComparisonFailure: Expected :lastName1 Actual:Development */
         Optional<DepartmentModel> department = getDepartmentById(1);
         Assert.assertEquals(departmentName, department.get().getDepartmentName());
     }
