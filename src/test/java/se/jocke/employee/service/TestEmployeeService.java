@@ -12,11 +12,13 @@ import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.EntityAlreadyInStorageException;
 import se.jocke.dao.EntityNotFoundException;
+import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -108,6 +110,7 @@ public class TestEmployeeService {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
         Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> SYSTEM_UNDER_TEST.createEmployee(employee));
+        
         Assertions.assertEquals("Entity with id " + employee.getEmployeeId().getId() + " already in storage", exception.getMessage());
 
         verify(employeeDao, times(1)).findById(anyInt());
@@ -137,8 +140,11 @@ public class TestEmployeeService {
     @DisplayName("When client try to delete employee that not exists")
     public void testRemoveEmployeeEntityNotFoundException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
+
         Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.removeEmployee(employee));
+
         assertEquals("Entity with id " + employee.getEmployeeId().getId() + " not found", exception.getMessage());
+
         verify(employeeDao, times(1)).findById(anyInt());
         verifyNoMoreInteractions(employeeDao);
     }
@@ -146,18 +152,30 @@ public class TestEmployeeService {
     @Test
     @DisplayName("When client update employee")
     public void testUpdateEmployeeHappyFlow() {
-        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
-        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry);
+
+        BigDecimal newSalary = new BigDecimal("36000.00");
+
+        Employee employeeToUpdate = Employee.builder()
+                .employeeId(employee.getEmployeeId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(newSalary)
+                .departmentId(employee.getDepartmentId())
+                .build();
+
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(EmployeePojoMapper.map(employeeToUpdate)));
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeePojoMapper.map(employeeToUpdate));
 
         employeeResult = SYSTEM_UNDER_TEST.updateEmployee(employee);
 
         Assertions.assertAll(
-                () -> assertEquals(employee.getEmployeeId().getId(), employeeResult.getEmployeeId().getId()),
-                () -> assertEquals(employee.getFirstName(), employeeResult.getFirstName()),
-                () -> assertEquals(employee.getLastName(), employeeResult.getLastName()),
-                () -> assertEquals(employee.getSalary(), employeeResult.getSalary()),
-                () -> assertEquals(employee.getFullTime(), employeeResult.getFullTime()),
-                () -> assertEquals(employee.getDepartmentId(), employeeResult.getDepartmentId())
+                () -> assertEquals(employeeToUpdate.getEmployeeId().getId(), employeeResult.getEmployeeId().getId()),
+                () -> assertEquals(employeeToUpdate.getFirstName(), employeeResult.getFirstName()),
+                () -> assertEquals(employeeToUpdate.getLastName(), employeeResult.getLastName()),
+                () -> assertEquals(employeeToUpdate.getSalary(), employeeResult.getSalary()),
+                () -> assertEquals(employeeToUpdate.getFullTime(), employeeResult.getFullTime()),
+                () -> assertEquals(employeeToUpdate.getDepartmentId(), employeeResult.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
@@ -167,8 +185,11 @@ public class TestEmployeeService {
     @DisplayName("When client update employee that not exists")
     public void testUpdateEmployeeEntityNotFoundException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
+
         Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.updateEmployee(employee));
+
         assertEquals("Entity with id " + employee.getEmployeeId().getId() + " not found", exception.getMessage());
+
         verify(employeeDao, times(1)).findById(anyInt());
         verifyNoMoreInteractions(employeeDao);
     }
