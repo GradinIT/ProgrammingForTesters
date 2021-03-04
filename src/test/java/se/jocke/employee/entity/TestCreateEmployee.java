@@ -29,8 +29,11 @@ public class TestCreateEmployee {
     @Test
     public void testCreateEmployeeThrowsException(){
         Assertions.assertThrows(NullPointerException.class, () -> {
+            Employee.builder().employeeId(EMPLOYEE.getEmployeeId());
             Employee.builder().firstName(EMPLOYEE.getFirstName());
             Employee.builder().lastName(EMPLOYEE.getLastName());
+            Employee.builder().salary(EMPLOYEE.getSalary());
+            Employee.builder().fullTime(EMPLOYEE.getFullTime());
         });
 
     }

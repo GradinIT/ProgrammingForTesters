@@ -42,6 +42,11 @@ public class TestEmployeeService {
 
     @BeforeEach
     public void setUp(){
+
+    }
+
+    @Test
+    public void findById(){
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("FirstName1")
@@ -49,11 +54,7 @@ public class TestEmployeeService {
                 .fullTime(Boolean.TRUE)
                 .salary(BigDecimal.valueOf(25000))
                 .departmentId(1)
-        .build()));
-    }
-
-    @Test
-    public void findById(){
+                .build()));
         Employee employee = systemUnderTest.getEmployeeById(1);
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
