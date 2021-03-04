@@ -9,14 +9,14 @@ import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
-
+@DisplayName("Test EmployeeModelMapper")
 public class TestModelMapper {
 
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
     @Test
-    @DisplayName("When we map employee to model")
+    @DisplayName("Given that we want to map employee to model")
     public void testEmployeeToEmployeeModelMapping() {
         EmployeeModel empModel = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
@@ -30,7 +30,7 @@ public class TestModelMapper {
     }
 
     @Test
-    @DisplayName("When we map model to employee")
+    @DisplayName("Given that we want to map model to employee")
     public void testEmployeeModelToEmployeeMapping() {
         Employee empFromModel = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertAll(

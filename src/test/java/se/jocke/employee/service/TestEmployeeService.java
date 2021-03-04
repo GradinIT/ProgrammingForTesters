@@ -110,7 +110,7 @@ public class TestEmployeeService {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
         Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> SYSTEM_UNDER_TEST.createEmployee(employee));
-        
+
         Assertions.assertEquals("Entity with id " + employee.getEmployeeId().getId() + " already in storage", exception.getMessage());
 
         verify(employeeDao, times(1)).findById(anyInt());

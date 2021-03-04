@@ -50,5 +50,4 @@ public class TestEmployeeDao {
                 () -> assertEquals(3, allEmployees.size())
         );
     }
-
 }

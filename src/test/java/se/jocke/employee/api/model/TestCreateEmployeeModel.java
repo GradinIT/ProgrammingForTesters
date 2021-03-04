@@ -13,8 +13,8 @@ public class TestCreateEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
     @Test
-    @DisplayName("Given that all parameters are correct")
-    public void testCreateEmployeeModel() {
+    @DisplayName("Given that everything is OK")
+    public void testCreateEmployeeModelHappyFlow() {
 
         EmployeeModel employeeModel = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
@@ -35,36 +35,15 @@ public class TestCreateEmployeeModel {
         );
     }
 
-    @Nested
-    @DisplayName("Given that we build employee model without a NonNull parameter")
-    class testNullPointerException {
-
-        @Test
-        @DisplayName("When we try to build employee model without employee ID")
-        public void testCreateEmployeeModelWithoutEmployeeID() {
-            Assertions.assertThrows(NullPointerException.class,
-                    () -> EmployeeModel.builder()
-                    .firstName(EMPLOYEE_MODEL.getFirstName())
-                    .lastName(EMPLOYEE_MODEL.getLastName())
-                    .salary(EMPLOYEE_MODEL.getSalary())
-                    .fullTime(EMPLOYEE_MODEL.getFullTime())
-                    .departmentId(EMPLOYEE_MODEL.getDepartmentId())
-                    .build()
-            );
-        }
-
-        @Test
-        @DisplayName("When we try to build employee model without last name")
-        public void testCreateEmployeeModelWithOnlyLastName() {
-            Assertions.assertThrows(NullPointerException.class,
-                    () -> EmployeeModel.builder()
-                            .employeeId(EMPLOYEE_MODEL.getEmployeeId())
-                            .firstName(EMPLOYEE_MODEL.getFirstName())
-                            .salary(EMPLOYEE_MODEL.getSalary())
-                            .fullTime(EMPLOYEE_MODEL.getFullTime())
-                            .departmentId(EMPLOYEE_MODEL.getDepartmentId())
-                            .build()
-            );
-        }
+    @Test
+    @DisplayName("Given that something is null")
+    public void testCreateEmployeeModelThrowsNullPointerException() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> {
+                    EmployeeModelTestBuilder.builder()
+                            .firstName(null)
+                            .build();
+                });
     }
 }
+

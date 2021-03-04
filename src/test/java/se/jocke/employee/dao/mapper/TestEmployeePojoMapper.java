@@ -25,7 +25,7 @@ public class TestEmployeePojoMapper {
     }
 
     @Test
-    @DisplayName("Map employeeDatabaseEntry to employee")
+    @DisplayName("Given that we map employeeDatabaseEntry to employee")
     public void testMapEmployeeDatabaseEntryToEmployee() {
 
         EmployeeDatabaseEntry employeeDatabaseEntry = EmployeeDatabaseEntry.builder()
@@ -50,7 +50,7 @@ public class TestEmployeePojoMapper {
     }
 
     @Test
-    @DisplayName("Map employee to employeeDatabaseEntry")
+    @DisplayName("Given that we map employee to employeeDatabaseEntry")
     public void testMapEmployeeToEmployeeDatabaseEntry() {
 
         EmployeeDatabaseEntry employeeDatabaseEntry = EmployeePojoMapper.map(employee);
@@ -66,7 +66,7 @@ public class TestEmployeePojoMapper {
     }
 
     @Test
-    @DisplayName("Map list of employeeDatabaseEntry to list of employees")
+    @DisplayName("Given that we map list of employeeDatabaseEntry to list of employees")
     public void testMapEmployeeDatabaseEntryListToEmployeeList() {
 
         List<EmployeeDatabaseEntry> employeeDatabaseEntryList = Arrays.asList(EmployeeDatabaseEntry.builder()
