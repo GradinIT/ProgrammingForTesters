@@ -26,7 +26,6 @@ public class SeleniumTest {
             Thread.sleep(5000);
             search.submit();
 
-
         } catch (Exception e) {
             System.out.println("Not able to load Chrome web browser " + e.getMessage());
         }

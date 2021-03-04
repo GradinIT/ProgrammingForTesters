@@ -28,7 +28,7 @@ public class TestCreateEmployee {
     }
 
     @Test
-    public void testCreateEmployeeThrowsException() {
+    public void testCreateEmployeeThrowsException() {   //Vi testar att kasta ett nullpointerexception då allt utom ID har värden.
         Assertions.assertThrows(NullPointerException.class, () -> {
             Employee.builder().employeeId(EMPLOYEE.getEmployeeId()).build();
         });
