@@ -1,11 +1,9 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
@@ -31,8 +29,6 @@ public class TestEmployeeRestAPI extends TestClient {
     public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
         Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
     }
-
-
 
     @When("the client updates first name of employee (\\d+) to (.+)$")
     public EmployeeModel theClientUpdatesFirstName(int employeeId, String firstName) {
@@ -65,8 +61,6 @@ public class TestEmployeeRestAPI extends TestClient {
         Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
     }
 
-
-
     private List<EmployeeModel> makeEmployeesList(List<String> given) {
         List<se.jocke.api.EmployeeModel> employees = new ArrayList<>();
         for (int i = 0; i < given.size() - 1; i += 6) {
@@ -96,9 +90,9 @@ public class TestEmployeeRestAPI extends TestClient {
     Throwable exceptionThatWasThrown;
 
     @Then("employee {int} is deleted")
-    public void departmentIsDeleted(int employeeId) {
+    public void employeeIsDeleted(int employeeId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getDepartmentById(employeeId);
+            getEmployeeById(employeeId);
         });
     }
 
@@ -116,5 +110,18 @@ public class TestEmployeeRestAPI extends TestClient {
         assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown2.getMessage());
     }
 
+    @When("the client creates employee {int}")
+    public void theClientCreatesEmployee(int employeeId) {
+        createEmployee(getEmployeeById(employeeId).get());
+    }
 
+    @But("the employeeId {int} already exists")
+    public void theEmployeeIsNotAllreadyInDataBase(int employeeId) {
+
+    }
+
+    @Then("the errormessage is {int} : [Entity with id {int} already in databse]")
+    public void checkErrorMessage(int errorCode, int employeeId) {
+        Assertions.assertEquals(errorCode+" : [Entity with id " + employeeId +" not found]",exceptionThatWasThrown.getMessage());
+            }
 }
