@@ -22,7 +22,7 @@ public class TestCreateDepartmentModel {
     }
 
     @Test
-    public void testCreateDepartmentModelThrowsException() {
+    public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
             DepartmentModel.builder().departmentName(DEPARTMENT_MODEL.getDepartmentName()).build();
         });

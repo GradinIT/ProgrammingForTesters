@@ -1,10 +1,10 @@
-Feature: test department api
-  Scenario: client gets all departments
-    When the client calls /department
-    Then the client receives 4 departments
-  Scenario: client updates name for department 1
-    When the client updates name for department to Coding
-    Then the name is updated to Coding
+Feature: test employee api
+  Scenario: client gets all employees
+    When the client calls /employee
+    Then the client receives 4 employees
+  Scenario: client updates name for employee 1
+    When the client updates name for employee to Robert
+    Then the name is updated to Robert
   Scenario: client gets Department 1
     When the client gets department 1
     Then the name is

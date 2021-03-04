@@ -134,15 +134,27 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>2.28.2</version>
+
+            <artifactId>mockito-inline</artifactId>
+
+            <version>3.7.7</version>
+
             <scope>test</scope>
+
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.5.15</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>2.28.2</version>
+            <version>3.3.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

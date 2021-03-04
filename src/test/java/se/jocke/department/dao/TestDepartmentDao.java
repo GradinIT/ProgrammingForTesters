@@ -28,6 +28,8 @@ public class TestDepartmentDao {
 
     @Test
     public void testGetDepartmentById() {
+        // Optional objektet använder sig ofta utav metoden isPresent() som kollar om Optional
+        // instansen innehåller något värde
         Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
@@ -40,7 +42,7 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () ->assertEquals(3,departments.size())
+                () ->assertEquals(4,departments.size())
         );
     }
 }

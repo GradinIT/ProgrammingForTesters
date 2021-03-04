@@ -7,5 +7,6 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class EntityID<T> {
     private T id;
-    public T getId() {return this.id;}
+    public T getId() {
+        return this.id;}
 }
