@@ -47,7 +47,6 @@ public class TestEmployeeService {
                 .fullTime(true)
                 .departmentId(1)
                 .build());
-        MockitoAnnotations.initMocks(this);
     }
 
     @Test
