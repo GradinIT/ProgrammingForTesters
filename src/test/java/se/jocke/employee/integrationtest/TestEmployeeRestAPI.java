@@ -67,11 +67,6 @@ public class TestEmployeeRestAPI {
 
     }
 
-    @And("^the size of employee list is checked$")
-    public void checkSizeOfEmployeeList() {
-        Assert.assertEquals(3, getAllEmployees().get().size());
-    }
-
     @Given("^the employees$")
     public void givenEmployees(DataTable employees) {
         List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());

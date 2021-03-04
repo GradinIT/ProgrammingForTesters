@@ -46,7 +46,7 @@ public class TestEmployeeService {
 
     //Testar getEmployeeById(Integer employee)
     @Test
-    public void findByEmployeeId() {
+    public void getEmployeeById() {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .departmentId(2)
@@ -68,7 +68,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void testListOfEmployees() {
+    public void getAllEmployees() {
         when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeeDatabaseEntry.builder()
                 .firstName("firstName1")
                 .lastName("lastName1")
@@ -157,7 +157,6 @@ public class TestEmployeeService {
                 () -> assertEquals(employee.getSalary(), updateEmployee.getSalary()));
     }
 
-    //Varför kan jag inte använda EntityNotFoundException som finns i update metoden?
     //Förväntar mig att det inte finns ett id - skickar ett exception
     @Test
     public void updateEmployeeError() {
@@ -176,12 +175,11 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(any(Integer.class));
     }
 
-
-    //Testar removeEmployee(Employee employee) normalflödet happy flow
+    //Testar removeEmployee(Employee employee)
     //Förväntar mig att det finns ett id - testar att ta bort
     //mocka findbyid, anropar delete - retunera värdet från employee
     @Test
-    public void removeEmployeeHappyFlow() {
+    public void removeEmployee() {
         Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(employee.getEmployeeId().getId())
@@ -202,22 +200,5 @@ public class TestEmployeeService {
                 () -> assertEquals(employee.getFullTime(), removeEmployee.getFullTime()),
                 () -> assertEquals(employee.getSalary(), removeEmployee.getSalary()));
     }
-
-//    @Test
-//    public void removeEmployeeError() {
-//        Employee employee = EmployeeTestBuilder.builder().build();
-//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-//                .employeeId(employee.getEmployeeId().getId())
-//                .firstName(employee.getFirstName())
-//                .lastName(employee.getLastName())
-//                .fullTime(employee.getFullTime())
-//                .salary(employee.getSalary())
-//                .departmentId(employee.getDepartmentId())
-//                .build()));
-//        Assertions.assertThrows(EntityNotFoundException.class, () -> {
-//                systemUndertest.removeEmployee(employee);
-//        });
-//        verify(employeeDao, times(1)).findById(any(Integer.class));
-//    }
 
 }
