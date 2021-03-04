@@ -20,9 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @TimeAndLogg
     public Employee getEmployeeById(Integer employeeId) {
-        Optional<EmployeeDatabaseEntry> employee = employeeDao.findById(employeeId);
-        if(employee.isPresent())
-            return EmployeePojoMapper.map(employee.get());
+        Optional<EmployeeDatabaseEntry> employeeDatabaseEntryOptional = employeeDao.findById(employeeId);
+        if(employeeDatabaseEntryOptional.isPresent())
+            return EmployeePojoMapper.map(employeeDatabaseEntryOptional.get());
         else throw new EntityNotFoundException(employeeId);
     }
 

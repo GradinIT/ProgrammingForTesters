@@ -66,11 +66,8 @@ public class TestEmployeeService {
     @Test
     public void create() {
 
-        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
-
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
-
-        databaseEntryOptional.ifPresent(employeeDatabaseEntry -> when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry));
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry);
 
         Employee employee = crudOperation.createEmployee(EmployeeTestBuilder.builder().build());
 
@@ -90,11 +87,9 @@ public class TestEmployeeService {
 
     @Test
     public void update() {
-        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
 
-        when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
-
-        databaseEntryOptional.ifPresent(employeeDatabaseEntry -> when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry));
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDatabaseEntry));
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry);
 
         Employee employee = crudOperation.updateEmployee(crudOperation.getEmployeeById(1));
 
@@ -113,11 +108,10 @@ public class TestEmployeeService {
 
     @Test
     public void remove() {
-        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
 
-        when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDatabaseEntry));
 
-        Employee employee = crudOperation.removeEmployee(EmployeePojoMapper.map(databaseEntryOptional.get()));
+        Employee employee = crudOperation.removeEmployee(EmployeePojoMapper.map(Optional.of(employeeDatabaseEntry).get()));
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -134,9 +128,8 @@ public class TestEmployeeService {
 
     @Test
     public void getAll() {
-        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
 
-        databaseEntryOptional.ifPresent(employeeDatabaseEntry -> when(employeeDao.findAll()).thenReturn(Collections.singletonList(employeeDatabaseEntry)));
+        when(employeeDao.findAll()).thenReturn(Collections.singletonList(employeeDatabaseEntry));
 
         List<Employee> employees = crudOperation.getAllEmployees();
 
