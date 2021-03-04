@@ -27,6 +27,9 @@ public class TestModelMapper {
                 () -> assertEquals(EMPLOYEE.getDepartmentId(), model.getDepartmentId())
 
         );
+
+        // Här funkar inte att jämföra EMPLOYEE , model då de är olika typer av objekt :)
+
     }
 
     @Test
@@ -43,6 +46,7 @@ public class TestModelMapper {
 
 
         );
+
     }
 
 }

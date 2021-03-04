@@ -12,17 +12,18 @@ public class TestCreateEmployee {
 
     @Test
     public void testCreateEmployee(){
-        Employee employee = Employee.builder()
-                .employeeId(EMPLOYEE.getEmployeeId())
-                .firstName(EMPLOYEE.getFirstName())
-                .lastName(EMPLOYEE.getLastName())
-                .fullTime(EMPLOYEE.getFullTime())
-                .salary(EMPLOYEE.getSalary())
-                .departmentId(EMPLOYEE.getDepartmentId()).build();
+        Employee employee = Employee
+                .builder()
+                    .employeeId(EMPLOYEE.getEmployeeId())
+                    .firstName(EMPLOYEE.getFirstName())
+                    .lastName(EMPLOYEE.getLastName())
+                    .fullTime(EMPLOYEE.getFullTime())
+                    .salary(EMPLOYEE.getSalary())
+                    .departmentId(EMPLOYEE.getDepartmentId())
+                .build();
 
+        // Funkar att använda objekt-jämförelse, båda är av Employee-typen
         Assertions.assertEquals(EMPLOYEE, employee);
-
-        // Även testa varje attribut för sig? Jag är för lat men det ska ju också vara bra!
     }
 
 @Test

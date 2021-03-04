@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Employee extends Entity<EmployeeID> {
+public class Employee extends Entity<EmployeeID> {   //
     private final @NonNull EmployeeID employeeId;
     private final @NonNull String firstName;
     private final @NonNull String lastName;

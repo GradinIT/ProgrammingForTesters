@@ -22,6 +22,9 @@ public class TestCreateEmployeeModel {
                 .departmentId(EMPLOYEE_MODEL.getDepartmentId())
                 .build();
 
+        Assertions.assertEquals(EMPLOYEE_MODEL,employee);
+        // Funkar att jämföra objekt här då EqualsAndHashCode taggen finns på objektet. Båda är av typen EmployeeModel
+        /*
         Assertions.assertAll(
                 () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
                 () -> assertEquals(EMPLOYEE_MODEL.getFirstName() ,employee.getFirstName()),
@@ -29,9 +32,8 @@ public class TestCreateEmployeeModel {
                 () -> assertEquals(EMPLOYEE_MODEL.getFullTime() , employee.getFullTime()),
                 () -> assertEquals(EMPLOYEE_MODEL.getSalary() ,employee.getSalary()),
                 () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId() ,employee.getDepartmentId())
-
         );
-
+        */
     }
     @Test
     public void testCreateEmployeeModelThrowsException(){
