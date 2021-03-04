@@ -1,17 +1,19 @@
 package se.jocke.employee.service;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.dao.EntityNotFoundException;
+import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
-import se.jocke.department.entity.EmployeeID;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
@@ -19,9 +21,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
@@ -30,13 +30,11 @@ public class TestEmployeeService {
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
-    Employee exampleEmployee;
+    private Employee exampleEmployee = EmployeeTestBuilder.builderMethod().build();
 
     // Utöka med att testa de andra metoderna i EmployeeServiceImpl?
-
-    @BeforeEach // Forska lite kring detta - en setup för varje test eller köra samma flera gånger?
-    public void setUp() {
-        // När vi anropar findById() med vilket id som helst skapas istället en påhittad employee
+    @Test
+    public void testGetEmployeeById() {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("Mock")
@@ -45,10 +43,7 @@ public class TestEmployeeService {
                 .fullTime(true)
                 .departmentId(5)
                 .build()));
-    }
 
-    @Test
-    public void testGetEmployeeById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
 
         Assertions.assertEquals(1, employee.getEmployeeId().getId());
@@ -57,26 +52,8 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(1); // Vad gör verify? Varför vill vi veta hur många gånger findById körs?
     }
 
-//    @Before
-//    public void employeeToAdd() {
-//        exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(1).build())
-//                .firstName("Mock")
-//                .lastName("Mockesson")
-//                .salary(BigDecimal.valueOf(22000))
-//                .fullTime(true)
-//                .departmentId(5)
-//                .build();
-//    }
     @Test
     public void testCreateEmployee() {
-        exampleEmployee = Employee.builder().employeeId(EmployeeID.builder().id(100).build())
-                .firstName("Mock")
-                .lastName("Mockesson")
-                .salary(BigDecimal.valueOf(22000))
-                .fullTime(true)
-                .departmentId(5)
-                .build();
-
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
                 .employeeId(exampleEmployee.getEmployeeId().getId())
@@ -90,20 +67,67 @@ public class TestEmployeeService {
         Employee addedEmployee = systemUnderTest.createEmployee(exampleEmployee);
 
         Assertions.assertNotNull(addedEmployee);
-        Assertions.assertEquals(100, addedEmployee.getEmployeeId().getId());
-        Assertions.assertEquals("Mock", addedEmployee.getFirstName());
-        verify(employeeDao,times(1)).save(any(EmployeeDatabaseEntry.class));
+        Assertions.assertEquals(exampleEmployee.getEmployeeId().getId(), addedEmployee.getEmployeeId().getId());
+        Assertions.assertEquals(exampleEmployee.getFirstName(), addedEmployee.getFirstName());
+        Assertions.assertEquals(exampleEmployee.getLastName(), addedEmployee.getLastName());
+        Assertions.assertEquals(exampleEmployee.getSalary(), addedEmployee.getSalary());
+        Assertions.assertEquals(exampleEmployee.getFullTime(), addedEmployee.getFullTime());
+        Assertions.assertEquals(exampleEmployee.getDepartmentId(), addedEmployee.getDepartmentId());
+        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
+    @Test
     public void testRemoveEmployee() {
+        when(employeeDao.findById(exampleEmployee.getEmployeeId().getId()))
+                .thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                        .employeeId(exampleEmployee.getEmployeeId().getId())
+                        .firstName(exampleEmployee.getFirstName())
+                        .lastName(exampleEmployee.getLastName())
+                        .salary(exampleEmployee.getSalary())
+                        .fullTime(exampleEmployee.getFullTime())
+                        .departmentId(exampleEmployee.getDepartmentId())
+                        .build()));
 
+        systemUnderTest.removeEmployee(exampleEmployee);
+
+        verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
     }
 
+    @Test
+    public void testRemoveEmployeeErrorMessage() {
+        when(employeeDao.findById(exampleEmployee.getEmployeeId().getId()))
+                .thenReturn(Optional.empty());
+
+        Assertions.assertThrows(EntityNotFoundException.class,
+                () -> systemUnderTest.removeEmployee(exampleEmployee));
+
+        verify(employeeDao,times(1)).findById(any());
+        verify(employeeDao,times(0)).delete(any());
+    }
+
+    @Test
     public void testUpdateEmployee() {
+        when(employeeDao.findById(exampleEmployee.getEmployeeId().getId())).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(exampleEmployee.getEmployeeId().getId())
+                .firstName(exampleEmployee.getFirstName())
+                .lastName(exampleEmployee.getLastName())
+                .salary(exampleEmployee.getSalary())
+                .fullTime(exampleEmployee.getFullTime())
+                .departmentId(exampleEmployee.getDepartmentId())
+                .build()));
 
+        systemUnderTest.updateEmployee(exampleEmployee);
+        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
+    @Test
     public void testGetAllEmployee() {
 
+    }
+
+    public Employee getExampleEmployee() {
+        return exampleEmployee = EmployeeTestBuilder
+                .builderMethod()
+                .build();
     }
 }
