@@ -44,7 +44,6 @@ public class TestDepartmentService {
 
     @Test
     public void findById() {
-
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
                 .departmentId(1)
                 .departmentName("Development")

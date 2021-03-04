@@ -42,7 +42,6 @@ public class TestEmployeeService {
 
     @Test
     public void findById() {
-        Employee employee = systemUnderTest.getEmployeeById(2);
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(2)
                 .firstName("MockTest")
@@ -51,8 +50,9 @@ public class TestEmployeeService {
                 .salary(BigDecimal.valueOf(45000.00))
                 .departmentId(15)
                 .build()));
+        Employee employee = systemUnderTest.getEmployeeById(2);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(2, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("MockTest", employee.getFirstName()),
                 () -> Assertions.assertEquals("MockTest2", employee.getLastName()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
@@ -108,7 +108,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void createDepartmentError() {
+    public void createEmployeeError() {
         Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(
                 EmployeeDatabaseEntry.builder()
