@@ -49,19 +49,8 @@ public class TestEmployeeService {
                 .build()));
     }
 
-//    @Before
-//    public void setUp() {
-//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-//                .employeeId(1)
-//                .firstName("firstName1")
-//                .lastName("lastName1")
-//                .fullTime(Boolean.TRUE)
-//                .salary(BigDecimal.valueOf(25000.00))
-//                .departmentId(1)
-//                .build()));
-//}
     @Test
-    public void findById() { //FIXA TILL NÄR @BEFORE ÄR BORTA
+    public void findById() { //FIXA TILL NÄR @BEFOREEACH ÄR BORTA
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -72,19 +61,6 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
-    }
-
-    @Test //INTE GÖRA KLART
-    public void createEmployee() {
-        //1 Skapa en ny employee med employeeID 77
-        //2 Kalla på metoden createEmployee-metoden i TestClient
-        //3 Skriv assertions
-    }
-
-    @Test //INTE GÖRA KLART
-    public void updateEmployee() {
-        //1 hitta en employee
-        //2 uppdatera mha updateEmployee-metoden i TestClient
     }
 
     @Test //KOLLA ATT DENNA ÄR RÄTT
