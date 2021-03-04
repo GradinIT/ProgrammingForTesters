@@ -1,15 +1,12 @@
 package se.jocke.employee.service;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
-import se.jocke.api.mapper.EmployeeModelMapper;
-import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.mapper.EmployeePojoMapper;
@@ -19,7 +16,6 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +26,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
 
-    Optional<EmployeeDatabaseEntry> databaseEntryOptional;
+    EmployeeDatabaseEntry employeeDatabaseEntry;
 
     @Mock
     private EmployeeDao employeeDao;
@@ -39,20 +35,20 @@ public class TestEmployeeService {
 
     @BeforeEach
     public void setUp() {
-        databaseEntryOptional = Optional.of(EmployeeDatabaseEntry.builder()
+        employeeDatabaseEntry = EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("Hanna")
                 .lastName("Olsson")
                 .salary(BigDecimal.valueOf(40000))
                 .fullTime(true)
                 .departmentId(1)
-                .build());
+                .build();
     }
 
     @Test
     public void findById() {
 
-        when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDatabaseEntry));
 
         Employee employee = crudOperation.getEmployeeById(1);
         Assertions.assertAll(
@@ -69,6 +65,8 @@ public class TestEmployeeService {
 
     @Test
     public void create() {
+
+        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
 
@@ -92,6 +90,8 @@ public class TestEmployeeService {
 
     @Test
     public void update() {
+        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
+
         when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
 
         databaseEntryOptional.ifPresent(employeeDatabaseEntry -> when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry));
@@ -113,21 +113,20 @@ public class TestEmployeeService {
 
     @Test
     public void remove() {
+        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(databaseEntryOptional);
 
-        if (databaseEntryOptional.isPresent()) {
-            Employee employee = crudOperation.removeEmployee(EmployeePojoMapper.map(databaseEntryOptional.get()));
+        Employee employee = crudOperation.removeEmployee(EmployeePojoMapper.map(databaseEntryOptional.get()));
 
-            Assertions.assertAll(
-                    () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
-                    () -> Assertions.assertEquals("Hanna", employee.getFirstName()),
-                    () -> Assertions.assertEquals("Olsson", employee.getLastName()),
-                    () -> Assertions.assertEquals(BigDecimal.valueOf(40000), employee.getSalary()),
-                    () -> Assertions.assertEquals(1, employee.getDepartmentId()),
-                    () -> Assertions.assertEquals(true, employee.getFullTime())
-            );
-        }
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
+                () -> Assertions.assertEquals("Hanna", employee.getFirstName()),
+                () -> Assertions.assertEquals("Olsson", employee.getLastName()),
+                () -> Assertions.assertEquals(BigDecimal.valueOf(40000), employee.getSalary()),
+                () -> Assertions.assertEquals(1, employee.getDepartmentId()),
+                () -> Assertions.assertEquals(true, employee.getFullTime())
+        );
 
         verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
@@ -135,6 +134,7 @@ public class TestEmployeeService {
 
     @Test
     public void getAll() {
+        Optional<EmployeeDatabaseEntry> databaseEntryOptional = Optional.of(employeeDatabaseEntry);
 
         databaseEntryOptional.ifPresent(employeeDatabaseEntry -> when(employeeDao.findAll()).thenReturn(Collections.singletonList(employeeDatabaseEntry)));
 
