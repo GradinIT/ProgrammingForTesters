@@ -1,5 +1,6 @@
 package se.jocke.employee.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -110,6 +111,18 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(any());
         verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
 
+    }
+
+    @Test
+    public void testRemoveEmployeeErrorMessage() {
+        when(employeeDao.findById(exampleEmployee.getEmployeeId().getId()))
+                .thenReturn(Optional.empty());
+
+        Assertions.assertThrows(EntityNotFoundException.class,
+                () -> systemUnderTest.removeEmployee(exampleEmployee));
+
+        verify(employeeDao,times(1)).findById(any());
+        verify(employeeDao,times(0)).delete(any());
     }
 
     @Test
