@@ -39,8 +39,8 @@ public class TestEmployeeService {
     public void setUp() {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
-                .firstName("firstName1")
-                .lastName("lastName1")
+                .firstName("Svante")
+                .lastName("Turesson")
                 .fullTime(Boolean.TRUE)
                 .salary(BigDecimal.valueOf(25000.00))
                 .departmentId(1)
@@ -52,8 +52,8 @@ public class TestEmployeeService {
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
-                () -> Assertions.assertEquals("lastName1", employee.getLastName()),
+                () -> Assertions.assertEquals("Svante", employee.getFirstName()),
+                () -> Assertions.assertEquals("Turesson", employee.getLastName()),
                 () -> Assertions.assertEquals(Boolean.TRUE, employee.getFullTime()),
                 () -> Assertions.assertEquals(BigDecimal.valueOf(25000.00), employee.getSalary()),
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
