@@ -50,7 +50,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void findById() {
+    public void testFindById() {
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
@@ -75,7 +75,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void findAllEmployees() {
+    public void testFindAllEmployees() {
 
         when(employeeDao.findAll()).thenReturn(Arrays.asList(
                 EmployeeDatabaseEntry.builder()
@@ -97,7 +97,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void createEmployee() {
+    public void testCreateEmployee() {
         Employee employee = EmployeeTestBuilder.builder().build();
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
@@ -125,7 +125,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void updateEmployee() {
+    public void testUpdateEmployee() {
         Employee employee = EmployeeTestBuilder.builder().lastName("Hellberg").build();
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeePojoMapper.map(employee)));
@@ -147,7 +147,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void deleteEmployee() {
+    public void testDeleteEmployee() {
         Employee employee = EmployeeTestBuilder.builder().build();
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeePojoMapper.map(employee)));
