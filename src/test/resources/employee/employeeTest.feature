@@ -10,8 +10,8 @@ Feature: test employee api
         Then now the name of employee is
         And the size of employee list is checked
     Scenario: client updates employee for employee 1
-        When now the client updates the employee to firstName1 and lastname1 and true and 25000.00 and 2
-        Then now the the employee is updated to firstName1 and lastname1 and true and 25000.00 and 2
+        When now the client updates the employee to firstName1 and lastName1 and true and 25000.00 and 1
+        Then now the the employee is updated to firstName1 and lastName1 and true and 25000.00 and 1
     Scenario: client deletes employee
         Given the employees
            | 40 | Lena | Clark | 10 | 20000.00 | true |

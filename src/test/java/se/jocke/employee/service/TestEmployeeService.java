@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.EntityAlreadyInStorageException;
+import se.jocke.dao.EntityNotFoundException;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
@@ -130,11 +131,11 @@ public class TestEmployeeService {
 
     }
 
+    //Förväntar mig att det finns ett id - testa det som finns
     //Testar updateEmployee(Employee employee), normalflödet (Happy flow)
     @Test
     public void updateEmployeeHappyFlow() {
         Employee employee = EmployeeTestBuilder.builder().build();
-//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.isPresent());
         EmployeeDatabaseEntry updateEmployee = EmployeeDatabaseEntry.builder()
                 .employeeId(employee.getEmployeeId().getId())
                 .firstName(employee.getFirstName())
@@ -156,7 +157,28 @@ public class TestEmployeeService {
                 () -> assertEquals(employee.getSalary(), updateEmployee.getSalary()));
     }
 
+    //Varför kan jag inte använda EntityNotFoundException som finns i update metoden?
+    //Förväntar mig att det inte finns ett id - skickar ett exception
+    @Test
+    public void updateEmployeeError() {
+        Employee employee = EmployeeTestBuilder.builder().build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .departmentId(employee.getDepartmentId())
+                .build()));
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            systemUndertest.updateEmployee(employee);
+        });
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+    }
+
+
     //Testar removeEmployee(Employee employee) normalflödet happy flow
+    //Förväntar mig att det finns ett id - testar att ta bort
     //mocka findbyid, anropar delete - retunera värdet från employee
     @Test
     public void removeEmployeeHappyFlow() {
@@ -180,5 +202,22 @@ public class TestEmployeeService {
                 () -> assertEquals(employee.getFullTime(), removeEmployee.getFullTime()),
                 () -> assertEquals(employee.getSalary(), removeEmployee.getSalary()));
     }
+
+//    @Test
+//    public void removeEmployeeError() {
+//        Employee employee = EmployeeTestBuilder.builder().build();
+//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+//                .employeeId(employee.getEmployeeId().getId())
+//                .firstName(employee.getFirstName())
+//                .lastName(employee.getLastName())
+//                .fullTime(employee.getFullTime())
+//                .salary(employee.getSalary())
+//                .departmentId(employee.getDepartmentId())
+//                .build()));
+//        Assertions.assertThrows(EntityNotFoundException.class, () -> {
+//                systemUndertest.removeEmployee(employee);
+//        });
+//        verify(employeeDao, times(1)).findById(any(Integer.class));
+//    }
 
 }
