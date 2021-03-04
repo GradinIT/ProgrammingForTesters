@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CucumberContextConfiguration
+@CucumberContextConfiguration           //Spring Boot context all over the class
 @SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestClient {

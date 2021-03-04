@@ -29,12 +29,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class) // Hela klassen befinner sig i en Mockitokontext, inte SpringBoot
 public class TestEmployeeService { // Bygg ut med alla "CRUD"-kommandon, finn dem under EmployeeService
     @Mock
     private EmployeeDao employeeDao;
-    @InjectMocks
-    private EmployeeService systemUnderTest = new EmployeeServiceImpl();
+    @InjectMocks // EmployeeServiceImpl är beroende av interface EmployeeDao för att fungera. Därför injiceras mocken/imitationen av employeeDao i EmployeeServiceImpl. Om det inte
+    private EmployeeService systemUnderTest = new EmployeeServiceImpl(); //är Mockitokontext så sköter SpringBoot injectionerna åt oss (förutsatt annotetringar)
 
     /* MALL
     *  @BeforeEach
