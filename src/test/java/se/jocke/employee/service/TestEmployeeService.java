@@ -11,8 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.department.entity.Department;
 import se.jocke.department.entity.Employee;
 import se.jocke.department.entity.Entity;
 import se.jocke.department.entity.EntityID;
@@ -21,9 +23,12 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -31,8 +36,6 @@ import static org.mockito.Mockito.*;
 public class TestEmployeeService {
     @Mock
     private EmployeeDao employeeDao;
-    @Mock
-    private Employee e;
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
@@ -61,51 +64,68 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void createOrUpdateEmployee(){
-        when(e.getEmployeeId().getId()).thenReturn(5);
-        when(e.getFirstName()).thenReturn("firstName1");
-        when(e.getLastName()).thenReturn("lastName2");
-        when(e.getFullTime()).thenReturn(true);
-        when(e.getSalary()).thenReturn(BigDecimal.valueOf(25000));
-        when(e.getDepartmentId()).thenReturn(1);
-        Employee employee = systemUnderTest.createEmployee(e);
+    public void createEmployeeHappyFlow(){
+        Employee employee = EmployeeTestBuilder.builder().build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .salary(employee.getSalary())
+                .fullTime(employee.getFullTime())
+                .departmentId(employee.getDepartmentId())
+                .build());
+        Employee createEmployee = systemUnderTest.createEmployee(employee);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(5, employee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
-                () -> Assertions.assertEquals("lastName1", employee.getLastName()),
-                () -> Assertions.assertEquals(Boolean.TRUE, employee.getFullTime()),
-                () -> Assertions.assertEquals(BigDecimal.valueOf(25000), employee.getSalary()),
-                () -> Assertions.assertEquals(1, employee.getDepartmentId())
+                () -> Assertions.assertEquals(employee.getEmployeeId().getId(), createEmployee.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(employee.getFirstName(), createEmployee.getFirstName()),
+                () -> Assertions.assertEquals(employee.getLastName(), createEmployee.getLastName()),
+                () -> Assertions.assertEquals(employee.getFullTime(), createEmployee.getFullTime()),
+                () -> Assertions.assertEquals(employee.getSalary(), createEmployee.getSalary()),
+                () -> Assertions.assertEquals(employee.getDepartmentId(), createEmployee.getDepartmentId())
         );
-        verify(employeeDao, times(1)).findById(1);
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
     public void remove(){
-        //Mocka findById retunera värdet från employee, som en employeeDastabaseEntity.
-
         Employee employee = EmployeeTestBuilder.builder().build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .salary(employee.getSalary())
+                .fullTime(employee.getFullTime())
+                .departmentId(employee.getDepartmentId())
+                .build()));
         Employee removeEmployee = systemUnderTest.removeEmployee(employee);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
-                () -> Assertions.assertEquals("lastName1", employee.getLastName()),
-                () -> Assertions.assertEquals(BigDecimal.valueOf(25000), employee.getSalary()),
-                () -> Assertions.assertEquals(Boolean.TRUE, employee.getFullTime()),
-                () -> Assertions.assertEquals(1, employee.getDepartmentId())
+                () -> Assertions.assertEquals(employee.getEmployeeId().getId(), removeEmployee.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(employee.getFirstName(), removeEmployee.getFirstName()),
+                () -> Assertions.assertEquals(employee.getLastName(), removeEmployee.getLastName()),
+                () -> Assertions.assertEquals(employee.getSalary(), removeEmployee.getSalary()),
+                () -> Assertions.assertEquals(employee.getFullTime(), removeEmployee.getFullTime()),
+                () -> Assertions.assertEquals(employee.getDepartmentId(), removeEmployee.getDepartmentId())
         );
-        verify(employeeDao, times(1)).findById(1);
-    }
-
-    @Test
-    public void update(){
-
     }
 
     @Test
     public void getAll(){
+        when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeeDatabaseEntry.builder()
+                .employeeId(1)
+                .firstName("Johanna")
+                .lastName("Salmi")
+                .salary(BigDecimal.valueOf(20000))
+                .fullTime(Boolean.TRUE)
+                .departmentId(1)
+                .build()));
+
         List<Employee> employees = systemUnderTest.getAllEmployees();
-        verify(employeeDao, times(1)).findAll();
+        Assertions.assertAll(
+                () -> assertNotNull(employees),
+                () -> assertEquals(1, employees.size())
+        );
     }
 
 /*    Employee createOrUpdateEmployee(Employee employee);

@@ -37,11 +37,6 @@ public class TestDepartmentService {
     @InjectMocks
     private DepartmentService systemUnderTest = new DepartmentServiceImpl();
 
-    @BeforeEach
-    public void setUp() {
-
-    }
-
     @Test
     public void findById() {
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
@@ -62,7 +57,6 @@ public class TestDepartmentService {
                 .departmentName("Development")
                 .departmentId(1)
                 .build()));
-
         List<Department> departments = systemUnderTest.getDepartments();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
