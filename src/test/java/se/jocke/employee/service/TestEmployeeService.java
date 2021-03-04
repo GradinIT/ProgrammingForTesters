@@ -28,7 +28,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Test employee rest-service")
+@DisplayName("Test employee service")
 public class TestEmployeeService {
 
     private Employee employee;
