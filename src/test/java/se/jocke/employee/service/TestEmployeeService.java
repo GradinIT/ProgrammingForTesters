@@ -16,6 +16,7 @@ import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.department.entity.Employee;
 import se.jocke.department.entity.Entity;
 import se.jocke.department.entity.EntityID;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
@@ -27,7 +28,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 public class TestEmployeeService {
     @Mock
     private EmployeeDao employeeDao;
@@ -36,8 +36,9 @@ public class TestEmployeeService {
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
-    @BeforeEach
-    public void setUp() {
+
+    @Test
+    public void findById() {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("firstName1")
@@ -46,15 +47,7 @@ public class TestEmployeeService {
                 .salary(BigDecimal.valueOf(25000))
                 .departmentId(1)
                 .build()));
-    }
-/*
-    @BeforeEach
-    public void setUpGetAll(){
-        when(employeeDao.findAll()).thenReturn(List<EmployeeDao>);
-    }*/
 
-    @Test
-    public void findById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -89,7 +82,10 @@ public class TestEmployeeService {
 
     @Test
     public void remove(){
-        Employee employee = systemUnderTest.removeEmployee(systemUnderTest.getEmployeeById(1));
+        //Mocka findById retunera värdet från employee, som en employeeDastabaseEntity.
+
+        Employee employee = EmployeeTestBuilder.builder().build();
+        Employee removeEmployee = systemUnderTest.removeEmployee(employee);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
