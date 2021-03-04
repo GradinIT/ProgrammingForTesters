@@ -1,5 +1,6 @@
 package se.jocke.employee.service;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,8 +49,19 @@ public class TestEmployeeService {
                 .build()));
     }
 
+//    @Before
+//    public void setUp() {
+//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+//                .employeeId(1)
+//                .firstName("firstName1")
+//                .lastName("lastName1")
+//                .fullTime(Boolean.TRUE)
+//                .salary(BigDecimal.valueOf(25000.00))
+//                .departmentId(1)
+//                .build()));
+//}
     @Test
-    public void findById() {
+    public void findById() { //FIXA TILL NÄR @BEFORE ÄR BORTA
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -62,20 +74,20 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(1);
     }
 
-    @Test
+    @Test //INTE GÖRA KLART
     public void createEmployee() {
         //1 Skapa en ny employee med employeeID 77
         //2 Kalla på metoden createEmployee-metoden i TestClient
         //3 Skriv assertions
     }
 
-    @Test
+    @Test //INTE GÖRA KLART
     public void updateEmployee() {
         //1 hitta en employee
         //2 uppdatera mha updateEmployee-metoden i TestClient
     }
 
-    @Test
+    @Test //KOLLA ATT DENNA ÄR RÄTT
     public void removeEmployee() {
         //hitta en employee
         Employee employee = systemUnderTest.getEmployeeById(1);
@@ -85,28 +97,19 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void listAllEmployees() {
+    public void listAllEmployees() { //EVENTUELLT FIXA TILL DENNA MAX 30-45 MIN
+        //1 Lista alla employees mha getAllEmployees-metoden i EmployeeServiceImpl
+        // systemUnderTest.getAllEmployees();
+        //2 skriv assertions
         Employee employee = systemUnderTest.getEmployeeById(1);
         List<Employee> employees = systemUnderTest.getAllEmployees();
         employees.add(employee);
         employees.add(employee);
         employees.add(employee);
 //            when(employeeDao.findAll()).thenReturn(employees);
-//            List<Employee> tempEmpList = SYSTEM_UNDER_TEST.getAllEmployees();
-//            Assertions.assertEquals(3, tempEmpList.size());
+//            List<Employee> EN_LISTA = .getAllEmployees();
+//            Assertions.assertEquals(3, EN_LISTA.size());
         verify(employeeDao, times(1)).findAll();
-
-//            List<EmployeeDatabaseEntry> employees = new ArrayList<>();
-//            employees.add(empDbE);
-//            employees.add(empDbE);
-//            employees.add(empDbE);
-//            when(employeeDao.findAll()).thenReturn(employees);
-//            List<Employee> tempEmpList = SYSTEM_UNDER_TEST.getAllEmployees();
-//            Assertions.assertEquals(3, tempEmpList.size());
-//            verify(employeeDao, times(1)).findAll();
 
     }
 }
-//1 Lista alla employees mha getAllEmployees-metoden i EmployeeServiceImpl
-// systemUnderTest.getAllEmployees();
-//2 skriv assertions?
