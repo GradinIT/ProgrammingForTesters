@@ -6,8 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import se.jocke.TestClient;
-//import se.jocke.api.DepartmentModel;
-import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 
 import java.math.BigDecimal;
