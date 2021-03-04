@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
+import se.jocke.employee.builder.EmployeeModelTestBuilder;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -85,7 +87,7 @@ public class TestEmployeeRestAPI extends TestClient {
     @Given("^the employee$")
     public void givenEmployees(DataTable employeeDataTable) {
         List<EmployeeModel> listOfEmployees = makeEmployeesList(employeeDataTable.asList());
-        listOfEmployees.stream().forEach(employee -> createEmployee(employee));
+        listOfEmployees.forEach(TestClient::createEmployee); // listOfEmployees.stream().forEach(employee -> createEmployee(employee));
     }
 
     @When("the client deletes employee {int}")
@@ -116,5 +118,11 @@ public class TestEmployeeRestAPI extends TestClient {
         assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown2.getMessage());
     }
 
+    @When("the client adds an employee with id {int}")
+    public void the_client_adds_an_employee_with_id(Integer int1) {
+        EmployeeModel empModel = EmployeeModelTestBuilder.builderMethod().build();
+
+
+    }
 
 }

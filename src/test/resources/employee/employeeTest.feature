@@ -12,17 +12,20 @@ Feature: test employee api
   Scenario: the client deletes employee
     Given the employee
     | 10 | Jonas | Svensson | 27000 | 1 | 2 |
+    | 11 | Tora  | Turesson | 32000 | 0 | 4 |
     When the client deletes employee 10
+    When the client deletes employee 11
     Then employee 10 is deleted
+    Then employee 11 is deleted
 
   Scenario: searching for non-existent employee
     When the client tries to get employee 42
     Then employee 42 not found exception is thrown
 
-  #Scenario: adding a new employee
-  #  When the client adds an employee with id 42
-  #  Then employee with id 42 is added
-  #  And the number of employees is 4
+  Scenario: adding a new employee
+    When the client adds an employee with id 42
+    Then employee with id 42 is added
+    And the number of employees is 4
 
   #Scenario: deleting number 42
   #  When the client deletes employee 42

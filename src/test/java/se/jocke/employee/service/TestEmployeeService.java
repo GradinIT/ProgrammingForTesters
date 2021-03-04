@@ -3,6 +3,8 @@ package se.jocke.employee.service;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.dao.EntityNotFoundException;
 import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
 import se.jocke.department.entity.EmployeeID;
@@ -21,8 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -36,8 +37,8 @@ public class TestEmployeeService {
     @InjectMocks // Vi injecerar vår mockade dao i vårt service-objekt
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
-    Employee exampleEmployee;
-    EmployeeDatabaseEntry employeeDbEntry;
+    private Employee exampleEmployee;
+    private EmployeeDatabaseEntry employeeDbEntry;
 
     @BeforeAll
     public void setUp() {
@@ -103,6 +104,8 @@ public class TestEmployeeService {
         Employee removedEmployee = systemUnderTest.removeEmployee(exampleEmployee);
 
         assertions(exampleEmployee, removedEmployee);
+
+        assertThrows(EntityNotFoundException.class, () -> systemUnderTest.getEmployeeById(removedEmployee.getEmployeeId().getId()));
 
         verify(employeeDao, times(1)).findById(any());
         verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
