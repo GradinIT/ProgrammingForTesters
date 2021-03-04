@@ -37,6 +37,7 @@ public class TestEmployeeRestAPI extends TestClient {
     @When("^the client updates first name for employee to (.+)$")
     public void updateNameOfEmployee(String employeeName) {
         Optional <List<EmployeeModel>> employees = getAllEmployees();
+
         employees.ifPresent(employeeModels -> updateEmployee(EmployeeModel.builder()
                 .employeeId(employeeModels.get(0).getEmployeeId())
                 .firstName(employeeName)
@@ -90,12 +91,12 @@ public class TestEmployeeRestAPI extends TestClient {
     }
     Throwable exceptionThatWasThrown;
     @Then("the employee {int} is deleted")
-    public void employeeIsDeleted(Integer departmentId) {
-        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> getEmployeeById(departmentId));
+    public void employeeIsDeleted(Integer employeeId) {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> getEmployeeById(employeeId));
     }
     @And("the error message for employee is {int} : [Entity with id {int} not found]")
-    public void checkErrorMessage(Integer errorCode, Integer departmentId) {
-        Assertions.assertEquals(errorCode+" : [Entity with id " + departmentId +" not found]",exceptionThatWasThrown.getMessage());
+    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
+        Assertions.assertEquals(errorCode+" : [Entity with id " + employeeId +" not found]",exceptionThatWasThrown.getMessage());
     }
 
 }
