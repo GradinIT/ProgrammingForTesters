@@ -89,6 +89,38 @@ public class TestEmployeeService {
     }
 
     @Test
+    public void updateEmployeeHappyFlow(){
+        Employee employee = EmployeeTestBuilder.builder().build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .salary(employee.getSalary())
+                .fullTime(employee.getFullTime())
+                .departmentId(employee.getDepartmentId())
+                .build()));
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .salary(employee.getSalary())
+                .fullTime(employee.getFullTime())
+                .departmentId(employee.getDepartmentId())
+                .build());
+        Employee updateEmployee = systemUnderTest.updateEmployee(employee);
+        Assertions.assertAll(
+                () -> assertEquals(employee.getEmployeeId().getId(), updateEmployee.getEmployeeId().getId()),
+                () -> assertEquals(employee.getFirstName(), updateEmployee.getFirstName()),
+                () -> assertEquals(employee.getLastName(), updateEmployee.getLastName()),
+                () -> assertEquals(employee.getFullTime(), updateEmployee.getFullTime()),
+                () -> assertEquals(employee.getSalary(), updateEmployee.getSalary()),
+                () -> assertEquals(employee.getDepartmentId(), updateEmployee.getDepartmentId())
+        );
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
+    }
+
+    @Test
     public void remove(){
         Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
