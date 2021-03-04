@@ -35,7 +35,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
     }
 
-
     @TimeAndLogg
     public Employee removeEmployee(Employee employee) {
         Optional<EmployeeDatabaseEntry> e = employeeDao.findById(employee.getEmployeeId().getId());
@@ -45,6 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDao.delete(EmployeePojoMapper.map(employee));
         return employee;
     }
+
     @TimeAndLogg
     public Employee updateEmployee(Employee employee) {
         Optional<EmployeeDatabaseEntry> e = employeeDao.findById(employee.getEmployeeId().getId());
@@ -53,6 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
     }
+
     @TimeAndLogg
     public List<Employee> getAllEmployees() {
 

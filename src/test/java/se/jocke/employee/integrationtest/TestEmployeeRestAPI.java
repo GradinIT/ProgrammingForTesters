@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 import se.jocke.department.entity.Employee;
+import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,9 +31,20 @@ public class TestEmployeeRestAPI extends TestClient {
                 employees = getAllEmployees();
             };
 
-    @Then("^the client receives (\\d+) employee$")
+    @Then("^the client receives (\\d+) employees$")
         public void receviedAllEmployess(int numberOfEmployees) throws Throwable {
             Assert.assertEquals(numberOfEmployees,employees.get().size());
+    }
+
+    @When("^the client creates an employee$")
+        public void createEmployee() {
+            EmployeeModel empModel = EmployeeModelTestBuilder.builder().build();
+            employee = createEmployee(empModel);
+    }
+
+    @Then("^the client receives name (.+)$")
+    public void receiveName(String name) throws Throwable {
+        Assert.assertEquals(name,employee.get().getFirstName());
     }
 
     @When("^the client calls employee by id (\\d+)$")
@@ -40,8 +52,8 @@ public class TestEmployeeRestAPI extends TestClient {
             employee = getEmployeeById(employeeId);
     };
 
-    @Then("^the client receives name (.+)$")
-        public void receviedEmployee(String name) throws Throwable {
+    @Then("^the client receives employee with name (.+)$")
+        public void receivedEmployee(String name) throws Throwable {
             Assert.assertEquals(name,employee.get().getFirstName());
     }
 
@@ -86,9 +98,21 @@ public class TestEmployeeRestAPI extends TestClient {
         return empModels;
     }
 
+    //Ändrar namn genom att sätta samma ID som kastas in och kör en Optional på empmodel,
+    //som i sin tur används för att sätta nuvarande värden, men ändrar förnamnet till det -
+    //som anges i testfallet, det läser alltså över nuvarande objekt
     @When("^the client updates firstname to (.+) on employee by id (\\d+)$")
-        public void updateEmployeeName(String firstname, Integer employeeId) {
-            updateEmployee(EmployeeModel.builder().employeeId(employeeId).firstName(firstname).build());
+        public void updateEmployeeName(String firstname, Integer employeeId) { ;
+        Optional<EmployeeModel> empM = getEmployeeById(employeeId);
+
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employeeId)
+                .firstName(firstname)
+                .lastName(empM.get().getLastName())
+                .fullTime(empM.get().getFullTime())
+                .salary(empM.get().getSalary())
+                .departmentId(empM.get().getDepartmentId())
+                .build());
     }
 
     @Then("^name is changed to (.+) on employee id (\\d+)$")
