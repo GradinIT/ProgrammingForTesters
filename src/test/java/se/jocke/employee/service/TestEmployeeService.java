@@ -28,6 +28,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("Test employee rest-service")
 public class TestEmployeeService {
 
     private Employee employee;
@@ -55,7 +56,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client get employee by ID")
+    @DisplayName("Given that client want employee by ID")
     public void testFindEmployee() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
@@ -72,7 +73,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When employee isn't represent")
+    @DisplayName("Given that employee isn't represent")
     public void testFindEmployeeThrowsEntityNotFindException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
 
@@ -84,7 +85,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client create employee")
+    @DisplayName("Given that client create employee")
     public void testCreateEmployeeHappyFlow() {
 
         when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.empty());
@@ -105,7 +106,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client try to create employee that already exists")
+    @DisplayName("Given that client try to create employee that already exists")
     public void testCreateEmployeeEntityAlreadyInStorageException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
@@ -118,7 +119,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client delete employee")
+    @DisplayName("Given that client delete employee")
     public void testRemoveEmployeeHappyFlow() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
@@ -137,7 +138,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client try to delete employee that not exists")
+    @DisplayName("Given that client want to delete employee that not exists")
     public void testRemoveEmployeeEntityNotFoundException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
 
@@ -150,7 +151,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client update employee")
+    @DisplayName("Given that client want to update employee")
     public void testUpdateEmployeeHappyFlow() {
 
         BigDecimal newSalary = new BigDecimal("36000.00");
@@ -182,7 +183,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client update employee that not exists")
+    @DisplayName("Given that client update employee that not exists")
     public void testUpdateEmployeeEntityNotFoundException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
 
@@ -195,7 +196,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("When client request list with all employees")
+    @DisplayName("Given that client request list with all employees")
     public void testGetAllEmployees() {
         List<EmployeeDatabaseEntry> employees = new ArrayList<>();
         employees.add(employeeDatabaseEntry);

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
-@DisplayName("When we create employee model")
+@DisplayName("Test create employee model")
 public class TestCreateEmployeeModel {
 
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
