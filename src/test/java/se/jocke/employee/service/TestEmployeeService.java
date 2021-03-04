@@ -67,7 +67,7 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(BigDecimal.valueOf(25000), employee.getSalary()),
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
-        verify(employeeDao, times(1)).findById(1);
+        verify(employeeDao, times(2)).findById(1);
     }
 
     @Test
@@ -93,12 +93,12 @@ public class TestEmployeeService {
         Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
-                .employeeId(1)
-                .firstName("FirstName1")
-                .lastName("LastName1")
-                .fullTime(Boolean.TRUE)
-                .salary(BigDecimal.valueOf(25000))
-                .departmentId(1)
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .departmentId(employee.getDepartmentId())
                 .build());
         Employee createdEmployee = systemUnderTest.createEmployee(employee);
         Assertions.assertAll(
