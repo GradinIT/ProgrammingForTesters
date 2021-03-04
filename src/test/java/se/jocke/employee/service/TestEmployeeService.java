@@ -28,9 +28,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
 
-    private Employee testEmp;
-    private Employee tempEmp;
-    private EmployeeDatabaseEntry empDbE;
+    private Employee employee;
+    private Employee employeeResult;
+    private EmployeeDatabaseEntry employeeDatabaseEntry;
 
     @Mock
     private EmployeeDao employeeDao;
@@ -40,33 +40,33 @@ public class TestEmployeeService {
 
     @BeforeEach
     void setUp() {
-        tempEmp = null;
-        testEmp = EmployeeTestBuilder.builder().build();
-        empDbE = EmployeeDatabaseEntry.builder()
-                .employeeId(testEmp.getEmployeeId().getId())
-                .firstName(testEmp.getFirstName())
-                .lastName(testEmp.getLastName())
-                .salary(testEmp.getSalary())
-                .fullTime(testEmp.getFullTime())
-                .departmentId(testEmp.getDepartmentId())
+        employeeResult = null;
+        employee = EmployeeTestBuilder.builder().build();
+        employeeDatabaseEntry = EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .salary(employee.getSalary())
+                .fullTime(employee.getFullTime())
+                .departmentId(employee.getDepartmentId())
                 .build();
     }
 
     @Test
     @DisplayName("When client get employee by ID")
     public void testFindEmployee() {
-        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
-        tempEmp = SYSTEM_UNDER_TEST.getEmployeeById(testEmp.getEmployeeId().getId());
+        employeeResult = SYSTEM_UNDER_TEST.getEmployeeById(employee.getEmployeeId().getId());
         Assertions.assertAll(
-                () -> assertEquals(testEmp.getEmployeeId().getId(), tempEmp.getEmployeeId().getId()),
-                () -> assertEquals(testEmp.getFirstName(), tempEmp.getFirstName()),
-                () -> assertEquals(testEmp.getLastName(), tempEmp.getLastName()),
-                () -> assertEquals(testEmp.getSalary(), tempEmp.getSalary()),
-                () -> assertEquals(testEmp.getFullTime(), tempEmp.getFullTime()),
-                () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
+                () -> assertEquals(employee.getEmployeeId().getId(), employeeResult.getEmployeeId().getId()),
+                () -> assertEquals(employee.getFirstName(), employeeResult.getFirstName()),
+                () -> assertEquals(employee.getLastName(), employeeResult.getLastName()),
+                () -> assertEquals(employee.getSalary(), employeeResult.getSalary()),
+                () -> assertEquals(employee.getFullTime(), employeeResult.getFullTime()),
+                () -> assertEquals(employee.getDepartmentId(), employeeResult.getDepartmentId())
         );
-        verify(employeeDao, times(1)).findById(testEmp.getEmployeeId().getId());
+        verify(employeeDao, times(1)).findById(employee.getEmployeeId().getId());
     }
 
     @Test
@@ -85,18 +85,18 @@ public class TestEmployeeService {
     @DisplayName("When client create employee")
     public void testCreateEmployeeHappyFlow() {
 
-        when(employeeDao.findById(testEmp.getEmployeeId().getId())).thenReturn(Optional.empty());
-        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(empDbE);
+        when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.empty());
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry);
 
-        tempEmp = SYSTEM_UNDER_TEST.createEmployee(testEmp);
+        employeeResult = SYSTEM_UNDER_TEST.createEmployee(employee);
 
         Assertions.assertAll(
-                () -> assertEquals(testEmp.getEmployeeId().getId(), tempEmp.getEmployeeId().getId()),
-                () -> assertEquals(testEmp.getFirstName(), tempEmp.getFirstName()),
-                () -> assertEquals(testEmp.getLastName(), tempEmp.getLastName()),
-                () -> assertEquals(testEmp.getSalary(), tempEmp.getSalary()),
-                () -> assertEquals(testEmp.getFullTime(), tempEmp.getFullTime()),
-                () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
+                () -> assertEquals(employee.getEmployeeId().getId(), employeeResult.getEmployeeId().getId()),
+                () -> assertEquals(employee.getFirstName(), employeeResult.getFirstName()),
+                () -> assertEquals(employee.getLastName(), employeeResult.getLastName()),
+                () -> assertEquals(employee.getSalary(), employeeResult.getSalary()),
+                () -> assertEquals(employee.getFullTime(), employeeResult.getFullTime()),
+                () -> assertEquals(employee.getDepartmentId(), employeeResult.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
@@ -105,10 +105,10 @@ public class TestEmployeeService {
     @Test
     @DisplayName("When client try to create employee that already exists")
     public void testCreateEmployeeEntityAlreadyInStorageException() {
-        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
-        Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> SYSTEM_UNDER_TEST.createEmployee(testEmp));
-        Assertions.assertEquals("Entity with id " + testEmp.getEmployeeId().getId() + " already in storage", exception.getMessage());
+        Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> SYSTEM_UNDER_TEST.createEmployee(employee));
+        Assertions.assertEquals("Entity with id " + employee.getEmployeeId().getId() + " already in storage", exception.getMessage());
 
         verify(employeeDao, times(1)).findById(anyInt());
         verifyNoMoreInteractions(employeeDao);
@@ -117,17 +117,17 @@ public class TestEmployeeService {
     @Test
     @DisplayName("When client delete employee")
     public void testRemoveEmployeeHappyFlow() {
-        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
 
-        tempEmp = SYSTEM_UNDER_TEST.removeEmployee(testEmp);
+        employeeResult = SYSTEM_UNDER_TEST.removeEmployee(employee);
 
         Assertions.assertAll(
-                () -> assertEquals(testEmp.getEmployeeId().getId(), tempEmp.getEmployeeId().getId()),
-                () -> assertEquals(testEmp.getFirstName(), tempEmp.getFirstName()),
-                () -> assertEquals(testEmp.getLastName(), tempEmp.getLastName()),
-                () -> assertEquals(testEmp.getSalary(), tempEmp.getSalary()),
-                () -> assertEquals(testEmp.getFullTime(), tempEmp.getFullTime()),
-                () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
+                () -> assertEquals(employee.getEmployeeId().getId(), employeeResult.getEmployeeId().getId()),
+                () -> assertEquals(employee.getFirstName(), employeeResult.getFirstName()),
+                () -> assertEquals(employee.getLastName(), employeeResult.getLastName()),
+                () -> assertEquals(employee.getSalary(), employeeResult.getSalary()),
+                () -> assertEquals(employee.getFullTime(), employeeResult.getFullTime()),
+                () -> assertEquals(employee.getDepartmentId(), employeeResult.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
@@ -137,8 +137,8 @@ public class TestEmployeeService {
     @DisplayName("When client try to delete employee that not exists")
     public void testRemoveEmployeeEntityNotFoundException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
-        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.removeEmployee(testEmp));
-        assertEquals("Entity with id " + testEmp.getEmployeeId().getId() + " not found", exception.getMessage());
+        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.removeEmployee(employee));
+        assertEquals("Entity with id " + employee.getEmployeeId().getId() + " not found", exception.getMessage());
         verify(employeeDao, times(1)).findById(anyInt());
         verifyNoMoreInteractions(employeeDao);
     }
@@ -146,40 +146,40 @@ public class TestEmployeeService {
     @Test
     @DisplayName("When client update employee")
     public void testUpdateEmployeeHappyFlow() {
-        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(empDbE));
-        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(empDbE);
+        when(employeeDao.findById(anyInt())).thenReturn(Optional.of(employeeDatabaseEntry));
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry);
 
-        tempEmp = SYSTEM_UNDER_TEST.updateEmployee(testEmp);
+        employeeResult = SYSTEM_UNDER_TEST.updateEmployee(employee);
 
         Assertions.assertAll(
-                () -> assertEquals(testEmp.getEmployeeId().getId(), tempEmp.getEmployeeId().getId()),
-                () -> assertEquals(testEmp.getFirstName(), tempEmp.getFirstName()),
-                () -> assertEquals(testEmp.getLastName(), tempEmp.getLastName()),
-                () -> assertEquals(testEmp.getSalary(), tempEmp.getSalary()),
-                () -> assertEquals(testEmp.getFullTime(), tempEmp.getFullTime()),
-                () -> assertEquals(testEmp.getDepartmentId(), tempEmp.getDepartmentId())
+                () -> assertEquals(employee.getEmployeeId().getId(), employeeResult.getEmployeeId().getId()),
+                () -> assertEquals(employee.getFirstName(), employeeResult.getFirstName()),
+                () -> assertEquals(employee.getLastName(), employeeResult.getLastName()),
+                () -> assertEquals(employee.getSalary(), employeeResult.getSalary()),
+                () -> assertEquals(employee.getFullTime(), employeeResult.getFullTime()),
+                () -> assertEquals(employee.getDepartmentId(), employeeResult.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(anyInt());
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
-    @DisplayName("When client try to update employee that not exists")
+    @DisplayName("When client update employee that not exists")
     public void testUpdateEmployeeEntityNotFoundException() {
         when(employeeDao.findById(anyInt())).thenReturn(Optional.empty());
-        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.updateEmployee(testEmp));
-        assertEquals("Entity with id " + testEmp.getEmployeeId().getId() + " not found", exception.getMessage());
+        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () -> SYSTEM_UNDER_TEST.updateEmployee(employee));
+        assertEquals("Entity with id " + employee.getEmployeeId().getId() + " not found", exception.getMessage());
         verify(employeeDao, times(1)).findById(anyInt());
         verifyNoMoreInteractions(employeeDao);
     }
 
     @Test
-    @DisplayName("When client get list with all employees")
+    @DisplayName("When client request list with all employees")
     public void testGetAllEmployees() {
         List<EmployeeDatabaseEntry> employees = new ArrayList<>();
-        employees.add(empDbE);
-        employees.add(empDbE);
-        employees.add(empDbE);
+        employees.add(employeeDatabaseEntry);
+        employees.add(employeeDatabaseEntry);
+        employees.add(employeeDatabaseEntry);
 
         when(employeeDao.findAll()).thenReturn(employees);
 
