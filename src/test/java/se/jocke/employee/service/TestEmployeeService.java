@@ -33,7 +33,7 @@ public class TestEmployeeService {
                 .firstName("firstName1")
                 .lastName("lastName1")
                 .fullTime(true)
-                .salary(BigDecimal.valueOf(2500000, 2))
+                .salary(BigDecimal.valueOf(25000).setScale(2))
                 .departmentId(1)
                 .build()));
     }

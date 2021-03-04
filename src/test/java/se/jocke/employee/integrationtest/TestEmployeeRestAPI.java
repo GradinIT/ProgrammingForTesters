@@ -39,7 +39,7 @@ public class TestEmployeeRestAPI extends TestClient {
                 .firstName(employeeFirstName)
                 .lastName("lastName1")
                 .fullTime(true)
-                .salary(BigDecimal.valueOf(2500000, 2))
+                .salary(BigDecimal.valueOf(25000).setScale(2))
                 .departmentId(1)
                 .build());
     }
@@ -57,7 +57,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @Then("^employees first name is$")
     public void nameOfEmployeeIs() throws Throwable {
-        Assert.assertEquals("Coding", employee.get().getFirstName());
+        Assert.assertEquals("Marcus", employee.get().getFirstName());
     }
 
     @Given("^the employees$")
