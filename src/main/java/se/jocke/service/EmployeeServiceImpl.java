@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeById(Integer employeeId) {
         Optional<EmployeeDatabaseEntry> employee = employeeDao.findById(employeeId);
         if(employee.isPresent())
-            return EmployeePojoMapper.map(employee.get());
+            return EmployeePojoMapper.mapReturnEmployee(employee.get());
         else throw new EntityNotFoundException(employeeId);
     }
     @TimeAndLogg
@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(e.isPresent()) {
             throw new EntityAlreadyInStorageException(employee.getEmployeeId().getId());
         }
-        return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
+        return EmployeePojoMapper.mapReturnEmployee(employeeDao.save(EmployeePojoMapper.mapReturnDbEntry(employee)));
     }
     @TimeAndLogg
     public Employee removeEmployee(Employee employee) {
@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(!e.isPresent()) {
             throw new EntityNotFoundException(employee.getEmployeeId().getId());
         }
-        employeeDao.delete(EmployeePojoMapper.map(employee));
+        employeeDao.delete(EmployeePojoMapper.mapReturnDbEntry(employee));
         return employee;
     }
     @TimeAndLogg
@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(!e.isPresent()) {
             throw new EntityNotFoundException(employee.getEmployeeId().getId());
         }
-        return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
+        return EmployeePojoMapper.mapReturnEmployee(employeeDao.save(EmployeePojoMapper.mapReturnDbEntry(employee)));
     }
     @TimeAndLogg
     public List<Employee> getAllEmployees() {

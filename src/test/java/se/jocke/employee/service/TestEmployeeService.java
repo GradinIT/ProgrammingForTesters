@@ -1,96 +1,114 @@
 package se.jocke.employee.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import static org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.EntityNotFoundException;
 import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
-import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@TestInstance(Lifecycle.PER_CLASS)
 public class TestEmployeeService {
-    @Mock // Varför
+    @Mock // Vi har en mockad dao för att vi vill isolera funktionaliteten i Service-klassen och BARA testa metoderna där
     private EmployeeDao employeeDao;
-    @InjectMocks
+    @InjectMocks // Vi injecerar vår mockade dao i vårt service-objekt
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
-    private Employee exampleEmployee = EmployeeTestBuilder.builderMethod().build();
+    Employee exampleEmployee;
+    EmployeeDatabaseEntry employeeDbEntry;
 
-    // Utöka med att testa de andra metoderna i EmployeeServiceImpl?
-    @Test
-    public void testGetEmployeeById() {
-        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-                .employeeId(1)
-                .firstName("Mock")
-                .lastName("Mockesson")
-                .salary(BigDecimal.valueOf(22000))
-                .fullTime(true)
-                .departmentId(5)
-                .build()));
+    @BeforeAll
+    public void setUp() {
+        // initierar en exempel-employee att jämföra mot i assertions
+        exampleEmployee = EmployeeTestBuilder.builderMethod().build();
 
-        Employee employee = systemUnderTest.getEmployeeById(1);
-
-        Assertions.assertEquals(1, employee.getEmployeeId().getId());
-        Assertions.assertEquals("Mock", employee.getFirstName());
-
-        verify(employeeDao, times(1)).findById(1); // Vad gör verify? Varför vill vi veta hur många gånger findById körs?
-    }
-
-    @Test
-    public void testCreateEmployee() {
-        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
-        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
+        // initierar ett database entry baserad på exempel-employeeen
+        employeeDbEntry = EmployeeDatabaseEntry.builder()
                 .employeeId(exampleEmployee.getEmployeeId().getId())
                 .firstName(exampleEmployee.getFirstName())
                 .lastName(exampleEmployee.getLastName())
                 .salary(exampleEmployee.getSalary())
                 .fullTime(exampleEmployee.getFullTime())
                 .departmentId(exampleEmployee.getDepartmentId())
-                .build());
+                .build();
+    }
+
+    @Test
+    public void testGetEmployeeById() {
+
+        when(employeeDao.findById(any())).thenReturn(Optional.of(employeeDbEntry));
+
+        Employee foundEmployee = systemUnderTest.getEmployeeById(1);
+
+        assertions(exampleEmployee, foundEmployee);
+
+        verify(employeeDao, times(1)).findById(any());
+    }
+
+    @Test
+    public void testGetAllEmployees() {
+
+        when(employeeDao.findAll()).thenReturn(Arrays.asList(employeeDbEntry));
+
+        List<Employee> allEmployees = systemUnderTest.getAllEmployees();
+
+        assertEquals(1, allEmployees.size());
+
+        verify(employeeDao, times(1)).findAll();
+
+    }
+
+    @Test
+    public void testCreateEmployee() {
+
+        when(employeeDao.findById(any())).thenReturn(Optional.empty());
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDbEntry);
 
         Employee addedEmployee = systemUnderTest.createEmployee(exampleEmployee);
 
-        Assertions.assertNotNull(addedEmployee);
-        Assertions.assertEquals(exampleEmployee.getEmployeeId().getId(), addedEmployee.getEmployeeId().getId());
-        Assertions.assertEquals(exampleEmployee.getFirstName(), addedEmployee.getFirstName());
-        Assertions.assertEquals(exampleEmployee.getLastName(), addedEmployee.getLastName());
-        Assertions.assertEquals(exampleEmployee.getSalary(), addedEmployee.getSalary());
-        Assertions.assertEquals(exampleEmployee.getFullTime(), addedEmployee.getFullTime());
-        Assertions.assertEquals(exampleEmployee.getDepartmentId(), addedEmployee.getDepartmentId());
+        assertions(exampleEmployee, addedEmployee);
+
+        verify(employeeDao, times(1)).findById(any());
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
     public void testRemoveEmployee() {
-        when(employeeDao.findById(exampleEmployee.getEmployeeId().getId()))
-                .thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-                        .employeeId(exampleEmployee.getEmployeeId().getId())
-                        .firstName(exampleEmployee.getFirstName())
-                        .lastName(exampleEmployee.getLastName())
-                        .salary(exampleEmployee.getSalary())
-                        .fullTime(exampleEmployee.getFullTime())
-                        .departmentId(exampleEmployee.getDepartmentId())
-                        .build()));
+        // Kanske inte ska mockas pga returnerar inget?
+        when(employeeDao.findById(any())).thenReturn(Optional.of(employeeDbEntry));
+        // Varför behövs ingen regel för delete?
 
-        systemUnderTest.removeEmployee(exampleEmployee);
+        Employee removedEmployee = systemUnderTest.removeEmployee(exampleEmployee);
 
+        assertions(exampleEmployee, removedEmployee);
+
+        verify(employeeDao, times(1)).findById(any());
         verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
+
     }
 
     @Test
@@ -107,27 +125,34 @@ public class TestEmployeeService {
 
     @Test
     public void testUpdateEmployee() {
-        when(employeeDao.findById(exampleEmployee.getEmployeeId().getId())).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-                .employeeId(exampleEmployee.getEmployeeId().getId())
-                .firstName(exampleEmployee.getFirstName())
+
+        Employee employeeWithNewName = Employee.builder()
+                .employeeId(EmployeeID.builder().id(exampleEmployee.getEmployeeId().getId()).build())
+                .firstName("Mocke")
                 .lastName(exampleEmployee.getLastName())
                 .salary(exampleEmployee.getSalary())
                 .fullTime(exampleEmployee.getFullTime())
                 .departmentId(exampleEmployee.getDepartmentId())
-                .build()));
+                .build();
 
-        systemUnderTest.updateEmployee(exampleEmployee);
+        when(employeeDao.findById(any())).thenReturn(Optional.of(EmployeePojoMapper.mapReturnDbEntry(employeeWithNewName)));
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeePojoMapper.mapReturnDbEntry(employeeWithNewName));
+
+        Employee updatedEmployee = systemUnderTest.updateEmployee(employeeWithNewName);
+
+        assertions(employeeWithNewName, updatedEmployee);
+
+        verify(employeeDao, times(1)).findById(any());
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
-    @Test
-    public void testGetAllEmployee() {
-
-    }
-
-    public Employee getExampleEmployee() {
-        return exampleEmployee = EmployeeTestBuilder
-                .builderMethod()
-                .build();
+    public void assertions(Employee expected, Employee actual) {
+        assertNotNull(actual);
+        assertEquals(expected.getEmployeeId().getId(), actual.getEmployeeId().getId());
+        assertEquals(expected.getFirstName(), actual.getFirstName());
+        assertEquals(expected.getLastName(), actual.getLastName());
+        assertEquals(expected.getSalary(), actual.getSalary());
+        assertEquals(expected.getFullTime(), actual.getFullTime());
+        assertEquals(expected.getDepartmentId(), actual.getDepartmentId());
     }
 }

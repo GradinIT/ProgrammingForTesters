@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
-import se.jocke.dao.EntityNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -61,9 +60,9 @@ public class TestEmployeeRestAPI extends TestClient {
         Assert.assertEquals(updatedEmployee, getEmployeeById(employeeId).get());
     }
 
-    @And("^the total number of employees is unchanged$")
-    public void checkTheListSizeOfEmployees() {
-        Assert.assertEquals(3, optionalEmployeeModelList.get().size());
+    @And("^the total number of employees is still (\\d+)$")
+    public void checkTheListSizeOfEmployees(int numberOfEmployees) {
+        Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
     }
 
 
@@ -103,21 +102,19 @@ public class TestEmployeeRestAPI extends TestClient {
         });
     }
 
-
     Throwable exceptionThatWasThrown2;
 
     @When("the client tries to get employee {int}")
     public void searchForNonExistentEmployee(Integer employeeId) {
-        try {
-            optionalEmployeeModel = getEmployeeById(employeeId);
-        } catch (Throwable e) {
-            exceptionThatWasThrown2 = e;
-        }
-    }
-    // Hur kan jag testa att rätt exceptions kastades när det redan kastas i When-satsen?
-    @Then("the not found exception is thrown")
-    public void throwNotFoundException() {
 
-        //assertThrows(HttpClientErrorException.class, () -> exceptionThatWasThrown);
+        exceptionThatWasThrown2 = assertThrows(HttpClientErrorException.class, () -> optionalEmployeeModel = getEmployeeById(employeeId));
+
     }
+
+    @Then("employee {int} not found exception is thrown")
+    public void throwNotFoundException(Integer employeeId) {
+        assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown2.getMessage());
+    }
+
+
 }
