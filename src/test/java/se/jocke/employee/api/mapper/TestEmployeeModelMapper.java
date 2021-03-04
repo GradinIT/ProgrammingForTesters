@@ -37,6 +37,6 @@ public class TestEmployeeModelMapper {
                 () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary()),
                 () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime()),
                 () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId())
-                );
+        );
     }
 }

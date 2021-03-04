@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeePojoMapper {
-    public static Employee map(EmployeeDatabaseEntry employeeDatabaseEntry) {
+    public static Employee mapReturnEmployee(EmployeeDatabaseEntry employeeDatabaseEntry) {
         return Employee.builder()
                 .employeeId(EmployeeID.builder().id(employeeDatabaseEntry.getEmployeeId()).build())
                 .firstName(employeeDatabaseEntry.getFirstName())
@@ -19,7 +19,7 @@ public class EmployeePojoMapper {
                 .build();
     }
 
-    public static EmployeeDatabaseEntry map(Employee employee) {
+    public static EmployeeDatabaseEntry mapReturnDbEntry(Employee employee) {
         return EmployeeDatabaseEntry.builder()
                 .employeeId(employee.getEmployeeId().getId())
                 .firstName(employee.getFirstName())
@@ -33,7 +33,7 @@ public class EmployeePojoMapper {
     public static List<Employee> map(List<EmployeeDatabaseEntry> all) {
         List<Employee> employees = new ArrayList<>();
         for (EmployeeDatabaseEntry employeeDatabaseEntry : all)
-            employees.add(map(employeeDatabaseEntry));
+            employees.add(mapReturnEmployee(employeeDatabaseEntry));
         return employees;
     }
 }

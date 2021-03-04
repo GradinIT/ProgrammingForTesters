@@ -50,7 +50,7 @@ public class TestEmployeeDao {
     }
 
     @Test
-    // Körs först av någon anledning. OBS överflödigt test
+    // Körs först av någon anledning. OBS överflödigt test som dessutom gör de andra testen beroende :S
     public void testSave() {
         // <S extends T> S save(S var1);
         EmployeeDatabaseEntry edbeSaved = employeeDao.save(
