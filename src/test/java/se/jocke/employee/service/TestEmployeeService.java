@@ -46,7 +46,7 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
                 () -> Assertions.assertEquals("lastName1", employee.getLastName()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
-                () -> Assertions.assertEquals(BigDecimal.valueOf(2500000, 2), employee.getSalary()),
+                () -> Assertions.assertEquals(BigDecimal.valueOf(25000).setScale(2), employee.getSalary()),
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
