@@ -34,12 +34,11 @@ public class TestEmployeeRestAPI {
         Assert.assertEquals(numberOfEmployees, employees.get().size());
     }
 
-
-    //Kolla detta för att kunna uppdatera namn
     @When("^now the client updates the employee to (.+) and (.+) and (.+) and (.+) and (.+)$")
     public void updateOfEmployee(String firstName, String lastName, Boolean fullTime, BigDecimal bigDecimal, Integer departmentId) throws Throwable {
+      EmployeeModel employeeModel = getEmployeeById(1).get();
       updateEmployee(EmployeeModel.builder()
-              .employeeId(1)
+              .employeeId(employeeModel.getEmployeeId())
               .firstName(firstName)
               .lastName(lastName)
               .fullTime(fullTime)
@@ -80,7 +79,6 @@ public class TestEmployeeRestAPI {
         listOfEmployees.stream().forEach(employee -> createEmployee(employee));
     }
 
-    //kolla på denna
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> employee = new ArrayList<>();
         for(int i = 0 ; i < given.size() - 1 ; i +=6) {
@@ -96,7 +94,6 @@ public class TestEmployeeRestAPI {
         return employee;
     }
 
-    //den här
     @When("the client deletes employee {int}")
     public void deleteEmployeeFromDB(Integer employeeId) {
         deleteEmployee(getEmployeeById(employeeId).get());
@@ -104,7 +101,6 @@ public class TestEmployeeRestAPI {
 
     Throwable exceptionThatWasThrown;
 
-    // och den här måste stämma överens
     @Then("the employee {int} is deleted")
     public void employeeIsDeleted(Integer employeeId){
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {

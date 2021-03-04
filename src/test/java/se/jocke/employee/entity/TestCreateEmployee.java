@@ -28,6 +28,7 @@ public class TestCreateEmployee {
         Assertions.assertEquals(EMPLOYEE.getSalary(), employee.getSalary());
     }
 
+    //Testar vi så att det inte är null, eftersom det inte får vara null genom @nonnull i employee
     @Test
     public void testCreateDepartmentThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {

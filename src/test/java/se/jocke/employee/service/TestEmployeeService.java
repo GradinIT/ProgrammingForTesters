@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.dao.EntityAlreadyInStorageException;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
@@ -30,22 +31,19 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
 public class TestEmployeeService {
-    //De som vi mockar
+
     @Mock
     private EmployeeDao employeeDao;
 
-    //Det som ska testas
     @InjectMocks
     private final EmployeeService systemUndertest = new EmployeeServiceImpl();
 
-    //Används för att hålla isär testet och miljöuppsättningen.
-    //Körs före varje annoterad metod @test.
     @BeforeEach
     public void setUp() {
 
     }
 
-   //Testar getEmployeeById(Integer employee)
+    //Testar getEmployeeById(Integer employee)
     @Test
     public void findByEmployeeId() {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
@@ -65,15 +63,11 @@ public class TestEmployeeService {
                 () -> assertEquals(2, employee.getDepartmentId()),
                 () -> assertEquals(true, employee.getFullTime()),
                 () -> assertEquals(BigDecimal.valueOf(25000.00), employee.getSalary()));
-        //Kollar så att anropet har kommit till den metoden,
-        //speciellt eftersom vi har injectad
         verify(employeeDao, times(1)).findById(1);
     }
 
-//  Testar List<Employee> getAllEmployees()
     @Test
     public void testListOfEmployees() {
-        //Sätt upp regel
         when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeeDatabaseEntry.builder()
                 .firstName("firstName1")
                 .lastName("lastName1")
@@ -85,17 +79,14 @@ public class TestEmployeeService {
 
         List<Employee> employees = systemUndertest.getAllEmployees();
         Assertions.assertAll(
-                ()-> assertNotNull(employees),
-                ()-> assertEquals(1, employees.size())
+                () -> assertNotNull(employees),
+                () -> assertEquals(1, employees.size())
         );
-//        List<Employee> mockedList = mock(List.class);
-//        mockedList.size();
-//        verify(mockedList, times(1)).size();
+
     }
 
-    //Testar updateEmployee(Employee employee), normalflödet (Happy flow)
     @Test
-    public void createEmployee() {
+    public void createEmployeeHappyFlow() {
         Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
@@ -121,31 +112,73 @@ public class TestEmployeeService {
 
     }
 
-//    @Test
-//    public void updateEmployee() {
-//        Employee employee = EmployeeTestBuilder.builder().build();
-//        Employee updateEmployee = systemUndertest.updateEmployee(employee);
-//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
-//        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
-//                .employeeId(employee.getEmployeeId().getId())
-//                .firstName(employee.getFirstName())
-//                .lastName(employee.getLastName())
-//                .fullTime(employee.getFullTime())
-//                .salary(employee.getSalary())
-//                .departmentId(employee.getDepartmentId())
-//                .build());
-//
-//        Assertions.assertAll(
-//                () -> assertNotNull(updateEmployee),
-//                () -> assertEquals(employee.getEmployeeId().getId(), updateEmployee.getEmployeeId().getId()),
-//                () -> assertEquals(employee.getLastName(), updateEmployee.getLastName()),
-//                () -> assertEquals(employee.getFirstName(), updateEmployee.getFirstName()),
-//                () -> assertEquals(employee.getDepartmentId(), updateEmployee.getDepartmentId()),
-//                () -> assertEquals(employee.getFullTime(), updateEmployee.getFullTime()),
-//                () -> assertEquals(employee.getSalary(), updateEmployee.getSalary()));
-//        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
-//        verify(employeeDao, times(2)).findById(any(Integer.class));
-//
-//    }
+    @Test
+    public void createEmployeeError() {
+        Employee employee = EmployeeTestBuilder.builder().build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .departmentId(employee.getDepartmentId())
+                .build()));
+        Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> {
+            systemUndertest.createEmployee(employee);
+        });
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+
+    }
+
+    //Testar updateEmployee(Employee employee), normalflödet (Happy flow)
+    @Test
+    public void updateEmployeeHappyFlow() {
+        Employee employee = EmployeeTestBuilder.builder().build();
+//        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.isPresent());
+        EmployeeDatabaseEntry updateEmployee = EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .departmentId(employee.getDepartmentId())
+                .build();
+
+        lenient().when(employeeDao.save(any())).thenReturn(updateEmployee);
+
+        Assertions.assertAll(
+                () -> assertNotNull(updateEmployee),
+                () -> assertEquals(employee.getEmployeeId().getId(), updateEmployee.getEmployeeId()),
+                () -> assertEquals(employee.getLastName(), updateEmployee.getLastName()),
+                () -> assertEquals(employee.getFirstName(), updateEmployee.getFirstName()),
+                () -> assertEquals(employee.getDepartmentId(), updateEmployee.getDepartmentId()),
+                () -> assertEquals(employee.getFullTime(), updateEmployee.getFullTime()),
+                () -> assertEquals(employee.getSalary(), updateEmployee.getSalary()));
+    }
+
+    //Testar removeEmployee(Employee employee) normalflödet happy flow
+    //mocka findbyid, anropar delete - retunera värdet från employee
+    @Test
+    public void removeEmployeeHappyFlow() {
+        Employee employee = EmployeeTestBuilder.builder().build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(employee.getEmployeeId().getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .departmentId(employee.getDepartmentId())
+                .build()));
+        Employee removeEmployee = systemUndertest.removeEmployee(employee);
+
+        Assertions.assertAll(
+                () -> assertNotNull(removeEmployee),
+                () -> assertEquals(employee.getEmployeeId().getId(), removeEmployee.getEmployeeId().getId()),
+                () -> assertEquals(employee.getLastName(), removeEmployee.getLastName()),
+                () -> assertEquals(employee.getFirstName(), removeEmployee.getFirstName()),
+                () -> assertEquals(employee.getDepartmentId(), removeEmployee.getDepartmentId()),
+                () -> assertEquals(employee.getFullTime(), removeEmployee.getFullTime()),
+                () -> assertEquals(employee.getSalary(), removeEmployee.getSalary()));
+    }
 
 }
