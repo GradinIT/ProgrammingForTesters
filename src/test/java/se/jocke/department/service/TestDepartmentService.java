@@ -22,10 +22,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
@@ -95,14 +93,14 @@ public class TestDepartmentService {
         Department department = DepartmentTestBuilder.builder().build();
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(
                 DepartmentDatabaseEntry.builder()
-                    .departmentId(department.getDepartmentId())
-                    .departmentName(department.getDepartmentName())
-                    .build()
+                        .departmentId(department.getDepartmentId())
+                        .departmentName(department.getDepartmentName())
+                        .build()
         ));
         Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> {
             systemUnderTest.create(department);
         });
-        Assertions.assertEquals("Entity with id "+department.getDepartmentId()+" already in storage",
+        Assertions.assertEquals("Entity with id " + department.getDepartmentId() + " already in storage",
                 exception.getMessage());
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verifyNoMoreInteractions(departmentDao);
