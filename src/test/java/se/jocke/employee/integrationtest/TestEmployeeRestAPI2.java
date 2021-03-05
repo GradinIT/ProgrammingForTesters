@@ -1,10 +1,13 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 
@@ -92,7 +95,7 @@ public class TestEmployeeRestAPI2 extends TestClient {
         Assert.assertEquals("Nico", employee.get().getFirstName());
     }
 
-    @Given("^the employees")
+    @Given("^the employees are")
     public void givenEmployees(DataTable employees) {
         List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());
         listOfEmployees.stream().forEach(employee -> createEmployee(employee));
@@ -104,6 +107,29 @@ public class TestEmployeeRestAPI2 extends TestClient {
             emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).firstName(given.get(i + 1)).build());
         }
         return emps;
+    }// måste jag lägga till alla 6 variabler tex: efternamn,lön, anställning osv?
+     // Lägger till employees i en lista!
+     // I rad 97 så borde man kanske ändra till employeeId() istället för firstName() så att de blir unikt!!! men då måste man göra om!
+
+    @When("the client deletes this employee {int}")
+    public void deleteDepartment(Integer employeeId) {
+        deleteEmployee(getEmployeeById(employeeId).get());
     }
-}// Lägger till employees i en lista!
-// I rad 97 så borde man kanske ändra till employeeId() istället för firstName() så att de blir unikt!!! men då måste man göra om!
+
+    Throwable exceptionThatWasThrown;
+
+    @Then("the employee {int} is now deleted")
+    public void employeeIsDeleted(Integer employeeId) {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            getEmployeeById(employeeId);
+        });
+    }
+
+    @And("error message is {int} : [Entity with id {int} not found]")
+    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
+        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
+    }
+}
+
+
+

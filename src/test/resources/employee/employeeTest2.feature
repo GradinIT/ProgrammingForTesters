@@ -25,19 +25,23 @@ Feature: test employee api
     Then the name of employee is
 
   Scenario: client deletes employee
-    Given the employees
+    Given the employees are
 
-      | 1 | Nico  | Palucchi | 30000 |
-      | 2 | Astrid| Sinabian | 35000 |
-      | 3 | Eddie | Diaz     | 40000 |
-    When the client deletes employee 1
-    Then the employee 1 is deleted
-    When the client deletes department 55
+      | 1 | Nico  | Palucchi | 30000 | True | 1
+      | 2 | Astrid| Sinabian | 35000 | True | 1
+      | 3 | Eddie | Diaz     | 40000 | True | 1
+
+    When the client deletes this employee 1
+    Then the employee 1 is now deleted
+
+
+    When the client deletes department 1
+
     When the client deletes department 56
     When the client deletes department 57
     Then the department 55 is deleted
-    And  the error message is 404 : [Entity with id 55 not found]
+    And  error message is 404 : [Entity with id 55 not found]
     Then the department 56 is deleted
-    And  the error message is 404 : [Entity with id 56 not found]
+    And  error message is 404 : [Entity with id 56 not found]
     Then the department 57 is deleted
-    And  the error message is 404 : [Entity with id 57 not found]
+    And  error message is 404 : [Entity with id 57 not found]
