@@ -33,6 +33,7 @@ public class TestDepartmentDao {
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
                 () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
+                
         );
     }
     @Test

@@ -8,3 +8,4 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = {"src/test/resources/department/departmentTest.feature"})
 public class IntegrationTest {
 }
+//"src/test/resources/department/employeeTest.feature"
