@@ -14,7 +14,7 @@ Feature: test department api
   Scenario: client deletes department
     Given the departments
       | 55 | Fun |
-      | 56 | Play |
+      | 56 | HR |
       | 57 | Fika |
     When the client deletes department 55
     When the client deletes department 56

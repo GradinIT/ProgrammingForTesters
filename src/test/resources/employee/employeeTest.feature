@@ -3,3 +3,7 @@ Feature: test employee api
     When the client calls /employee
     Then the client receives 3 employees
 
+  Scenario: client updates name for employee 1
+    When the client updates firstName for employeeId 1 to Agda
+    Then the firstName is updated to Agda
+
