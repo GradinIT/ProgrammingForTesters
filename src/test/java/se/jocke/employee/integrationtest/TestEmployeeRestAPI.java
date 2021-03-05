@@ -5,14 +5,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.H2JpaConfig;
-import se.jocke.LiquibaseConfigurer;
-import se.jocke.RestServiceApplication;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 
@@ -21,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends TestClient {

@@ -5,14 +5,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.H2JpaConfig;
-import se.jocke.LiquibaseConfigurer;
-import se.jocke.RestServiceApplication;
 import se.jocke.TestClient;
 import se.jocke.api.DepartmentModel;
 
