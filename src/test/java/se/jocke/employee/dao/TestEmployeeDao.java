@@ -34,8 +34,7 @@ public class TestEmployeeDao {
 
         Assertions.assertAll(
                 () -> assertNotNull(data),
-                () -> assertEquals(1, data
-                        .stream()
+                () -> assertEquals(1, data.stream()
                         .filter(D -> D.getFirstName().equals("Anita")).count())
         );
     }
@@ -46,9 +45,8 @@ public class TestEmployeeDao {
 
         Assertions.assertAll(
                 () -> assertNotNull(data),
-                () -> assertEquals(2,data
-                        .stream()
-                        .filter(EmployeeDatabaseEntry::getFullTime).count())
+                () -> assertEquals(4, data.stream()
+                        .filter(D -> D.getFullTime().equals(Boolean.FALSE)).count())
         );
     }
 
@@ -59,33 +57,32 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry),
-                () -> assertEquals("Anita",optionalEmployeeDatabaseEntry.get().getFirstName())
+                () -> assertEquals("Anita", optionalEmployeeDatabaseEntry.get().getFirstName())
         );
     }
 
     @Test
-    public void getAllEmployeesByDepartmentId() {
+    public void testGetAllEmployeesByDepartmentId() {
         List<EmployeeDatabaseEntry> data = employeeDao.findAll();
 
         Assertions.assertAll(
                 () -> assertFalse(data.isEmpty()),
-                () -> assertEquals(2,data.stream()
-                        .filter(D -> D.getDepartmentId() == 2)
-                        .count())
+                () -> assertEquals(2, data.stream()
+                        .filter(D -> D.getDepartmentId() == 2).count())
         );
     }
 
     @Test
-    public void getEmployeesBetweenSalaryRange() {
+    public void testGetEmployeesBetweenSalaryRange() {
         List<EmployeeDatabaseEntry> data = employeeDao.findAll();
 
-        Predicate<EmployeeDatabaseEntry> salaryRange = D -> D.getSalary().compareTo(new BigDecimal("25000")) > 0 && D.getSalary().compareTo(new BigDecimal("27000")) < 0;
+        Predicate<EmployeeDatabaseEntry> salaryRange = D -> D.getSalary().compareTo(new BigDecimal("25000")) > 0
+                && D.getSalary().compareTo(new BigDecimal("27000")) < 0;
 
         Assertions.assertAll(
                 () -> assertFalse(data.isEmpty()),
-                () -> assertEquals(1,data.stream()
-                        .filter(salaryRange)
-                        .count())
+                () -> assertEquals(1, data.stream()
+                        .filter(salaryRange).count())
         );
     }
 

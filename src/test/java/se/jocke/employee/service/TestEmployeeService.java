@@ -14,6 +14,7 @@ import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.EntityNotFoundException;
 import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
 import se.jocke.department.entity.Entity;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
@@ -31,6 +32,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
 
+    Employee globalEmployee;
+
     @Mock
     private EmployeeDao employeeDao;
 
@@ -40,35 +43,36 @@ public class TestEmployeeService {
     @BeforeEach
     public void setup() {
 
-//        final Integer employeeId = 1;
-//        String firstName = "Linus";
-//        String lastName = "Hellberg";
-//        boolean fulltime = false;
-//        BigDecimal salary = new BigDecimal("22000.00");
-//        Integer departmendId = 3;
-
+        globalEmployee = EmployeeTestBuilder.builder()
+                .employeeId(EmployeeID.builder().id(1).build())
+                .firstName("Linus")
+                .lastName("Hellberg")
+                .fullTime(false)
+                .salary(new BigDecimal("22000.00"))
+                .departmentId(3)
+                .build();
     }
 
     @Test
     public void testFindById() {
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-                .employeeId(1)
-                .firstName("Linus")
-                .lastName("Hellberg")
-                .fullTime(false)
-                .salary(new BigDecimal(22000.00))
-                .departmentId(3)
+                .employeeId(globalEmployee.getEmployeeId().getId())
+                .firstName(globalEmployee.getFirstName())
+                .lastName(globalEmployee.getLastName())
+                .fullTime(globalEmployee.getFullTime())
+                .salary(globalEmployee.getSalary())
+                .departmentId(globalEmployee.getDepartmentId())
                 .build()));
 
         Employee emp = employeeService.getEmployeeById(1);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1,emp.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("Linus",emp.getFirstName()),
-                () -> Assertions.assertEquals("Hellberg",emp.getLastName()),
-                () -> Assertions.assertEquals(false,emp.getFullTime()),
-                () -> Assertions.assertEquals(new BigDecimal(22000.00),emp.getSalary()),
-                () -> Assertions.assertEquals(3,emp.getDepartmentId())
+                () -> Assertions.assertEquals(globalEmployee.getEmployeeId().getId(),emp.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(globalEmployee.getFirstName(),emp.getFirstName()),
+                () -> Assertions.assertEquals(globalEmployee.getLastName(),emp.getLastName()),
+                () -> Assertions.assertEquals(globalEmployee.getFullTime(),emp.getFullTime()),
+                () -> Assertions.assertEquals(globalEmployee.getSalary(),emp.getSalary()),
+                () -> Assertions.assertEquals(globalEmployee.getDepartmentId(),emp.getDepartmentId())
                 );
 
         verify(employeeDao,times(1)).findById(1);
@@ -79,12 +83,12 @@ public class TestEmployeeService {
 
         when(employeeDao.findAll()).thenReturn(Arrays.asList(
                 EmployeeDatabaseEntry.builder()
-                        .employeeId(1)
-                        .firstName("Linus")
-                        .lastName("Hellberg")
-                        .fullTime(false)
-                        .salary(new BigDecimal(22000.00))
-                        .departmentId(3)
+                        .employeeId(globalEmployee.getEmployeeId().getId())
+                        .firstName(globalEmployee.getFirstName())
+                        .lastName(globalEmployee.getLastName())
+                        .fullTime(globalEmployee.getFullTime())
+                        .salary(globalEmployee.getSalary())
+                        .departmentId(globalEmployee.getDepartmentId())
                         .build()));
 
         List<Employee> emps = employeeService.getAllEmployees();
@@ -98,27 +102,26 @@ public class TestEmployeeService {
 
     @Test
     public void testCreateEmployee() {
-        Employee employee = EmployeeTestBuilder.builder().build();
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
-                .employeeId(employee.getEmployeeId().getId())
-                .firstName(employee.getFirstName())
-                .lastName(employee.getLastName())
-                .fullTime(employee.getFullTime())
-                .salary(employee.getSalary())
-                .departmentId(employee.getDepartmentId())
+                .employeeId(globalEmployee.getEmployeeId().getId())
+                .firstName(globalEmployee.getFirstName())
+                .lastName(globalEmployee.getLastName())
+                .fullTime(globalEmployee.getFullTime())
+                .salary(globalEmployee.getSalary())
+                .departmentId(globalEmployee.getDepartmentId())
                 .build());
 
-        Employee emp = employeeService.createEmployee(employee);
+        Employee emp = employeeService.createEmployee(globalEmployee);
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(employee.getEmployeeId().getId(),emp.getEmployeeId().getId()),
-                () -> Assertions.assertEquals(employee.getFirstName(),emp.getFirstName()),
-                () -> Assertions.assertEquals(employee.getLastName(),emp.getLastName()),
-                () -> Assertions.assertEquals(employee.getFullTime(),emp.getFullTime()),
-                () -> Assertions.assertEquals(employee.getSalary(),emp.getSalary()),
-                () -> Assertions.assertEquals(employee.getDepartmentId(),emp.getDepartmentId()));
+                () -> Assertions.assertEquals(globalEmployee.getEmployeeId().getId(),emp.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(globalEmployee.getFirstName(),emp.getFirstName()),
+                () -> Assertions.assertEquals(globalEmployee.getLastName(),emp.getLastName()),
+                () -> Assertions.assertEquals(globalEmployee.getFullTime(),emp.getFullTime()),
+                () -> Assertions.assertEquals(globalEmployee.getSalary(),emp.getSalary()),
+                () -> Assertions.assertEquals(globalEmployee.getDepartmentId(),emp.getDepartmentId()));
 
         verify(employeeDao,times(1)).findById(any(Integer.class));
         verify(employeeDao,times(1)).save(any(EmployeeDatabaseEntry.class));
@@ -126,20 +129,27 @@ public class TestEmployeeService {
 
     @Test
     public void testUpdateEmployee() {
-        Employee employee = EmployeeTestBuilder.builder().lastName("Hellberg").build();
+        globalEmployee = EmployeeTestBuilder.builder()
+                .employeeId(globalEmployee.getEmployeeId())
+                .firstName(globalEmployee.getFirstName())
+                .lastName("Furu")
+                .fullTime(globalEmployee.getFullTime())
+                .salary(globalEmployee.getSalary())
+                .departmentId(globalEmployee.getDepartmentId())
+                .build();
 
-        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeePojoMapper.map(employee)));
-        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeePojoMapper.map(employee));
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeePojoMapper.map(globalEmployee)));
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeePojoMapper.map(globalEmployee));
 
-        Employee updatedEmp = employeeService.updateEmployee(employee);
+        Employee updatedEmp = employeeService.updateEmployee(globalEmployee);
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(employee.getEmployeeId().getId(),updatedEmp.getEmployeeId().getId()),
-                () -> Assertions.assertEquals(employee.getFirstName(),updatedEmp.getFirstName()),
-                () -> Assertions.assertEquals(employee.getLastName(),updatedEmp.getLastName()),
-                () -> Assertions.assertEquals(employee.getFullTime(),updatedEmp.getFullTime()),
-                () -> Assertions.assertEquals(employee.getSalary(),updatedEmp.getSalary()),
-                () -> Assertions.assertEquals(employee.getDepartmentId(),updatedEmp.getDepartmentId())
+                () -> Assertions.assertEquals(globalEmployee.getEmployeeId().getId(),updatedEmp.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(globalEmployee.getFirstName(),updatedEmp.getFirstName()),
+                () -> Assertions.assertEquals(globalEmployee.getLastName(),updatedEmp.getLastName()),
+                () -> Assertions.assertEquals(globalEmployee.getFullTime(),updatedEmp.getFullTime()),
+                () -> Assertions.assertEquals(globalEmployee.getSalary(),updatedEmp.getSalary()),
+                () -> Assertions.assertEquals(globalEmployee.getDepartmentId(),updatedEmp.getDepartmentId())
         );
 
         verify(employeeDao, times(1)).findById(any(Integer.class));
@@ -148,11 +158,19 @@ public class TestEmployeeService {
 
     @Test
     public void testDeleteEmployee() {
-        Employee employee = EmployeeTestBuilder.builder().build();
 
-        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeePojoMapper.map(employee)));
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeePojoMapper.map(globalEmployee)));
 
-        Employee emp = employeeService.removeEmployee(employee);
+        Employee emp = employeeService.removeEmployee(globalEmployee);
+
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(globalEmployee.getEmployeeId().getId(),emp.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(globalEmployee.getFirstName(),emp.getFirstName()),
+                () -> Assertions.assertEquals(globalEmployee.getLastName(),emp.getLastName()),
+                () -> Assertions.assertEquals(globalEmployee.getFullTime(),emp.getFullTime()),
+                () -> Assertions.assertEquals(globalEmployee.getSalary(),emp.getSalary()),
+                () -> Assertions.assertEquals(globalEmployee.getDepartmentId(),emp.getDepartmentId())
+        );
 
         verify(employeeDao, times(1)).findById(any(Integer.class));
         verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
@@ -160,12 +178,11 @@ public class TestEmployeeService {
 
     @Test
     public void testEntityNotFoundException() {
-        Employee emp = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
 
         Throwable t = Assertions.assertThrows(EntityNotFoundException.class,
-                () -> employeeService.removeEmployee(emp));
+                () -> employeeService.removeEmployee(globalEmployee));
 
-        Assertions.assertEquals("Entity with id " + emp.getEmployeeId().getId() + " not found",t.getMessage());
+        Assertions.assertEquals("Entity with id " + globalEmployee.getEmployeeId().getId() + " not found",t.getMessage());
     }
 }
