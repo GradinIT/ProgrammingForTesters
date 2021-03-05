@@ -1,8 +1,8 @@
 package se.jocke.dao.mapper;
 
 import se.jocke.dao.EmployeeDatabaseEntry;
-import se.jocke.entity.Employee;
-import se.jocke.entity.EmployeeID;
+import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package se.jocke.api.mapper;
 
 import se.jocke.api.EmployeeModel;
-import se.jocke.entity.Employee;
+import se.jocke.department.entity.Employee;
 
 import java.util.List;
 import java.util.stream.Collectors;
