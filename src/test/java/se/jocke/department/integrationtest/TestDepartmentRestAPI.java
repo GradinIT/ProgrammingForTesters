@@ -72,6 +72,7 @@ public class TestDepartmentRestAPI extends TestClient {
         deleteDepartment(getDepartmentById(departmentId).get());
     }
     Throwable exceptionThatWasThrown;
+
     @Then("the department {int} is deleted")
     public void departmentIsDeleted(Integer departmentId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {

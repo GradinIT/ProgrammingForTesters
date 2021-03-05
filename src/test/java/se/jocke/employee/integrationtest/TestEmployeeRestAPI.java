@@ -1,16 +1,12 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
-import se.jocke.employee.builder.EmployeeModelTestBuilder;
-import se.jocke.employee.builder.EmployeeTestBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -35,6 +31,8 @@ public class TestEmployeeRestAPI extends TestClient {
         Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
     }
 
+    @When("the client updates first name of employee (\\d+) to (.+)$")
+    public EmployeeModel theClientUpdatesFirstName(int employeeId, String firstName) {
 
     @When("^the client calls employee (\\d+)$")
     public void theClientCallsEmployee(int employeeId) {
@@ -67,7 +65,10 @@ public class TestEmployeeRestAPI extends TestClient {
         Assert.assertEquals(updatedEmployee, getEmployeeById(employeeId).get());
     }
 
-
+    @And("^the total number of employees is still (\\d+)$")
+    public void checkTheListSizeOfEmployees(int numberOfEmployees) {
+        Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
+    }
 
     private List<EmployeeModel> makeEmployeesList(List<String> given) {
         List<se.jocke.api.EmployeeModel> employees = new ArrayList<>();
@@ -98,9 +99,9 @@ public class TestEmployeeRestAPI extends TestClient {
     Throwable exceptionThatWasThrown;
 
     @Then("employee {int} is deleted")
-    public void departmentIsDeleted(int employeeId) {
+    public void employeeIsDeleted(int employeeId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getDepartmentById(employeeId);
+            getEmployeeById(employeeId);
         });
     }
 
@@ -118,11 +119,18 @@ public class TestEmployeeRestAPI extends TestClient {
         assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown2.getMessage());
     }
 
-    @When("the client adds an employee with id {int}")
-    public void the_client_adds_an_employee_with_id(Integer int1) {
-        EmployeeModel newEmpModel = EmployeeModelTestBuilder.builderMethod().build();
-
-        createEmployee(newEmpModel);
+    @When("the client creates employee {int}")
+    public void theClientCreatesEmployee(int employeeId) {
+        createEmployee(getEmployeeById(employeeId).get());
     }
 
+    @But("the employeeId {int} already exists")
+    public void theEmployeeIsNotAllreadyInDataBase(int employeeId) {
+
+    }
+
+    @Then("the errormessage is {int} : [Entity with id {int} already in databse]")
+    public void checkErrorMessage(int errorCode, int employeeId) {
+        Assertions.assertEquals(errorCode+" : [Entity with id " + employeeId +" not found]",exceptionThatWasThrown.getMessage());
+            }
 }

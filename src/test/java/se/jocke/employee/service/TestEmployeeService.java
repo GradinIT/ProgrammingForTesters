@@ -1,5 +1,7 @@
 package se.jocke.employee.service;
 
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.EntityNotFoundException;
@@ -26,9 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @TestInstance(Lifecycle.PER_CLASS)
@@ -59,7 +60,6 @@ public class TestEmployeeService {
 
     @Test
     public void testGetEmployeeById() {
-
         when(employeeDao.findById(any())).thenReturn(Optional.of(employeeDbEntry));
 
         Employee foundEmployee = systemUnderTest.getEmployeeById(1);
@@ -71,7 +71,6 @@ public class TestEmployeeService {
 
     @Test
     public void testGetAllEmployees() {
-
         when(employeeDao.findAll()).thenReturn(Arrays.asList(employeeDbEntry));
 
         List<Employee> allEmployees = systemUnderTest.getAllEmployees();
@@ -84,7 +83,6 @@ public class TestEmployeeService {
 
     @Test
     public void testCreateEmployee() {
-
         when(employeeDao.findById(any())).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDbEntry);
 
@@ -100,7 +98,6 @@ public class TestEmployeeService {
     public void testRemoveEmployee() {
         // Kanske inte ska mockas pga returnerar inget?
         when(employeeDao.findById(any())).thenReturn(Optional.of(employeeDbEntry));
-        // Varför behövs ingen regel för delete?
 
         Employee removedEmployee = systemUnderTest.removeEmployee(exampleEmployee);
 
@@ -127,7 +124,6 @@ public class TestEmployeeService {
 
     @Test
     public void testUpdateEmployee() {
-
         Employee employeeWithNewName = Employee.builder()
                 .employeeId(EmployeeID.builder().id(exampleEmployee.getEmployeeId().getId()).build())
                 .firstName("Mocke")
@@ -149,12 +145,14 @@ public class TestEmployeeService {
     }
 
     public void assertions(Employee expected, Employee actual) {
-        assertNotNull(actual);
-        assertEquals(expected.getEmployeeId().getId(), actual.getEmployeeId().getId());
-        assertEquals(expected.getFirstName(), actual.getFirstName());
-        assertEquals(expected.getLastName(), actual.getLastName());
-        assertEquals(expected.getSalary(), actual.getSalary());
-        assertEquals(expected.getFullTime(), actual.getFullTime());
-        assertEquals(expected.getDepartmentId(), actual.getDepartmentId());
+        assertAll(
+                () -> assertNotNull(actual),
+                () -> assertEquals(expected.getEmployeeId().getId(), actual.getEmployeeId().getId()),
+                () -> assertEquals(expected.getFirstName(), actual.getFirstName()),
+                () -> assertEquals(expected.getLastName(), actual.getLastName()),
+                () -> assertEquals(expected.getSalary(), actual.getSalary()),
+                () -> assertEquals(expected.getFullTime(), actual.getFullTime()),
+                () -> assertEquals(expected.getDepartmentId(), actual.getDepartmentId())
+        );
     }
 }
