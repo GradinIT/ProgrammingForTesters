@@ -74,25 +74,24 @@ public class TestEmployeeService {
 
     @Test
     public void testCreateEmployeeHappyFlow() {
-        Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(EmployeeDatabaseEntry.builder()
-                .employeeId(employee.getEmployeeId().getId())
-                .firstName(employee.getFirstName())
-                .lastName(employee.getLastName())
-                .salary(employee.getSalary())
-                .fullTime(employee.getFullTime())
-                .departmentId(employee.getDepartmentId())
+                .employeeId(testPerson.getEmployeeId())
+                .firstName(testPerson.getFirstName())
+                .lastName(testPerson.getLastName())
+                .salary(testPerson.getSalary())
+                .fullTime(testPerson.getFullTime())
+                .departmentId(testPerson.getDepartmentId())
                 .build());
-        Employee createdEmployee = crudTest.createEmployee(employee);
+        Employee createdEmployee = crudTest.createEmployee(EmployeePojoMapper.map(testPerson));
         Assertions.assertAll(
                 () -> assertNotNull(createdEmployee),
-                () -> assertEquals(employee.getEmployeeId().getId(), createdEmployee.getEmployeeId().getId()),
-                () -> assertEquals(employee.getFirstName(), createdEmployee.getFirstName()),
-                () -> assertEquals(employee.getLastName(), createdEmployee.getLastName()),
-                () -> assertEquals(employee.getSalary(), createdEmployee.getSalary()),
-                () -> assertEquals(employee.getFullTime(), createdEmployee.getFullTime()),
-                () -> assertEquals(employee.getDepartmentId(), createdEmployee.getDepartmentId())
+                () -> assertEquals(testPerson.getEmployeeId(), createdEmployee.getEmployeeId().getId()),
+                () -> assertEquals(testPerson.getFirstName(), createdEmployee.getFirstName()),
+                () -> assertEquals(testPerson.getLastName(), createdEmployee.getLastName()),
+                () -> assertEquals(testPerson.getSalary(), createdEmployee.getSalary()),
+                () -> assertEquals(testPerson.getFullTime(), createdEmployee.getFullTime()),
+                () -> assertEquals(testPerson.getDepartmentId(), createdEmployee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(any(Integer.class));
         verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
@@ -144,13 +143,41 @@ public class TestEmployeeService {
 
     @Test
     public void testUpdateEmployeeNotFoundException() {
-
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        Throwable errorMessage = assertThrows(EntityNotFoundException.class, () -> crudTest.updateEmployee(EmployeePojoMapper.map(testPerson)));
+        Assertions.assertEquals("Entity with id "+testPerson.getEmployeeId()+" not found", errorMessage.getMessage());
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verifyNoMoreInteractions(employeeDao);
     }
 
     @Test
     public void testRemoveEmployee() {
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(testPerson));
+        Employee deletedEmployee = crudTest.removeEmployee(EmployeePojoMapper.map(testPerson));
+        Assertions.assertAll(
+                () -> assertEquals(deletedEmployee.getEmployeeId().getId(), testPerson.getEmployeeId()),
+                () -> assertEquals(deletedEmployee.getFirstName(), testPerson.getFirstName()),
+                () -> assertEquals(deletedEmployee.getLastName(), testPerson.getLastName()),
+                () -> assertEquals(deletedEmployee.getSalary(), testPerson.getSalary()),
+                () -> assertEquals(deletedEmployee.getFullTime(), testPerson.getFullTime()),
+                () -> assertEquals(deletedEmployee.getDepartmentId(), testPerson.getDepartmentId())
+        );
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
 
+    }
 
+    @Test
+    public void testRemoveEmployeeNotFoundException() {
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        Throwable errorMessage = Assertions.assertThrows(EntityNotFoundException.class, () ->
+                crudTest.removeEmployee(EmployeePojoMapper.map(testPerson)));
+        Assertions.assertEquals("Entity with id "+testPerson.getEmployeeId()+" not found", errorMessage.getMessage());
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        // Verifierar att employeeDao körs en gång
+        // Båda metoder gör samma sak
+        verify(employeeDao, times(0)).delete(any(EmployeeDatabaseEntry.class));
+        verifyNoMoreInteractions(employeeDao);
     }
 
 }

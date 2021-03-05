@@ -35,6 +35,7 @@ public class EmployeeRestService {
     }
     @PutMapping("/employee")
     public ResponseEntity<EmployeeModel> updateEmployee(@RequestBody EmployeeModel employeeModel){
+        System.out.println("Hello");
         EmployeeModel response = EmployeeModelMapper.map(employeeService.updateEmployee(EmployeeModelMapper.map(employeeModel)));
         return new ResponseEntity<EmployeeModel>(response,HttpStatus.OK);
     }
