@@ -11,9 +11,9 @@ Feature: test employee api
     When the client gets employee 1
     Then the first name is
 
-#  Scenario: client updates first name for employee 1
-#    When the client updates first name for employee to firstName1
-#    Then the first name is updated to firstName1
+  Scenario: client updates first name for employee 1
+    When the client updates first name for employee to firstName1
+    Then the first name is updated to firstName1
 
   Scenario: client deletes employee
     Given the employees
