@@ -55,7 +55,6 @@ public class TestEmployeeRestAPI extends TestClient {
         );
     }
 
-
     @When("client gets employee {int}")
     public void clientGetsEmployee(int employeeID) {
         employee = getEmployeeById(employeeID);
@@ -87,7 +86,6 @@ public class TestEmployeeRestAPI extends TestClient {
         }
         return emps;
     }
-
 
     @When("client deletes employee {int}")
     public void clientDeletesEmployee(int employeeId) {
