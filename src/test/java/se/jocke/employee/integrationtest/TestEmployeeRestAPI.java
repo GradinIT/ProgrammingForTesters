@@ -1,5 +1,5 @@
 package se.jocke.employee.integrationtest;
-
+/*
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -102,3 +102,4 @@ public class TestEmployeeRestAPI extends TestClient {
         Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
 }
+*/

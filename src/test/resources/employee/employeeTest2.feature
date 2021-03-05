@@ -37,11 +37,11 @@ Feature: test employee api
 
     When the client deletes department 1
 
-    When the client deletes department 56
-    When the client deletes department 57
-    Then the department 55 is deleted
-    And  error message is 404 : [Entity with id 55 not found]
-    Then the department 56 is deleted
-    And  error message is 404 : [Entity with id 56 not found]
-    Then the department 57 is deleted
-    And  error message is 404 : [Entity with id 57 not found]
+    When the client deletes department 2
+    When the client deletes department 3
+    Then the department 1 is deleted
+    And  error message is 404 : [Entity with id 1 not found]
+    Then the department 2 is deleted
+    And  error message is 404 : [Entity with id 2 not found]
+    Then the department 3 is deleted
+    And  error message is 404 : [Entity with id 3 not found]
