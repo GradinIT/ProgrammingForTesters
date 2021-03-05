@@ -27,38 +27,40 @@ public class TestEmployeeDao {
 
     @Test
     public void testGetEmployeeById() {
+        Integer expectedEmployeeId = 1;
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getEmployeeId())
+                () -> assertEquals(expectedEmployeeId,optionalEmployeeDatabaseEntry.get().getEmployeeId())
         );
     }
 
     @Test
     public void testGetEmployeeByFirstName() {
+        String expectedFirstName = "firstName1";
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("firstName1",optionalEmployeeDatabaseEntry.get().getFirstName())
+                () -> assertEquals(expectedFirstName,optionalEmployeeDatabaseEntry.get().getFirstName())
         );
     }
 
     @Test
     public void testGetEmployeeByLastName() {
+        String expectedLastName = "lastName1";
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("lastName1",optionalEmployeeDatabaseEntry.get().getLastName())
+                () -> assertEquals(expectedLastName,optionalEmployeeDatabaseEntry.get().getLastName())
         );
     }
 
     @Test
     public void testGetEmployeeBySalary() {
         BigDecimal bd1 = new BigDecimal(25000.00);
-
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
@@ -69,21 +71,23 @@ public class TestEmployeeDao {
 
     @Test
     public void testGetEmployeeByFullTime() {
+        Boolean expectedFullTime = true;
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(true,optionalEmployeeDatabaseEntry.get().getFullTime())
+                () -> assertEquals(expectedFullTime,optionalEmployeeDatabaseEntry.get().getFullTime())
         );
     }
 
     @Test
     public void testGetEmployeeByDepartmentId() {
+        Integer expectedDepartmentId = 1;
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getDepartmentId())
+                () -> assertEquals(expectedDepartmentId,optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
    }
 }

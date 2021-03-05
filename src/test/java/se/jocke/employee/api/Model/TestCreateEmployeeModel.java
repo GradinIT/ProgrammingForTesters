@@ -3,7 +3,6 @@ package se.jocke.employee.api.Model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
-import se.jocke.department.entity.EmployeeID;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {
