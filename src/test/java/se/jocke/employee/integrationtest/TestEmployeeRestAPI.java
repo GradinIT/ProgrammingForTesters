@@ -31,8 +31,6 @@ public class TestEmployeeRestAPI extends TestClient {
         Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
     }
 
-    @When("the client updates first name of employee (\\d+) to (.+)$")
-    public EmployeeModel theClientUpdatesFirstName(int employeeId, String firstName) {
 
     @When("^the client calls employee (\\d+)$")
     public void theClientCallsEmployee(int employeeId) {
@@ -132,5 +130,5 @@ public class TestEmployeeRestAPI extends TestClient {
     @Then("the errormessage is {int} : [Entity with id {int} already in databse]")
     public void checkErrorMessage(int errorCode, int employeeId) {
         Assertions.assertEquals(errorCode+" : [Entity with id " + employeeId +" not found]",exceptionThatWasThrown.getMessage());
-            }
+    }
 }
