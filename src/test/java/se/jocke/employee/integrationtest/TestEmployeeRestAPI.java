@@ -95,25 +95,30 @@ public class TestEmployeeRestAPI extends TestClient {
 
     EmployeeModel createdEmployee;
 
-    @When("the client tries to create employee {int}")
-    public void theClientCreatesEmployee(int employeeId) {
-         createdEmployee = EmployeeModelTestBuilder.builderMethod()
-                 .employeeId(employeeId)
-                 .build();
+//    @When("the client tries to create employee {int}")
+//    public void theClientCreatesEmployee(int employeeId) {
+//         createdEmployee = EmployeeModel.builder()
+//                 .firstName("hej")
+//                 .lastName("hejs")
+//                 .salary(new BigDecimal(25000).setScale(2))
+//                 .fullTime(true)
+//                 .departmentId(1)
+//                 .employeeId(employeeId)
+//                 .build();
+//
+////         createEmployee(createdEmployee);
+//        exceptionThatWasThrown = assertThrows(HttpServerErrorException.class, () -> createEmployee(createdEmployee));
+//    }
+//
+//    @Then("employee with id {int} already exists")
+//    public void employeeAlreadyInDatabase(int employeeId) {
+//        assertEquals(createdEmployee.getEmployeeId(), getEmployeeById(employeeId).get().getEmployeeId());
+//    }
 
-//         createEmployee(createdEmployee);
-        exceptionThatWasThrown = assertThrows(EntityAlreadyInStorageException.class, () -> createEmployee(createdEmployee));
-    }
-
-    @But("employee with id {int} already exists")
-    public void employeeAlreadyInDatabase(int employeeId) {
-        assertEquals(createdEmployee.getEmployeeId(), getEmployeeById(employeeId).get().getEmployeeId());
-    }
-
-    @Then("the errormessage is: [Entity with id {int} already in databse]")
-    public void checkErrorMessage(int employeeId) {
-        Assertions.assertEquals( "[Entity with id " + employeeId +" already in storage]", exceptionThatWasThrown.getMessage());
-            }
+//    @Then("the errormessage is: [Entity with id {int} already in databse]")
+//    public void checkErrorMessage(int employeeId) {
+//        Assertions.assertEquals( "[Entity with id " + employeeId +" already in storage]", exceptionThatWasThrown.getMessage());
+//            }
 
     private List<EmployeeModel> getEmployeeList(List<String> given) {
         List<se.jocke.api.EmployeeModel> employees = new ArrayList<>();

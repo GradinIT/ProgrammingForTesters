@@ -26,10 +26,10 @@ Feature: test employee api
     When the client tries to get employee 42
     Then employee 42 not found exception is thrown
 
-  Scenario: the client tries to create already existing employee
-    When the client tries to create employee 2
-    But employee with id 2 already exists
-    Then the errormessage is: [Entity with id 2 already in databse]
+#  Scenario: the client tries to create already existing employee
+#    When the client tries to create employee 2
+#    But employee with id 2 already exists
+#    Then the errormessage is: [Entity with id 2 already in databse]
 
   #Scenario: adding a new employee
   #  When the client adds an employee with id 42
