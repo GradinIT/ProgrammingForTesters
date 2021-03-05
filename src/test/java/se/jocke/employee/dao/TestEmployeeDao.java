@@ -12,6 +12,7 @@ import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,29 +24,24 @@ public class TestEmployeeDao {
     @Autowired
     EmployeeDao employeeDao;
 
-    //Eventuellt bryta ut instansen och assertAll (assertTrue och assertNotNull)
-    //Eventuellt göra fler tester på lastName etc.
-
+    //Här kan man egentligen välja att använda antingen assertTrue och assertNotNull
     @Test
     public void testGetEmployeeById() {
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
-                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getEmployeeId())
+                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()), //kollar att raden finns
+                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()), //kollar att inget är null
+                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getEmployeeId()),
+                () -> assertEquals("firstName1",optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("lastName1",optionalEmployeeDatabaseEntry.get().getLastName()),
+                () -> assertEquals(true,optionalEmployeeDatabaseEntry.get().getFullTime()),
+                () -> assertEquals(BigDecimal.valueOf(25000).longValue(),optionalEmployeeDatabaseEntry.get().getSalary().longValue()),
+                () -> assertEquals(1,optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }
 
-    //Varför behövs både aseertTrue och assertNotNull
-    @Test
-    public void testGetEmployeeByFirstName() {
-        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
-        Assertions.assertAll(
-                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("firstName1",optionalEmployeeDatabaseEntry.get().getFirstName())
-        );
-    }
+
+
 
     //Null-värdet har med hela listan att göra
     @Test

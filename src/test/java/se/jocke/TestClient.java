@@ -2,18 +2,11 @@ package se.jocke;
 
 import com.google.gson.Gson;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
-import se.jocke.H2JpaConfig;
-import se.jocke.LiquibaseConfigurer;
-import se.jocke.RestServiceApplication;
 import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 
@@ -30,6 +23,7 @@ public class TestClient {
 
     public static Optional<List<DepartmentModel>> getAllDepartments() {
         RestTemplate restTemplate = new RestTemplate();
+        //kallar på department och skickas till departmentRestService
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
                 HttpMethod.GET,
                 null,

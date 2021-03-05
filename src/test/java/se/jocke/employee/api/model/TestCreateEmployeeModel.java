@@ -7,10 +7,12 @@ import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {
+    //en instans av den riktiga employeemodel
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
     @Test
     public void testCreateEmployeeModel() {
+        //skapar en testinstans för employeemodel
         EmployeeModel employee = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
