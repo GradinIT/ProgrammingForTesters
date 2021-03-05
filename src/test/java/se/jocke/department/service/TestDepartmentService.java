@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EntityAlreadyInStorageException;
-
 import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
 import se.jocke.service.DepartmentService;
@@ -37,7 +36,7 @@ public class TestDepartmentService {
 
     @InjectMocks
     private DepartmentService systemUnderTest = new DepartmentServiceImpl();
-/*
+
     @BeforeEach
     public void setUp() {
 
@@ -50,32 +49,14 @@ public class TestDepartmentService {
                 .departmentId(1)
                 .departmentName("Development")
                 .build()));
-<<<<<<< HEAD
-    }
-*/
-    @Test
-    public void findById() {
-        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(DepartmentDatabaseEntry.builder()
-                .departmentId(1)
-                .departmentName("Development")
-                .build()));
-
 
         Department department = systemUnderTest.getDepartmentById(1);
         Assertions.assertAll(
-                () -> assertEquals(1, department.getDepartmentId()),
-                () -> assertEquals("Development", department.getDepartmentName())
+                () -> Assertions.assertEquals(1, department.getDepartmentId()),
+                () -> Assertions.assertEquals("Development", department.getDepartmentName())
         );
         verify(departmentDao, times(1)).findById(1);
     }
-    @Test
-    public void getAllDepartments() {
-        when(departmentDao.findAll()).thenReturn(Arrays.asList(DepartmentDatabaseEntry.builder()
-        .departmentName("Development")
-        .departmentId(1)
-        .build()
-        ));
-=======
 
     @Test
     public void getAllDepartments() {
@@ -83,44 +64,21 @@ public class TestDepartmentService {
                 .departmentName("Development")
                 .departmentId(1)
                 .build()));
-
 
         List<Department> departments = systemUnderTest.getDepartments();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-
-                () -> assertEquals(1,departments.size())
-        );
-
-    }
-    @Test
-    public void createDepartment(){
-        Department department = DepartmentTestBuilder.builder().build();
-
                 () -> assertEquals(1, departments.size())
         );
     }
+
     @Test
     public void createDepartmentHappyFlow() {
         Department department = DepartmentTestBuilder.builder().build();
-
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(departmentDao.save(any(DepartmentDatabaseEntry.class))).thenReturn(DepartmentDatabaseEntry.builder()
                 .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
-
-                .build()
-                );
-        Department createdDepartment = systemUnderTest.create(department);
-        Assertions.assertAll(
-                () -> assertNotNull(createdDepartment),
-                () -> assertEquals(department.getDepartmentId(),createdDepartment.getDepartmentId()),
-                () -> assertEquals(department.getDepartmentName(),createdDepartment.getDepartmentName())
-
-        );
-        verify(departmentDao,times(1)).findById(any(Integer.class));
-        verify(departmentDao,times(1)).save(any(DepartmentDatabaseEntry.class));
-
                 .build());
         Department createdDepartment = systemUnderTest.create(department);
         Assertions.assertAll(
@@ -137,9 +95,9 @@ public class TestDepartmentService {
         Department department = DepartmentTestBuilder.builder().build();
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.of(
                 DepartmentDatabaseEntry.builder()
-                    .departmentId(department.getDepartmentId())
-                    .departmentName(department.getDepartmentName())
-                    .build()
+                        .departmentId(department.getDepartmentId())
+                        .departmentName(department.getDepartmentName())
+                        .build()
         ));
         Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> {
             systemUnderTest.create(department);
@@ -148,6 +106,5 @@ public class TestDepartmentService {
                 exception.getMessage());
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verifyNoMoreInteractions(departmentDao);
-
     }
 }
