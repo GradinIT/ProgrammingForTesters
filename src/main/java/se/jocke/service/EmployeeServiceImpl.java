@@ -28,13 +28,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @TimeAndLogg
     public Employee createEmployee(Employee employee) {
-<<<<<<< HEAD
-=======
+
         Optional<EmployeeDatabaseEntry> e = employeeDao.findById(employee.getEmployeeId().getId());
         if(e.isPresent()) {
             throw new EntityAlreadyInStorageException(employee.getEmployeeId().getId());
         }
->>>>>>> develop
         return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
     }
 

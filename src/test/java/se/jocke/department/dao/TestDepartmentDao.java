@@ -31,13 +31,10 @@ public class TestDepartmentDao {
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-<<<<<<< HEAD
-                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
-                
-=======
+                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName()),
                 () -> assertEquals("Development", optionalEmployeeDatabaseEntry.get().getDepartmentName()),
                 () -> assertEquals(departmetId, optionalEmployeeDatabaseEntry.get().getDepartmentId())
->>>>>>> develop
+
         );
     }
 

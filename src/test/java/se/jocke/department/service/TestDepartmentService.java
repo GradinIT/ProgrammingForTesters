@@ -9,10 +9,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
-<<<<<<< HEAD
-=======
 import se.jocke.dao.EntityAlreadyInStorageException;
->>>>>>> develop
+
 import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
 import se.jocke.service.DepartmentService;
@@ -61,8 +59,7 @@ public class TestDepartmentService {
                 .departmentId(1)
                 .departmentName("Development")
                 .build()));
-=======
->>>>>>> develop
+
 
         Department department = systemUnderTest.getDepartmentById(1);
         Assertions.assertAll(
@@ -71,7 +68,6 @@ public class TestDepartmentService {
         );
         verify(departmentDao, times(1)).findById(1);
     }
-<<<<<<< HEAD
     @Test
     public void getAllDepartments() {
         when(departmentDao.findAll()).thenReturn(Arrays.asList(DepartmentDatabaseEntry.builder()
@@ -87,12 +83,12 @@ public class TestDepartmentService {
                 .departmentName("Development")
                 .departmentId(1)
                 .build()));
->>>>>>> develop
+
 
         List<Department> departments = systemUnderTest.getDepartments();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-<<<<<<< HEAD
+
                 () -> assertEquals(1,departments.size())
         );
 
@@ -101,20 +97,18 @@ public class TestDepartmentService {
     public void createDepartment(){
         Department department = DepartmentTestBuilder.builder().build();
 
-=======
                 () -> assertEquals(1, departments.size())
         );
     }
-
     @Test
     public void createDepartmentHappyFlow() {
         Department department = DepartmentTestBuilder.builder().build();
->>>>>>> develop
+
         when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(departmentDao.save(any(DepartmentDatabaseEntry.class))).thenReturn(DepartmentDatabaseEntry.builder()
                 .departmentId(department.getDepartmentId())
                 .departmentName(department.getDepartmentName())
-<<<<<<< HEAD
+
                 .build()
                 );
         Department createdDepartment = systemUnderTest.create(department);
@@ -126,7 +120,7 @@ public class TestDepartmentService {
         );
         verify(departmentDao,times(1)).findById(any(Integer.class));
         verify(departmentDao,times(1)).save(any(DepartmentDatabaseEntry.class));
-=======
+
                 .build());
         Department createdDepartment = systemUnderTest.create(department);
         Assertions.assertAll(
@@ -154,6 +148,6 @@ public class TestDepartmentService {
                 exception.getMessage());
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verifyNoMoreInteractions(departmentDao);
->>>>>>> develop
+
     }
 }
