@@ -7,18 +7,22 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
+import se.jocke.dao.EntityAlreadyInStorageException;
+import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestEmployeeRestAPI extends TestClient {
-    Optional<EmployeeModel> optionalEmployeeModel = null;
-    Optional<List<EmployeeModel>> optionalEmployeeModelList = null;
+    Optional<EmployeeModel> optionalEmployeeModel;
+    Optional<List<EmployeeModel>> optionalEmployeeModelList;
+    EmployeeModel employeeModel;
+    Throwable exceptionThatWasThrown;
+
 
 
     @When("the client calls /employee")
@@ -32,18 +36,21 @@ public class TestEmployeeRestAPI extends TestClient {
     }
 
 
+
     @When("^the client calls employee (\\d+)$")
     public void theClientCallsEmployee(int employeeId) {
         optionalEmployeeModel = getEmployeeById(employeeId);
     }
 
-    @And("the client updates first name of employee (\\d+) to (.+)$")
-    public EmployeeModel theClientUpdatesFirstName(int employeeId, String firstName) {
+    @Then("employee {int} is found")
+    public void employeeIsFound(int employeeId) {
+        assertTrue(optionalEmployeeModel.isPresent());
+    }
 
-        EmployeeModel updatedEmployeeModel = null;
+    @When("the client updates first name of employee (\\d+) to (.+)$")
+    public void theClientUpdatesFirstName(int employeeId, String firstName) {
 
-        if (optionalEmployeeModel.isPresent()) {
-            updatedEmployeeModel = EmployeeModel.builder()
+        employeeModel = EmployeeModel.builder()
                     .employeeId(employeeId)
                     .firstName(firstName)
                     .lastName(optionalEmployeeModel.get().getLastName())
@@ -51,24 +58,68 @@ public class TestEmployeeRestAPI extends TestClient {
                     .fullTime(optionalEmployeeModel.get().getFullTime())
                     .departmentId(optionalEmployeeModel.get().getDepartmentId())
                     .build();
-            updateEmployee(updatedEmployeeModel);
-        }
-        return updatedEmployeeModel;
+
+        updateEmployee(employeeModel);
     }
 
     @Then("^the name of employee (\\d+) is updated to (.+)$")
     public void theNameIsUpdated(int employeeId, String firstName) {
-        optionalEmployeeModelList = getAllEmployees();
-        EmployeeModel updatedEmployee = theClientUpdatesFirstName(employeeId, firstName); // Nu körs denna två gånger - anropas av gurkan med when
-        Assert.assertEquals(updatedEmployee, getEmployeeById(employeeId).get());
+        Assert.assertEquals(employeeModel.getFirstName(), getEmployeeById(employeeId).get().getFirstName());
     }
 
-    @And("^the total number of employees is still (\\d+)$")
-    public void checkTheListSizeOfEmployees(int numberOfEmployees) {
-        Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
+
+
+    @Given("^the employee$")
+    public void givenEmployees(DataTable employeeDataTable) {
+        List<EmployeeModel> listOfEmployees = getEmployeesList(employeeDataTable.asList());
+        listOfEmployees.forEach(TestClient::createEmployee); // listOfEmployees.stream().forEach(employee -> createEmployee(employee));
     }
 
-    private List<EmployeeModel> makeEmployeesList(List<String> given) {
+    @When("the client deletes employee {int}")
+    public void theClientDeletesEmployee(int employeeId) {
+        deleteEmployee(getEmployeeById(employeeId).get());
+    }
+
+    @Then("employee {int} is deleted")
+    public void employeeIsDeleted(int employeeId) {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            getEmployeeById(employeeId);
+        });
+    }
+
+    @When("the client tries to get employee {int}")
+    public void searchForNonExistentEmployee(Integer employeeId) {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> optionalEmployeeModel = getEmployeeById(employeeId));
+    }
+
+    @Then("employee {int} not found exception is thrown")
+    public void throwNotFoundException(Integer employeeId) {
+        assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
+    }
+
+    EmployeeModel createdEmployee;
+
+    @When("the client tries to create employee {int}")
+    public void theClientCreatesEmployee(int employeeId) {
+         createdEmployee = EmployeeModelTestBuilder.builderMethod()
+                 .employeeId(employeeId)
+                 .build();
+
+//         createEmployee(createdEmployee);
+        exceptionThatWasThrown = assertThrows(EntityAlreadyInStorageException.class, () -> createEmployee(createdEmployee));
+    }
+
+    @But("employee with id {int} already exists")
+    public void employeeAlreadyInDatabase(int employeeId) {
+        assertEquals(createdEmployee.getEmployeeId(), getEmployeeById(employeeId).get().getEmployeeId());
+    }
+
+    @Then("the errormessage is: [Entity with id {int} already in databse]")
+    public void checkErrorMessage(int employeeId) {
+        Assertions.assertEquals( "[Entity with id " + employeeId +" already in storage]", exceptionThatWasThrown.getMessage());
+            }
+
+    private List<EmployeeModel> getEmployeesList(List<String> given) {
         List<se.jocke.api.EmployeeModel> employees = new ArrayList<>();
         for (int i = 0; i < given.size() - 1; i += 6) {
             employees.add(se.jocke.api.EmployeeModel.builder()
@@ -81,54 +132,5 @@ public class TestEmployeeRestAPI extends TestClient {
                     .build());
         }
         return employees;
-    }
-
-    @Given("^the employee$")
-    public void givenEmployees(DataTable employeeDataTable) {
-        List<EmployeeModel> listOfEmployees = makeEmployeesList(employeeDataTable.asList());
-        listOfEmployees.forEach(TestClient::createEmployee); // listOfEmployees.stream().forEach(employee -> createEmployee(employee));
-    }
-
-    @When("the client deletes employee {int}")
-    public void theClientDeletesEmployee(int employeeId) {
-        deleteEmployee(getEmployeeById(employeeId).get());
-    }
-
-    Throwable exceptionThatWasThrown;
-
-    @Then("employee {int} is deleted")
-    public void employeeIsDeleted(int employeeId) {
-        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getEmployeeById(employeeId);
-        });
-    }
-
-    Throwable exceptionThatWasThrown2;
-
-    @When("the client tries to get employee {int}")
-    public void searchForNonExistentEmployee(Integer employeeId) {
-
-        exceptionThatWasThrown2 = assertThrows(HttpClientErrorException.class, () -> optionalEmployeeModel = getEmployeeById(employeeId));
-
-    }
-
-    @Then("employee {int} not found exception is thrown")
-    public void throwNotFoundException(Integer employeeId) {
-        assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown2.getMessage());
-    }
-
-    @When("the client creates employee {int}")
-    public void theClientCreatesEmployee(int employeeId) {
-        createEmployee(getEmployeeById(employeeId).get());
-    }
-
-    @But("the employeeId {int} already exists")
-    public void theEmployeeIsNotAllreadyInDataBase(int employeeId) {
-
-    }
-
-    @Then("the errormessage is {int} : [Entity with id {int} already in databse]")
-    public void checkErrorMessage(int errorCode, int employeeId) {
-        Assertions.assertEquals(errorCode+" : [Entity with id " + employeeId +" not found]",exceptionThatWasThrown.getMessage());
     }
 }
