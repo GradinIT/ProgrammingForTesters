@@ -25,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         else throw new EntityNotFoundException(employeeId);
     }
     @TimeAndLogg
-    public Employee createOrUpdateEmployee(Employee employee) {
+    public Employee createEmployee(Employee employee) {
         return EmployeePojoMapper.map(employeeDao.save(EmployeePojoMapper.map(employee)));
     }
     @TimeAndLogg
