@@ -33,7 +33,6 @@ public class TestEmployeeRestAPI extends TestClient {
     @When("^the client updates name for employee to (.+)$")
     public void updateNameOfEmployee(String name) throws Throwable {
         Optional<List<EmployeeModel>> employees = getAllEmployees();
-        //Employee e = new EmployeeModelTestBuilder();
         employees.ifPresent(employeeModels -> updateEmployee(EmployeeModel.builder()
                 .employeeId(employeeModels.get(0).getEmployeeId())
                 .firstName(name)
@@ -57,7 +56,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @Then("^the employee name is$")
     public void nameOfEmployeeIs() throws Throwable {
-        Assert.assertEquals("firstName1", employee.get().getFirstName());
+        Assert.assertEquals("Test", employee.get().getFirstName());
     }
 
     @Given("^the employees$")

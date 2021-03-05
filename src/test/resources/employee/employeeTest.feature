@@ -3,14 +3,14 @@ Feature: test employee api
     When the client calls /employee
     Then the client receives 3 employees
   Scenario: client updates name for employee 1
-    When the client updates name for employee to firstName1
-    Then the employee name is updated to firstName1
+    When the client updates name for employee to Test
+    Then the employee name is updated to Test
   Scenario: client gets Employee 1
     When the client gets employee 1
     Then the employee name is
   Scenario: client updates name for employee 1
-    When the client updates name for employee to Test
-    Then the employee name is updated to Test
+    When the client updates name for employee to firstName1
+    Then the employee name is updated to firstName1
   Scenario: the client deletes employee
     Given the employees
       | 12 | Kalle | Kallesson | 4000 | TRUE | 1 |
