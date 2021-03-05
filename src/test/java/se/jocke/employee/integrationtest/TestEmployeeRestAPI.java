@@ -24,9 +24,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@CucumberContextConfiguration
-@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},
-        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = Optional.empty();
     Optional<EmployeeModel> employee = Optional.empty();
