@@ -1,13 +1,16 @@
 Feature: test employee api
 
+  #Background: all employees
+    #Given there are 3 employees in total
+
   Scenario: client gets all employees
     When the client calls /employee
     Then the client receives 3 employees
 
   Scenario: client updates first name
-    When the client updates first name of employee 1 to Jonas
+    When the client calls employee 1
+    And the client updates first name of employee 1 to Jonas
     Then the name of employee 1 is updated to Jonas
-    And the total number of employees is still 3
 
   Scenario: the client deletes employee
     Given the employee
@@ -22,10 +25,10 @@ Feature: test employee api
     When the client tries to get employee 42
     Then employee 42 not found exception is thrown
 
-  Scenario: adding a new employee
-    When the client adds an employee with id 42
-    Then employee with id 42 is added
-    And the number of employees is 4
+  #Scenario: adding a new employee
+  #  When the client adds an employee with id 42
+  #  Then employee with id 42 is added
+  #  And the number of employees is 4
 
   #Scenario: deleting number 42
   #  When the client deletes employee 42

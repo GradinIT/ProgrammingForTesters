@@ -36,7 +36,7 @@ public class TestEmployeeService {
     @Mock // Vi har en mockad dao för att vi vill isolera funktionaliteten i Service-klassen och BARA testa metoderna där
     private EmployeeDao employeeDao;
     @InjectMocks // Vi injecerar vår mockade dao i vårt service-objekt
-    private EmployeeService systemUnderTest = new EmployeeServiceImpl();
+    private final EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
     private Employee exampleEmployee;
     private EmployeeDatabaseEntry employeeDbEntry;

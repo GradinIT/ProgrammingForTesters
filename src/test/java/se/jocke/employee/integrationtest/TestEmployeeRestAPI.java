@@ -24,6 +24,7 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<EmployeeModel> optionalEmployeeModel = null;
     Optional<List<EmployeeModel>> optionalEmployeeModelList = null;
 
+
     @When("the client calls /employee")
     public void getAll() {
         optionalEmployeeModelList = getAllEmployees();
@@ -35,10 +36,14 @@ public class TestEmployeeRestAPI extends TestClient {
     }
 
 
-
-    @When("the client updates first name of employee (\\d+) to (.+)$")
-    public EmployeeModel theClientUpdatesFirstName(int employeeId, String firstName) {
+    @When("^the client calls employee (\\d+)$")
+    public void theClientCallsEmployee(int employeeId) {
         optionalEmployeeModel = getEmployeeById(employeeId);
+    }
+
+    @And("the client updates first name of employee (\\d+) to (.+)$")
+    public EmployeeModel theClientUpdatesFirstName(int employeeId, String firstName) {
+
         EmployeeModel updatedEmployeeModel = null;
 
         if (optionalEmployeeModel.isPresent()) {
@@ -58,13 +63,8 @@ public class TestEmployeeRestAPI extends TestClient {
     @Then("^the name of employee (\\d+) is updated to (.+)$")
     public void theNameIsUpdated(int employeeId, String firstName) {
         optionalEmployeeModelList = getAllEmployees();
-        EmployeeModel updatedEmployee = theClientUpdatesFirstName(employeeId, firstName);
+        EmployeeModel updatedEmployee = theClientUpdatesFirstName(employeeId, firstName); // Nu körs denna två gånger - anropas av gurkan med when
         Assert.assertEquals(updatedEmployee, getEmployeeById(employeeId).get());
-    }
-
-    @And("^the total number of employees is still (\\d+)$")
-    public void checkTheListSizeOfEmployees(int numberOfEmployees) {
-        Assert.assertEquals(numberOfEmployees, optionalEmployeeModelList.get().size());
     }
 
 
@@ -120,9 +120,9 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @When("the client adds an employee with id {int}")
     public void the_client_adds_an_employee_with_id(Integer int1) {
-        EmployeeModel empModel = EmployeeModelTestBuilder.builderMethod().build();
+        EmployeeModel newEmpModel = EmployeeModelTestBuilder.builderMethod().build();
 
-
+        createEmployee(newEmpModel);
     }
 
 }

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public class EmployeeTestBuilder {
     // EmployeeBuilder är en grej som finns gömt i @Superbuilder i Employee
-    private static Employee.EmployeeBuilder builder = Employee.builder();
+    private static final Employee.EmployeeBuilder builder = Employee.builder();
 
     public static Employee.EmployeeBuilder builderMethod() {
         return builder
