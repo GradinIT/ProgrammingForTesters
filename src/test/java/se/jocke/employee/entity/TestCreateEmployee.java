@@ -14,7 +14,7 @@ public class TestCreateEmployee {
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
     @Test
-    @DisplayName("Given that all parameters are OK")
+    @DisplayName("When we create employee \"Happy Flow\"")
     public void testCreateEmployee() {
 
         Employee employee = Employee.builder()
@@ -37,7 +37,7 @@ public class TestCreateEmployee {
     }
 
     @Test
-    @DisplayName("Given that something is null")
+    @DisplayName("When we create employee and something is null")
     public void testCreateEmployeeThrowsNullPointerException() {
         assertThrows(NullPointerException.class,
                 () -> Employee.builder().employeeId(EmployeeID.builder().id(1).build()).build());

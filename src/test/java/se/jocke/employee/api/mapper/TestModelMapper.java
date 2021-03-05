@@ -16,7 +16,7 @@ public class TestModelMapper {
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
     @Test
-    @DisplayName("Given that we want to map employee to model")
+    @DisplayName("When we want to map employee to model")
     public void testEmployeeToEmployeeModelMapping() {
         EmployeeModel empModel = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
@@ -30,7 +30,7 @@ public class TestModelMapper {
     }
 
     @Test
-    @DisplayName("Given that we want to map model to employee")
+    @DisplayName("When we want to map model to employee")
     public void testEmployeeModelToEmployeeMapping() {
         Employee empFromModel = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertAll(

@@ -13,7 +13,7 @@ public class TestCreateEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
     @Test
-    @DisplayName("Given that everything is OK")
+    @DisplayName("When we create employee model \"Happy Flow \"")
     public void testCreateEmployeeModelHappyFlow() {
 
         EmployeeModel employeeModel = EmployeeModel.builder()
@@ -36,7 +36,7 @@ public class TestCreateEmployeeModel {
     }
 
     @Test
-    @DisplayName("Given that something is null")
+    @DisplayName("When we create employee model and something is null")
     public void testCreateEmployeeModelThrowsNullPointerException() {
         Assertions.assertThrows(NullPointerException.class,
                 () -> {

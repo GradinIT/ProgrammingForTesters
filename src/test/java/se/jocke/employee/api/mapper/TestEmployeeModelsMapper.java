@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestEmployeeModelsMapper {
 
     @Test
-    @DisplayName("Given that we want to map a list of employees to employee models")
+    @DisplayName("When we want to map a list of employees to employee models")
     public void testEmployeeModelsMapper() {
         List<Employee> employees = Collections.singletonList(EmployeeTestBuilder.builder().build());
         List<EmployeeModel> employeeModelList = EmployeeModelsMapper.map(employees);

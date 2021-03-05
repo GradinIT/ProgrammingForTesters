@@ -27,7 +27,7 @@ public class TestEmployeeDao {
     private EmployeeDao employeeDao;
 
     @Test
-    @DisplayName("Given that we want employee by id")
+    @DisplayName("When we want employee by id")
     public void testGetEmployeeById() {
         Optional<EmployeeDatabaseEntry> employeeByID = employeeDao.findById(1);
         Assertions.assertAll(
@@ -42,7 +42,7 @@ public class TestEmployeeDao {
     }
 
     @Test
-    @DisplayName("Given that employee ID is null")
+    @DisplayName("When we want employee by ID and employee ID is null")
     public void testGetEmployeeByIdThrowsException() {
 
         Integer id = null;
@@ -54,7 +54,7 @@ public class TestEmployeeDao {
     }
 
     @Test
-    @DisplayName("Given that we want all employees")
+    @DisplayName("When we want all employees")
     public void testGetAllEmployees() {
         List<EmployeeDatabaseEntry> allEmployees = employeeDao.findAll();
         Assertions.assertAll(
