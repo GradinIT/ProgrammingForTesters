@@ -5,13 +5,15 @@ import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
-public class TestCreateEmployeeModel {
-
+public class
+TestCreateEmployeeModel {
+// en instans av den riktiga Employeemodel- har information i sig
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
 
     @Test
     public void testCreateEmployeeModel() {
+//skapar en testinstans för Employeemodel
         EmployeeModel employee = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
@@ -30,7 +32,7 @@ public class TestCreateEmployeeModel {
         Assertions.assertEquals(EMPLOYEE_MODEL,employee);
     }
 
-    @Test
+    @Test //vi testar så att nullpointerexception kastas vid null dvs om inget värde finns i variablen.
     public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
             EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
@@ -43,4 +45,5 @@ public class TestCreateEmployeeModel {
         });
     }
 }
+
 

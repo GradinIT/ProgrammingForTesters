@@ -1,7 +1,6 @@
 package se.jocke.employee.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,8 +26,8 @@ public class TestEmployeeService {
         @InjectMocks
         private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
-        @BeforeEach
-        public void setUp() {
+        @Test
+        public void testGetEmployeeById() {
             when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                     .employeeId(1)
                     .firstName("firstName1")
@@ -37,10 +36,6 @@ public class TestEmployeeService {
                     .salary(BigDecimal.valueOf(25000.00))
                     .departmentId(1)
                     .build()));
-        }
-
-        @Test
-        public void findById() {
             Employee employee = systemUnderTest.getEmployeeById(1);
             Assertions.assertAll(
                     () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
