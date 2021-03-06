@@ -2,27 +2,19 @@ package se.jocke.employee.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import se.jocke.dao.DepartmentDao;
-import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
-import se.jocke.department.entity.Department;
 import se.jocke.department.entity.Employee;
-import se.jocke.service.DepartmentService;
-import se.jocke.service.DepartmentServiceImpl;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
-
 import java.math.BigDecimal;
 import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -47,14 +39,20 @@ public class TestEmployeeService {
                 .build()));
     }
 
+    @DisplayName("Testning if mocked object return right values")
     @Test
     public void findById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("firstName1", employee.getFirstName())
-                //() TESTA MER
+                () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
+                () -> Assertions.assertEquals("lastName1", employee.getLastName()),
+                () -> Assertions.assertEquals(BigDecimal.valueOf(25000), employee.getSalary()),
+                () -> Assertions.assertEquals(true, employee.getFullTime()),
+                () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
     }
+
+    // LÄGG TILL CRUD GREJER ANVÄND SÖNDER MOCKEN
 }

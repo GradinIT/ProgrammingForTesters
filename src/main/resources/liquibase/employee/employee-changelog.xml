@@ -19,7 +19,7 @@
             <column name="FIRSTNAME">firstName1</column>
             <column name="LASTNAME">lastName1</column>
             <column name="FULLTIME">true</column>
-            <column name="SALARY">25000.00</column>
+            <column name="SALARY">25000</column>
             <column name="DEPARTMENTID">1</column>
         </insert>
         <insert tableName="EMPLOYEE">

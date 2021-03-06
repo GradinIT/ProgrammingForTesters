@@ -1,6 +1,7 @@
 package se.jocke.employee.api.model;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
@@ -8,7 +9,10 @@ import se.jocke.employee.builder.EmployeeModelTestBuilder;
 public class TestCreateEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
-// TEST FUNGERAR, SKRIV DOKUMENTATION
+    // Tests for creating an employee objects with correct data
+    // An object is built and then tested against the expected values
+    // Also testing that the expected exception is thrown
+    @DisplayName("Testing employee model creation")
     @Test
     public void testCreateEmployeeModel() {
         EmployeeModel employee = EmployeeModel.builder()
@@ -29,6 +33,7 @@ public class TestCreateEmployeeModel {
 
     }
 
+    @DisplayName("Testing that NullPointerException is thrown")
     @Test
     public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
