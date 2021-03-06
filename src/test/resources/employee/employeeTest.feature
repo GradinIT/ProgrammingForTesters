@@ -13,3 +13,6 @@ Feature: test employee api
       | 55 | Fun |
     When the client deletes employee 55
     Then the employee 55 is deleted
+    Scenario: client creates employee
+      When the client creates an employee
+      Then an employee is created

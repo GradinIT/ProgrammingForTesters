@@ -8,6 +8,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
 @SuiteDisplayName("Testing all methods for department and employee packages")
-@SelectPackages({"se.jocke.department", "se.jocke.employee", "se,jocke."})
+@SelectPackages({"se.jocke.department", "se.jocke.employee"})
 public class TestSuite {
 }

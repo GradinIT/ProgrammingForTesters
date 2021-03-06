@@ -51,7 +51,7 @@ public class TestEmployeeModelMapper {
         assertAll(
                 ()-> assertNotNull(EMPLOYEE),
                 () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), 100),
-                () -> assertEquals(EMPLOYEE.getFirstName(), "TestareN"), // Test set up to fail on purpose
+                () -> assertEquals(EMPLOYEE.getFirstName(), "Testare"), // Test set up to fail on purpose
                 () -> assertEquals(EMPLOYEE.getLastName(), "Testarsson"),
                 () -> assertEquals(EMPLOYEE.getFullTime(), true),
                 () -> assertEquals(EMPLOYEE.getSalary(), BigDecimal.valueOf(25000.0)),

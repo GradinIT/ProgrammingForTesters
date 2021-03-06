@@ -98,4 +98,9 @@ public class TestEmployeeRestAPI extends TestClient {
         });
         assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage());
     }
+
+    @Then("an employee is created")
+    public void anEmployeeIsCreated(EmployeeModel employee) {
+        createEmployee(employee);
+    }
 }
