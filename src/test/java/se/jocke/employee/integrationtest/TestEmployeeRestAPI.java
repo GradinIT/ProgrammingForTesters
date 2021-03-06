@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
-import se.jocke.dao.EntityAlreadyInStorageException;
-import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -72,7 +70,12 @@ public class TestEmployeeRestAPI extends TestClient {
     @Given("^the employee$")
     public void givenEmployees(DataTable employeeDataTable) {
         List<EmployeeModel> listOfEmployees = getEmployeesList(employeeDataTable.asList());
-        listOfEmployees.forEach(TestClient::createEmployee); // listOfEmployees.stream().forEach(employee -> createEmployee(employee));
+        listOfEmployees.forEach(TestClient::createEmployee);
+    }
+
+    @And("the total number of employees is {int}")
+    public void totalNumberOfEmployyes(int numberOfEmployees) {
+        Assertions.assertEquals(numberOfEmployees, getAllEmployees().get().size());
     }
 
     @When("the client deletes employee {int}")
@@ -80,12 +83,14 @@ public class TestEmployeeRestAPI extends TestClient {
         deleteEmployee(getEmployeeById(employeeId).get());
     }
 
-    @Then("employee {int} is deleted")
+    @Then("employee {int} is no longer found in search")
     public void employeeIsDeleted(int employeeId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
     }
+
+
 
     @When("the client tries to get employee {int}")
     public void searchForNonExistentEmployee(Integer employeeId) {
@@ -97,32 +102,7 @@ public class TestEmployeeRestAPI extends TestClient {
         assertEquals("404 : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
     }
 
-    EmployeeModel createdEmployee;
 
-//    @When("the client tries to create employee {int}")
-//    public void theClientCreatesEmployee(int employeeId) {
-//         createdEmployee = EmployeeModel.builder()
-//                 .firstName("hej")
-//                 .lastName("hejs")
-//                 .salary(new BigDecimal(25000).setScale(2))
-//                 .fullTime(true)
-//                 .departmentId(1)
-//                 .employeeId(employeeId)
-//                 .build();
-//
-////         createEmployee(createdEmployee);
-//        exceptionThatWasThrown = assertThrows(HttpServerErrorException.class, () -> createEmployee(createdEmployee));
-//    }
-//
-//    @Then("employee with id {int} already exists")
-//    public void employeeAlreadyInDatabase(int employeeId) {
-//        assertEquals(createdEmployee.getEmployeeId(), getEmployeeById(employeeId).get().getEmployeeId());
-//    }
-
-//    @Then("the errormessage is: [Entity with id {int} already in databse]")
-//    public void checkErrorMessage(int employeeId) {
-//        Assertions.assertEquals( "[Entity with id " + employeeId +" already in storage]", exceptionThatWasThrown.getMessage());
-//            }
 
     private List<EmployeeModel> getEmployeesList(List<String> given) {
         List<se.jocke.api.EmployeeModel> employees = new ArrayList<>();
