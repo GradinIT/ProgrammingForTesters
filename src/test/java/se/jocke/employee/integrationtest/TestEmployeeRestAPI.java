@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class TestEmployeeRestAPI extends TestClient {
@@ -99,8 +98,35 @@ public class TestEmployeeRestAPI extends TestClient {
         assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage());
     }
 
-    @Then("an employee is created")
-    public void anEmployeeIsCreated(EmployeeModel employee) {
-        createEmployee(employee);
+    @When("the client creates an employee")
+    public void theClientCreatesAnEmployee() {
+        EmployeeModel empCreate = EmployeeModel.builder()
+                .employeeId(getAllEmployees().get().size()+1)
+                .firstName("New")
+                .lastName("Test")
+                .fullTime(false)
+                .salary(BigDecimal.valueOf(999.00))
+                .departmentId(1)
+                .build();
+        createEmployee(empCreate);
     }
+
+    @Then("an employee is created")
+    public void anEmployeeIsCreated() throws Throwable {
+        Optional<EmployeeModel> createdEmp = getEmployeeById(getAllEmployees().get().size());
+
+        assertAll(
+                ()-> assertNotNull(createdEmp),
+                ()-> assertEquals(4, createdEmp.get().getEmployeeId()),
+                ()-> assertEquals("New", createdEmp.get().getFirstName()),
+                ()-> assertEquals("Test", createdEmp.get().getLastName()), //Set up to fail! Remove E and test will pass
+                ()-> assertEquals(false, createdEmp.get().getFullTime()),
+                ()-> assertEquals(BigDecimal.valueOf(999.00), createdEmp.get().getSalary()),
+                ()-> assertEquals(1, createdEmp.get().getDepartmentId()
+        ));
+
+    }
+
+
+
 }
