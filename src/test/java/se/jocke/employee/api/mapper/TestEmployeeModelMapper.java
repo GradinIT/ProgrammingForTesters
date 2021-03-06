@@ -19,7 +19,7 @@ public class TestEmployeeModelMapper {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
-    // Test that the Employees fields corresponds to the EmployeeModels fields
+    // Test that EmployeeModelsMapper can map an Employee to EmployeeModel
     @Test
     public void testEmployeeToEmployeeModelMapping() {
         EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
@@ -33,7 +33,7 @@ public class TestEmployeeModelMapper {
         );
     }
 
-    // Test the reverse of above
+    // Test that EmployeeModelsMapper can map an EmployeeModel to Employee
     @Test
     public void testEmployeeModelToEmployeeMapping() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
