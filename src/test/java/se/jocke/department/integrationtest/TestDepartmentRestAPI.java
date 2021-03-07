@@ -66,7 +66,6 @@ public class TestDepartmentRestAPI extends TestClient {
         }
         return deps;
     }
-
     @When("the client deletes department {int}")
     public void deleteDepartment(Integer departmentId) {
         deleteDepartment(getDepartmentById(departmentId).get());

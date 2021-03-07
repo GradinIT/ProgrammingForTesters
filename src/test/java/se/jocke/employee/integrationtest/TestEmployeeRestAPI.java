@@ -6,7 +6,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.bytebuddy.implementation.bytecode.Throw;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Spy;
 import org.mockito.Mock;
 import org.springframework.web.client.HttpClientErrorException;
@@ -14,8 +16,10 @@ import se.jocke.TestClient;
 import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
 import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
 import se.jocke.util.ObjectUtility;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,7 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
     @Spy
     Optional<EmployeeModel> employee = null;
+
 
     @When("^the client calls /employee$")
     public void getAllEmps() throws Throwable {
@@ -62,18 +67,6 @@ public class TestEmployeeRestAPI extends TestClient {
         );
     }
 
-    @When("^the client deletes employee (\\d+)$")
-    public void deleteEmployee(Integer employeeID) {
-
-        deleteEmployee(getEmployeeById(employeeID).get());
-    }
-
-    @Then("^the client (\\d+) is deleted$")
-    public void employeeIsDeleted(Integer employeeID) {
-        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> getEmployeeById(employeeID));
-        assertEquals("404 : [Entity with id 1 not found]", exceptionThatWasThrown.getMessage());
-    }
-
     @Given("^the employees$")
     public void givenEmployees(DataTable employees) {
         List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());
@@ -89,6 +82,45 @@ public class TestEmployeeRestAPI extends TestClient {
             emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).build());
         }
         return emps;
+    }
+
+
+    @When("^the client deletes employee (\\d+)$")
+    public void deleteEmployee(Integer employeeID) {
+
+        deleteEmployee(getEmployeeById(employeeID).get());
+    }
+
+    Throwable exceptionThatWasThrown;
+
+    @Then("^the client (\\d+) is deleted$")
+    public void employeeIsDeleted(Integer employeeID) {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> getEmployeeById(employeeID));
+        assertEquals("404 : [Entity with id 1 not found]", exceptionThatWasThrown.getMessage());
+    }
+
+    @And("error message is {int} : [Entity with id {int} not found]")
+    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
+
+        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
+    }
+
+    @When("the client updates employee (\\d+) new firstname (.+) and lastname(.+)$")
+    public void updateEmployee(Integer ID, String firstName, String lastName) {
+        employee = getEmployeeById(ID);
+        updateEmployee(employee.get().builder().employeeId(ID).firstName(firstName)
+                .lastName(lastName)
+                .salary(employee.get().getSalary())
+                .fullTime(employee.get().getFullTime())
+                .departmentId(employee.get().getDepartmentId())
+                .build());
+    }
+
+    @Then("the employee (\\d+) is updated and new firstname is (.+) and lastname(.+)$")
+    public void employeeIsUpdated(Integer ID, String firstName, String lastName) {
+        employee= getEmployeeById(2);
+        Assert.assertEquals(firstName, employee.get().getFirstName());
+        Assert.assertEquals(lastName, employee.get().getLastName());
     }
 
 

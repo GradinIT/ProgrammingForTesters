@@ -12,6 +12,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.dao.EntityAlreadyInStorageException;
 import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
 import se.jocke.department.entity.EmployeeID;
@@ -19,9 +20,10 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeSave{
@@ -45,15 +47,23 @@ public class TestEmployeeSave{
                 .fullTime(true)
                 .departmentId(5).build();
         employee = EmployeePojoMapper.map(empdb);
-        when(employeeDao.save(EmployeePojoMapper.map(employee))).thenReturn(empdb);
     }
 
     @Test
     public void save() {
-        Employee emp = systemUnderTest.createOrUpdateEmployee(employee);
+        when(employeeDao.save(empdb)).thenReturn(empdb);
+        Employee emp = systemUnderTest.createEmployee(employee);
         Assertions.assertEquals("java", emp
                 .getFirstName());
         Assertions.assertEquals("javasson", emp.getLastName());
+
+      verify(employeeDao,times(1)).save(empdb);
+    }
+    @Test
+    public void employeeEntityInStorageException(){
+        when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(empdb));
+        Assertions.assertThrows(EntityAlreadyInStorageException.class,()->systemUnderTest.createEmployee(employee));
+        verify(employeeDao,times(1)).findById(employee.getEmployeeId().getId());
     }
 
 

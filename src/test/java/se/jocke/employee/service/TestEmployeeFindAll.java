@@ -16,7 +16,8 @@ import se.jocke.service.EmployeeServiceImpl;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeFindAll {
 
@@ -49,6 +50,7 @@ public class TestEmployeeFindAll {
     public void findAll(){
         List<Employee> testlist = systemUnderTest.getAllEmployees();
         Assertions.assertEquals(2,testlist.size());
+        verify(employeeDao,times(1)).findAll();
     }
 
 }

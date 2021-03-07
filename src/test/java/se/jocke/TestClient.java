@@ -93,12 +93,7 @@ public class TestClient {
         EmployeeModel result = restTemplate.postForObject(BASE_URL+"employee/", employeeModel, EmployeeModel.class);
         return Optional.of(result);
     }
-    public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
-        RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.PUT, null);
-        ResponseEntity<EmployeeModel> response = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.PUT, requestEntity, EmployeeModel.class);
-        return Optional.of(response.getBody());
-    }
+
     public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
@@ -119,5 +114,12 @@ public class TestClient {
             employeeModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
         });
         return Optional.ofNullable(employeeModels);
+    }
+
+    public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
+        RestTemplate restTemplate = new RestTemplate();
+        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<>(employeeModel, HttpMethod.PUT, null);
+        ResponseEntity<EmployeeModel> response = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.PUT, requestEntity, EmployeeModel.class);
+        return Optional.of(response.getBody());
     }
 }

@@ -2,8 +2,14 @@ package se.jocke.department.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import se.jocke.department.builder.DepartmentTestBuilder;
+
+
+//Här har jag testat att det går att skapa en department pojo.
+//Den använder sig av en testbuilder som ska innehålla samma fältvariabler som department och jömför dem sedan.
+
 
 public class TestCreateDepartment {
     @Spy

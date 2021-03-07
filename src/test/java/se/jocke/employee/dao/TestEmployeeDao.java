@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
+import se.jocke.department.entity.Employee;
 import se.jocke.util.ObjectUtility;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
@@ -43,15 +44,10 @@ public class TestEmployeeDao {
                 () ->assertEquals(3,employees.size())
         );
     }
+    @Test
+    public void removeEmployee(Employee employee){
+
+    }
 
 
-//@Test
-//    public void testGetDepartmentById() {
-//        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
-//        Assertions.assertAll(
-//                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-//                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-//                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
-//        );
-//    }
 }

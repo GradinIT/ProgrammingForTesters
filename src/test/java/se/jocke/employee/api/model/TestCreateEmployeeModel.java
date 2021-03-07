@@ -12,7 +12,7 @@ import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import static org.mockito.Mockito.when;
 
 public class TestCreateEmployeeModel {
-    @Spy
+
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
 

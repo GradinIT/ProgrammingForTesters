@@ -10,3 +10,7 @@ Scenario:  client deletes employee
   | 1 |
   When the client deletes employee 1
   Then the client 1 is deleted
+  And error message is 404 : [Entity with id 1 not found]
+  Scenario: client updates employee by id
+    When  the client updates employee 2 new firstname Darth and lastname Vader
+    Then the employee 2 is updated and new firstname is Darth and lastname Vader
