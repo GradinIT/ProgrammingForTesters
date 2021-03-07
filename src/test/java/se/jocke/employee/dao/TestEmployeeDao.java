@@ -31,8 +31,8 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 ()->assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 ()->assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                ()->assertEquals("Coder", optionalEmployeeDatabaseEntry.get().getFirstName()),
-                ()->assertEquals("Codersson", optionalEmployeeDatabaseEntry.get().getLastName())
+                ()->assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
+                ()->assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName())
         );
     }
 

@@ -36,7 +36,7 @@ public class TestEmployeeRestAPI extends TestClient {
     @When("^the client updates firstName for employee to (.+)$")
     public void updateFirstNameOfEmployee(String firstName) throws Throwable {
 
-        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(firstName).lastName("Codersson").fullTime(true).salary(BigDecimal.valueOf(25000.0)).departmentId(1).build());
+        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(firstName).lastName("lastName1").fullTime(true).salary(BigDecimal.valueOf(25000.0)).departmentId(1).build());
 
     }
 
@@ -50,7 +50,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @When("^the client updates lastName for employee to (.+)$")
     public void updateLastNameOfEmployee(String lastName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().employeeId(1).lastName(lastName).firstName("Coder").fullTime(true).salary(BigDecimal.valueOf(25000.0)).departmentId(1).build());
+        updateEmployee(EmployeeModel.builder().employeeId(1).lastName(lastName).firstName("firstName1").fullTime(true).salary(BigDecimal.valueOf(25000.0)).departmentId(1).build());
 
     }
 
