@@ -28,11 +28,11 @@ public class TestDepartmentDao {
 
     @Test
     public void testGetDepartmentById() {
-        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
+        Optional<DepartmentDatabaseEntry> optionalDepartmentDatabaseEntry = departmentDao.findById(1);
         Assertions.assertAll(
-                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
+                () -> assertTrue(optionalDepartmentDatabaseEntry.isPresent()),
+                () -> assertNotNull(optionalDepartmentDatabaseEntry.get()),
+                () -> assertEquals("Development",optionalDepartmentDatabaseEntry.get().getDepartmentName())
         );
     }
     @Test
@@ -40,7 +40,7 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () ->assertEquals(4,departments.size())
+                () -> assertEquals(4,departments.size())
         );
     }
 }

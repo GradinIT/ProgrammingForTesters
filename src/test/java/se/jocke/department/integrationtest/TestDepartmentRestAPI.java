@@ -27,7 +27,7 @@ public class TestDepartmentRestAPI extends TestClient {
         departments = getAllDepartments();
     }
 
-    @Then("^the client receives (\\d+) departments$")
+    @Then("the client receives {int} departments")
     public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
         Assert.assertEquals(numberOfDepartments, departments.get().size());
     }

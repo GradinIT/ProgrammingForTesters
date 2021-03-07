@@ -46,4 +46,5 @@ public class TestDepartmentService {
         );
         verify(departmentDao, times(1)).findById(1);
     }
+
 }
