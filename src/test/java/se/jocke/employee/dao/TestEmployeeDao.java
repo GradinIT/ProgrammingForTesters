@@ -33,11 +33,14 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
 public class TestEmployeeDao {
+    // Autowire EmployeeDao to access changelog info
     @Autowired
     EmployeeDao employeeDao;
 
+    // Hardcoded entries to compare
     private EmployeeDatabaseEntry tester = new EmployeeDatabaseEntry();
 
+    // Setting up hardcoded data, should be same as in chagelog
     @BeforeEach
     public void setUp() {
         tester = EmployeeDatabaseEntry.builder()
@@ -50,7 +53,8 @@ public class TestEmployeeDao {
                 .build();
     }
 
-    @DisplayName("Comparing database entry with tester set up after what should be in database for ID 1")
+    // Testing hardcoded against changelog
+    @DisplayName("Comparing database entry for ID 1 in changelog with tester values")
     @Test
     public void testGetEmployeeById() {
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
@@ -67,7 +71,8 @@ public class TestEmployeeDao {
         );
     }
 
-    @DisplayName("Testing number of employees in database, should return 3")
+    // Testing how many employees exist in changelog
+    @DisplayName("Testing number of employees in database")
     @Test
     public void testGetEmployees() {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();

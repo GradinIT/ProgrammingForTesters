@@ -9,7 +9,7 @@ import se.jocke.employee.builder.EmployeeModelTestBuilder;
 public class TestCreateEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
-    // Tests for creating an employee objects with correct data
+    // Tests for creating an employee object with correct data
     // An object is built and then tested against the expected values
     // Also testing that the expected exception is thrown
     @DisplayName("Testing employee model creation")

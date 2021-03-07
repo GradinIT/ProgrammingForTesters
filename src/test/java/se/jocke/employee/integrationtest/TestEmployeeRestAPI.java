@@ -5,12 +5,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.junit.jupiter.api.DisplayName;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
-import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
-import se.jocke.department.entity.Employee;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
@@ -26,17 +22,17 @@ public class TestEmployeeRestAPI extends TestClient {
 
 
     @When("^the client calls /employee$")
-    public void getAll() throws Throwable {
+    public void getAll() {
         employees = getAllEmployees();
     }
 
     @Then("^the client receives (\\d+) employees$")
-    public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
+    public void theClientGotAllEmployees(int numberOfEmployees) {
         Assert.assertEquals(numberOfEmployees, employees.get().size());
     }
 
     @When("^the client updates first name for employee to (.+)$")
-    public void updateNameOfEmployee(String firstName) throws Throwable {
+    public void updateNameOfEmployee(String firstName) {
         Optional<List<EmployeeModel>> employees = getAllEmployees();
         updateEmployee(EmployeeModel.builder()
                 .employeeId(1)
@@ -49,18 +45,18 @@ public class TestEmployeeRestAPI extends TestClient {
     }
 
     @Then("the employee first name is updated to (.+)$")
-    public void nameOfEmployeeIsUpdated(String firstName) throws Throwable {
+    public void nameOfEmployeeIsUpdated(String firstName)  {
         Optional<EmployeeModel> employee = getEmployeeById(1);
         Assert.assertEquals(firstName, employee.get().getFirstName());
     }
 
     @When("^the client gets employee (\\d+)$")
-    public void getTheEmployeeById(Integer employeeId) throws Throwable {
+    public void getTheEmployeeById(Integer employeeId) {
         employee = getEmployeeById(employeeId);
     }
 
     @Then("^the name of employee is$")
-    public void firstNameOfEmployeeIs() throws Throwable {
+    public void firstNameOfEmployeeIs() {
         Assert.assertEquals("firstName", employee.get().getFirstName());
     }
 
@@ -72,14 +68,14 @@ public class TestEmployeeRestAPI extends TestClient {
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 2) {
+        for (int i = 0; i < given.size() - 1; i += 6) {
             emps.add(EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
-                    .lastName(given.get(i + 1))
-                    .salary(BigDecimal.valueOf(9))
-                    .fullTime(true)
-                    .departmentId(1)
+                    .lastName(given.get(i + 2))
+                    .salary(BigDecimal.valueOf(Double.parseDouble(given.get(i + 3))))
+                    .fullTime(Boolean.parseBoolean(given.get(i + 4)))
+                    .departmentId(Integer.parseInt(given.get(i + 5)))
                     .build());
         }
         return emps;
@@ -95,7 +91,7 @@ public class TestEmployeeRestAPI extends TestClient {
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
-        assertEquals("404 : [Entity with id 55 not found]", exceptionThatWasThrown.getMessage());
+        assertEquals("404 : [Entity with id 14 not found]", exceptionThatWasThrown.getMessage());
     }
 
     @When("the client creates an employee")
@@ -112,7 +108,7 @@ public class TestEmployeeRestAPI extends TestClient {
     }
 
     @Then("an employee is created")
-    public void anEmployeeIsCreated() throws Throwable {
+    public void anEmployeeIsCreated() {
         Optional<EmployeeModel> createdEmp = getEmployeeById(getAllEmployees().get().size());
 
         assertAll(
@@ -126,7 +122,4 @@ public class TestEmployeeRestAPI extends TestClient {
         ));
 
     }
-
-
-
 }

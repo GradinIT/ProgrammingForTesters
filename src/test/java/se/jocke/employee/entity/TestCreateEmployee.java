@@ -1,7 +1,9 @@
 package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnJre;
 import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
 import se.jocke.department.entity.Employee;
@@ -10,6 +12,8 @@ import se.jocke.employee.builder.EmployeeTestBuilder;
 public class TestCreateEmployee {
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
+    // Testing creating employee and that the result is same as original
+    @DisplayName("Testing employee creation")
     @Test
     public void testCreateEmployee() {
         Employee employee = EmployeeTestBuilder.builder()
@@ -33,6 +37,8 @@ public class TestCreateEmployee {
 
     }
 
+    // Testing that exception is thrown if result is null
+    @DisplayName("Testing that NullPointerException is thrown")
     @Test
     public void testCreateEmployeeThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {

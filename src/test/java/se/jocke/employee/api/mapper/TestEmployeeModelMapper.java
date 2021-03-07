@@ -44,14 +44,14 @@ public class TestEmployeeModelMapper {
                 () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime())
         );
     }
-    // MOCKA EMPLOYEE OCH MODEL FÖR ATT PÅVISA MOCKING?
+
     @DisplayName("Testing builders with hardcoded data")
     @Test
     public void testEmployeeBuildersHardCoded() {
         assertAll(
                 ()-> assertNotNull(EMPLOYEE),
                 () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), 100),
-                () -> assertEquals(EMPLOYEE.getFirstName(), "Testare"), // Test set up to fail on purpose
+                () -> assertEquals(EMPLOYEE.getFirstName(), "Testare"),
                 () -> assertEquals(EMPLOYEE.getLastName(), "Testarsson"),
                 () -> assertEquals(EMPLOYEE.getFullTime(), true),
                 () -> assertEquals(EMPLOYEE.getSalary(), BigDecimal.valueOf(25000.0)),

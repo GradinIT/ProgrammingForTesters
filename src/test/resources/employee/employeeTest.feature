@@ -10,9 +10,9 @@ Feature: test employee api
     Then the name of employee is
   Scenario: client deletes employee
     Given the employees
-      | 55 | Fun |
-    When the client deletes employee 55
-    Then the employee 55 is deleted
+      | 14 | first | last | 9999 | true | 1 |
+    When the client deletes employee 14
+    Then the employee 14 is deleted
     Scenario: client creates employee
       When the client creates an employee
       Then an employee is created
