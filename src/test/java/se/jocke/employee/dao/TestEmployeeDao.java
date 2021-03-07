@@ -61,6 +61,7 @@ public class TestEmployeeDao {
         );  
     }
 
+    @DisplayName("Checks noSuchElementException")
     @Test
     public void testNoSuchElementException() {
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(0);
