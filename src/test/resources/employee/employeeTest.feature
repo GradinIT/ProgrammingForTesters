@@ -12,9 +12,10 @@ Feature: test employee api
     When the client requests employee id 1
     Then the client get employee 1 and the first name is Coder
     And the client get employee 1 and the last name is Codersson
-  Scenario: client creates employee
+  Scenario: client delete employee
     Given the employees
       | 14 | Simon | Anveden | true | 85000 | 1 |
-  Scenario: client delete employee
+      | 13 | Bengt | Johansson | true | 35000 | 0 |
+
     When the client deletes employee 1
     Then the employee 1 is deleted

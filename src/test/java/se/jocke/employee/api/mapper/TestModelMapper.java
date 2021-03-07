@@ -2,6 +2,7 @@ package se.jocke.employee.api.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import se.jocke.api.EmployeeModel;
 import se.jocke.api.mapper.EmployeeModelMapper;
 import se.jocke.department.entity.Employee;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestModelMapper {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
-    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
+   private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
     @Test
     public void testEmployeeToEmployeeModelMapping(){

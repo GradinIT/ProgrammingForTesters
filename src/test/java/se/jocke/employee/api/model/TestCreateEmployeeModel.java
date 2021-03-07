@@ -28,10 +28,11 @@ public class TestCreateEmployeeModel {
         Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId());
     }
     @Test
-    public void testCreateEmployeeThrowsException() {
+    public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            Employee.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
-            Employee.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();
+            Employee.builder().build();
+            /*Employee.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
+            Employee.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();*/
         });
     }
 

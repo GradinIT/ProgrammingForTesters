@@ -14,11 +14,18 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,6 +37,10 @@ public class TestEmployeeService {
 
     @BeforeEach
     public void setUp(){
+    }
+
+    @Test
+    public void findById(){
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("firstName1")
@@ -38,10 +49,7 @@ public class TestEmployeeService {
                 .salary(BigDecimal.valueOf(25000.0))
                 .departmentId(1)
                 .build()));
-    }
 
-    @Test
-    public void findById(){
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 ()->Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -52,5 +60,22 @@ public class TestEmployeeService {
                 ()->Assertions.assertEquals(1, employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
+    }
+
+    @Test
+    public void getAllEmployees(){
+        when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeeDatabaseEntry.builder()
+                .firstName("Testar")
+                .lastName("Testarsson")
+                .departmentId(1)
+                .fullTime(Boolean.TRUE)
+                .salary(BigDecimal.valueOf(25000))
+                .employeeId(1)
+                .build()));
+        List<Employee> employees = systemUnderTest.getAllEmployees();
+        Assertions.assertAll(
+                ()->assertNotNull(employees),
+                ()->assertEquals(1,employees.size())
+        );
     }
 }
