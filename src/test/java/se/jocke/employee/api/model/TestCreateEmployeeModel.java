@@ -5,7 +5,6 @@ import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestCreateEmployeeModel {
         private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
@@ -25,7 +24,7 @@ public class TestCreateEmployeeModel {
             Assertions.assertAll(
                     () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
                     () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId()),
-                    () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),           // Anders fråm EmployeeModelTestBuilder
+                    () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),           //  från EmployeeModelTestBuilder
                     () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),
                     () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary()),
                     () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime()),
