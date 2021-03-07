@@ -17,8 +17,8 @@ import java.util.Optional;
 
 public class TestEmployeeRestAPI extends TestClient {
 
-    Optional<List<EmployeeModel>> employees = null;
-    Optional <EmployeeModel> employee = null;
+    Optional<List<EmployeeModel>> employees = Optional.empty();
+    Optional <EmployeeModel> employee = Optional.empty();
 
     @When("^the client calls /employee$")
     public void getAll() {
