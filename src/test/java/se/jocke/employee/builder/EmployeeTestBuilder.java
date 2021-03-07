@@ -13,7 +13,7 @@ public class EmployeeTestBuilder {
                 .employeeId(EmployeeID.builder().id(100).build())
                 .firstName("Testare")
                 .lastName("Testarsson")
-                .salary(BigDecimal.valueOf(25000.0))
+                .salary(BigDecimal.valueOf(25000))
                 .fullTime(Boolean.TRUE)
                 .departmentId(1);
     }

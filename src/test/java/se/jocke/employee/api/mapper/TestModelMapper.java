@@ -21,14 +21,14 @@ public class TestModelMapper {
             Assertions.assertAll(
                     () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
                     () -> assertEquals(EMPLOYEE.getDepartmentId(), model.getDepartmentId()),
-                    () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()),
+                    () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName()), // Testare DVS EmployeeTestBuilder
                     () -> assertEquals(EMPLOYEE.getLastName(), model.getLastName()),
                     () -> assertEquals(EMPLOYEE.getSalary(), model.getSalary()),
                     () -> assertEquals(EMPLOYEE.getFullTime(), model.getFullTime())
             );
         }
         @Test
-        public void testDepartmentModelToDepartmentMapping() {
+        public void testEmployeeModelToEmployeeMapping() {
             Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
             Assertions.assertAll(
                     () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),

@@ -1,11 +1,11 @@
 package se.jocke.employee.api.model;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
-import se.jocke.department.builder.DepartmentModelTestBuilder;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestCreateEmployeeModel {
         private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
@@ -22,20 +22,22 @@ public class TestCreateEmployeeModel {
                     .fullTime(EMPLOYEE_MODEL.getFullTime())
                     .build();
 
-            Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId());
-            Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId());
-            Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName());
-            Assertions.assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName());
-            Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary());
-            Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime());
-
-            Assertions.assertEquals(EMPLOYEE_MODEL,employee);
+            Assertions.assertAll(
+                    () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId()),
+                    () -> assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId()),
+                    () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName()),           // Anders fråm EmployeeModelTestBuilder
+                    () -> assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName()),
+                    () -> assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary()),
+                    () -> assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime()),
+                    () -> assertEquals(EMPLOYEE_MODEL,employee)
+            );
         }
 
     @Test
     public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
             EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
+            EmployeeModel.builder().departmentId(EMPLOYEE_MODEL.getDepartmentId()).build();
         });
     }
 
