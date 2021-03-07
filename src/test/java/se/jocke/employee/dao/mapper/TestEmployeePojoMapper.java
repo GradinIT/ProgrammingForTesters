@@ -9,6 +9,7 @@ import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -84,5 +85,18 @@ public class TestEmployeePojoMapper {
                 () -> assertFalse(employeeList.isEmpty()),
                 () -> assertEquals(1, employeeList.size())
         );
+    }
+
+    @Test
+    @DisplayName("When list contains EmployeeDataBaseEntry = null")
+    public void testMapListThrowsException() {
+        List<EmployeeDatabaseEntry> list = new ArrayList<>();
+        EmployeeDatabaseEntry test = null;
+        list.add(test);
+
+        assertThrows(NullPointerException.class, () -> {
+            EmployeePojoMapper.map(list);
+        });
+
     }
 }
