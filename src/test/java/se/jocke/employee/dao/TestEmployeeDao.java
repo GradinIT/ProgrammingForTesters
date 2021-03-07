@@ -35,9 +35,7 @@ public class TestEmployeeDao {
         //And then check if it has any null values, if not then test is passed.
     }
     @Test
-    public void testGetAllEmployees() {   //Check if it's possible to receive a list of all the employees
-        //In the database by calling the service method, "GetAllEmployees()" that has a callback method from
-        // The method findAll() from EmployeeDao.
+    public void testGetAllEmployees() {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),

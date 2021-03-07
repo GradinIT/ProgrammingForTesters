@@ -51,6 +51,7 @@ public class TestEmployeeSave{
 
     @Test
     public void save() {
+        when(employeeDao.findById(empdb.getEmployeeId())).thenReturn(Optional.empty());
         when(employeeDao.save(empdb)).thenReturn(empdb);
         Employee emp = systemUnderTest.createEmployee(employee);
         Assertions.assertEquals("java", emp
@@ -64,6 +65,7 @@ public class TestEmployeeSave{
         when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(empdb));
         Assertions.assertThrows(EntityAlreadyInStorageException.class,()->systemUnderTest.createEmployee(employee));
         verify(employeeDao,times(1)).findById(employee.getEmployeeId().getId());
+
     }
 
 
