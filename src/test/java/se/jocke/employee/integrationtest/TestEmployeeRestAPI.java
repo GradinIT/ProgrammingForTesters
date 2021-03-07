@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
