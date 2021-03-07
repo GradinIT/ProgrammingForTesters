@@ -15,7 +15,5 @@ Feature: test employee api
   Scenario: client delete employee
     Given the employees
       | 14 | Simon | Anveden | true | 85000 | 1 |
-      | 13 | Bengt | Johansson | true | 35000 | 0 |
-
-    When the client deletes employee 1
-    Then the employee 1 is deleted
+    When the client deletes employee 14
+    Then the employee 14 is deleted
