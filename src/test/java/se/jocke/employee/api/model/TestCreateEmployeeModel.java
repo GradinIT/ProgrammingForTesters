@@ -40,7 +40,7 @@ public class TestCreateEmployeeModel {
     public void testCreateEmployeeModelThrowsNullPointerException() {
         Assertions.assertThrows(NullPointerException.class,
                 () -> {
-                    EmployeeModelTestBuilder.builder()
+                    EmployeeModel.builder()
                             .firstName(null)
                             .build();
                 });
