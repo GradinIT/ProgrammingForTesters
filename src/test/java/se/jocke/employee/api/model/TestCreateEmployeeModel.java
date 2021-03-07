@@ -9,7 +9,7 @@ public class TestCreateEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
     @Test
-    public void testCreateDepartmentModel() {
+    public void testCreateEmployeeModel() {
         EmployeeModel employee = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())

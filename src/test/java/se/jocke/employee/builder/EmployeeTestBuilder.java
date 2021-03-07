@@ -10,10 +10,10 @@ public class EmployeeTestBuilder {
 
     public static Employee.EmployeeBuilder builder() {
         return builder
-                .employeeId(EmployeeID.builder().id(100).build())
+                .employeeId(EmployeeID.builder().id(200).build())
                 .firstName("Testare")
-                .lastName("Testarsson")
-                .salary(BigDecimal.valueOf(25000.0))
+                .lastName("Testsson")
+                .salary(BigDecimal.valueOf(25000.00))
                 .fullTime(Boolean.TRUE)
                 .departmentId(1);
     }

@@ -5,8 +5,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import liquibase.pro.packaged.S;
-import org.checkerframework.checker.nullness.Opt;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
@@ -51,6 +49,80 @@ public class TestEmployeeRestAPI extends TestClient {
         Optional<EmployeeModel> employee = getEmployeeById(1);
         Assert.assertEquals(employeeName, employee.get().getFirstName());
     }
+    // added late program working to here down->
+
+    @When("^the client updates lastname for employee to (.+)$")
+    public void updateLastnameOfEmployee(String employeeLastname) {
+        updateEmployee(EmployeeModel.builder()
+        .employeeId(1)
+        .firstName("firstName1")
+        .lastName(employeeLastname)
+        .salary(BigDecimal.valueOf(25000))
+        .fullTime(true)
+        .departmentId(1)
+        .build());
+    }
+
+    @Then("the employee lastname is updated to (.+)$")
+    public void lastNameOfEmployeeIsUpdated(String employeeLastname) {
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+        Assert.assertEquals(employeeLastname, employee.get().getLastName());
+    }
+
+    @When("^the client updates salary for employee to (.+)$")
+    public void updateSalaryOfEmployee(BigDecimal employeeSalary) {
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(1)
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .salary(employeeSalary)
+                .fullTime(true)
+                .departmentId(1)
+                .build());
+    }
+
+    @Then("^the employee salary is updated to (.+)$")
+    public void salaryEmployeeIsUpdated(BigDecimal employeeSalary) {
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+        Assert.assertEquals(employeeSalary, employee.get().getSalary());
+    }
+
+    @When("the client updates full time for employee to {}")
+    public void updateFullTimeOfEmployee(Boolean fullTime) {
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(1)
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .salary(BigDecimal.valueOf(25000))
+                .fullTime(fullTime)
+                .departmentId(1)
+                .build());
+    }
+
+    @Then("the employee full time is updated to {}")
+    public void FullTimeOfEmployeeIsUpdated(Boolean fullTime) {
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+        Assert.assertEquals(fullTime, employee.get().getFullTime());
+    }
+
+    @When("the client updates department for employee to {int}")
+    public void updateDepartmentOfEmployee(Integer departmentId) {
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(1)
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .salary(BigDecimal.valueOf(25000))
+                .fullTime(true)
+                .departmentId(departmentId)
+                .build());
+    }
+
+    @Then("the employee department is updated to (.+)$")
+    public void DepartmentOfEmployeeIsUpdated(Integer departmentId) {
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+        Assert.assertEquals(departmentId, employee.get().getDepartmentId());
+    }
+    // here
 
     @When("^the client gets employee (\\d+)$")
     public void getTheEmployeeById(Integer employeeId) throws Throwable{
@@ -60,6 +132,10 @@ public class TestEmployeeRestAPI extends TestClient {
     @Then("^the employees name is$")
     public void nameOfEmployeeIs() throws Throwable{
         Assert.assertEquals("Egon", employee.get().getFirstName());
+    }
+    @Then("^the employee lastname is$")
+    public void lastNameOfEmployeeIs() {
+        Assert.assertEquals("Egonson", employee.get().getLastName());
     }
 
     @Given("^the employees$")

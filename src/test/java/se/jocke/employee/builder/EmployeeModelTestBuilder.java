@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 public class EmployeeModelTestBuilder {
     public static EmployeeModel.EmployeeModelBuilder builder() {
         return EmployeeModel.builder()
-                .employeeId(200)
+                .employeeId(100)
                 .departmentId(1)
-                .firstName("Anders")
-                .lastName("Andersson")
+                .firstName("Johan")
+                .lastName("Johansson")
                 .fullTime(Boolean.TRUE)
                 .salary(BigDecimal.valueOf(25000));
     }
