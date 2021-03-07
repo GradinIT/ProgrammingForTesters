@@ -16,48 +16,48 @@ import java.util.Optional;
 
 public class TestEmployeeRestAPI extends TestClient {
 
-    Optional<List<EmployeeModel>> employees = Optional.empty();
-    Optional <EmployeeModel> employee = Optional.empty();
+    Optional<List<EmployeeModel>> ListEmployeeModels = Optional.empty();
+    Optional <EmployeeModel> employeeModel = Optional.empty();
 
     @When("^the client calls /employee$")
     public void getAll() {
-        employees = getAllEmployees();
+        ListEmployeeModels = getAllEmployees();
     }
 
     @Then("the client receives {int} employees")
     public void theClientGetAllEmployees(Integer numOfEmployees) {
-        Assertions.assertEquals(numOfEmployees, employees.get().size());
+        Assertions.assertEquals(numOfEmployees, ListEmployeeModels.get().size());
     }
 
     @When("the client updates name for employee {int} to {}")
     public void updateNameOfEmployee(Integer employeeId, String name) {
-        employee = getEmployeeById(employeeId);
+        employeeModel = getEmployeeById(employeeId);
 
-        employee = updateEmployee(EmployeeModel.builder()
-                .employeeId(employee.get().getEmployeeId())
+        employeeModel = updateEmployee(EmployeeModel.builder()
+                .employeeId(employeeModel.get().getEmployeeId())
                 .firstName(name)
-                .lastName(employee.get().getLastName())
-                .fullTime(employee.get().getFullTime())
-                .salary(employee.get().getSalary())
-                .departmentId(employee.get().getDepartmentId())
+                .lastName(employeeModel.get().getLastName())
+                .fullTime(employeeModel.get().getFullTime())
+                .salary(employeeModel.get().getSalary())
+                .departmentId(employeeModel.get().getDepartmentId())
                 .build()
         );
     }
 
     @Then("the name of employee is updated to {}")
     public void theNameIsUpdatedTo(String name) {
-        Assertions.assertEquals(name, employee.get().getFirstName());
+        Assertions.assertEquals(name, employeeModel.get().getFirstName());
     }
 
     @When("the client request employee id {int}")
     public void employeeById(Integer employeeId) {
-        employee = getEmployeeById(employeeId);
+        employeeModel = getEmployeeById(employeeId);
     }
 
     @Then("the client get employee {int} and the name is {}")
     public void employeeNameIs(Integer employeeId, String name) {
-        Assertions.assertEquals(employeeId, employee.get().getEmployeeId());
-        Assertions.assertEquals(name, employee.get().getFirstName());
+        Assertions.assertEquals(employeeId, employeeModel.get().getEmployeeId());
+        Assertions.assertEquals(name, employeeModel.get().getFirstName());
     }
 
     @Given("^the employees$")

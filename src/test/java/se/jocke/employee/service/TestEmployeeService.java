@@ -42,7 +42,7 @@ public class TestEmployeeService {
     private final EmployeeService SYSTEM_UNDER_TEST = new EmployeeServiceImpl();
 
     @BeforeEach
-    void setUp() {
+    void setData() {
         employeeResult = null;
         employee = EmployeeTestBuilder.builder().build();
         employeeDatabaseEntry = EmployeeDatabaseEntry.builder()
