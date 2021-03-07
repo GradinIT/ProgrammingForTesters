@@ -1,9 +1,11 @@
 package se.jocke.employee.builder;
 
+import lombok.EqualsAndHashCode;
 import se.jocke.department.entity.Employee;
 import se.jocke.department.entity.EmployeeID;
 
 import java.math.BigDecimal;
+
 
 public class EmployeeTestBuilder {
     private static Employee.EmployeeBuilder builder = Employee.builder();
