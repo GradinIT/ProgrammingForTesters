@@ -10,7 +10,7 @@ public class TestCreateEmployeeModel {
 
 
     @Test
-    public void testCreateDepartmentModel() {
+    public void testCreateEmployeeModel() {
         EmployeeModel employee = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
@@ -30,7 +30,7 @@ public class TestCreateEmployeeModel {
     }
 
     @Test
-    public void testCreateDepartmentModelThrowsException() {
+    public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
             EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
         });

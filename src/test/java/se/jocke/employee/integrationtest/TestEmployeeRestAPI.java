@@ -101,7 +101,7 @@ public class TestEmployeeRestAPI extends TestClient {
     @Then("the employee (\\d+) is deleted$")
     public void employeeIsDeleted(Integer employeeId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getDepartmentById(employeeId);
+            getEmployeeById(employeeId);
         });
     }
 
@@ -109,5 +109,4 @@ public class TestEmployeeRestAPI extends TestClient {
     public void checkErrorMessage(Integer errorCode, Integer employeeId) {
         Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
-
 }
