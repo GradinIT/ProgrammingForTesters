@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.department.builder.DepartmentTestBuilder;
 
-
 public class TestCreateDepartment {
     private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
 

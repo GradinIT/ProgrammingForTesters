@@ -1,7 +1,6 @@
 package se.jocke.employee.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,9 +19,13 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -32,11 +35,13 @@ import static org.mockito.Mockito.when;
 public class TestEmployeeService {
     @Mock
     private EmployeeDao employeeDao;
+
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
-    @BeforeEach
-    public void setUp() {
+    @Test
+    public void findById() {
+
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("firstName1")
@@ -45,10 +50,7 @@ public class TestEmployeeService {
                 .salary(BigDecimal.valueOf(25000.00))
                 .departmentId(1)
                 .build()));
-    }
 
-    @Test
-    public void findById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -62,39 +64,39 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void createEmployee() {
-        //1 Skapa en ny employee med employeeID 77
-        //2 Kalla på metoden createEmployee-metoden i TestClient
-        //3 Skriv assertions
-    }
-
-    @Test
-    public void updateEmployee() {
-        //1 hitta en employee
-        //2 uppdatera mha updateEmployee-metoden i TestClient
-    }
-
-    @Test
     public void removeEmployee() {
-        //1 hitta en employee
+
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(1)
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .fullTime(Boolean.TRUE)
+                .salary(BigDecimal.valueOf(25000.00))
+                .departmentId(1)
+                .build()));
+
         Employee employee = systemUnderTest.getEmployeeById(1);
-        //använder removeEmployee från EmployeeServiceImpl
         systemUnderTest.removeEmployee(employee);
         verify(employeeDao,times(1)).delete(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
     public void listAllEmployees() {
-        Employee employee = systemUnderTest.getEmployeeById(1);
+
+        when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeeDatabaseEntry.builder()
+                .employeeId(1)
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .fullTime(Boolean.TRUE)
+                .salary(BigDecimal.valueOf(25000.00))
+                .departmentId(1)
+                .build()));
+
         List<Employee> employees = systemUnderTest.getAllEmployees();
-        employees.add(employee);
-        employees.add(employee);
-        employees.add(employee);
-        verify(employeeDao, times(1)).findAll();
+        Assertions.assertAll(
+                () -> assertNotNull(employees),
+                () -> assertEquals(1, employees.size())
+        );
+
     }
 }
-//1 Lista alla employees mha getAllEmployees-metoden i EmployeeServiceImpl
-// systemUnderTest.getAllEmployees();
-//2 skriv assertions?
-
-

@@ -6,5 +6,6 @@ import org.junit.runner.RunWith;
 @SelectPackages({
         "se.jocke.employee"
 })
+
 public class TestEmployeeSuit {
 }

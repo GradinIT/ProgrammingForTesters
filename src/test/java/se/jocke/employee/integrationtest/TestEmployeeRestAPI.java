@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static java.lang.Double.parseDouble;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -38,7 +37,7 @@ public class TestEmployeeRestAPI extends TestClient{
 
     @When("^the client updates firstName for employee to (.+)$")
     public void updateFirstNameOfEmployee(String firstName) throws Throwable {
-        //den här måste innehålla samtliga parameter eftersom den skall bygga ett objekt
+
         updateEmployee(EmployeeModel.builder()
                 .employeeId(1)
                 .firstName(firstName)
@@ -49,7 +48,7 @@ public class TestEmployeeRestAPI extends TestClient{
                 .build());
     }
 
-    @Then("the firstName is updated to (.+)$")
+    @Then("^the firstName is updated to (.+)$")
     public void firstNameOfEmployeeIsUpdated(String firstName) throws Throwable {
         Optional<EmployeeModel> employee = getEmployeeById(1);
         Assert.assertEquals(firstName, employee.get().getFirstName());
@@ -73,19 +72,18 @@ public class TestEmployeeRestAPI extends TestClient{
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 6) { // nullpointer
+        for (int i = 0; i < given.size() - 1; i += 6) {
             emps.add(EmployeeModel.builder()
                     .employeeId(Integer.parseInt(given.get(i)))
                     .firstName(given.get(i + 1))
                     .lastName(given.get(i + 2))
                     .fullTime(Boolean.valueOf(given.get(i + 3)))
                     .salary(new BigDecimal(given.get(i + 4)))
-                    .departmentId(Integer.parseInt(given.get(i + 5)))
+                    .departmentId(Integer.parseInt(given.get(i+5)))
                     .build());
         }
         return emps;
     }
-
 
     @When("the client deletes employee {int}")
     public void deleteEmployee(Integer employeeId) {
@@ -99,12 +97,5 @@ public class TestEmployeeRestAPI extends TestClient{
         });
         assertEquals( "404 : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
-
-
-
-//    @And("the error message is {int} : [Entity with id {int} not found]")
-//    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
-//        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
-//    }
 
 }
