@@ -10,10 +10,10 @@ import se.jocke.employee.builder.EmployeeTestBuilder;
  */
 public class TestCreateEmployee {
 
-    // Create Employee to test
+    // Create a dummy Employee to test against
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
-    // Test that our test Employee we just built corresponds to a predefined employee
+    // Create a new employee with the same field values as our dummy, and Assert that they are equal
     @Test
     public void testCreateEmployee() {
         Employee employee = Employee.builder()
@@ -34,7 +34,7 @@ public class TestCreateEmployee {
         Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
     }
 
-    // Test that the Employee builder throws an exception if it does not get all fields it needs (I think?)
+    // Test that the Employee builder throws an exception if the builder pattern does not get all the @NonNull fields it require
     @Test
     public void testCreateEmployeeThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> Employee.builder().firstName(EMPLOYEE.getFirstName()).build());

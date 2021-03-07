@@ -24,10 +24,13 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * Created by Oscar Bergström 05-03-2021
+ */
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
 
-    // Test EmployeeService.java
+    // Test EmployeeService.java/EmployeeServiceImpl.java
 
     // Mock EmployeeDao since EmployeeServiceImpl is dependent on it
     @Mock

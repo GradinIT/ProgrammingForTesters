@@ -10,10 +10,10 @@ import se.jocke.employee.builder.EmployeeModelTestBuilder;
  */
 public class TestCreateEmployeeModel {
 
-    // Create a test EmployeeModel
+    // Create a dummy EmployeeModel to test against
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
-    // Create an Employee from the model and then check that it's fields equal the models
+    // Create an Employee from the dummy model and then check that it's fields equal the models
     @Test
     public void testCreateEmployeeModel() {
         EmployeeModel employee = EmployeeModel.builder()
