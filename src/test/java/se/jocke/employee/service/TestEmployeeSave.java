@@ -18,8 +18,10 @@ import se.jocke.department.entity.Employee;
 import se.jocke.department.entity.EmployeeID;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
+import se.jocke.util.ObjectUtility;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -31,9 +33,9 @@ public class TestEmployeeSave{
     EmployeeDao employeeDao;
     @InjectMocks
     EmployeeService systemUnderTest = new EmployeeServiceImpl();
-    @Mock
+
     EmployeeDatabaseEntry empdb;
-    @Mock
+
     Employee employee;
 
 
@@ -54,10 +56,9 @@ public class TestEmployeeSave{
         when(employeeDao.findById(empdb.getEmployeeId())).thenReturn(Optional.empty());
         when(employeeDao.save(empdb)).thenReturn(empdb);
         Employee emp = systemUnderTest.createEmployee(employee);
-        Assertions.assertEquals("java", emp
-                .getFirstName());
-        Assertions.assertEquals("javasson", emp.getLastName());
-
+        List<Object> EmpAttrList = new ObjectUtility().ObjectUtility(emp);
+        boolean result = EmpAttrList.stream().anyMatch(e->e.equals(null));
+        Assertions.assertFalse(result);
       verify(employeeDao,times(1)).save(empdb);
     }
     @Test
