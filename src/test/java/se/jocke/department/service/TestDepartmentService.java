@@ -7,11 +7,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import se.jocke.dao.DepartmentDao;
-import se.jocke.dao.DepartmentDatabaseEntry;
-import se.jocke.dao.EntityAlreadyInStorageException;
+import se.jocke.dao.*;
+import se.jocke.dao.mapper.DepartmentDatabaseEntryMapper;
+import se.jocke.dao.mapper.EmployeePojoMapper;
 import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
+import se.jocke.department.entity.Employee;
+import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.DepartmentService;
 import se.jocke.service.DepartmentServiceImpl;
 
@@ -19,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -106,5 +109,36 @@ public class TestDepartmentService {
                 exception.getMessage());
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verifyNoMoreInteractions(departmentDao);
+    }
+    @Test
+    public void updateEmployeeHappyFlow(){
+        Department department = DepartmentTestBuilder.builder().build();
+
+        when(departmentDao.findById(any(Integer.class)))
+                .thenReturn(Optional.of(DepartmentDatabaseEntryMapper.map(department)));
+        when(departmentDao.save(DepartmentDatabaseEntryMapper.map(department)))
+                .thenReturn(DepartmentDatabaseEntryMapper.map(department));
+        Department d = systemUnderTest.update(department);
+        Assertions.assertAll(
+                () -> assertNotNull(d),
+                () -> assertEquals(d.getDepartmentName(), department.getDepartmentName())
+        );
+
+        verify(departmentDao, times(1)).findById(any(Integer.class));
+        verify(departmentDao, times(1)).save(any(DepartmentDatabaseEntry.class));
+    }
+
+    @Test
+    public void updateEmployeeError(){
+
+      Department departmentToUpdate = DepartmentTestBuilder.builder().build();
+      Integer departmentId = departmentToUpdate.getDepartmentId();
+
+        when(departmentDao.findById(departmentId)).thenReturn(Optional.empty());
+        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () ->
+                { systemUnderTest.update(departmentToUpdate); }
+        );
+        verify(departmentDao, times(1)).findById(departmentId);
+        Assertions.assertEquals("Entity with id "+ departmentId +" not found",exception.getMessage());
     }
 }

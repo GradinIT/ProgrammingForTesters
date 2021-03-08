@@ -8,19 +8,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.api.mapper.EmployeeModelMapper;
-import se.jocke.dao.EmployeeDao;
-import se.jocke.dao.EmployeeDatabaseEntry;
-import se.jocke.dao.EntityAlreadyInStorageException;
-import se.jocke.dao.EntityNotFoundException;
+import se.jocke.dao.*;
 import se.jocke.dao.mapper.EmployeePojoMapper;
+import se.jocke.department.entity.Department;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -47,12 +50,7 @@ public class TestEmployeeService {
         Employee employee = systemUnderTest.getEmployeeById(testEmployee.getEmployeeId().getId());
         Assertions.assertAll(
                 () -> assertNotNull(employee),
-                () -> Assertions.assertEquals(employee.getEmployeeId().getId(), testEmployee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals(employee.getFirstName(), testEmployee.getFirstName()),
-                () -> Assertions.assertEquals(employee.getLastName(), testEmployee.getLastName()),
-                () -> Assertions.assertEquals(employee.getSalary(), testEmployee.getSalary()),
-                () -> Assertions.assertEquals(employee.getFullTime(), testEmployee.getFullTime()),
-                () -> Assertions.assertEquals(employee.getDepartmentId(), testEmployee.getDepartmentId())
+                () -> Assertions.assertEquals(EmployeeModelMapper.map(employee), EmployeeModelMapper.map(testEmployee))
 
         );
         verify(employeeDao, times(1)).findById(testEmployee.getEmployeeId().getId());
@@ -136,14 +134,25 @@ public class TestEmployeeService {
 
     @Test
     public void updateEmployeeError(){
-        // Ofärdig metod!
-    }
-    @Test
-    public void getAllHappyFlow(){
+       Integer employeeId = testEmployee.getEmployeeId().getId();
 
+        when(employeeDao.findById(employeeId)).thenReturn(Optional.empty());
+        Throwable exception = Assertions.assertThrows(EntityNotFoundException.class, () ->
+                { systemUnderTest.updateEmployee(testEmployee); }
+        );
+        verify(employeeDao, times(1)).findById(employeeId);
+        Assertions.assertEquals("Entity with id "+ employeeId +" not found",exception.getMessage());
     }
     @Test
-    public void getAllError(){
+    public void getAll(){
+
+        when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeePojoMapper.map(testEmployee)));
+
+        List<Employee> employees = systemUnderTest.getAllEmployees();
+        Assertions.assertAll(
+                () -> assertNotNull(employees),
+                () -> assertEquals(1, employees.size())
+        );
 
     }
 
