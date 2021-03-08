@@ -1,4 +1,4 @@
-package se.jocke.employee.dao;
+package se.jocke.employee.TestPackage;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
 @DisplayName("Test employee DAO")
-public class TestDepartmentDao {
+public class TestEmployeeDao {
 
     @Autowired
     private EmployeeDao employeeDao;

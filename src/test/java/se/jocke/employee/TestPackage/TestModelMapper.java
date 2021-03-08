@@ -1,4 +1,4 @@
-package se.jocke.department.api.mapper;
+package se.jocke.employee.TestPackage;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
