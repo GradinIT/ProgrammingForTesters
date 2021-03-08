@@ -34,4 +34,16 @@ public class TestCreateEmployee {
             Employee.builder().employeeId(EMPLOYEE.getEmployeeId()).build();
         });
     }
+    @Test
+    public void testCreateEmployeeExceptOneThrowsException() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            Employee.builder().employeeId(EMPLOYEE.getEmployeeId())
+                    .firstName(EMPLOYEE.getFirstName())
+                    .lastName(EMPLOYEE.getLastName())
+                    //.salary(EMPLOYEE.getSalary())
+                    .fullTime(EMPLOYEE.getFullTime())
+                    .departmentId(EMPLOYEE.getDepartmentId())
+                    .build();
+        });
+    }
 }
