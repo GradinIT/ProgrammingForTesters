@@ -36,9 +36,8 @@ public class TestCreateEmployee {
 
     @Test
     public void testCreateEmployeeThrowsException() {
-        assertThrows(NullPointerException.class, () -> {
-            // Jag skapar en employee men "glömmer" att lägga till lastName.
-            // Detta kommer att producera en NullPoinerException
+        Throwable errorMessage = Assertions.assertThrows(NullPointerException.class, () ->{
+            // Skapar en employee och "glömmer" lastName för att få fram NullpointerException
             Employee.builder()
                     .employeeId(EMPLOYEE.getEmployeeId())
                     .firstName(EMPLOYEE.getFirstName())
@@ -47,7 +46,7 @@ public class TestCreateEmployee {
                     .departmentId(EMPLOYEE.getDepartmentId())
                     .build();
         });
-
+        Assertions.assertEquals("lastName is marked non-null but is null", errorMessage.getMessage());
     }
 
     @Test

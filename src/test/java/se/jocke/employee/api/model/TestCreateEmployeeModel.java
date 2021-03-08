@@ -29,10 +29,9 @@ public class TestCreateEmployeeModel {
 
     }
 
-    // TODO Need an explanation. Don't understand this
     @Test
     public void testCreateEmployeeModelThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () ->{
+        Throwable errorMessage = Assertions.assertThrows(NullPointerException.class, () ->{
             // Skapar en employee och "glömmer" lastName för att få fram NullpointerException
             EmployeeModel.builder()
                     .employeeId(EMPLOYEE_MODEL.getEmployeeId())
@@ -42,5 +41,6 @@ public class TestCreateEmployeeModel {
                     .departmentId(EMPLOYEE_MODEL.getDepartmentId())
                     .build();
         });
+        Assertions.assertEquals("lastName is marked non-null but is null", errorMessage.getMessage());
     }
 }

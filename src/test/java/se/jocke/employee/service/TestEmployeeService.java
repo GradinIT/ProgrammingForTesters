@@ -99,15 +99,8 @@ public class TestEmployeeService {
 
     @Test
     public void testCreateEmployeeAlreadyExistsError() {
-        Employee employee = EmployeeTestBuilder.builder().build();
-        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-                .employeeId(employee.getEmployeeId().getId())
-                .firstName(employee.getFirstName())
-                .lastName(employee.getLastName())
-                .salary(employee.getSalary())
-                .fullTime(employee.getFullTime())
-                .departmentId(employee.getDepartmentId())
-                .build()));
+        Employee employee = EmployeePojoMapper.map(testPerson);
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(testPerson));
         Throwable errorMessage = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> {
            crudTest.createEmployee(employee);
         });

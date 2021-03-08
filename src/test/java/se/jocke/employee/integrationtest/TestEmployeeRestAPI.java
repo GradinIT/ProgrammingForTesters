@@ -43,7 +43,6 @@ public class TestEmployeeRestAPI extends TestClient {
                 .fullTime(true)
                 .departmentId(1)
                 .build());
-        //System.out.println("HÄR ÄR ALLA" + getAllEmployees());
     }
 
     @Then("^the name of employee is updated to (.+) lastname (.+)$")
