@@ -14,4 +14,5 @@ public class EmployeeModelTestBuilder {
                 .fullTime(Boolean.TRUE)
                 .salary(BigDecimal.valueOf(25000));
     }
+
 }
