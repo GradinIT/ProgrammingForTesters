@@ -31,7 +31,7 @@ public class TestEmployeeService {
     @Mock
     private EmployeeDao employeeDao;
     @InjectMocks
-    private final EmployeeService crudOperation = new EmployeeServiceImpl();
+    private final EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
     @BeforeEach
     public void setUp() {
@@ -50,7 +50,7 @@ public class TestEmployeeService {
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDatabaseEntry));
 
-        Employee employee = crudOperation.getEmployeeById(1);
+        Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
                 () -> Assertions.assertEquals("Hanna", employee.getFirstName()),
@@ -69,7 +69,7 @@ public class TestEmployeeService {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry);
 
-        Employee employee = crudOperation.createEmployee(EmployeeTestBuilder.builder().build());
+        Employee employee = systemUnderTest.createEmployee(EmployeeTestBuilder.builder().build());
 
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(employee),
@@ -91,7 +91,7 @@ public class TestEmployeeService {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDatabaseEntry));
         when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDatabaseEntry);
 
-        Employee employee = crudOperation.updateEmployee(crudOperation.getEmployeeById(1));
+        Employee employee = systemUnderTest.updateEmployee(systemUnderTest.getEmployeeById(1));
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -111,7 +111,7 @@ public class TestEmployeeService {
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDatabaseEntry));
 
-        Employee employee = crudOperation.removeEmployee(EmployeePojoMapper.map(Optional.of(employeeDatabaseEntry).get()));
+        Employee employee = systemUnderTest.removeEmployee(EmployeePojoMapper.map(Optional.of(employeeDatabaseEntry).get()));
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
@@ -131,7 +131,7 @@ public class TestEmployeeService {
 
         when(employeeDao.findAll()).thenReturn(Collections.singletonList(employeeDatabaseEntry));
 
-        List<Employee> employees = crudOperation.getAllEmployees();
+        List<Employee> employees = systemUnderTest.getAllEmployees();
 
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(employees),

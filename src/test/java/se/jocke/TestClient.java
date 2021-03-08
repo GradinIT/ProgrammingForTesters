@@ -31,8 +31,8 @@ public class TestClient {
         List<?> list = (List<?>) responseEntity.getBody();
         List<DepartmentModel> departmentModels = new ArrayList<>();
         assert list != null;
-        list.forEach(o -> {
-            departmentModels.add(gson.fromJson(o.toString(), DepartmentModel.class));
+        list.forEach(departmentModel -> {
+            departmentModels.add(gson.fromJson(departmentModel.toString(), DepartmentModel.class));
         });
         return Optional.of(departmentModels);
 
