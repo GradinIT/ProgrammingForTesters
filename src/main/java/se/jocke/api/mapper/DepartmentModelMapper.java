@@ -1,7 +1,7 @@
 package se.jocke.api.mapper;
 
 import se.jocke.api.DepartmentModel;
-import se.jocke.department.entity.Department;
+import se.jocke.entity.Department;
 
 public class DepartmentModelMapper {
     public static Department map (DepartmentModel model) {

@@ -11,7 +11,7 @@ import se.jocke.dao.DepartmentDao;
 import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EntityAlreadyInStorageException;
 import se.jocke.department.builder.DepartmentTestBuilder;
-import se.jocke.department.entity.Department;
+import se.jocke.entity.Department;
 import se.jocke.service.DepartmentService;
 import se.jocke.service.DepartmentServiceImpl;
 

@@ -1,4 +1,4 @@
-package se.jocke.department.entity;
+package se.jocke.entity;
 
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;

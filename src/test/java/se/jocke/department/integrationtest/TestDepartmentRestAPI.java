@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.TestClient;
 import se.jocke.api.DepartmentModel;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TestDepartmentRestAPI extends TestClient {
+public class TestDepartmentRestAPI extends DepartmentTestClient {
     Optional<List<DepartmentModel>> departments = null;
     Optional<DepartmentModel> department = null;
 

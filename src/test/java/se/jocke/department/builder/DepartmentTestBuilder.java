@@ -1,6 +1,6 @@
 package se.jocke.department.builder;
 
-import se.jocke.department.entity.Department;
+import se.jocke.entity.Department;
 
 public class DepartmentTestBuilder {
     public static Department.DepartmentBuilder builder() {

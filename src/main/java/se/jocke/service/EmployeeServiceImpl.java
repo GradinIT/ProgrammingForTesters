@@ -8,7 +8,7 @@ import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.EntityAlreadyInStorageException;
 import se.jocke.dao.EntityNotFoundException;
 import se.jocke.dao.mapper.EmployeePojoMapper;
-import se.jocke.department.entity.Employee;
+import se.jocke.entity.Employee;
 
 import java.util.List;
 import java.util.Optional;
