@@ -22,7 +22,6 @@ public class TestCreateEmployee {
                     .departmentId(EMPLOYEE.getDepartmentId())
                 .build();
 
-        // Funkar att använda objekt-jämförelse, båda är av Employee-typen
         Assertions.assertEquals(EMPLOYEE, employee);
     }
 

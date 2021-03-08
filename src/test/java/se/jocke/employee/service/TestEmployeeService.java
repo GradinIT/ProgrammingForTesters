@@ -99,7 +99,6 @@ public class TestEmployeeService {
     public void removeEmployeeHappyFlow(){
 
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeePojoMapper.map(testEmployee)));
-        // when(employeeDao.delete(any(EmployeeDatabaseEntry.class))).then("deleted");
 
         Assertions.assertEquals(testEmployee, systemUnderTest.removeEmployee(testEmployee));
         verify(employeeDao, times(1)).findById(any(Integer.class));
@@ -141,6 +140,7 @@ public class TestEmployeeService {
                 { systemUnderTest.updateEmployee(testEmployee); }
         );
         verify(employeeDao, times(1)).findById(employeeId);
+        verifyNoMoreInteractions(employeeDao);
         Assertions.assertEquals("Entity with id "+ employeeId +" not found",exception.getMessage());
     }
     @Test

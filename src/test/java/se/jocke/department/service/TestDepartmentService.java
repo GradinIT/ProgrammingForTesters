@@ -111,7 +111,7 @@ public class TestDepartmentService {
         verifyNoMoreInteractions(departmentDao);
     }
     @Test
-    public void updateEmployeeHappyFlow(){
+    public void updateDepartmentHappyFlow(){
         Department department = DepartmentTestBuilder.builder().build();
 
         when(departmentDao.findById(any(Integer.class)))
@@ -129,7 +129,7 @@ public class TestDepartmentService {
     }
 
     @Test
-    public void updateEmployeeError(){
+    public void updateDepartmentError(){
 
       Department departmentToUpdate = DepartmentTestBuilder.builder().build();
       Integer departmentId = departmentToUpdate.getDepartmentId();
@@ -139,6 +139,26 @@ public class TestDepartmentService {
                 { systemUnderTest.update(departmentToUpdate); }
         );
         verify(departmentDao, times(1)).findById(departmentId);
+        verifyNoMoreInteractions(departmentDao);
         Assertions.assertEquals("Entity with id "+ departmentId +" not found",exception.getMessage());
+    }
+    @Test
+    public void removeDepartmentHappyFlow(){
+        Department departmentToRemove = DepartmentTestBuilder.builder().build();
+        when(departmentDao.findById(any(Integer.class)))
+                .thenReturn(Optional.of(DepartmentDatabaseEntryMapper.map(departmentToRemove)));
+
+        Assertions.assertEquals(departmentToRemove, systemUnderTest.remove(departmentToRemove));
+        verify(departmentDao, times(1)).findById(any(Integer.class));
+        verify(departmentDao, times(1)).delete(DepartmentDatabaseEntryMapper.map(departmentToRemove));
+    }
+
+    @Test
+    public void removeDepartmentError(){
+        Department departmentToRemove = DepartmentTestBuilder.builder().build();
+        when(departmentDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.remove(departmentToRemove));
+        verify(departmentDao, times(1)).findById(any(Integer.class));
+        verifyNoMoreInteractions(departmentDao);
     }
 }
