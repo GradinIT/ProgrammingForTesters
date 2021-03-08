@@ -38,5 +38,6 @@ Feature: test employee api
   Then The employee 33 is deleted, checked by failed getId
   Then The employee 34 is deleted, checked by failed getId
   Scenario: client tries to delete non-existant employee
-    When The client tries to delete non-existant employee with id 33
-    Then The delete should be OK although non-existant object, that is idempotent delete
+    When The client tries to delete non-existant employee with id 200
+    Then The delete is not OK with thrown exception
+    And The delete error message is 404 : [Entity with id 200 not found]

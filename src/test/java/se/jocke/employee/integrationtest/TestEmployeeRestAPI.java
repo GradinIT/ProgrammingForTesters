@@ -121,10 +121,16 @@ public class TestEmployeeRestAPI extends TestClient{
                 .departmentId(-123)
                 .build());
     }
-    @Then("The delete should be OK although non-existant object, that is idempotent delete")
+    @Then("The delete is not OK with thrown exception")
     public void employeeDeleteNonexistant() {
         // Check that this delete is idempotent and does not cause an error/exception, although it does not exist
-        Optional<EmployeeModel> emplModelResult = deleteEmployee(myEmplModel);
-        Assertions.assertEquals(true,emplModelResult.get().equals(myEmplModel));
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class,()->{
+           Optional<EmployeeModel> employeeModel = deleteEmployee(myEmplModel);
+        });
+
+    }
+    @And("The delete error message is {int} : [Entity with id {int} not found]")
+    public void checkErrorMessageNotFoundEmployee(Integer errorCode, Integer employeeId) {
+        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
 }

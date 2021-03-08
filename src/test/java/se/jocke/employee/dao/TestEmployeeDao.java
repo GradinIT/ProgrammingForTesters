@@ -10,6 +10,7 @@ import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
+import se.jocke.department.entity.Employee;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -48,5 +49,11 @@ public class TestEmployeeDao {
                     () -> assertEquals(3,employees.size())
             );
         }
-
+        @Test
+        public void testGetNonExistantEmpoyeeId(){
+            Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(4444);
+            Assertions.assertAll(
+                    ()->assertFalse(optionalEmployeeDatabaseEntry.isPresent())
+            );
+        }
 }
