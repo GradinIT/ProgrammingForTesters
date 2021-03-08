@@ -7,24 +7,7 @@ import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel { //passed 3/1 by default, no Mocking yet
 
-    /* MALL
-    private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
-     */
-
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
-
-    /* MALL
-    @Test
-    public void testCreateDepartmentModel() {
-        DepartmentModel department = DepartmentModel.builder()
-                .departmentId(DEPARTMENT_MODEL.getDepartmentId())
-                .departmentName(DEPARTMENT_MODEL.getDepartmentName())
-                .build();
-
-        Assertions.assertEquals(DEPARTMENT_MODEL.getDepartmentName(), department.getDepartmentName());
-        Assertions.assertEquals(DEPARTMENT_MODEL.getDepartmentId(), department.getDepartmentId());
-        Assertions.assertEquals(DEPARTMENT_MODEL,department);
-    }*/
 
     @Test
     public void testCreateEmployeeModel() {
@@ -46,19 +29,24 @@ public class TestCreateEmployeeModel { //passed 3/1 by default, no Mocking yet
         Assertions.assertEquals(EMPLOYEE_MODEL, employee);
     }
 
-    /*  MALL
-    @Test
-    public void testCreateDepartmentModelThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            DepartmentModel.builder().departmentName(DEPARTMENT_MODEL.getDepartmentName()).build();
-        });
-    }*/
-
-    @Test
+    @Test //the original, keep this one
     public void testCreateEmployeeModelThrowsException () {
         Assertions.assertThrows(NullPointerException.class, () -> {
             EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
-        });
+        });  //EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()) // for comparison
     }
+
+   /* @Test //my own test to understand the purpose of the assertThrows test. Result: "Expected java.lang.NullPointerException to be thrown, but nothing was thrown".
+    public void testCreateEmployeeModelThrowsException () {           // Conclusion: This test is to control that the EmployeeModel is given all parameters needed, if not
+        Assertions.assertThrows(NullPointerException.class, () -> {     // an NullPointerException is thrown. EmployeeModels parameters all have the constraint of @NonNull.
+            EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId())
+                    .firstName(EMPLOYEE_MODEL.getFirstName())
+                    .lastName(EMPLOYEE_MODEL.getLastName())
+                    .salary(EMPLOYEE_MODEL.getSalary())
+                    .fullTime(EMPLOYEE_MODEL.getFullTime())
+                    .departmentId(EMPLOYEE_MODEL.getDepartmentId())
+                    .build();
+        });
+    }*/
 
 }

@@ -6,26 +6,12 @@ import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
 public class TestCreateEmployee {  // 2/3-21 Test past by default values. No Mocking done yet.
-    /* MALL
-    private final Department DEPARTMENT = DepartmentTestBuilder.builder().build(); */
 
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
-    /*MALL
-    *  @Test
-    public void testCreateDepartment() {
-        Department department = DepartmentTestBuilder.builder()
-                .departmentId(DEPARTMENT.getDepartmentId())
-                .departmentName(DEPARTMENT.getDepartmentName())
-                .build();
-        Assertions.assertEquals(DEPARTMENT, department);
-        Assertions.assertEquals(DEPARTMENT.getDepartmentName(), department.getDepartmentName());
-        Assertions.assertEquals(DEPARTMENT.getDepartmentId(), department.getDepartmentId());
-    } */
-
     @Test
     public void testCreateEmployee() {  // Test passed from start.
-        Employee employee = EmployeeTestBuilder.builder()
+        Employee employee = Employee.builder()
                 .departmentId(EMPLOYEE.getDepartmentId())
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .firstName(EMPLOYEE.getFirstName())
@@ -42,18 +28,26 @@ public class TestCreateEmployee {  // 2/3-21 Test past by default values. No Moc
         Assertions.assertEquals(EMPLOYEE.getFullTime(), employee.getFullTime());
         Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
     }
-        /* MALL
-        * @Test
-    public void testCreateDepartmentThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            Department.builder().departmentName(DEPARTMENT.getDepartmentName()).build();
+
+    @Test // Original test, keep this one!
+    public void testCreateEmployeeThrowsException() { // Test passed from start.
+        Assertions.assertThrows(NullPointerException.class, () ->{
+            Employee.builder().firstName(EMPLOYEE.getFirstName()).build();
+        });
+    }
+
+   /* @Test // Ciccis own test
+    public void makeTheTestFailTestCreateEmployeeThrowsException() { // Giving all arguments to the builder, thus making the asssertThrow test fail.
+        Assertions.assertThrows(NullPointerException.class, () ->{ // result :"Expected java.lang.NullPointerException to be thrown, but nothing was thrown."
+            Employee.builder().departmentId(EMPLOYEE.getDepartmentId())
+                    .employeeId(EMPLOYEE.getEmployeeId())
+                    .firstName(EMPLOYEE.getFirstName())
+                    .lastName(EMPLOYEE.getLastName())
+                    .salary(EMPLOYEE.getSalary())
+                    .fullTime(EMPLOYEE.getFullTime())
+                    .departmentId(EMPLOYEE.getDepartmentId())
+                    .build();
         });
     }*/
-        @Test
-        public void testCreateEmployeeThrowsException() { // Test passed from start.
-            Assertions.assertThrows(NullPointerException.class, () ->{
-                Employee.builder().firstName(EMPLOYEE.getFirstName()).build();
-            });
-        }
 
 }

@@ -16,12 +16,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/* MALL
- @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
-public class TestDepartmentDao {
-   @Autowired
-   DepartmentDao departmentDao; */
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
@@ -29,24 +23,13 @@ public class TestEmployeeDao { // No Mocking done yet, 2/3-21 Added all paramete
     @Autowired
     EmployeeDao employeeDao;
 
-/* MALL
-@Test
-    public void testGetDepartmentById() {
-        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(1);
-        Assertions.assertAll(
-                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development",optionalEmployeeDatabaseEntry.get().getDepartmentName())
-        );
-    } */
-
     @Test   //Test passed 28/2-21 when only 2 parameters. Row 49: typo of assertNull, corrected to assertNotNull,
     public void testGetEmployeeById() {
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1); // return value should be Optional if the requested object is of Optional type.
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("firstName1",optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("Lotta",optionalEmployeeDatabaseEntry.get().getFirstName()),
                 () -> assertEquals("lastName1",optionalEmployeeDatabaseEntry.get().getLastName()),
                 () -> assertEquals(25000.00,optionalEmployeeDatabaseEntry.get().getSalary().longValue()),
                 () -> assertEquals(true,optionalEmployeeDatabaseEntry.get().getFullTime()),
@@ -54,23 +37,13 @@ public class TestEmployeeDao { // No Mocking done yet, 2/3-21 Added all paramete
         );
     }
 
-/* MALL
-*@Test
-    public void testGetDepartments() {
-        List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
-        Assertions.assertAll(
-                () -> assertNotNull(departments),
-                () ->assertEquals(4,departments.size())
-        );
-    } */
-
     @Test
     public void testGetEmployees() { // Test passed. By default 3 employees. If more employees are added, one
 //                                   might need to adjust departmentTest.feature-file in resources?
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),
-                () -> assertEquals(3,employees.size())
+                () -> assertEquals(4,employees.size())
         );
     }
 }

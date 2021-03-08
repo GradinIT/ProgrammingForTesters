@@ -1,14 +1,5 @@
 package se.jocke.employee.service;
 
-/* MALL
-* @ExtendWith(MockitoExtension.class)
-public class TestDepartmentService {
-    @Mock
-    private DepartmentDao departmentDao;
-    @InjectMocks
-    private DepartmentService systemUnderTest = new DepartmentServiceImpl();
-*/
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,30 +48,6 @@ public class TestEmployeeService { // Bygg ut med alla "CRUD"-kommandon, finn de
                 .build()));
     }
 
-    /* MALL
-    *  @Test
-    public void findById() {
-        Department department = systemUnderTest.getDepartmentById(1);
-        Assertions.assertAll(
-                () -> Assertions.assertEquals(1, department.getDepartmentId()),
-                () -> Assertions.assertEquals("Development", department.getDepartmentName())
-        );
-        verify(departmentDao, times(1)).findById(1);
-    }*/
-
-    /*@Test // My own test to understand where the EntityID comes from.
-    public void test(){
-        Employee employee = systemUnderTest.getEmployeeById(1);
-        System.out.println(employee.getEmployeeId());
-    }*/
-
-    /* MALL
-    Employee getEmployeeById(Integer employeeId);
-    Employee createOrUpdateEmployee(Employee employee);
-    Employee removeEmployee(Employee employee);
-    Employee updateEmployee(Employee employee);
-    List<Employee> getAllEmployees(); */
-
     @Test
     public void findById() {
         Employee employee = systemUnderTest.getEmployeeById(1);
@@ -95,6 +62,17 @@ public class TestEmployeeService { // Bygg ut med alla "CRUD"-kommandon, finn de
         verify(employeeDao, times(1)).findById(1);
     }
 
+/*@Test // My own test to understand where the EntityID comes from.
+    public void test(){
+        Employee employee = systemUnderTest.getEmployeeById(1);
+        System.out.println(employee.getEmployeeId());
+    }*/
 
+    /* MALL
+    Employee getEmployeeById(Integer employeeId);
+    Employee createOrUpdateEmployee(Employee employee);
+    Employee removeEmployee(Employee employee);
+    Employee updateEmployee(Employee employee);
+    List<Employee> getAllEmployees(); */
 
 }

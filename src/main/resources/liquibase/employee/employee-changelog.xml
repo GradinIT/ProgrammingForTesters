@@ -16,7 +16,7 @@
     <changeSet id="add-data-employee" author="Joakim Gradin">
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">1</column>
-            <column name="FIRSTNAME">firstName1</column>
+            <column name="FIRSTNAME">Lotta</column>
             <column name="LASTNAME">lastName1</column>
             <column name="FULLTIME">true</column>
             <column name="SALARY">25000.00</column>
@@ -34,6 +34,14 @@
             <column name="EMPLOYEEID">3</column>
             <column name="FIRSTNAME">firstName3</column>
             <column name="LASTNAME">lastName3</column>
+            <column name="FULLTIME">true</column>
+            <column name="SALARY">25000.00</column>
+            <column name="DEPARTMENTID">1</column>
+        </insert>
+        <insert tableName="EMPLOYEE">
+            <column name="EMPLOYEEID">4</column>
+            <column name="FIRSTNAME">Katten</column>
+            <column name="LASTNAME">Jansson</column>
             <column name="FULLTIME">true</column>
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>

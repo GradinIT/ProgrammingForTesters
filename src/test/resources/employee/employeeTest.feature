@@ -1,7 +1,7 @@
 Feature: test employee api
   Scenario: client gets all employees
     When calls /employee
-    Then receives 3 employees
+    Then receives 4 employees
   Scenario: client updates lastName for employee 1
     When updates lastName for employee to Everest
     Then the lastName is updated to Everest
