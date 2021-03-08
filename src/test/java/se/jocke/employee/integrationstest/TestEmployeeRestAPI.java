@@ -70,7 +70,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @Then("^this name is$")
     public void nameOfEmployeeIs() throws Throwable {
-        Assert.assertEquals("Robert", employee.get().getFirstName());
+        Assert.assertEquals("firstName1", employee.get().getFirstName());
     }
 
     // skapar en lista utav dataTable som finns i cukumber filen

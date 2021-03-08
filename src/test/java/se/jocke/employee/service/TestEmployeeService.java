@@ -89,6 +89,7 @@ public class TestEmployeeService {
     @Test
     public void createEmployeeHappyFlow() {
 
+        //ser om vi kan skapa en employee
 
         Employee employee = EmployeeTestBuilder.builder().build();
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
