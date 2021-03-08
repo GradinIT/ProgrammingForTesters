@@ -30,6 +30,7 @@ public class TestCreateEmployeeModel {
         Assertions.assertEquals(EMPLOYEE_MODEL, employee);
     }
 
+
     @Test
     public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {

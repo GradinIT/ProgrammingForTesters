@@ -24,12 +24,10 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
 
-
-    @When("^The client calls /employee$")
+    @When("The client asks for all employees")
     public void getAll() throws Throwable {
         employees = getAllEmployees();
     }
-
     @Then("^The client receives (\\d+) employees$")
     public void TheClientGotAllEmployees(int numberOfEmployees) throws Throwable {
         Assert.assertEquals(numberOfEmployees, employees.get().size());
@@ -61,10 +59,13 @@ public class TestEmployeeRestAPI extends TestClient {
         employee = getEmployeeById(employeeId);
     }
 
-    @Then("The name is {word} {word}")
-    public void nameOfEmployeeIs(String firstname, String lastname) throws Throwable {
-        Assert.assertEquals(firstname, employee.get().getFirstName());
-        Assert.assertEquals(lastname, employee.get().getLastName());
+    @Then("The attributes are {word}, {word}, {word}, {word}, {int}")
+    public void nameOfEmployeeIs(String firstName, String lastName, String salary, String fullTime, Integer departmentId) throws Throwable {
+        Assert.assertEquals(firstName, employee.get().getFirstName());
+        Assert.assertEquals(lastName, employee.get().getLastName());
+        Assert.assertEquals(BigDecimal.valueOf(Double.parseDouble(salary)).setScale(NUMBER_OF_SALARY_DECIMALS), employee.get().getSalary().setScale(NUMBER_OF_SALARY_DECIMALS));
+        Assert.assertEquals(Boolean.parseBoolean(fullTime), employee.get().getFullTime());
+        Assert.assertEquals(departmentId,employee.get().getDepartmentId());
     }
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
@@ -81,6 +82,7 @@ public class TestEmployeeRestAPI extends TestClient {
         }
         return employees;
     }
+
     @Given("^The employees$")
     public void givenEmployees(DataTable employees) {
         List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());
@@ -95,7 +97,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     Throwable exceptionThatWasThrown;
 
-    @Then("The employee {int} is deleted, checked by failed getId")
+    @Then("The employee {int} is deleted, checked by failed 'get employee'")
     public void employeeIsDeleted(Integer employeeId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
@@ -109,7 +111,7 @@ public class TestEmployeeRestAPI extends TestClient {
 
     EmployeeModel myEmplModel;
 
-    @When("The client tries to delete non-existant employee with id {int}")
+    @When("The client tries to delete non-existent employee with id {int}")
     public void checkEmployeeDeleteNonExistant(Integer testEmployeeId) {
         myEmplModel = (EmployeeModel.builder()
                 .employeeId(testEmployeeId)
@@ -121,11 +123,16 @@ public class TestEmployeeRestAPI extends TestClient {
                 .build());
     }
 
-    @Then("The delete should be OK although non-existant object, that is idempotent delete")
+    @Then("The delete is not OK with thrown exception")
     public void employeeDeleteNonexistant() {
-        // Check that this delete is idempotent and does not cause an error/exception,
-        // and returns the same object, although it does not exist
-        Optional<EmployeeModel> emplModelResult = deleteEmployee(myEmplModel);
-        Assertions.assertEquals(true, emplModelResult.get().equals(myEmplModel));
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            Optional<EmployeeModel> emplModelResult = deleteEmployee(myEmplModel);
+        });
+    }
+
+    @And("The delete error message is {int} : [Entity with id {int} not found]")
+    public void checkEmployeeDeleteErrorMessage(Integer errorCode, Integer employeeId) {
+        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
 }
+

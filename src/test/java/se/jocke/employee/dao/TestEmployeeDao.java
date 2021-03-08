@@ -38,6 +38,14 @@ public class TestEmployeeDao {
     }
 
     @Test
+    public void testGetonexistantEmployeeNById() {
+        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1234);
+        Assertions.assertAll(
+                () -> assertFalse(optionalEmployeeDatabaseEntry.isPresent())
+        );
+    }
+
+    @Test
     public void testGetEmployees() {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
