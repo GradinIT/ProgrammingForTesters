@@ -1,23 +1,13 @@
 package se.jocke.employee.service;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
-import se.jocke.dao.DepartmentDatabaseEntry;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
-import se.jocke.department.entity.Department;
 import se.jocke.department.entity.Employee;
-import se.jocke.department.entity.Entity;
-import se.jocke.department.entity.EntityID;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
@@ -38,7 +28,6 @@ public class TestEmployeeService {
     private EmployeeDao employeeDao;
     @InjectMocks
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
-
 
     @Test
     public void findById() {
@@ -159,13 +148,4 @@ public class TestEmployeeService {
                 () -> assertEquals(1, employees.size())
         );
     }
-
-/*    Employee createOrUpdateEmployee(Employee employee);
-
-    Employee removeEmployee(Employee employee);
-
-    Employee updateEmployee(Employee employee);
-
-    List<Employee> getAllEmployees();*/
-
 }
