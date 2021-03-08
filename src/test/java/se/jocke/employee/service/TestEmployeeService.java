@@ -1,7 +1,5 @@
 package se.jocke.employee.service;
 
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import se.jocke.dao.EmployeeDao;
 import se.jocke.dao.EmployeeDatabaseEntry;
 import se.jocke.dao.EntityNotFoundException;
