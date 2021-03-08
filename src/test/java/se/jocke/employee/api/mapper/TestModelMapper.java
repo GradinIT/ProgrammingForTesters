@@ -19,8 +19,6 @@ public class TestModelMapper {
     public void testEmployeeToEmployeeModel() {
         EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertAll(
-                //Skriver getId() för att få ut rätt ID, då EmployeeID extendar till Entity och därifrån vidare till EntityID-
-                //samt att när model mappas så ropar den redan då på getId() och därav ropas den endast från Employee här
                 () -> Assertions.assertEquals(EMPLOYEE.getEmployeeId().getId(),model.getEmployeeId()),
                 () -> Assertions.assertEquals(EMPLOYEE.getFirstName(),model.getFirstName()),
                 () -> Assertions.assertEquals(EMPLOYEE.getLastName(),model.getLastName()),

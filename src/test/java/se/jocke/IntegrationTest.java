@@ -6,6 +6,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = {"src/test/resources/employee/employeeTest.feature","src/test/resources/department/departmentTest.feature"})
-//Lägg till employee-feature med ett , tecken
+
 public class IntegrationTest {
 }
