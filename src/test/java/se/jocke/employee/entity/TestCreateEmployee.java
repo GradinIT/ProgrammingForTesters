@@ -2,8 +2,6 @@ package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.builder.DepartmentTestBuilder;
-import se.jocke.department.entity.Department;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
@@ -15,12 +13,15 @@ public class TestCreateEmployee {
 
         @Test
         public void testCreateEmployee() {
-            //skapar ett nytt objekt "employee" med Testbuildern och lägger in värderna från "EMPLOYEE"
+            //skapar ett nytt objekt "employee" med riktiga buildern och lägger in värderna från "EMPLOYEE"
             // sen ser vi om värderna matchar
-            Employee employee = EmployeeTestBuilder.builder()
+            Employee employee = Employee.builder()
                     .employeeId(EMPLOYEE.getEmployeeId())
                     .firstName(EMPLOYEE.getFirstName())
                     .lastName(EMPLOYEE.getLastName())
+                    .salary(EMPLOYEE.getSalary())
+                    .fullTime(EMPLOYEE.getFullTime())
+                    .departmentId(EMPLOYEE.getDepartmentId())
                     .build();
             Assertions.assertEquals(EMPLOYEE, employee);
             Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());

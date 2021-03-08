@@ -1,18 +1,19 @@
 Feature: test employee api
   Scenario: client gets all employees
     When the client calls /employee
-    Then the client receives 4 employees
+    Then the client receives 3 employees
   Scenario: client updates name for employee 1
     When the client updates name for employee to Robert
-    Then the name is updated to Robert
-  Scenario: client gets Department 1
-    When the client gets department 1
-    Then the name is
-  Scenario: client updates name for department 1
-    When the client updates name for department to Development
-    Then the name is updated to Development
-  Scenario: client deletes department
-    Given the departments
-      | 55 | Fun |
-    When the client deletes department 55
-    Then the department 55 is deleted
+    Then this name is updated to Robert
+  Scenario: client gets Employee 1
+    When the client gets employee 1
+    Then this name is
+  Scenario: client deletes employee
+    Given the employees
+   #  |empId|fName   |lName   |salary|fTime|depId|
+      |12    |Robert  |Tenglund|50000 |True |1    |
+      |13    |Blurb   |Glurb   |40000 |True |1    |
+      |14    |Kalle   |Anka    |30000 |false|1    |
+    When the client deletes employee 12
+    Then the employee 12 is deleted
+    And Error 404, the employee 12 not found

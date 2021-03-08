@@ -2,9 +2,7 @@ package se.jocke.employee.api.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.api.DepartmentModel;
 import se.jocke.api.EmployeeModel;
-import se.jocke.department.builder.DepartmentModelTestBuilder;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {
@@ -37,7 +35,7 @@ public class TestCreateEmployeeModel {
     public void testCreateEmployeeModelThrowsException() {
         // testet kollar så att DepartmentModel skickar ett exeption när en variabel är null
         Assertions.assertThrows(NullPointerException.class, () -> {
-            DepartmentModel.builder().departmentName(EmployeeTestInstance.getLastName()).build();
+            EmployeeModel.builder().firstName(EmployeeTestInstance.getFirstName()).build();
         });
     }
 }

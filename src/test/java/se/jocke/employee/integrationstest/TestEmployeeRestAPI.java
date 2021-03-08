@@ -1,15 +1,17 @@
 package se.jocke.employee.integrationstest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.api.DepartmentModel;
 import se.jocke.TestClient;
 import se.jocke.api.EmployeeModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,57 +24,102 @@ public class TestEmployeeRestAPI extends TestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
 
+    // i den här klassen programmerar vi logiken för gurk filen
 
+    // hämtar alla employees och lägger in dom i en lista
     @When("^the client calls /employee$")
     public void getAll() throws Throwable {
-        employees = getAllEmployeees();
+        employees = getAllEmployees();
     }
+
+    //kollar att clienten får ut alla employees
     @Then("^the client receives (\\d+) employees$")
     public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
+        employees = getAllEmployees();
         Assert.assertEquals(numberOfEmployees, employees.get().size());
+        System.out.println("-------------------" + numberOfEmployees);
+
     }
+
+
     @When("^the client updates name for employee to (.+)$")
-    public void updateNameOfEmployee(String employeeName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(employeeName).build());
+    public void updateNameOfEmployee(String firstName) throws Throwable {
+        employees = getAllEmployees();
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employees.get().get(0).getEmployeeId())
+                .firstName(firstName)
+                .lastName(employees.get().get(0).getLastName())
+                .salary(employees.get().get(0).getSalary())
+                .fullTime(employees.get().get(0).getFullTime())
+                .departmentId(employees.get().get(0).getDepartmentId())
+                .build());
+
+        //updateEmployee(EmployeeModel.builder().employeeId(1).firstName(firstName).build());
     }
-    @Then("the name is updated to (.+)$")
-    public void nameOfEmployeeIsUpdated(String employeeName) throws Throwable {
+
+    @Then("this name is updated to (.+)$")
+    public void nameOfEmployeeIsUpdated(String firstName) throws Throwable {
         Optional<EmployeeModel> employee = getEmployeeById(1);
-        Assert.assertEquals(employeeName,employee.get().getFirstName());
+        Assert.assertEquals(firstName, employee.get().getFirstName());
     }
+
     @When("^the client gets employee (\\d+)$")
     public void getTheEmployeeById(Integer employeeId) throws Throwable {
         employee = getEmployeeById(employeeId);
     }
-    @Then("^the name is$")
+
+    @Then("^this name is$")
     public void nameOfEmployeeIs() throws Throwable {
-        Assert.assertEquals("Robert",employee.get().getFirstName());
+        Assert.assertEquals("Robert", employee.get().getFirstName());
     }
 
+    // skapar en lista utav dataTable som finns i cukumber filen
     @Given("^the employees$")
     public void givenEmployees(DataTable employees) {
         List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());
         listOfEmployees.stream().forEach(employee -> createEmployee(employee));
-    }
-    private List<EmployeeModel> makeEmployeeList(List<String> given) {
-        List<EmployeeModel> deps = new ArrayList<>();
-        for(int i = 0 ; i < given.size() - 1 ; i +=2) {
-            deps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).firstName(given.get(i+1)).build());
-        }
-        return deps;
-    }
-    @When("^the client deletes employee (\\d+)$")
-    public void deleteEmployee(Integer employeeId){
-        deleteEmployee(EmployeeModel.builder().employeeId(employeeId).firstName("").build());
-    }
-    @Then("^the employee (\\d+) is deleted$")
-    public void employeeIsDeleted(Integer employeeId){
-        Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getTheEmployeeById(employeeId);;
-        });
 
-        assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
     }
+
+    // metod som används i givenEmployees
+    private List<EmployeeModel> makeEmployeeList(List<String> given) {
+        List<EmployeeModel> emps = new ArrayList<>();
+        for (int i = 0; i < given.size() - 1; i += 6) {
+            emps.add(EmployeeModel.builder()
+                    .employeeId(Integer.parseInt(given.get(i)))
+                    .firstName(given.get(i+1))
+                    .lastName(given.get(i+2))
+                    .salary(BigDecimal.valueOf(Double.parseDouble(given.get(i+3))))
+                    .fullTime(Boolean.parseBoolean(given.get(i+4)))
+                    .departmentId(Integer.parseInt(given.get(i+5)))
+                    .build());
+
+        }
+        System.out.println("-------------------" + emps);
+        return emps;
+    }
+
+    @When("^the client deletes employee (\\d+)$")
+    public void deleteEmployee(Integer employeeId) {
+         deleteEmployee(getEmployeeById(employeeId).get());}
+
+    Throwable exceptionThatWasThrown;
+
+    @Then("^the employee (\\d+) is deleted$")
+    public void employeeIsDeleted(Integer employeeId) {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            getTheEmployeeById(employeeId);
+            ;
+        });
+    }
+
+        @And("Error {int}, the employee {int} not found")
+        public void checkErrorMessageEmployee (Integer errorCode, Integer employeeId){
+            Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
+
+        }
+
+
+
 
 }
-
