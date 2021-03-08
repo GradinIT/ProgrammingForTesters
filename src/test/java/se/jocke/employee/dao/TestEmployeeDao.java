@@ -19,13 +19,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
-public class TestEmployeeDao { // No Mocking done yet, 2/3-21 Added all parameters, methods corrected, tests passed with all default values,
+public class TestEmployeeDao { // 2/3-21 Added all parameters, methods corrected, tests passed with all default values,
     @Autowired
     EmployeeDao employeeDao;
 
     @Test   //Test passed 28/2-21 when only 2 parameters. Row 49: typo of assertNull, corrected to assertNotNull,
     public void testGetEmployeeById() {
-        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1); // return value should be Optional if the requested object is of Optional type.
+        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(1);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import se.jocke.department.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
-public class TestCreateEmployee {  // 2/3-21 Test past by default values. No Mocking done yet.
+public class TestCreateEmployee {  // 2/3-21 Test past by default values.
 
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 

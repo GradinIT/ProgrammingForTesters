@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import se.jocke.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 
-public class TestCreateEmployeeModel { //passed 3/1 by default, no Mocking yet
+public class TestCreateEmployeeModel { //passed 3/1 by default,
 
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
