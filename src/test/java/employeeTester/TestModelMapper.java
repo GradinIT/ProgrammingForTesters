@@ -20,7 +20,7 @@ public class TestModelMapper {
         Assertions.assertAll(
                 () -> assertEquals(Employee.getEmployeeId().getId(), model.getEmployeeId()),
                 () -> assertEquals(Employee.getFirstName(), model.getFirstName()),
-                () -> assertEquals(Employee.getFullTime(), model.getFullTime()),
+                () -> assertEquals(Employee.getFullTime(), model.getLastName()),
                 () -> assertEquals(Employee.getSalary(), model.getSalary()),
                 () -> assertEquals(Employee.getFullTime(), model.getFullTime()),
                 () -> assertEquals(Employee.getDepartmentId(), model.getDepartmentId())
@@ -33,7 +33,7 @@ public class TestModelMapper {
         Assertions.assertAll(
                 () -> assertEquals(Employee_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),
                 () -> assertEquals(Employee_MODEL.getFirstName(), employee.getFirstName()),
-                () -> assertEquals(Employee_MODEL.getFullTime(), employee.getFullTime()),
+                () -> assertEquals(Employee_MODEL.getFullTime(), employee.getLastName()),
                 () -> assertEquals(Employee_MODEL.getSalary(), employee.getSalary()),
                 () -> assertEquals(Employee_MODEL.getFullTime(), employee.getFullTime()),
                 () -> assertEquals(Employee_MODEL.getDepartmentId(), employee.getDepartmentId())

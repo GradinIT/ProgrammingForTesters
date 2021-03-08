@@ -56,11 +56,31 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(BigDecimal.valueOf(20000), employee.getSalary()),
                 () -> Assertions.assertEquals(5, employee.getDepartmentId())
 
-
-
         );
         verify(employeeDao, times(1)).findById(1);
     }
+
+
+    @Test
+    public void removeEmployee() {
+
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(1)
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .fullTime(Boolean.TRUE)
+                .salary(BigDecimal.valueOf(25000.00))
+                .departmentId(1)
+                .build()));
+
+        Employee employee = systemUnderTest.getEmployeeById(1);
+        systemUnderTest.removeEmployee(employee);
+        verify(employeeDao,times(1)).delete(any(EmployeeDatabaseEntry.class));
+    }
+
+
+
+
 }
 
 

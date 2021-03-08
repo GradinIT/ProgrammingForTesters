@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.TestClient;
 import se.jocke.api.DepartmentModel;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TestDepartmentRestAPI extends TestClient {
     Optional<List<DepartmentModel>> departments = null;
     Optional<DepartmentModel> department = null;
-
+@Test
 
     @When("^the client calls /department$")
     public void getAll() throws Throwable {

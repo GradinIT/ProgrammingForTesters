@@ -8,8 +8,10 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.api.DepartmentModel;
+import se.jocke.api.EmployeeModel;
 import se.jocke.TestClient;
+import se.jocke.department.entity.Employee;
+import se.jocke.department.entity.EmployeeID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,58 +22,59 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class integrationTestEmployeeRestAPI  extends TestClient {
-    Optional<List<DepartmentModel>> departments = null;
-    Optional<DepartmentModel> department = null;
+    Optional<List<EmployeeModel>> employees = null;
+    Optional<EmployeeModel> employee = null;
 
 @Test
-    @When("^the client calls /department$")
+    @When("^the client calls /employee$")
     public void getAll() throws Throwable {
-        departments = getAllDepartments();
+        employees = getAllEmployees();
     }
-    @Then("^the client receives (\\d+) departments$")
-    public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
-        Assert.assertEquals(numberOfDepartments, departments.get().size());
+    @Then("^the client receives (\\d+) employees$")
+    public void theClientGotAllEmployees(int numberOfEmployees) throws Throwable {
+        Assert.assertEquals(numberOfEmployees, employees.get().size());
+
     }
-    @When("^the client updates name for department to (.+)$")
-    public void updateNameOfDepartment(String departmentName) throws Throwable {
-        updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
+    @When("^the client updates name for employee to (.+)$")
+    public void updateNameOfEmployees(String employeeName) throws Throwable {
+        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(employeeName).build());
     }
     @Then("the name is updated to (.+)$")
-    public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
-        Optional<DepartmentModel> department = getDepartmentById(1);
-        Assert.assertEquals(departmentName,department.get().getDepartmentName());
+    public void nameOfEmployeeIsUpdated(String employeeName) throws Throwable {
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+        Assert.assertEquals(employeeName,employee.get().getFirstName());
     }
-    @When("^the client gets department (\\d+)$")
-    public void getTheDepartmentById(Integer departmentId) throws Throwable {
-        department = getDepartmentById(departmentId);
+    @When("^the client gets employee (\\d+)$")
+    public void getTheEmployeeById(Integer employeeId) throws Throwable {
+        employee = getEmployeeById(employeeId);
     }
     @Then("^the name is$")
-    public void nameOfDepartmentIs() throws Throwable {
-        Assert.assertEquals("Coding",department.get().getDepartmentName());
+    public void nameOfEmployeeIs() throws Throwable {
+        Assert.assertEquals("ali",employee.get().getFirstName());
     }
 
-    @Given("^the departments$")
-    public void givenDepartments(DataTable departments) {
-        List<DepartmentModel> listOfDepartments = makeDepartmentList(departments.asList());
-        listOfDepartments.stream().forEach(department -> createDepartment(department));
+    @Given("^the employees$")
+    public void givenEmployees(DataTable employees) {
+        List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());
+        listOfEmployees.stream().forEach(employee -> createEmployee(employee));
     }
-    private List<DepartmentModel> makeDepartmentList(List<String> given) {
-        List<DepartmentModel> deps = new ArrayList<>();
+    private List<EmployeeModel> makeEmployeeList(List<String> given) {
+        List<EmployeeModel> emps = new ArrayList<>();
         for(int i = 0 ; i < given.size() - 1 ; i +=2) {
-            deps.add(DepartmentModel.builder().departmentId(Integer.parseInt(given.get(i))).departmentName(given.get(i+1)).build());
+            emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).firstName(given.get(i+1)).build());
         }
-        return deps;
+        return emps;
     }
-    @When("^the client deletes department (\\d+)$")
-    public void deleteDepartment(Integer departmentId){
-        deleteDepartment(getDepartmentById(departmentId).get());
+    @When("^the client deletes employee (\\d+)$")
+    public void deleteEmployee(Integer employeeId){
+        deleteEmployee(getEmployeeById(employeeId).get());
     }
-    @Then("^the department (\\d+) is deleted$")
-    public void departmentIsDeleted(Integer departmentId){
+    @Then("^the employee (\\d+) is deleted$")
+    public void employeeIsDeleted(Integer employeeId){
         Throwable exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
-            getDepartmentById(departmentId);
+            getTheEmployeeById(employeeId);
         });
-        assertEquals("404 : [Entity with id 55 not found]",exceptionThatWasThrown.getMessage());
+        assertEquals("404 : [Employee with id "+ employeeId+ "not found]",exceptionThatWasThrown.getMessage());
     }
 }
 
