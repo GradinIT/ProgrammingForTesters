@@ -2,17 +2,14 @@ package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-//import se.jocke.department.builder.DepartmentTestBuilder; ------>Ta bort när du gör sista testet!
-//import se.jocke.department.entity.Department; ------>Ta bort när du gör sista testet!
 import se.jocke.department.entity.Employee;
-//import se.jocke.employee.builder.EmployeeModelTestBuilder; ------>Ta bort när du gör sista testet!
 import se.jocke.employee.builder.EmployeeTestBuilder;
 
 public class TestCreateEmployee {
     private final Employee EMPLOYEE  = EmployeeTestBuilder.builder().build();
 
     @Test
-    public void testCreateDepartment() {
+    public void testCreateEmployee() {
         Employee employee = Employee.builder()
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .firstName(EMPLOYEE.getFirstName())

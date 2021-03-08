@@ -27,21 +27,7 @@ Feature: test employee api
   Scenario: client deletes employee
     Given the employees are
 
-      | 1 | Nico  | Palucchi | 30000 | True | 1
-      | 2 | Astrid| Sinabian | 35000 | True | 1
-      | 3 | Eddie | Diaz     | 40000 | True | 1
+      | 14 | Nico  | Palucchi | 31000 | True | 1 |
 
-    When the client deletes this employee 1
-    Then the employee 1 is now deleted
-
-
-    When the client deletes department 1
-
-    When the client deletes department 2
-    When the client deletes department 3
-    Then the department 1 is deleted
-    And  error message is 404 : [Entity with id 1 not found]
-    Then the department 2 is deleted
-    And  error message is 404 : [Entity with id 2 not found]
-    Then the department 3 is deleted
-    And  error message is 404 : [Entity with id 3 not found]
+    When the client deletes this employee 14
+    Then the employee 14 is now deleted

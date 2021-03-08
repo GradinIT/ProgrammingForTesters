@@ -36,10 +36,19 @@ public class TestEmployeeRestAPI2 extends TestClient {
 
     @When("^the client updates first name of employee to (.+)$")
     public void updateNameOfEmployee(String employeeName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().employeeId(1).firstName(employeeName).build());
+        employees = getAllEmployees();
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employees.get().get(0).getEmployeeId())
+                .firstName(employeeName)
+                .lastName(employees.get().get(0).getLastName())
+                .salary(employees.get().get(0).getSalary())
+                .fullTime(employees.get().get(0).getFullTime())
+                .departmentId(employees.get().get(0).getDepartmentId())
+                .build());
     }
 
-    // Söker på employees först namn för att uppdatera den!
+
+    // Söker på employees first namn för att uppdatera den!
     //
     @Then("the first name is updated to (.+)$")
     public void nameOfEmployeeIsUpdated(String employeeName) throws Throwable {
@@ -50,10 +59,17 @@ public class TestEmployeeRestAPI2 extends TestClient {
     // Uppdaterar employees förnamn!
     @When("^the client updates last name of employee to (.+)$")
     public void updateLastNameOfEmployee(String employeeLastName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().departmentId(1).lastName(employeeLastName).build());
+        employees = getAllEmployees();
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employees.get().get(0).getEmployeeId())
+                .firstName(employees.get().get(0).getFirstName())
+                .lastName(employeeLastName)
+                .salary(employees.get().get(0).getSalary())
+                .fullTime(employees.get().get(0).getFullTime())
+                .departmentId(employees.get().get(0).getDepartmentId())
+                .build());
     }
     // Söker på efternamn för att uppdatera det!
-    // Borde jag ändra rad 49 departmentId(1) till något annat, kanske employee id?
 
     @Then("the last name is updated to (.+)$")
     public void lastNameOfEmployeeIsUpdated(String employeeLastName) throws Throwable {
@@ -64,7 +80,17 @@ public class TestEmployeeRestAPI2 extends TestClient {
 
     @When("^the client updates salary of employee to (.+)$")
     public void updateSalaryOfEmployee(BigDecimal employeeSalary) throws Throwable {
-        updateEmployee(EmployeeModel.builder().departmentId(1).salary(employeeSalary).build());
+        //updateEmployee(EmployeeModel.builder().departmentId(1).salary(employeeSalary).build());
+        employees = getAllEmployees();
+        System.out.println("---------------" + employees);
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employees.get().get(0).getEmployeeId())
+                .firstName(employees.get().get(0).getFirstName())
+                .lastName(employees.get().get(0).getLastName())
+                .salary(employeeSalary)
+                .fullTime(employees.get().get(0).getFullTime())
+                .departmentId(employees.get().get(0).getDepartmentId())
+                .build());
     }
 
     @Then("the salary is updated to (.+)$")
@@ -75,7 +101,17 @@ public class TestEmployeeRestAPI2 extends TestClient {
 
     @When("^the client updates contract of employee to full time (.+)$")
     public void updateContractOfEmployee(boolean employment) throws Throwable {
-        updateEmployee(EmployeeModel.builder().departmentId(1).fullTime(employment).build());
+        //updateEmployee(EmployeeModel.builder().departmentId(1).fullTime(employment).build());
+        employees = getAllEmployees();
+        System.out.println("---------------" + employees);
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employees.get().get(0).getEmployeeId())
+                .firstName(employees.get().get(0).getFirstName())
+                .lastName(employees.get().get(0).getLastName())
+                .salary(employees.get().get(0).getSalary())
+                .fullTime(employment)
+                .departmentId(employees.get().get(0).getDepartmentId())
+                .build());
     }
 
     @Then("the contract is updated to (.+)$")
@@ -87,6 +123,16 @@ public class TestEmployeeRestAPI2 extends TestClient {
     @When("^the client gets employee by id (\\d+)$")
     public void getTheEmployeeById(Integer employeeId) throws Throwable {
         employee = getEmployeeById(employeeId);
+        employees = getAllEmployees();
+        System.out.println("---------------" + employees);
+        updateEmployee(EmployeeModel.builder()
+                .employeeId(employees.get().get(0).getEmployeeId())
+                .firstName(employees.get().get(0).getFirstName())
+                .lastName(employees.get().get(0).getLastName())
+                .salary(employees.get().get(0).getSalary())
+                .fullTime(employees.get().get(0).getFullTime())
+                .departmentId(employeeId)
+                .build());
     }
 
     //
@@ -94,6 +140,7 @@ public class TestEmployeeRestAPI2 extends TestClient {
     public void nameOfEmployeeIs() throws Throwable {
         Assert.assertEquals("Nico", employee.get().getFirstName());
     }
+
 
     @Given("^the employees are")
     public void givenEmployees(DataTable employees) {
@@ -103,17 +150,25 @@ public class TestEmployeeRestAPI2 extends TestClient {
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> emps = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 2) {
-            emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).firstName(given.get(i + 1)).build());
+        for (int i = 0; i < given.size() - 1; i += 6) {
+            emps.add(EmployeeModel.builder().employeeId(Integer.parseInt(given.get(i))).
+                    firstName(given.get(i + 1))
+                    .lastName(given.get(i + 2))
+                    .salary(BigDecimal.valueOf(Double.parseDouble(given.get(i+3))))
+                    .fullTime(Boolean.parseBoolean(given.get(i+4)))
+                    .departmentId(Integer.parseInt(given.get(i+5)))
+                    .build());
         }
+        System.out.println(emps);
         return emps;
-    }// måste jag lägga till alla 6 variabler tex: efternamn,lön, anställning osv?
+    }
      // Lägger till employees i en lista!
      // I rad 97 så borde man kanske ändra till employeeId() istället för firstName() så att de blir unikt!!! men då måste man göra om!
 
     @When("the client deletes this employee {int}")
-    public void deleteDepartment(Integer employeeId) {
+    public void deleteEmployee(Integer employeeId) {
         deleteEmployee(getEmployeeById(employeeId).get());
+
     }
 
     Throwable exceptionThatWasThrown;
