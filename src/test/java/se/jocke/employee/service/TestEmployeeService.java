@@ -15,6 +15,7 @@ import se.jocke.service.EmployeeService;
 import se.jocke.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -48,5 +49,4 @@ public class TestEmployeeService {
         );
         verify(employeeDao, times(1)).findById(1);
     }
-
 }

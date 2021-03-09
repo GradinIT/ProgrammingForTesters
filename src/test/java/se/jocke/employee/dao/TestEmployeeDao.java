@@ -68,7 +68,6 @@ public class TestEmployeeDao {
         Assertions.assertThrows(NoSuchElementException.class, ()-> {
             optionalEmployeeDatabaseEntry.get();
         });
-
     }
 
 }

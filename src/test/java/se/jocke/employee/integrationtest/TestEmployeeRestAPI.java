@@ -38,12 +38,13 @@ public class TestEmployeeRestAPI extends TestClient {
 
     @When("^the client updates firstname for employee to (.+)$")
     public void updateFirstNameOfEmployee(String employeeFirstName) throws Throwable {
-        updateEmployee(EmployeeModel.builder().employeeId(1)
+        Optional<EmployeeModel> employee = getEmployeeById(1);
+        updateEmployee(EmployeeModel.builder().employeeId(employee.get().getEmployeeId())
                 .firstName(employeeFirstName)
-                .lastName(anyString())
-                .fullTime(anyBoolean())
-                .salary(BigDecimal.valueOf(anyDouble()))
-                .departmentId(anyInt())
+                .lastName(employee.get().getLastName())
+                .fullTime(employee.get().getFullTime())
+                .salary(employee.get().getSalary())
+                .departmentId(employee.get().getDepartmentId())
                 .build());
     }
 
