@@ -17,8 +17,8 @@ Feature: test employee api
   Scenario: the client deletes employee
     Given the employees
       | 55 | Kebne  | Kajse   | 45000 | true  | 1 |
-#      | 56 | Vattna | Yokull  | 35000 | false | 2 |
-#      | 57 | Mount  | Everest | 40000 | true  | 1 |
+#      | 56 | Vattna | Yokull  | 35000 | false | 2 |   #When building application in Maven this integration test seems to be run before the TestEmployeeSuit.
+#      | 57 | Mount  | Everest | 40000 | true  | 1 |   # These two lines makes the TestSuit think that there are two more employees in the database then expected. If these employees are activated, they must be deleted within the same scenario to not spoil the test suit.
     When deletes employee 55
 #    When deletes employee 56
 #    When deletes employee 57
