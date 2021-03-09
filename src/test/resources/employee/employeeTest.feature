@@ -17,8 +17,8 @@ Feature: test employee api
   Scenario: the client deletes employee
     Given the employees
       | 55 | Kebne  | Kajse   | 45000 | true  | 1 |
-      | 56 | Vattna | Yokull  | 35000 | false | 2 |
-      | 57 | Mount  | Everest | 40000 | true  | 1 |
+#      | 56 | Vattna | Yokull  | 35000 | false | 2 |
+#      | 57 | Mount  | Everest | 40000 | true  | 1 |
     When deletes employee 55
 #    When deletes employee 56
 #    When deletes employee 57
