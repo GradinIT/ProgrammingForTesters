@@ -59,6 +59,7 @@ public class TestEmployeeModelMapper {
         );
 
         assertAll(
+                () -> assertNotNull(EMPLOYEE_MODEL),
                 () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), 200),
                 () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), "Anders"),
                 () -> assertEquals(EMPLOYEE_MODEL.getLastName(), "Andersson"),

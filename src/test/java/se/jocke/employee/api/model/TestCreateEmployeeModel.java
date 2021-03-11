@@ -33,7 +33,7 @@ public class TestCreateEmployeeModel {
 
     }
 
-    @DisplayName("Testing that NullPointerException is thrown")
+    @DisplayName("Testing that NullPointerException is thrown if all variables aren't set")
     @Test
     public void testCreateEmployeeModelThrowsException() {
         Assertions.assertThrows(NullPointerException.class, () -> {
