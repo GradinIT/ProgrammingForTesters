@@ -1,0 +1,5 @@
+body,input,select {background-color: #fefaf1;}
+table {
+    border: 1px solid black;
+    width: 60%;
+}

@@ -1,6 +1,6 @@
 package se.jocke.service;
 
-import se.jocke.entity.Department;
+import se.jocke.department.entity.Department;
 
 import java.util.List;
 

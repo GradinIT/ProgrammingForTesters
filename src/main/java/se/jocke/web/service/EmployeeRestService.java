@@ -11,7 +11,7 @@ import se.jocke.service.EmployeeService;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:8082")
 @RestController
 public class EmployeeRestService {
 

@@ -1,7 +1,7 @@
 package se.jocke.dao.mapper;
 
 import se.jocke.dao.DepartmentDatabaseEntry;
-import se.jocke.entity.Department;
+import se.jocke.department.entity.Department;
 
 import java.util.List;
 import java.util.stream.Collectors;

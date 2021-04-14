@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="employee.js"></script>
+    <link rel="stylesheet" href="my.css">
+</head>
+
+<body>
+<div align="center">
+    <table>
+        <tr>
+            <td><label><b>Employee Id:</b></label></td>
+            <td align="right" ><input id="id" type="text"/></td>
+        </tr>
+        <tr>
+            <td><label><b>Firstname:</b></label></td>
+            <td align="right"><input id="firstname" type="text"/></td>
+        </tr>
+        <tr>
+            <td><label><b>Lastname:</b></label></td>
+            <td align="right"><input id="lastname" type="text"/></td>
+        </tr>
+        <tr>
+            <td><label><b>Department:</b></label></td>
+            <td align="right" ><select id="department"></td>
+        </tr>
+        <tr>
+            <td><label><b>Salary:</b></label></td>
+            <td align="right"><input id="salary" type="text"/></td>
+        </tr>
+        <tr>
+            <td><label><b>Fultime:</b></label></td>
+            <td align="right"><input id="fulltime" type="text"/></td>
+        </tr>
+        <tr>
+            <td>
+                <button id="clear" onclick="clearAllFields()">Clear</button>
+                <button id="create" onclick="create()">Create</button>
+                <button id="delete" onclick="deleteEmployee()">Delete</button>
+            </td>
+            <td align="right"><select id="employeeSelect" onchange="getData()">
+            </select></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
