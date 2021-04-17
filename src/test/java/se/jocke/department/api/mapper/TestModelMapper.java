@@ -2,8 +2,7 @@ package se.jocke.department.api.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.api.DepartmentModel;
-import se.jocke.api.mapper.DepartmentModelMapper;
+import se.jocke.department.api.DepartmentModel;
 import se.jocke.department.builder.DepartmentModelTestBuilder;
 import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;

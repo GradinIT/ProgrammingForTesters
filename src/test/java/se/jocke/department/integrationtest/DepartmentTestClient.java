@@ -2,20 +2,15 @@ package se.jocke.department.integrationtest;
 
 import com.google.gson.Gson;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
-import se.jocke.api.DepartmentModel;
-import se.jocke.api.EmployeeModel;
+import se.jocke.department.api.DepartmentModel;
 
 import java.util.ArrayList;
 import java.util.List;

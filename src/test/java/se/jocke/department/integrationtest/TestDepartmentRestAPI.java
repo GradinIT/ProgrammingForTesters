@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.api.DepartmentModel;
+import se.jocke.department.api.DepartmentModel;
 
 import java.util.ArrayList;
 import java.util.List;

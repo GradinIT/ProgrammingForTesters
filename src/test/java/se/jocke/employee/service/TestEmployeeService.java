@@ -6,13 +6,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import se.jocke.dao.EmployeeDao;
-import se.jocke.dao.EmployeeDatabaseEntry;
-import se.jocke.dao.EntityNotFoundException;
-import se.jocke.department.entity.Employee;
+import se.jocke.employee.dao.EmployeeDao;
+import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.common.dao.EntityNotFoundException;
+import se.jocke.employee.entity.Employee;
 import se.jocke.employee.builder.EmployeeTestBuilder;
-import se.jocke.service.EmployeeService;
-import se.jocke.service.EmployeeServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;

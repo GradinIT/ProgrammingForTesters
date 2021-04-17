@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.H2JpaConfig;
 import se.jocke.LiquibaseConfigurer;
-import se.jocke.dao.DepartmentDao;
-import se.jocke.dao.DepartmentDatabaseEntry;
 
 import java.util.List;
 import java.util.Optional;

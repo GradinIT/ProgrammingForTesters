@@ -1,7 +1,7 @@
 package se.jocke.employee.builder;
 
-import se.jocke.department.entity.Employee;
-import se.jocke.department.entity.EmployeeID;
+import se.jocke.employee.entity.Employee;
+import se.jocke.employee.entity.EmployeeID;
 
 import java.math.BigDecimal;
 

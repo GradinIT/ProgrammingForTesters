@@ -2,7 +2,7 @@ package se.jocke.department.api.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.api.DepartmentModel;
+import se.jocke.department.api.DepartmentModel;
 import se.jocke.department.builder.DepartmentModelTestBuilder;
 
 public class TestCreateDepartmentModel {

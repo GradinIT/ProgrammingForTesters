@@ -3,8 +3,8 @@ package se.jocke.employee.integrationtest;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import se.jocke.api.EmployeeModel;
-import se.jocke.department.entity.Employee;
+import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.entity.Employee;
 
 import java.util.List;
 import java.util.Optional;
