@@ -17,7 +17,5 @@ public class Static_ResourceHandler implements WebMvcConfigurer {
                 .setCachePeriod(3600)
                 .resourceChain(true) // 4.1
                 .addResolver(new PathResourceResolver()); //4.1
-        registry.addResourceHandler("/**") // « /webapp/css/style.css
-                .addResourceLocations("/");
     }
 }
