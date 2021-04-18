@@ -20,8 +20,8 @@ Feature: test department api
     When the client deletes department 56
     When the client deletes department 57
     Then the department 55 is deleted
-    And  the error message is 404 : [Entity with id 55 not found]
+    And  the error message is 404 : ["Entity with id 55 not found"]
     Then the department 56 is deleted
-    And  the error message is 404 : [Entity with id 56 not found]
+    And  the error message is 404 : ["Entity with id 56 not found"]
     Then the department 57 is deleted
-    And  the error message is 404 : [Entity with id 57 not found]
+    And  the error message is 404 : ["Entity with id 57 not found"]
