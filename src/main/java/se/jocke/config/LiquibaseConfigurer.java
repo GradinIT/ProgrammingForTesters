@@ -1,4 +1,4 @@
-package se.jocke;
+package se.jocke.config;
 
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;

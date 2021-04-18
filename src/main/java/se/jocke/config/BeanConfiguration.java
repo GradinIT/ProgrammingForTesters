@@ -1,4 +1,4 @@
-package se.jocke;
+package se.jocke.config;
 
 import org.springframework.context.annotation.Configuration;
 

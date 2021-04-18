@@ -7,8 +7,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import se.jocke.H2JpaConfig;
-import se.jocke.LiquibaseConfigurer;
+import se.jocke.config.H2JpaConfig;
+import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
 import se.jocke.department.api.DepartmentModel;
 

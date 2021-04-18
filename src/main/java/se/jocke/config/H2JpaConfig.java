@@ -1,4 +1,4 @@
-package se.jocke;
+package se.jocke.config;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
