@@ -5,10 +5,10 @@ This project is made by me in order to teach testing and test development
 ### Quick Start 
 
 1 Install Java 15 JDK 
-    * Mac https://mkyong.com/java/how-to-install-java-on-mac-osx/ 
-    * Windows https://docs.oracle.com/en/java/javase/16/install/installation-jdk-microsoft-windows-platforms.html#GUID-C11500A9-252C-46FE-BB17-FC5A9528EAEB
-    * Linux https://www.linuxuprising.com/2021/03/how-to-install-oracle-java-16-on-debian.html
-  
+    
+* Mac https://mkyong.com/java/how-to-install-java-on-mac-osx/
+* Windows https://docs.oracle.com/en/java/javase/16/install/installation-jdk-microsoft-windows-platforms.html#GUID-C11500A9-252C-46FE-BB17-FC5A9528EAEB
+* Linux https://www.linuxuprising.com/2021/03/how-to-install-oracle-java-16-on-debian.html
 
 2 Install Maven https://www.baeldung.com/install-maven-on-windows-linux-mac
 
@@ -24,7 +24,7 @@ This project is made by me in order to teach testing and test development
 
 7 change directory to development
 
-8 run git clone 
+8 run git clone https://github.com/GradinIT/ProgrammingForTesters.git
      
 
 
