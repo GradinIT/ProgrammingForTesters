@@ -2,7 +2,7 @@
 
 * En class är javas minsta körbara ( exekverbara enhet)
 * En typisk class defineras enligt
-```
+```java
 public class MyClass {
     
 }
@@ -11,7 +11,7 @@ public class MyClass {
 * En Class är en definition av en dataTyp
 * I Klassen ovan definerar vi alltså en datatyp som heter MyClass och är av typen MyClass
 * En class kan ha variabler(värden) och metoder(funktioner)
-```
+```java 
 public class MyClass {
 
     private Integer myIntegerValue; // det här är en variabel

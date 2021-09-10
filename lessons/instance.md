@@ -2,7 +2,7 @@
 
 * En instans är ett objekt av en viss datatyp
 
-```
+```java
     Integer myInteger = new Integer(5)
 ```
 
