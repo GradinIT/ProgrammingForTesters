@@ -28,3 +28,6 @@ This project is made by me in order to teach testing and test development
      
 
 
+###Lektioner
+
+1. [Vad är en class](lessons/class.md)
