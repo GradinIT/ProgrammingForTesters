@@ -30,4 +30,5 @@ This project is made by me in order to teach testing and test development
 
 ###Lektioner
 
-1. [Vad är en class](lessons/class.md)
+1. [Java Grund](https://toggleon.wordpress.com/2010/05/12/grundlaggande-objektorientering-i-java-inledning-och-syntax/)
+
