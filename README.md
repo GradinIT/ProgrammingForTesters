@@ -20,7 +20,7 @@ This project is made by me in order to teach testing and test development
   * windows use git bash 
   * mac linux use your preferred terminal 
 
-6 create a directory in user nome called development
+6 create a directory in user home called development
 
 7 change directory to development
 
@@ -31,4 +31,6 @@ This project is made by me in order to teach testing and test development
 ###Lektioner
 
 1. [Java Grund](https://toggleon.wordpress.com/2010/05/12/grundlaggande-objektorientering-i-java-inledning-och-syntax/)
-
+2. [Java Arv och Polymorfism](https://www.it.uu.se/edu/course/homepage/oopjava/st07/handout/f03-class.html)
+3. [Java Collections](https://www.w3resource.com/java-tutorial/java-collections.php)
+4. [Java REST/Microservices](https://www.youtube.com/watch?v=vtPkZShrvXQ)
