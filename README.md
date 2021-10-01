@@ -1,8 +1,12 @@
 # Programming For Testers
 
-This project is made by me in order to teach testing and test development
+##### Table of Contents
+[Quick Start ](#QuickStart)  
+[Lektioner](#Lektioner)
 
-### Quick Start 
+This project is made by me in order to teach testing and test development
+<a name="QuickStart"/>
+## Quick Start 
 
 1 Install Java 15 JDK 
     
@@ -25,10 +29,10 @@ This project is made by me in order to teach testing and test development
 7 change directory to development
 
 8 run git clone https://github.com/GradinIT/ProgrammingForTesters.git
-     
 
 
-###Lektioner
+<a name="Lektioner"/>
+## Lektioner
 
 1. [Java Grund](https://toggleon.wordpress.com/2010/05/12/grundlaggande-objektorientering-i-java-inledning-och-syntax/)
 2. [Java Arv och Polymorfism](https://www.it.uu.se/edu/course/homepage/oopjava/st07/handout/f03-class.html)
