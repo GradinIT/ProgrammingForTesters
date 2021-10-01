@@ -55,8 +55,23 @@ function populateDropdown() {
 }
 
 function update() {
-    var id = document.getElementById("id").value;
+    var employee = createEmployee()
+    console.log(employee)
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8082/employee",
+        data: employee,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            location.reload()
+        },
+        error: function (errMsg) {
+            alert(errMsg);
+        }
+    });
     console.log("update " + id)
+    getData(id)
 }
 
 function clearAllFields() {
