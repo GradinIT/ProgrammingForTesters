@@ -34,3 +34,6 @@ This project is made by me in order to teach testing and test development
 2. [Java Arv och Polymorfism](https://www.it.uu.se/edu/course/homepage/oopjava/st07/handout/f03-class.html)
 3. [Java Collections](https://www.w3resource.com/java-tutorial/java-collections.php)
 4. [Java REST/Microservices](https://www.youtube.com/watch?v=vtPkZShrvXQ)
+5. [Lamda Functions](https://www.oracle.com/webfolder/technetwork/tutorials/moocjdk8/documents/week1/lesson-1-1.pdf)
+6. [Stream API](https://www.oracle.com/webfolder/technetwork/tutorials/moocjdk8/documents/week2/lesson-2-1.pdf)
+7. [Advances Streams ](https://www.oracle.com/webfolder/technetwork/tutorials/moocjdk8/documents/week3/lesson-3-1.pdf)
