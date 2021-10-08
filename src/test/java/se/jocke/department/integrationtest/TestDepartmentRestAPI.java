@@ -71,7 +71,7 @@ public class TestDepartmentRestAPI extends DepartmentTestClient {
         deleteDepartment(getDepartmentById(departmentId).get());
     }
 
-    Throwable exceptionThatWasThrown;
+    private Throwable exceptionThatWasThrown;
 
     @Then("the department {int} is deleted")
     public void departmentIsDeleted(Integer departmentId) {
@@ -79,10 +79,9 @@ public class TestDepartmentRestAPI extends DepartmentTestClient {
             getDepartmentById(departmentId);
         });
     }
-
     @And("the error message is {int} : [\"Entity with id {int} not found\"]")
     public void checkErrorMessage(Integer errorCode, Integer departmentId) {
-        Assertions.assertEquals(errorCode + " : [Entity with id " + departmentId + " not found]", exceptionThatWasThrown.getMessage());
+        Assertions.assertEquals(errorCode + " : [{\"message\":\"Entity with id "+departmentId+" not found\"}]", exceptionThatWasThrown.getMessage());
     }
 
 }
