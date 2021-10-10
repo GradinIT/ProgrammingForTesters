@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import se.jocke.department.entity.Entity;
+import se.jocke.common.entity.Entity;
 
 import java.math.BigDecimal;
 

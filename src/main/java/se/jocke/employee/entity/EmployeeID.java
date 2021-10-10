@@ -2,7 +2,7 @@ package se.jocke.employee.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
-import se.jocke.department.entity.EntityID;
+import se.jocke.common.entity.EntityID;
 
 @SuperBuilder
 @EqualsAndHashCode

@@ -18,9 +18,7 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(EntityNotFoundException.class)
     @TimeAndLogg
     public ResponseEntity handleEntityNotFoundException(EntityNotFoundException e) {
-        Map<String,String> errors = Maps.newHashMap();
-        errors.put("message",e.getMessage());
-        return new ResponseEntity(errors,HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
     @ExceptionHandler(NullPointerException.class)
@@ -33,6 +31,4 @@ public class ExceptionHandlerAdvice {
     public ResponseEntity handleEntityAlreadyInStorageException(EntityAlreadyInStorageException e) {
         return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(e.getMessage());
     }
-    @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    public static class NotFoundException extends RuntimeException {}
 } 
