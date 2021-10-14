@@ -1,5 +1,5 @@
 package excersise.inheritence;
 
-public interface Etable {
+public interface Eatable {
     Boolean isEatable();
 }

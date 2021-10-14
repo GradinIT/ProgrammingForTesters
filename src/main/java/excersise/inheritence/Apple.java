@@ -1,20 +1,15 @@
 package excersise.inheritence;
 
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @Getter
-public class Apple extends Fruit implements Packable {
+public class Apple extends Fruit implements Eatable{
     private final String colour;
 
-    @Override
     public Boolean isEatable() {
         return Boolean.TRUE;
-    }
-
-    @Override
-    public void sayMyName() {
-        System.out.println(this.getClass().getName());
     }
 }
