@@ -31,6 +31,7 @@ This project is made by me in order to teach testing and test development
 2. [Java Arv och Polymorfism](https://www.it.uu.se/edu/course/homepage/oopjava/st07/handout/f03-class.html)
 3. [Java Filhantering](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxqYXZhaWJlcmdhaW5kdmFsfGd4OjE1YTA4OGJhMGE2YjIzNjI)
 4. [Java Exceptions](https://docplayer.se/2353667-Lite-om-felhantering-och-exceptions-mer-om-variabler-och-parametrar-falt-eng-array-och-klassen-arraylist.html)
+   [Mer Exceptions](http://www.cse.chalmers.se/edu/year/2015/course/TDA545/lec15-exceptions.pdf)
 5. [Java Collections](https://www.w3resource.com/java-tutorial/java-collections.php)
 6. [Java REST/Microservices](https://www.youtube.com/watch?v=vtPkZShrvXQ)
 7. [Lamda Functions](https://www.oracle.com/webfolder/technetwork/tutorials/moocjdk8/documents/week1/lesson-1-1.pdf)
