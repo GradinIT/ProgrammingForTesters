@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,24 +19,26 @@ public class WordCounter {
         reader.lines()
                 .filter(Objects::nonNull)      // filter null lines
                 .forEach(line -> {
-                    Arrays.asList(line.split(" ")).stream()         // manskriverjuinteihop man skriver ju isär         The the
+                    Arrays.asList(line.split(" ")).stream()
+                            .filter(word -> !word.isEmpty())
+                            .map(String::toUpperCase)
+                            .map(word -> word.replaceAll("[^a-zA-Z]", ""))
                             .forEach(word -> {
-                                if (!word.equals(" " ) && !word.isEmpty()) {
-                                    word = word.toUpperCase();
-                                    if (wordCounter.containsKey(word)) {
-                                        Integer count = wordCounter.get(word);
-                                        wordCounter.put(word, count + 1);
-                                    } else {
-                                        wordCounter.put(word, 1);
-                                    }
-                                }
+                                wordCounter.compute(word,(key,value)->{
+                                    if(value == null)
+                                        value = 1;
+                                    else
+                                        value++;
+                                    return value;
+                                });
+                               
                             });
                 });
 
         wordCounter.entrySet()
-            .stream()
-            .sorted(Map.Entry.<String, Integer>comparingByValue())
-            .limit(20)
-            .forEach(System.out::println);
+                .stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(20)
+                .forEach(System.out::println);
     }
 }
