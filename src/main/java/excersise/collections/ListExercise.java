@@ -1,12 +1,13 @@
 package excersise.collections;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListExercise {
     public static void main(String[] args) {
         //TODO: create a list of integers
-        List<Integer> integers = new ArrayList<>();
+        List<Integer> integers = new LinkedList<>();
         // add 5 different integers to the list
         integers.add(10);
         integers.add(33);

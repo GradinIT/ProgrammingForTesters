@@ -16,38 +16,26 @@ public class FunctionalExample {
         integers.add(6);
         integers.add(13);
 
-        Util util = new Util();
-        Integer greaterThanOrEqualTo = 7;
-
-        List<Integer> listOfValuesGraterThanOrEqualToSeven = integers.stream()
-                .filter(FunctionalExample::checkIfOk) // r is the current integer in the list
-                .filter(r -> {
-                    return util.isGreaterThanOrEqual(r, greaterThanOrEqualTo);
-                })
+        List<Integer> incrementedValuesList = integers.stream()
+                .filter(Objects::nonNull)// elements in the list that is null will not go to next step in Stream
+                .filter(integer -> { return integer%2 == 0;}) // elements in the list that is odd will not go to next step in Stream
+                .peek(System.out::println)
+                .map(FunctionalExample::increment)
+                .peek(System.out::println)
+                .map(FunctionalExample::decrement)
+                .peek(System.out::println)
                 .collect(Collectors.toList());
 
-
-        listOfValuesGraterThanOrEqualToSeven.clear();
-        for (Integer i : integers) {
-            if (checkIfOk(i)) {
-                if (util.isGreaterThanOrEqual(i , greaterThanOrEqualTo)) {
-                      listOfValuesGraterThanOrEqualToSeven.add(i);
-                }
-            }
-        }
-
-        int totalValue = integers.stream()
-                .filter(Objects::nonNull)
-                .mapToInt(Integer::intValue)
-                .sum();
-        System.out.println(totalValue);
+        System.out.println(integers);
+        System.out.println(incrementedValuesList);
+    }
+    private static Long increment(Integer i) {
+        long x = i.longValue();
+        return ++x;
     }
 
-    private static boolean checkIfOk(Integer integer) {
-  //      System.out.println(" first filter: " + integer);
-        // lots of lines of code
-        // ..
-        // ..
-        return Objects.nonNull(integer);
+    private static Integer decrement(Long i) {
+        int x = i.intValue();
+        return --x;
     }
 }
