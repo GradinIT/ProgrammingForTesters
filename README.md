@@ -38,5 +38,8 @@ This project is made by me in order to teach testing and test development
 8. [Stream API](https://www.oracle.com/webfolder/technetwork/tutorials/moocjdk8/documents/week2/lesson-2-1.pdf)
 9. [Advances Streams ](https://www.oracle.com/webfolder/technetwork/tutorials/moocjdk8/documents/week3/lesson-3-1.pdf)
 10. [Maven Tutorial](https://www.youtube.com/watch?v=JhSBS2OpGdU)
+    
+    [Maven For Biginners](http://tutorials.jenkov.com/maven/maven-tutorial.html)
+    
 11. [Installing JDK Tutorial](https://www.youtube.com/watch?v=IJ-PJbvJBGs)
 12. [Install IntelliJ](https://www.youtube.com/watch?v=EMLTOMdIz4w)
