@@ -16,6 +16,5 @@ public class TestDivide {
     @Test
     public void testDivideByZero() {
         Assertions.assertThrows(ArithmeticException.class, () ->Divide.calculate(10,0));
-
     }
 }
