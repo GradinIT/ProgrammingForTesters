@@ -5,8 +5,7 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.runner.RunWith;
 // Övning 5
 @RunWith(JUnitPlatform.class)
-@SelectPackages("se.jocke.excersices.basic")
+@SelectPackages("se.jocke.exercises.basic")
 public class CalculationTestSuite {
-
 }
 
