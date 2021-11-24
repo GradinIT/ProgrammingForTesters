@@ -13,8 +13,11 @@ public class TestAdd {
     }
 
     @Test
+    public void testAdd50() {
+        Assertions.assertEquals(50, Add.calculate(25, 25));
+    @Test
     public void testAdd20() {
-        Assertions.assertEquals(22, Add.calculate(11, 11));
+        Assertions.assertEquals(22, Add.calculate(12, 11));
     }
     public void testAdd2() {
         Assertions.assertEquals(1, Add.calculate(-5,5));
