@@ -4,6 +4,8 @@ import exercise.unittest.Add;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class TestAdd {
     @Test
     public void testAdd1() {

@@ -10,9 +10,16 @@ public class Main {
                     .build();
 
         try {
+            // här kodar vi som om inget går fel
+
             person.setAge(4);
+
+            // faktiskt ända hit
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        catch (Exception e) {
+
         }
     }
 }

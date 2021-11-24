@@ -1,26 +1,22 @@
 package exercise.one;
 
+import exercise.two.lombok.MySecondClassLombok;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
-
     public static void main(String[] args) {
-        int fistValue = 6;
-        int[] arrayOfIntegers = {fistValue, 2, 3, 4, 5};
-        String[] arrayOfStrings = {"hej", "på", "dig"};
-        int sum = 0;
-        for ( int i = 0 ; i < arrayOfIntegers.length ; ++i) {
-            sum += arrayOfIntegers[i];
-        }
-        System.out.println(sum);
-        sum = 0;
+        MySecondClassLombok mySecondClassLombok = MySecondClassLombok.builder()
+                .age(1)
+                .firstName("Lennart")
+                .lastName("Svensson")
+                .build();
 
-        sum += arrayOfIntegers[0];
-        sum += arrayOfIntegers[1];
-        sum += arrayOfIntegers[2];
-        sum += arrayOfIntegers[3];
-        sum += arrayOfIntegers[4];
-        System.out.println(sum);
-        int[] cloneOfArrayOfIntegers = arrayOfIntegers.clone();
+        MySecondClassLombok mySecondClassLombok2 = new MySecondClassLombok("Lennart",
+                "Svensson",
+                3);
 
     }
 }

@@ -9,9 +9,11 @@ public class MySecondClass {
     public MySecondClass(String runar) {
         this.runar = runar;
     }
+
     public void setRunar(String runar) {
         this.runar = runar;
     }
+
     public String getRunar() {
         return this.runar;
     }

@@ -1,17 +1,19 @@
 package exercise.collections;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ListExercise {
     public static void main(String[] args) {
         //TODO: create a list of integers
-        List<Integer> integers = new LinkedList<>();
+        List<Integer> integers = new ArrayList<>();
         // add 5 different integers to the list
         integers.add(10);
         integers.add(33);
         integers.add(12);
         integers.add(5);
+        integers.add(12);
         integers.add(1975);
         // print all integers to console
         integers.forEach(System.out::println);

@@ -1,10 +1,20 @@
 package exercise.one;
 
 public class MyFirstClass {
-    public static void main(String[] args) {
-        for(int i = 0 ; i < args.length ; i++) {
-            System.out.println("index:" + i + " value in array:" +args[i]);
-        }
-        System.out.println("index:" + 4 + " value in array:" +args[4]);
+    // instance property
+   private String myString;
+    // Constructor
+   public MyFirstClass(String value) {
+       this.myString = value;
+   }
+    public MyFirstClass(String hej,String hopp) {
+        this.myString = hej + " " + hopp;
     }
+   public MyFirstClass(Integer i) {
+       this.myString = i.toString();
+   }
+    // instance method
+   public String getMyString() {
+       return this.myString;
+   }
 }
