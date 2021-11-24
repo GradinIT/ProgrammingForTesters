@@ -13,11 +13,6 @@ public class TestAdd {
     }
 
     @Test
-    public void testAddPlus10() {
-        Assertions.assertEquals(22, Add.calculate(10,2) + 10);
-    }
-
-    @Test
     public void testAdd2() {
         Assertions.assertEquals(0, Add.calculate(-5,5));
     }
