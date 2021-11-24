@@ -19,4 +19,9 @@ public class TestAdd {
     public void testAdd3() {
         Assertions.assertEquals(-2, Add.calculate(6,-8));
     }
+
+    @Test
+    public void thing () {
+
+    }
 }
