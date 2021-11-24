@@ -18,7 +18,7 @@ public class FunctionalExample {
 
         List<Integer> incrementedValuesList = integers.stream()
                 .filter(Objects::nonNull)// elements in the list that is null will not go to next step in Stream
-                .filter(integer -> { return integer%2 == 0;}) // elements in the list that is odd will not go to next step in Stream
+                .filter(integer -> { return integer%2 == 0; }) // elements in the list that is odd will not go to next step in Stream
                 .peek(System.out::println)
                 .map(FunctionalExample::increment)
                 .peek(System.out::println)
