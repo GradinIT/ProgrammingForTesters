@@ -19,6 +19,11 @@ public class TestAdd {
     public static void thing34(){
 
     }
+    public static void Hello(){
+
+    }
+
+
     @Test
     public void testAdd2() {
         Assertions.assertEquals(0, Add.calculate(-5,5));
