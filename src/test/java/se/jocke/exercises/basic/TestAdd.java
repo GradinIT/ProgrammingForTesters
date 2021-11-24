@@ -13,7 +13,7 @@ public class TestAdd {
     }
 
     @Test
-    public void testAdd11() {
+    public void testAdd20() {
         Assertions.assertEquals(22, Add.calculate(11, 11));
     }
     public void testAdd2() {
