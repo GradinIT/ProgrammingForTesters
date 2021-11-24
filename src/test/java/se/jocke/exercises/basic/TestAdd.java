@@ -21,7 +21,7 @@ public class TestAdd {
     }
 
     @Test
-    public void thing22 () {
+    public void thing2666() {
 
 
 
