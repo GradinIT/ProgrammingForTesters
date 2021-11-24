@@ -20,4 +20,6 @@ public class Employee extends Entity<EmployeeID> {
     private final @NonNull BigDecimal salary;
     private final @NonNull Boolean fullTime;
     private final @NonNull Integer departmentId;
+
+
 }
