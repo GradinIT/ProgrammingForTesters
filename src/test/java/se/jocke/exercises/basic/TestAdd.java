@@ -12,7 +12,7 @@ public class TestAdd {
         Assertions.assertEquals(12, Add.calculate(10,2));
     }
     public void thing(){
-
+        System.out.println("thing");
     }
     @Test
     public void testAdd2() {
