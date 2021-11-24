@@ -10,10 +10,11 @@ public class TestAdd {
     @Test
     public void testAdd1() {
         Assertions.assertEquals(12, Add.calculate(10,2));
+
+    public void thing(){
+        System.out.println("hej hå");
     }
-    public void thing (){
-        System.out.println("hej");
-    }
+
     @Test
     public void testAdd2() {
         Assertions.assertEquals(0, Add.calculate(-5,5));
