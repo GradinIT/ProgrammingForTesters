@@ -12,9 +12,7 @@ public class TestAdd {
         Assertions.assertEquals(12, Add.calculate(10,2));
     }
 
-    public void thing(){
-
-    }
+    //Meddelande från Erwin
 
     @Test
     public void testAdd2() {
