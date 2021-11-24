@@ -15,6 +15,7 @@ public class TestAdd {
     public void thing(){
 
     }
+
     @Test
     public void testAdd2() {
         Assertions.assertEquals(0, Add.calculate(-5,5));
