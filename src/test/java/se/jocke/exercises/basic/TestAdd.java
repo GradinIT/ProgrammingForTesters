@@ -12,14 +12,7 @@ public class TestAdd {
         Assertions.assertEquals(12, Add.calculate(10,2));
     }
 
-    public static void thing(){
-
-    }
-
-    public static void thing34(){
-
-    }
-    public static void Hello(){
+    public void testwork(){
 
     }
 
