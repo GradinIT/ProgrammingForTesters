@@ -17,7 +17,4 @@ public class TestSubtract {
     public void testSubtract3() {
         Assertions.assertEquals(0, Subtract.calculate(-1,-1));
     }
-
-    public static class TestNinja {
-    }
 }
