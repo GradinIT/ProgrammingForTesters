@@ -9,7 +9,7 @@ import se.jocke.department.entity.Department;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestModelMapper {
+public class TestDepartmentModelMapper {
     private final DepartmentModel DEPARTMENT_MODEL = DepartmentModelTestBuilder.builder().build();
     private final Department DEPARTMENT = DepartmentTestBuilder.builder().build();
 
