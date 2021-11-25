@@ -1,7 +1,7 @@
-package se.jocke.department.api.mapper;
+package se.jocke.department.unittest.api.mapper;
 
-import se.jocke.department.api.DepartmentModel;
-import se.jocke.department.entity.Department;
+import se.jocke.department.unittest.api.DepartmentModel;
+import se.jocke.department.unittest.entity.Department;
 
 import java.util.List;
 import java.util.stream.Collectors;

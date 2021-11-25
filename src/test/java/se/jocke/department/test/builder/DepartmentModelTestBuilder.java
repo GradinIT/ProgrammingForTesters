@@ -1,6 +1,6 @@
 package se.jocke.department.test.builder;
 
-import se.jocke.department.api.DepartmentModel;
+import se.jocke.department.unittest.api.DepartmentModel;
 
 public class DepartmentModelTestBuilder {
     public static DepartmentModel build() {
