@@ -15,7 +15,7 @@ public class TestCreateEmployee {
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .firstName("Monthy")
                 .lastName("Python")
-                .salary(new BigDecimal(0))
+                .salary(new BigDecimal(10))
                 .fullTime(true)
                 .departmentId(1)
                 .build();

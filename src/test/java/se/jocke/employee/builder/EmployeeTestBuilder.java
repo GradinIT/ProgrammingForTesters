@@ -13,7 +13,7 @@ public class EmployeeTestBuilder {
                 .employeeId(EmployeeID.builder().id(2).build())
                 .firstName("Monthy")
                 .lastName("Python")
-                .salary(new BigDecimal(0))
+                .salary(new BigDecimal(10))
                 .fullTime(true)
                 .departmentId(1)
                 .build();
