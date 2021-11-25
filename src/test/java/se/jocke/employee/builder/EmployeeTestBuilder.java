@@ -15,7 +15,7 @@ public class EmployeeTestBuilder {
                 .lastName("Python")
                 .salary(new BigDecimal(20))
                 .fullTime(true)
-                .departmentId(10)
+                .departmentId(100)
                 .build();
     }
 }
