@@ -15,9 +15,9 @@ public class TestCreateEmployee {
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .firstName("Monthy")
                 .lastName("Python")
-                .salary(new BigDecimal(10))
+                .salary(new BigDecimal(20))
                 .fullTime(true)
-                .departmentId(1)
+                .departmentId(10)
                 .build();
 
         Assertions.assertEquals(EMPLOYEE, employee);
