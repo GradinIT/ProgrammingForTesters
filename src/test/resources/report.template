@@ -1,0 +1,38 @@
+
+Name:
+
+Summary:
+
+TODO: summarize what you have learned during this project, what techs you have made use of during the project
+and if you have skipped anything.
+
+UnitTests:
+    - UnitTestOne
+        Tests the ....
+    - UNitTestTwo
+        Tests the ....
+    .
+    .
+    .
+
+    - UnitTestSuite
+        The Test Suite runns ....
+
+IntegrationTest:
+    What tech have you made use of to create your integrationtest
+
+    Tell me in your own words ho the integration test runns
+
+    example;
+     first the server is started all test data is injected in the database ( describe what db you are using )
+     then the integration test DepartmentIntegrationTest is triggered by the fetures defined in the ...
+     the test calls the REST-API using the provided test client  ....
+
+
+Feedback To The Examiner/Teacher:
+
+Good stuff:
+
+Bad stuff:
+
+
