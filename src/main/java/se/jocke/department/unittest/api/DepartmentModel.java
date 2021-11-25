@@ -1,4 +1,4 @@
-package se.jocke.department.api;
+package se.jocke.department.unittest.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

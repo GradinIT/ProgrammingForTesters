@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
-import se.jocke.department.api.DepartmentModel;
+import se.jocke.department.unittest.api.DepartmentModel;
 
 import java.util.ArrayList;
 import java.util.List;
