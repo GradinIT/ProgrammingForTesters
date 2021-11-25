@@ -9,7 +9,7 @@ import se.jocke.employee.entity.Employee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestModelMapper {
+public class TestEmployeeModelMapper {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
     private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
 
