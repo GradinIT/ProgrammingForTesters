@@ -13,8 +13,8 @@ public class TestCreateEmployee {
     public void testCreateEmployee() {
         Employee employee = Employee.builder()
                 .employeeId(EMPLOYEE.getEmployeeId())
-                .firstName("Test")
-                .lastName("Tester")
+                .firstName("Monthy")
+                .lastName("Python")
                 .salary(new BigDecimal(0))
                 .fullTime(true)
                 .departmentId(1)
