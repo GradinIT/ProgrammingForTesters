@@ -1,17 +1,20 @@
 package se.jocke.employee.test.builder;
 
-import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.entity.Employee;
+import se.jocke.employee.entity.EmployeeID;
+
 
 import java.math.BigDecimal;
 
-public class EmployeeModelTestBuilder {
-    public static EmployeeModel.EmployeeModelBuilder builder() {
-        return EmployeeModel.builder()
-                .firstName("Micke")
-                .lastName("Tolfstrom")
-                .fullTime(true)
-                .departmentId(500)
-                .salary(new BigDecimal(12000))
-                .employeeId(800);
+public class EmployeeTestBuilder {
+    public static Employee.EmployeeBuilder builder() {
+
+        return Employee.builder()
+                .firstName("Jocke")
+                .lastName("Gradin")
+                .fullTime(false)
+                .departmentId(400)
+                .salary(new BigDecimal(16000))
+                .employeeId(EmployeeID.builder().id(7).build());
     }
 }
