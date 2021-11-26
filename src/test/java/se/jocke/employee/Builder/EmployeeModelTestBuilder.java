@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class EmployeeModelTestBuilder {
     public static EmployeeModel build() {
         return EmployeeModel.builder()
-                .employeeId(EmployeeBuilderFixture.EMPLOYEE_ID_INTEGER.intValue())
+                .employeeId(EmployeeBuilderFixture.EMPLOYEE_ID.getId())
                 .firstName(EmployeeBuilderFixture.FIRSTNAME)
                 .lastName(EmployeeBuilderFixture.LASTNAME)
                 .salary(EmployeeBuilderFixture.SALARY)
