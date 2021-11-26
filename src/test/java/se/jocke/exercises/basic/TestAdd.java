@@ -11,6 +11,9 @@ public class TestAdd {
     public void testAdd1() {
         Assertions.assertEquals(12, Add.calculate(10,2));
     }
+
+    //Meddelande från Erwin
+
     @Test
 
     public void thing(){
