@@ -17,7 +17,7 @@ public class TestDepartmentModelMapper {
     public void testDepartmentToDepartmentModelMapping() {
         DepartmentModel model = DepartmentModelMapper.map(DEPARTMENT);
         Assertions.assertAll(
-                () -> assertEquals(DEPARTMENT.getDepartmentId(), model.getDepartmentId()),
+                () -> assertEquals(DEPARTMENT.getDepartmentId().getId(), model.getDepartmentId()),
                 () -> assertEquals(DEPARTMENT.getDepartmentName(), model.getDepartmentName())
         );
     }
@@ -26,7 +26,7 @@ public class TestDepartmentModelMapper {
     public void testDepartmentModelToDepartmentMapping() {
         Department department = DepartmentModelMapper.map(DEPARTMENT_MODEL);
         Assertions.assertAll(
-                () -> assertEquals(DEPARTMENT_MODEL.getDepartmentId(), department.getDepartmentId()),
+                () -> assertEquals(DEPARTMENT_MODEL.getDepartmentId(), department.getDepartmentId().getId()),
                 () -> assertEquals(DEPARTMENT_MODEL.getDepartmentName(), department.getDepartmentName())
         );
     }
