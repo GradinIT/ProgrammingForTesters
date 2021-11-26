@@ -15,6 +15,10 @@ public class TestAdd {
     //Meddelande från Erwin
 
     @Test
+
+    public void thing(){
+
+    }
     public void testAdd2() {
         Assertions.assertEquals(0, Add.calculate(-5,5));
     }
