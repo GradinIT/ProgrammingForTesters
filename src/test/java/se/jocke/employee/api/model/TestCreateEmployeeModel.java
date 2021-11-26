@@ -7,7 +7,7 @@ import se.jocke.employee.api.EmployeeModel;
 import se.jocke.employee.entity.Employee;
 
 public class TestCreateEmployeeModel {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.build();
 
 
     @Test

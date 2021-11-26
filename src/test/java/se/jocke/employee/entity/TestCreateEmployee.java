@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import se.jocke.employee.Builder.EmployeeTestBuilder;
 
 public class TestCreateEmployee {
-    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
+    private final Employee EMPLOYEE = EmployeeTestBuilder.build();
 
     @Test
     public void testCreateEmployee() {
