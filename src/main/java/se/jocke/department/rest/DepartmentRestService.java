@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import se.jocke.department.api.DepartmentModel;
-import se.jocke.department.api.mapper.DepartmentModelMapper;
-import se.jocke.department.api.mapper.DepartmentModelsMapper;
-import se.jocke.department.service.DepartmentService;
+import se.jocke.department.unittest.api.DepartmentModel;
+import se.jocke.department.unittest.api.mapper.DepartmentModelMapper;
+import se.jocke.department.unittest.api.mapper.DepartmentModelsMapper;
+import se.jocke.department.unittest.service.DepartmentService;
 
 import java.util.List;
 
