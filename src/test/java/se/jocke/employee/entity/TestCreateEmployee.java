@@ -2,8 +2,6 @@ package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.builder.DepartmentTestBuilder;
-import se.jocke.department.entity.Department;
 import se.jocke.employee.Builder.EmployeeTestBuilder;
 
 public class TestCreateEmployee {

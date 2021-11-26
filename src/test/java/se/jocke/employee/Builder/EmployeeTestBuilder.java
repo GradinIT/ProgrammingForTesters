@@ -1,6 +1,5 @@
 package se.jocke.employee.Builder;
 
-import se.jocke.department.entity.Department;
 import se.jocke.employee.entity.Employee;
 import se.jocke.employee.entity.EmployeeID;
 

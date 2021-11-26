@@ -2,7 +2,6 @@ package se.jocke.employee.api.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.api.DepartmentModel;
 import se.jocke.employee.Builder.EmployeeModelTestBuilder;
 import se.jocke.employee.api.EmployeeModel;
 import se.jocke.employee.entity.Employee;
