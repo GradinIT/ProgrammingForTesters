@@ -22,10 +22,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class EmployeeDatabaseEntry {
     @Id
-    private Integer employeeId;
+    private Integer employeeId; //Kan vara samma på flera ställen men får inte ha olika mappings med firstname och lastname
     private String firstName;
     private String lastName;
     private BigDecimal salary;
     private Boolean fullTime;
-    private Integer departmentId;
+    private Integer departmentId; //Behöver kanske inte vara samma, man kan ju jobba på flera olika butiker samtidigt?
 }
