@@ -20,6 +20,7 @@ public class TestAdd {
     public void testAdd20() {
         Assertions.assertEquals(22, Add.calculate(12, 11));
     }
+    @Test
     public void testAdd2() {
         Assertions.assertEquals(1, Add.calculate(-5,5));
     }
