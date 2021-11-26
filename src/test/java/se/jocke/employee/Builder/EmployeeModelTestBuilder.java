@@ -7,13 +7,14 @@ import se.jocke.employee.entity.EmployeeID;
 import java.math.BigDecimal;
 
 public class EmployeeModelTestBuilder {
-    public static EmployeeModel.EmployeeModelBuilder builder() {
+    public static EmployeeModel build() {
         return EmployeeModel.builder()
-                .firstName("Runar")
-                .lastName("Sopranos")
-                .employeeId(3)
-                .salary(new BigDecimal("22500"))
-                .fullTime(Boolean.FALSE)
-                .departmentId(1);
+                .employeeId(EmployeeBuilderFixture.EMPLOYEE_ID_INTEGER.intValue())
+                .firstName(EmployeeBuilderFixture.FIRSTNAME)
+                .lastName(EmployeeBuilderFixture.LASTNAME)
+                .salary(EmployeeBuilderFixture.SALARY)
+                .fullTime(EmployeeBuilderFixture.FULLTIME)
+                .departmentId(EmployeeBuilderFixture.DEPARTMENTID)
+                .build();
     }
 }

@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 
 
 public class TestEmployeeModelMapper {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
-    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.build();
+    private final Employee EMPLOYEE = EmployeeTestBuilder.build();
 
     @Test
     public void testEmployeeToEmployeeModelMapping() {
