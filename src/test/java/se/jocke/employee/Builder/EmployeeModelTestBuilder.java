@@ -11,7 +11,7 @@ public class EmployeeModelTestBuilder {
         return EmployeeModel.builder()
                 .firstName("Runar")
                 .lastName("Sopranos")
-                .Employee.builder().employeeId(EmployeeID.builder().id(2).build())
+                .employeeId(3)
                 .salary(new BigDecimal("22500"))
                 .fullTime(Boolean.FALSE)
                 .departmentId(1);
