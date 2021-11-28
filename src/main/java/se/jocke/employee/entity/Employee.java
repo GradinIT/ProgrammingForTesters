@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 @ToString
 public class Employee extends Entity<EmployeeID> {
-    private final @NonNull EmployeeID employeeId;
+    private final @NonNull EmployeeID employeeId;   // ska inte det vara Integer istället för EmployeeID? builder?
     private final @NonNull String firstName;
     private final @NonNull String lastName;
     private final @NonNull BigDecimal salary;
