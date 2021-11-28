@@ -1,7 +1,9 @@
-package se.jocke.employee.entity;
+package se.jocke.employee.builder;
 
 import lombok.Builder;
 import lombok.Getter;
+import se.jocke.employee.entity.Employee;
+import se.jocke.employee.entity.EmployeeTestFixture;
 
 @Builder
 @Getter
