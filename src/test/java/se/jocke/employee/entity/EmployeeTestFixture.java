@@ -10,4 +10,7 @@ public class EmployeeTestFixture {
     public static BigDecimal salary = new BigDecimal("10000");
     public static Boolean fullTime = true;
     public static Integer departmentId = 5;
+
+  //  public static final Integer id = 1;
+ //   .employeeId(employee.getEmployeeId().getId())
 }
