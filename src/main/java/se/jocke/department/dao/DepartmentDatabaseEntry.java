@@ -1,4 +1,4 @@
-package se.jocke.department.unittest.dao;
+package se.jocke.department.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
