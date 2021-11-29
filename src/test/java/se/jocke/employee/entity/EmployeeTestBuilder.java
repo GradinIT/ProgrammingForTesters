@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
+
 public class EmployeeTestBuilder {
     public static Employee build(){
         return Employee.builder()
