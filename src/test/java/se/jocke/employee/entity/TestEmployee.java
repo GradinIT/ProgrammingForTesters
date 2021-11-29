@@ -20,12 +20,14 @@ public class TestEmployee {
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .build();
 
+        String EMPLOYEE_TO_STRING_VALUE = EMPLOYEE.toString();
+        String employee_to_string_value = employee.toString();
+
+        Assertions.assertEquals(EMPLOYEE_TO_STRING_VALUE,employee_to_string_value);
         Assertions.assertEquals(EMPLOYEE,employee);
         Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
         Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
-        String EMPLOYEE_TO_STRING_VALUE = EMPLOYEE.toString();
-        String employee_to_string_value = employee.toString();
-        Assertions.assertEquals(EMPLOYEE_TO_STRING_VALUE,employee_to_string_value);
+
     }
 
     @Test
