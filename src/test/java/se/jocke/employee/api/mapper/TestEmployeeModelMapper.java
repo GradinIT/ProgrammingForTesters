@@ -3,12 +3,14 @@ package se.jocke.employee.api.mapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.employee.entity.Employee;
 
 public class TestEmployeeModelMapper {
     private static final Employee EMPLOYEE = EmployeeTestBuilder.build();
-    private static final EmployeeModel EMPLOYEE_MODEL = EmployeeModel.builder()
+    private static final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.build();
+    /* EmployeeModel.builder()  //EmployeeModelTestbuilder.build() är samma som dessa rader
             .departmentId(EMPLOYEE.getDepartmentId())
             .firstName(EMPLOYEE.getFirstName())
             .lastName(EMPLOYEE.getLastName())
@@ -16,6 +18,7 @@ public class TestEmployeeModelMapper {
             .fullTime(EMPLOYEE.getFullTime())
             .employeeId(EMPLOYEE.getEmployeeId())
             .build();
+            */
 
     @Test
     public void testThatEmployeeModelIsEqualToEmployee() {
