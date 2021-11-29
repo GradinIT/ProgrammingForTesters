@@ -1,9 +1,9 @@
 package se.jocke.employee.entity;
 
 import java.math.BigDecimal;
+//ska egentligen ligga employee>builder
 
 public class EmployeeTestFixture {
-    public static final String name = "HEJ";
     public static final EmployeeID id = EmployeeID.builder().id(3).build(); // ändra till EmployeeID istället för Integer
     public static String firstName = "Daniel";
     public static String lastName = "Hock";
