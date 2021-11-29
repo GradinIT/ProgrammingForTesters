@@ -1,13 +1,8 @@
 package se.jocke.employee.builder;
 
 
-import se.jocke.department.unittest.api.DepartmentModel;
-import se.jocke.employee.api.EmployeeModel;
-import se.jocke.employee.entity.EmployeeID;
-import se.jocke.employee.entity.EmployeeTestFixture;
-
-import javax.annotation.Nonnull;
-import java.math.BigDecimal;
+import se.jocke.employee.unittest.api.EmployeeModel;
+import se.jocke.employee.unittest.api.entity.EmployeeTestFixture;
 
 public class EmployeeModelTestBuilder {
 
