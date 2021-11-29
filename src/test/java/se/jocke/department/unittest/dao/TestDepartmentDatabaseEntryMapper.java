@@ -1,8 +1,9 @@
 package se.jocke.department.unittest.dao;
 
 import io.cucumber.datatable.DataTable;
-import org.junit.Test;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.department.dao.DepartmentDatabaseEntryMapper;
 import se.jocke.department.entity.Department;
