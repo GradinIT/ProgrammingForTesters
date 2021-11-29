@@ -1,4 +1,4 @@
-package se.jocke.employee.entity;
+package se.jocke.employee.unittest.api.entity;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
