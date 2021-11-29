@@ -2,13 +2,12 @@ package se.jocke.employee.api.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.api.DepartmentModel;
 import se.jocke.employee.Builder.EmployeeModelTestBuilder;
 import se.jocke.employee.api.EmployeeModel;
 import se.jocke.employee.entity.Employee;
 
 public class TestCreateEmployeeModel {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
+    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.build();
 
 
     @Test
@@ -23,7 +22,7 @@ public class TestCreateEmployeeModel {
                 .build();
 
         Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId());
-        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getLastName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName());
         Assertions.assertEquals(EMPLOYEE_MODEL.getLastName(), employee.getLastName());
         Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(), employee.getSalary());
         Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime());

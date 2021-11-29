@@ -2,12 +2,10 @@ package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.builder.DepartmentTestBuilder;
-import se.jocke.department.entity.Department;
 import se.jocke.employee.Builder.EmployeeTestBuilder;
 
 public class TestCreateEmployee {
-    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
+    private final Employee EMPLOYEE = EmployeeTestBuilder.build();
 
     @Test
     public void testCreateEmployee() {
@@ -31,8 +29,9 @@ public class TestCreateEmployee {
 
     @Test
     public void testCreateEmployeeThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            Employee.builder().build();
-        });
+        Assertions.assertThrows(NullPointerException.class,
+                () ->
+                    Employee.builder().build());
+
     }
 }
