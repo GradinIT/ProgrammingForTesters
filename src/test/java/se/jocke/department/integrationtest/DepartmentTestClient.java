@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
-import se.jocke.department.unittest.api.DepartmentModel;
+import se.jocke.department.unittest.api.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,49 +23,49 @@ public class DepartmentTestClient {
     private static final String BASE_URL = "http://localhost:8082/";
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
-    public static Optional<List<DepartmentModel>> getAllDepartments() {
+    public static Optional<List<EmployeeModel>> getAllDepartments() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/",
                 HttpMethod.GET,
                 null,
                 List.class);
         List list = (List) responseEntity.getBody();
-        List<DepartmentModel> departmentModels = new ArrayList<>();
+        List<EmployeeModel> departmentModels = new ArrayList<>();
         list.stream().forEach(o -> {
-            departmentModels.add(gson.fromJson(o.toString(), DepartmentModel.class));
+            departmentModels.add(gson.fromJson(o.toString(), EmployeeModel.class));
         });
         return Optional.ofNullable(departmentModels);
 
     }
 
-    public static Optional<DepartmentModel> getDepartmentById(Integer departmentId) {
+    public static Optional<EmployeeModel> getDepartmentById(Integer departmentId) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"department/" + departmentId,
                 HttpMethod.GET,
                 null,
-                DepartmentModel.class);
-        return Optional.ofNullable(DepartmentModel.class.cast(responseEntity.getBody()));
+                EmployeeModel.class);
+        return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
 
     }
 
-    public static Optional<DepartmentModel> updateDepartment(DepartmentModel departmentModel) {
+    public static Optional<EmployeeModel> updateDepartment(EmployeeModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.PUT, null);
-        ResponseEntity<DepartmentModel> response = restTemplate.exchange(BASE_URL+"department/", HttpMethod.PUT, requestEntity, DepartmentModel.class);
+        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(departmentModel, HttpMethod.PUT, null);
+        ResponseEntity<EmployeeModel> response = restTemplate.exchange(BASE_URL+"department/", HttpMethod.PUT, requestEntity, EmployeeModel.class);
         return Optional.of(response.getBody());
     }
 
-    public static Optional<DepartmentModel> createDepartment(DepartmentModel departmentModel) {
+    public static Optional<EmployeeModel> createDepartment(EmployeeModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
-        DepartmentModel result = restTemplate.postForObject(BASE_URL+"department/", departmentModel, DepartmentModel.class);
+        EmployeeModel result = restTemplate.postForObject(BASE_URL+"department/", departmentModel, EmployeeModel.class);
         return Optional.of(result);
     }
 
-    public static Optional<DepartmentModel> deleteDepartment(DepartmentModel departmentModel) {
+    public static Optional<EmployeeModel> deleteDepartment(EmployeeModel departmentModel) {
         RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<DepartmentModel> requestEntity = new RequestEntity<DepartmentModel>(departmentModel, HttpMethod.DELETE,
+        RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(departmentModel, HttpMethod.DELETE,
                 null);
-        DepartmentModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, DepartmentModel.class).getBody();
+        EmployeeModel result = restTemplate.exchange(BASE_URL+"department/", HttpMethod.DELETE, requestEntity, EmployeeModel.class).getBody();
         return Optional.of(result);
 
     }
