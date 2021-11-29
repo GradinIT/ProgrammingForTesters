@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepartmentModel {
+public class EmployeeModel {
     @Nonnull
     private  Integer departmentId;
     @Nonnull

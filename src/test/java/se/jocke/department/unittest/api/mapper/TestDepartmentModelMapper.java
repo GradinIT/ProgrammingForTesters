@@ -2,20 +2,20 @@ package se.jocke.department.unittest.api.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.unittest.api.DepartmentModel;
+import se.jocke.department.unittest.api.EmployeeModel;
 import se.jocke.department.unittest.entity.Department;
 import se.jocke.department.test.builder.DepartmentTestBuilder;
 
 public class TestDepartmentModelMapper {
     private static final Department DEPARTMENT = DepartmentTestBuilder.build();
-    private static final DepartmentModel DEPARTMENT_MODEL = DepartmentModel.builder()
+    private static final EmployeeModel DEPARTMENT_MODEL = EmployeeModel.builder()
             .departmentId(DEPARTMENT.getDepartmentId())
             .departmentName(DEPARTMENT.getDepartmentName())
             .build();
 
     @Test
     public void testThatDepartmentModelIsEqualToDepartment() {
-        DepartmentModel departmentModel = DepartmentModelMapper.map(DEPARTMENT);
+        EmployeeModel departmentModel = DepartmentModelMapper.map(DEPARTMENT);
         Assertions.assertEquals(DEPARTMENT_MODEL,departmentModel);
         Assertions.assertEquals(DEPARTMENT.getDepartmentName(),departmentModel.getDepartmentName());
         Assertions.assertEquals(DEPARTMENT.getDepartmentId(),departmentModel.getDepartmentId());

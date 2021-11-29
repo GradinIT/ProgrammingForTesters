@@ -1,19 +1,14 @@
 package se.jocke.employee.builder;
 
 
-import se.jocke.department.unittest.api.DepartmentModel;
-import se.jocke.employee.api.EmployeeModel;
-import se.jocke.employee.entity.EmployeeID;
+import se.jocke.employee.api.EmployeeModel;  // fixar employeeid?
 import se.jocke.employee.entity.EmployeeTestFixture;
-
-import javax.annotation.Nonnull;
-import java.math.BigDecimal;
 
 public class EmployeeModelTestBuilder {
 
     public static EmployeeModel build() {
         return EmployeeModel.builder()
-              // .employeeId(EmployeeTestFixture.id)
+              // .employeeId(EmployeeTestFixture.id) // import se.jocke.employee.api.EmployeeModel; fixar employeeid
                 .employeeId(EmployeeTestFixture.id)
                 .departmentId(EmployeeTestFixture.departmentId)
                 .firstName(EmployeeTestFixture.firstName)
