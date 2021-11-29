@@ -7,7 +7,7 @@ import se.jocke.employee.entity.EmployeeID;
 public class EmployeeModelMapper {
     public static Employee map(EmployeeModel model) {
         return Employee.builder()
-                .employeeId(EmployeeID.builder().id(model.getEmployeeId()).build())
+                .employeeId(EmployeeID.builder().id(model.getDepartmentId()).build())
                 .firstName(model.getFirstName())
                 .lastName(model.getLastName())
                 .salary(model.getSalary())
@@ -16,9 +16,11 @@ public class EmployeeModelMapper {
                 .build();
     }
 
+
+
     public static EmployeeModel map(Employee employee) {
         return EmployeeModel.builder()
-                .employeeId(employee.getEmployeeId().getId())
+                .employeeId(employee.getEmployeeId())
                 .firstName(employee.getFirstName())
                 .lastName(employee.getLastName())
                 .salary(employee.getSalary())
