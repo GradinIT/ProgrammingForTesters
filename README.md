@@ -43,3 +43,5 @@ This project is made by me in order to teach testing and test development
     
 11. [Installing JDK Tutorial](https://www.youtube.com/watch?v=IJ-PJbvJBGs)
 12. [Install IntelliJ](https://www.youtube.com/watch?v=EMLTOMdIz4w)
+13. [Mockito](https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockito-junit-example/)
+14. [JUnit5](https://howtodoinjava.com/junit-5-tutorial/)
