@@ -31,14 +31,16 @@ public class TestDepartmentService {
 
     @Mock
     private DepartmentDao departmentDao;
-    
+
     @InjectMocks
-    private DepartmentService departmentService = new DepartmentServiceImpl();
+    private DepartmentService systemUnderTest = new DepartmentServiceImpl();
 
     @Test
     public void testFindById() {
         when(departmentDao.findById(DEPARTMENT.getDepartmentId())).thenReturn(Optional.of(DEPARTMENT_DATABASE_ENTRY));
-        Department department = departmentService.getDepartmentById(DEPARTMENT.getDepartmentId());
+
+        Department department = systemUnderTest.getDepartmentById(DEPARTMENT.getDepartmentId());
+
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(department),
                 () -> Assertions.assertEquals(DEPARTMENT, department)
