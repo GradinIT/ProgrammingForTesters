@@ -2,6 +2,7 @@ package se.jocke.employee.api.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import se.jocke.employee.Builder.EmployeeModelTestBuilder;
 import se.jocke.employee.Builder.EmployeeTestBuilder;
 import se.jocke.employee.api.EmployeeModel;
