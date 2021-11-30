@@ -20,7 +20,7 @@ import java.util.Optional;
 @SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class EmployeeTestClient {
-    private static final String BASE_URL = "http://localhost:8082/";
+    private static final String BASE_URL = "http://localhost:8082/":
     private static final Gson gson = new Gson().newBuilder().setPrettyPrinting().create();
 
     public static Optional<EmployeeModel> deleteEmployee(EmployeeModel employeeModel) {
@@ -63,3 +63,4 @@ public class EmployeeTestClient {
         return Optional.ofNullable(departmentModels);
     }
 }
+test.se jocke
