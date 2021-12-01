@@ -1,6 +1,6 @@
-package se.jocke.department.unittest.dao;
+package se.jocke.department.dao;
 
-import se.jocke.department.unittest.entity.Department;
+import se.jocke.department.entity.Department;
 
 import java.util.List;
 import java.util.stream.Collectors;

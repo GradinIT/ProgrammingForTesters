@@ -1,6 +1,6 @@
-package se.jocke.department.unittest.service;
+package se.jocke.department.service;
 
-import se.jocke.department.unittest.entity.Department;
+import se.jocke.department.entity.Department;
 
 import java.util.List;
 

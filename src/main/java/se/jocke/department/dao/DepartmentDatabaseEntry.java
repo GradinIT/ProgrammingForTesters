@@ -1,10 +1,11 @@
-package se.jocke.department.unittest.dao;
+package se.jocke.department.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,6 +22,6 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class DepartmentDatabaseEntry {
     @Id
-    private Integer departmentId;
-    private String departmentName;
+    private @NonNull Integer departmentId;
+    private @NonNull String departmentName;
 }
