@@ -16,6 +16,8 @@ public class TestNinja {
     @Mock
     Fu fu;
 
+    // Kommentar...
+
     // VAR
     @InjectMocks
     Ninja ninja;
