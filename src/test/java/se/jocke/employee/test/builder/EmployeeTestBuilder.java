@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 
 public class EmployeeTestBuilder {
     public static Employee.EmployeeBuilder builder() {
-
         return Employee.builder()
                 .firstName("Jocke")
                 .lastName("Gradin")
