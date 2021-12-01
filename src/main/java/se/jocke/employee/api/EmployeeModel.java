@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import se.jocke.employee.entity.EmployeeID;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -22,7 +21,7 @@ import java.math.BigDecimal;
 public class EmployeeModel {
 
     @Nonnull
-    private EmployeeID employeeId; // ändra till EmployeeID istället för Integer
+    private Integer employeeId;
     @Nonnull
     private String firstName;
     @Nonnull
