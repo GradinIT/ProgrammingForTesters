@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import se.jocke.common.dao.EntityNotFoundException;
 import se.jocke.department.dao.DepartmentDao;
 import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.department.entity.Department;
@@ -46,5 +47,10 @@ public class TestDepartmentService {
                 () -> Assertions.assertEquals(DEPARTMENT, department)
         );
         verify(departmentDao, times(1)).findById(DEPARTMENT.getDepartmentId());
+    }
+    @Test
+    public void testEntityNotFoundException() {
+        when(departmentDao.findById(DEPARTMENT.getDepartmentId())).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityNotFoundException.class,()-> systemUnderTest.getDepartmentById(DEPARTMENT.getDepartmentId()));
     }
 }
