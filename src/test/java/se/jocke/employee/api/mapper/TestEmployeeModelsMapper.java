@@ -14,7 +14,7 @@ import java.util.List;
 public class TestEmployeeModelsMapper {
 
     @Test
-    public void testOneElementInTheList() {
+    public void testListWithOneEntryMapFunction() {
         List<Employee> employeeList = new ArrayList<>();
 
         employeeList.add(EmployeeTestBuilder.build());
@@ -25,16 +25,12 @@ public class TestEmployeeModelsMapper {
         EmployeeModel model = EmployeeModelTestBuilder.build();
         expectedModelList.add(model);
 
-        org.assertj.core.api.Assertions.assertThat(actualModelsList).containsExactlyInAnyOrder(model);
-
-        org.assertj.core.api.Assertions.assertThat(actualModelsList).hasSameElementsAs(expectedModelList);
-
         Assertions.assertTrue(expectedModelList.containsAll(actualModelsList));
 
     }
 
     @Test
-    public void testNull() {
+    public void testNullOnEmployeeModelsMapper() {
 
         Assertions.assertThrows(NullPointerException.class,
                 () ->
