@@ -1,0 +1,63 @@
+package se.jocke.department.unittest.service;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import se.jocke.common.dao.EntityNotFoundException;
+import se.jocke.department.dao.DepartmentDao;
+import se.jocke.department.dao.DepartmentDatabaseEntry;
+import se.jocke.department.entity.Department;
+import se.jocke.department.service.DepartmentService;
+import se.jocke.department.service.DepartmentServiceImpl;
+import se.jocke.department.test.builder.DepartmentDatabaseEntryTestBuilder;
+import se.jocke.department.test.builder.DepartmentTestBuilder;
+import se.jocke.employee.builder.EmployeeDatabaseEntryTestBuilder;
+import se.jocke.employee.builder.EmployeeTestBuilder;
+import se.jocke.employee.dao.EmployeeDao;
+import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.employee.entity.Employee;
+import se.jocke.employee.service.EmployeeService;
+import se.jocke.employee.service.EmployeeServiceImpl;
+
+import java.util.Optional;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+public class TestEmployeeService {
+
+    private static final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
+    private static final EmployeeDatabaseEntry EMPLOYEE_DATABASE_ENTRY = EmployeeDatabaseEntryTestBuilder.build();
+
+    @Mock
+    private EmployeeDao employeeDao;
+
+    @InjectMocks
+    private EmployeeService systemUnderTest = new EmployeeServiceImpl();
+
+    @Test
+    public void testFindById() {
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
+
+        Employee employee = systemUnderTest.getEmployeeById(EMPLOYEE.getEmployeeId().getId());
+
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(employee),
+                () -> Assertions.assertEquals(EMPLOYEE, employee)
+        );
+        verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
+    }
+    @Test
+    public void testEntityNotFoundException() {
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityNotFoundException.class,()-> systemUnderTest.getEmployeeById(EMPLOYEE.getEmployeeId().getId()));
+    }
+}
