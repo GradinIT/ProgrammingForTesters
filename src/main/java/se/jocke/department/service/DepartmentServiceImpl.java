@@ -1,14 +1,14 @@
-package se.jocke.department.unittest.service;
+package se.jocke.department.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.jocke.common.aspects.TimeAndLogg;
-import se.jocke.department.unittest.dao.DepartmentDao;
-import se.jocke.department.unittest.dao.DepartmentDatabaseEntry;
+import se.jocke.department.dao.DepartmentDao;
+import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.common.dao.EntityNotFoundException;
-import se.jocke.department.unittest.dao.DepartmentDatabaseEntryMapper;
-import se.jocke.department.unittest.entity.Department;
+import se.jocke.department.dao.DepartmentDatabaseEntryMapper;
+import se.jocke.department.entity.Department;
 
 import java.util.List;
 import java.util.Optional;
