@@ -12,6 +12,7 @@ import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
+import se.jocke.employee.dao.EmployeeDao;
 
 import java.util.Arrays;
 import java.util.List;
