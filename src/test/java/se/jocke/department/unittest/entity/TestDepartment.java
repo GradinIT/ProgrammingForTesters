@@ -2,6 +2,7 @@ package se.jocke.department.unittest.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import se.jocke.department.entity.Department;
 import se.jocke.department.test.builder.DepartmentTestBuilder;
 
 public class TestDepartment {
