@@ -32,27 +32,27 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @TimeAndLogg
     public Department create(Department department) {
-        Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId());
+        Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId().getId());
         if(departmentDatabaseEntry.isPresent())
-            throw new EntityAlreadyInStorageException(department.getDepartmentId());
+            throw new EntityAlreadyInStorageException(department.getDepartmentId().getId());
         return DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(department)));
     }
 
     @TimeAndLogg
     public Department update(Department department) {
-        Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId());
+        Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId().getId());
         if(departmentDatabaseEntry.isPresent())
             return DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(department)));
-        throw new EntityNotFoundException(department.getDepartmentId());
+        throw new EntityNotFoundException(department.getDepartmentId().getId());
     }
 
     @TimeAndLogg
     public Department remove(Department department) {
-        Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId());
+        Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId().getId());
         if(departmentDatabaseEntry.isPresent()) {
             departmentDao.delete(DepartmentDatabaseEntryMapper.map(department));
             return department;
         }
-        throw new EntityNotFoundException(department.getDepartmentId());
+        throw new EntityNotFoundException(department.getDepartmentId().getId());
     }
 }
