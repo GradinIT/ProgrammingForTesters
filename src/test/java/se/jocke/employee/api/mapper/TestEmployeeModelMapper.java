@@ -16,10 +16,6 @@ public class TestEmployeeModelMapper {
             .fullTime(EMPLOYEE.getFullTime())
             .employeeId(EMPLOYEE.getEmployeeId())
             .build();
-<<<<<<< HEAD
-=======
-            */
->>>>>>> parent of c5c3a26 (TestEmployeeModelMapper: la till testEmployeeToEmployeeModelMapping - verkar funka men mvn clean install kör färre test?)
 
     @Test
     public void testThatEmployeeModelIsEqualToEmployee() {
