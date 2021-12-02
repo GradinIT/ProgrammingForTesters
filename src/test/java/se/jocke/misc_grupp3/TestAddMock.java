@@ -1,4 +1,4 @@
-package se.jocke.gerald;
+package se.jocke.misc_grupp3;
 
 import exercise.unittest.Add;
 import org.junit.jupiter.api.Assertions;
