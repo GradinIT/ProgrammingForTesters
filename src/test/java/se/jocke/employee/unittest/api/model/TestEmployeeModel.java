@@ -2,7 +2,7 @@ package se.jocke.employee.unittest.api.model;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import se.jocke.employee.builder.EmployeeModelTestBuilder;
+import se.jocke.employee.test.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.unittest.api.EmployeeModel;
 
 public class TestEmployeeModel {

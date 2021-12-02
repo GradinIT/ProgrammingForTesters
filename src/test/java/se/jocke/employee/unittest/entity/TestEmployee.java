@@ -1,8 +1,8 @@
-package se.jocke.employee.unittest.api.entity;
+package se.jocke.employee.unittest.entity;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import se.jocke.employee.builder.EmployeeTestBuilder;
+import se.jocke.employee.test.builder.EmployeeTestBuilder;
 
 
 public class TestEmployee {

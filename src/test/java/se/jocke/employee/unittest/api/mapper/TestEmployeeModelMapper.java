@@ -3,8 +3,8 @@ package se.jocke.employee.unittest.api.mapper;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import se.jocke.employee.unittest.api.EmployeeModel;
-import se.jocke.employee.builder.EmployeeTestBuilder;
-import se.jocke.employee.unittest.api.entity.Employee;
+import se.jocke.employee.test.builder.EmployeeTestBuilder;
+import se.jocke.employee.unittest.entity.Employee;
 
 public class TestEmployeeModelMapper {
     private static final Employee EMPLOYEE = EmployeeTestBuilder.build();
