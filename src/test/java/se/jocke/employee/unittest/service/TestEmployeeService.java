@@ -1,4 +1,4 @@
-package se.jocke.department.unittest.service;
+package se.jocke.employee.unittest.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-public class TestDepartmentService {
+public class TestEmployeeService {
 
     private static final Employee EMPLOYEE = EmployeeTestBuilder.build();
     // Klassen går inte att ändra pga final.
