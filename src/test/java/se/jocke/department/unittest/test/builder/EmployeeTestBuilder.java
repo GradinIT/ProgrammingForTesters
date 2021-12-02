@@ -1,4 +1,4 @@
-package se.jocke.employee.builder;
+package se.jocke.department.unittest.test.builder;
 
 import lombok.Builder;
 import lombok.Getter;
