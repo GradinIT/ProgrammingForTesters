@@ -40,6 +40,7 @@ public class TestEmployeeService {
                 .fullTime(true)
                 .departmentId(1)
                 .build()));
+        // comment
 
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
