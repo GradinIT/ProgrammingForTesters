@@ -7,19 +7,20 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 public class TestAdd {
+    Add add = new Add();
     @Test
     public void testAdd1() {
-        Assertions.assertEquals(12, Add.calculate(10,2));
+        Assertions.assertEquals(12, add.calculate(10,2));
     }
 
     //Meddelande från Erwin
 
     @Test
     public void testAdd2() {
-        Assertions.assertEquals(0, Add.calculate(-5,5));
+        Assertions.assertEquals(0, add.calculate(-5,5));
     }
     @Test
     public void testAdd3() {
-        Assertions.assertEquals(-2, Add.calculate(6,-8));
+        Assertions.assertEquals(-2, add.calculate(6,-8));
     }
 }

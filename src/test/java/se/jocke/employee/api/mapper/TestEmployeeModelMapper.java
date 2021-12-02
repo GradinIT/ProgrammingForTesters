@@ -2,9 +2,10 @@ package se.jocke.employee.api.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.employee.api.EmployeeModel;
-import se.jocke.employee.entity.Employee;
-import se.jocke.employee.entity.EmployeeTestBuilder;
+import se.jocke.employee.builder.EmployeeTestBuilder;
+import se.jocke.employee.unittest.api.EmployeeModel;
+import se.jocke.employee.unittest.api.entity.Employee;
+import se.jocke.employee.unittest.api.mapper.EmployeeModelMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,7 +17,7 @@ public class TestEmployeeModelMapper {
             .fullTime(EMPLOYEE.getFullTime())
             .salary(EMPLOYEE.getSalary())
             .departmentId(EMPLOYEE.getDepartmentId())
-            .employeeId(EMPLOYEE.getEmployeeId().getId())
+            .employeeId(EMPLOYEE.getEmployeeId())
             .build();
 
     @Test
