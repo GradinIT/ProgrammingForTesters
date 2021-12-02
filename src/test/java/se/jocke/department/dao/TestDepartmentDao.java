@@ -1,8 +1,12 @@
 package se.jocke.department.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -11,6 +15,7 @@ import se.jocke.config.LiquibaseConfigurer;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,14 +27,32 @@ public class TestDepartmentDao {
     @Autowired
     DepartmentDao departmentDao;
 
-    @Test
-    public void testGetDepartmentById() {
-        Integer departmetId = 1;
+    /*
+    @ParameterizedTest
+    @MethodSource({"stringFields"})
+    public void testGetDepartmentById(String parameter) {
+        Integer departmetId = 99;
         Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(departmetId);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development", optionalEmployeeDatabaseEntry.get().getDepartmentName()),
+                () -> assertEquals(parameter, optionalEmployeeDatabaseEntry.get().getDepartmentName()),
+                () -> assertEquals(departmetId, optionalEmployeeDatabaseEntry.get().getDepartmentId())
+        );
+    }
+
+    static Stream<String> stringFields() {
+        return Stream.of("Test_Development", "Development");
+    }*/
+
+    @Test
+    public void testGetDepartmentById() {
+        Integer departmetId = 99;
+        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(departmetId);
+        Assertions.assertAll(
+                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
+                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
+                () -> assertEquals("Department", optionalEmployeeDatabaseEntry.get().getDepartmentName()),
                 () -> assertEquals(departmetId, optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }

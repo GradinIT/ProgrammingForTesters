@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
-import se.jocke.employee.builder.EmployeeTestBuilder;
 
 public class TestEmployeeBoilerCode {
     private final EmployeeModel ACTUAL_EMPLOYEE = EmployeeModelTestBuilder.builder().build();
