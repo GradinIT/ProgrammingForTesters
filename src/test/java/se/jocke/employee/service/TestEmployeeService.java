@@ -1,4 +1,4 @@
-package se.jocke.department.unittest.service;
+package se.jocke.employee.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

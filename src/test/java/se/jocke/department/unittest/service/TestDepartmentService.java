@@ -38,19 +38,19 @@ public class TestDepartmentService {
 
     @Test
     public void testFindById() {
-        when(departmentDao.findById(DEPARTMENT.getDepartmentId())).thenReturn(Optional.of(DEPARTMENT_DATABASE_ENTRY));
+        when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.of(DEPARTMENT_DATABASE_ENTRY));
 
-        Department department = systemUnderTest.getDepartmentById(DEPARTMENT.getDepartmentId());
+        Department department = systemUnderTest.getDepartmentById(DEPARTMENT.getDepartmentId().getId());
 
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(department),
                 () -> Assertions.assertEquals(DEPARTMENT, department)
         );
-        verify(departmentDao, times(1)).findById(DEPARTMENT.getDepartmentId());
+        verify(departmentDao, times(1)).findById(DEPARTMENT.getDepartmentId().getId());
     }
     @Test
     public void testEntityNotFoundException() {
-        when(departmentDao.findById(DEPARTMENT.getDepartmentId())).thenReturn(Optional.empty());
-        Assertions.assertThrows(EntityNotFoundException.class,()-> systemUnderTest.getDepartmentById(DEPARTMENT.getDepartmentId()));
+        when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityNotFoundException.class,()-> systemUnderTest.getDepartmentById(DEPARTMENT.getDepartmentId().getId()));
     }
 }
