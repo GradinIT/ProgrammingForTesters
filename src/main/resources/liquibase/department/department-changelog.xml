@@ -15,6 +15,10 @@
             <column name="DEPARTMENTNAME">Development</column>
         </insert>
         <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">99</column>
+            <column name="DEPARTMENTNAME">Test_Development</column>
+        </insert>
+        <insert tableName="DEPARTMENT">
             <column name="DEPARTMENTID">2</column>
             <column name="DEPARTMENTNAME">Sales</column>
         </insert>
