@@ -10,6 +10,12 @@
         </createTable>
     </changeSet>
     <changeSet id="add-data-department" author="Joakim Gradin">
+
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">100</column>
+            <column name="DEPARTMENTNAME">ChefsAvdelningen</column>
+        </insert>
+
         <insert tableName="DEPARTMENT">
             <column name="DEPARTMENTID">1</column>
             <column name="DEPARTMENTNAME">Development</column>
