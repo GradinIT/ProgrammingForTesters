@@ -29,7 +29,7 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development", optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
                 () -> assertEquals(employeeId, optionalEmployeeDatabaseEntry.get().getEmployeeId())
         );
     }
@@ -39,7 +39,7 @@ public class TestEmployeeDao {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),
-                () -> assertEquals(4, employees.size())
+                () -> assertEquals(3, employees.size())
         );
     }
 }
