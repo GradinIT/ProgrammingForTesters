@@ -1,4 +1,6 @@
-package se.jocke.employee.unittest.entity;
+package se.jocke.employee.test.builder;
+
+import se.jocke.employee.unittest.entity.EmployeeID;
 
 import java.math.BigDecimal;
 //ska egentligen ligga employee>builder
