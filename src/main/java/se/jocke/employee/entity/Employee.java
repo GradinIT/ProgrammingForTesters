@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Id;
 import se.jocke.common.entity.Entity;
 
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 @ToString
 public class Employee extends Entity<EmployeeID> {
+    @Id
     private final @NonNull EmployeeID employeeId;
     private final @NonNull String firstName;
     private final @NonNull String lastName;

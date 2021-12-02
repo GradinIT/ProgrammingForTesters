@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.common.dao.EntityNotFoundException;
 import se.jocke.employee.Builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.Builder.EmployeeTestBuilder;
@@ -17,7 +18,6 @@ import se.jocke.employee.entity.Employee;
 import se.jocke.employee.service.EmployeeService;
 import se.jocke.employee.service.EmployeeServiceImpl;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -49,8 +49,24 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
     }
     @Test
+    public void testCreateEmployee() { //Test not working //
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
+
+        Employee employee = systemBeingTested.createEmployee(EMPLOYEE);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(employee, EMPLOYEE)
+
+        );
+        verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
+    }
+    @Test
     public void testEntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
         Assertions.assertThrows(EntityNotFoundException.class,()-> systemBeingTested.getEmployeeById(EMPLOYEE.getEmployeeId().getId()));
+    }
+    @Test
+    public void EntityAlreadyInStorageException() {
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
+        Assertions.assertThrows(EntityAlreadyInStorageException.class,() -> systemBeingTested.createEmployee(EMPLOYEE));
     }
 }
