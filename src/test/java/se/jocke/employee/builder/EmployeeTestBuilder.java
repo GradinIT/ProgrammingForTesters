@@ -9,12 +9,12 @@ public class EmployeeTestBuilder {
 
     public static Employee.EmployeeBuilder builder() {
         return Employee.builder()
-                .employeeId(EmployeeID.builder().id(2).build())
-                .firstName("Test/QA")
-                .lastName("SQUARE1")
-                .departmentId(5)
-                .salary(new BigDecimal(50000))
-                .fullTime(true);
+                .employeeId(EmployeeTestFixture.employeeId)
+                .firstName(EmployeeTestFixture.firstName)
+                .lastName(EmployeeTestFixture.lastName)
+                .departmentId(EmployeeTestFixture.departmentId)
+                .salary(EmployeeTestFixture.salary)
+                .fullTime(EmployeeTestFixture.fullTime);
         
     }
 }
