@@ -27,32 +27,14 @@ public class TestDepartmentDao {
     @Autowired
     DepartmentDao departmentDao;
 
-    /*
-    @ParameterizedTest
-    @MethodSource({"stringFields"})
-    public void testGetDepartmentById(String parameter) {
-        Integer departmetId = 99;
-        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(departmetId);
-        Assertions.assertAll(
-                () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
-                () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals(parameter, optionalEmployeeDatabaseEntry.get().getDepartmentName()),
-                () -> assertEquals(departmetId, optionalEmployeeDatabaseEntry.get().getDepartmentId())
-        );
-    }
-
-    static Stream<String> stringFields() {
-        return Stream.of("Test_Development", "Development");
-    }*/
-
     @Test
     public void testGetDepartmentById() {
-        Integer departmetId = 99;
+        Integer departmetId = 1;
         Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(departmetId);
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Department", optionalEmployeeDatabaseEntry.get().getDepartmentName()),
+                () -> assertEquals("Development", optionalEmployeeDatabaseEntry.get().getDepartmentName()),
                 () -> assertEquals(departmetId, optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
     }
