@@ -12,7 +12,7 @@ public class EmployeeTestFixture {
     public static String lastName = "Holk";
     public static BigDecimal salary = new BigDecimal("222222");
     public static Boolean fulltime = true;
-    public static Integer departmetId = 55;
+    public static Integer departmentId = 55;
 
 
 
