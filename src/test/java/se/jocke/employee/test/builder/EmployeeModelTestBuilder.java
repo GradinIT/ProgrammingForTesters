@@ -2,7 +2,6 @@ package se.jocke.employee.test.builder;
 
 
 import se.jocke.employee.unittest.api.EmployeeModel;
-import se.jocke.employee.unittest.entity.EmployeeTestFixture;
 
 public class EmployeeModelTestBuilder {
 

@@ -3,7 +3,6 @@ package se.jocke.employee.test.builder;
 import lombok.Builder;
 import lombok.Getter;
 import se.jocke.employee.unittest.entity.Employee;
-import se.jocke.employee.unittest.entity.EmployeeTestFixture;
 
 @Builder
 @Getter
