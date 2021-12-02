@@ -1,4 +1,4 @@
-package se.jocke.department.dao;
+package se.jocke.department.unittest.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
+import se.jocke.department.dao.DepartmentDao;
+import se.jocke.department.dao.DepartmentDatabaseEntry;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +41,7 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () -> assertEquals(4, departments.size())
+                () -> assertEquals(5, departments.size())
         );
     }
 }

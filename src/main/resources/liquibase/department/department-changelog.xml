@@ -26,5 +26,9 @@
             <column name="DEPARTMENTID">1450</column>
             <column name="DEPARTMENTNAME">Printing</column>
         </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">56</column>
+            <column name="DEPARTMENTNAME">Marketing</column>
+        </insert>
     </changeSet>
 </databaseChangeLog>
