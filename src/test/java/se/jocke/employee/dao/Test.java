@@ -2,4 +2,5 @@ package se.jocke.employee.dao;
 
 public class Test {
     // commented
+    // Test
 }
