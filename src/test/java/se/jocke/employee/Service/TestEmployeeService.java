@@ -20,6 +20,8 @@ import se.jocke.employee.service.EmployeeServiceImpl;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -59,6 +61,19 @@ public class TestEmployeeService {
         );
         verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
     }
+
+    @Test
+    public void testingCreateEmployee() {
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
+        //when(employeeDao.save(EMPLOYEE_DATABASE_ENTRY)).thenReturn(EMPLOYEE);
+        Employee createEmployee = systemBeingTested.createEmployee(EMPLOYEE);
+        Assertions.assertAll(
+                () -> assertNotNull(createEmployee),
+                () -> assertEquals(EMPLOYEE.getEmployeeId(), createEmployee.getEmployeeId()),
+                () -> assertEquals(EMPLOYEE.getFirstName(), createEmployee.getFirstName())
+        );
+    }
+
     @Test
     public void testEntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
