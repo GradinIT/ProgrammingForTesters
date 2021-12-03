@@ -54,6 +54,7 @@ public class TestEmployeeService {
         );
         verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
     }
+
     @Test
     public void testCreateEmployee() { //Test not working //
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
@@ -67,28 +68,43 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
     }
 
+   @Test
+    public void testRemoveEmployee() {
+      when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
+       when(employeeDao.delete(EMPLOYEE_DATABASE_ENTRY));    }
+
+    @Test
+    public void testUpdateEmployee() {
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
+        when(employeeDao.save(EMPLOYEE_DATABASE_ENTRY)).thenReturn((EMPLOYEE_DATABASE_ENTRY));
+        Employee employee = systemBeingTested.updateEmployee(EMPLOYEE);
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(employee),
+                () -> Assertions.assertEquals(EMPLOYEE, employee));
+    }
+
     @Test
     public void testEmployeeFindByIDEntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
-        Assertions.assertThrows(EntityNotFoundException.class,()-> systemBeingTested.getEmployeeById(EMPLOYEE.getEmployeeId().getId()));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemBeingTested.getEmployeeById(EMPLOYEE.getEmployeeId().getId()));
     }
+
     @Test
     public void testCreateEmployeeEntityAlreadyInStorageException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
-        Assertions.assertThrows(EntityAlreadyInStorageException.class,() -> systemBeingTested.createEmployee(EMPLOYEE));
+        Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> systemBeingTested.createEmployee(EMPLOYEE));
     }
+
     @Test
     public void testRemoveEmployeeEntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
-        Assertions.assertThrows(EntityNotFoundException.class,() -> systemBeingTested.removeEmployee(EMPLOYEE));
-      
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemBeingTested.removeEmployee(EMPLOYEE));
+
     }
+
     @Test
-    public void TestUpdateEmployeeNullPointerException() {
+    public void testUpdateEmployeeNullPointerException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
         Assertions.assertThrows(NullPointerException.class, () -> systemBeingTested.updateEmployee(EMPLOYEE));
     }
-    @Test
-    public void TestGetAllEmployeesNullPointerException() {
-        when(employeeDao.findAll(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EmployeeDao));
-        Assertions.assertThrows(NullPointerException.class, () -> systemBeingTested.getAllEmployees());
+}
