@@ -11,12 +11,11 @@ import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 import java.math.BigDecimal;
 import java.util.Optional;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
 
 import se.jocke.employee.entity.Employee;
-import static org.mockito.Mockito.when;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TestEmployeeService {
@@ -52,5 +51,17 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
         verify(employeeDao, times(1)).findById(1);
+    }
+
+    @Test
+    public void getAllEmployees() {
+    }
+
+    @Test
+    public void createEmployeeHappyFlow() {
+    }
+
+    @Test
+    public void createEmployeeError() {
     }
 }
