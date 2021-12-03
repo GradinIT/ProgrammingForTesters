@@ -1,5 +1,6 @@
 package se.jocke.employee.Service;
 
+import org.apache.catalina.LifecycleState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.event.SourceFilteringListener;
 import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.common.dao.EntityNotFoundException;
 import se.jocke.employee.Builder.EmployeeDatabaseEntryTestBuilder;
@@ -15,9 +17,11 @@ import se.jocke.employee.Builder.EmployeeTestBuilder;
 import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 import se.jocke.employee.entity.Employee;
+import se.jocke.employee.entity.EmployeeID;
 import se.jocke.employee.service.EmployeeService;
 import se.jocke.employee.service.EmployeeServiceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -87,6 +91,16 @@ public class TestEmployeeService {
     @Test
     public void EntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
-        Assertions.assertThrows(EntityAlreadyInStorageException.class,() -> systemBeingTested.removeEmployee(EMPLOYEE));
+        Assertions.assertThrows(EntityNotFoundException.class,() -> systemBeingTested.removeEmployee(EMPLOYEE));
+    }
+    @Test
+    public void TestUpdateEmployeeNullPointerException() {
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
+        Assertions.assertThrows(NullPointerException.class, () -> systemBeingTested.updateEmployee(EMPLOYEE));
+    }
+    @Test
+    public void TestGetAllEmployeesNullPointerException() {
+        when(employeeDao.findAll(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EmployeeDao));
+        Assertions.assertThrows(NullPointerException.class, () -> systemBeingTested.getAllEmployees());
     }
 }
