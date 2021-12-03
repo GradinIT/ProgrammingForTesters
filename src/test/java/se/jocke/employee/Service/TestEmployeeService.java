@@ -98,9 +98,5 @@ public class TestEmployeeService {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
         Assertions.assertThrows(NullPointerException.class, () -> systemBeingTested.updateEmployee(EMPLOYEE));
     }
-    @Test
-    public void TestGetAllEmployeesNullPointerException() {
-        when(employeeDao.findAll(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EmployeeDao));
-        Assertions.assertThrows(NullPointerException.class, () -> systemBeingTested.getAllEmployees());
-    }
+
 }
