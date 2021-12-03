@@ -1,4 +1,4 @@
-package se.jocke.gerald;
+package se.jocke.misc_grupp3;
 
 import exercise.gerald.Fu;
 import exercise.gerald.Ninja;
