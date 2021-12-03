@@ -2,10 +2,11 @@ package se.jocke.employee.old.api.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.employee.old.api.EmployeeModel;
+import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.api.mapper.EmployeeModelMapper;
 import se.jocke.employee.test.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.test.builder.EmployeeTestBuilder;
-import se.jocke.employee.old.entity.Employee;
+import se.jocke.employee.entity.Employee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

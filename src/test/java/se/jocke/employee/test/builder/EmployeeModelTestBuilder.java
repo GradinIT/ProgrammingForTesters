@@ -1,6 +1,6 @@
 package se.jocke.employee.test.builder;
 
-import se.jocke.employee.old.api.EmployeeModel;
+import se.jocke.employee.api.EmployeeModel;
 
 import java.math.BigDecimal;
 

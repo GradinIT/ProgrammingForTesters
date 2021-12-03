@@ -2,6 +2,7 @@ package se.jocke.employee.old.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import se.jocke.employee.entity.Employee;
 import se.jocke.employee.test.builder.EmployeeTestBuilder;
 
 public class TestCreateEmployee {

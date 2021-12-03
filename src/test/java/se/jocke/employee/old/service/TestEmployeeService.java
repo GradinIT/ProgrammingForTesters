@@ -8,9 +8,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.common.dao.EntityAlreadyInStorageException;
-import se.jocke.employee.old.dao.EmployeeDao;
-import se.jocke.employee.old.dao.EmployeeDatabaseEntry;
-import se.jocke.employee.old.entity.Employee;
+import se.jocke.employee.dao.EmployeeDao;
+import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.employee.entity.Employee;
+import se.jocke.employee.service.EmployeeService;
+import se.jocke.employee.service.EmployeeServiceImpl;
 import se.jocke.employee.test.builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.test.builder.EmployeeTestBuilder;
 

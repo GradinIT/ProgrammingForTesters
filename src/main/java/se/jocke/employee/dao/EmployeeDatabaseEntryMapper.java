@@ -1,7 +1,7 @@
-package se.jocke.employee.old.dao;
+package se.jocke.employee.dao;
 
-import se.jocke.employee.old.entity.Employee;
-import se.jocke.employee.old.entity.EmployeeID;
+import se.jocke.employee.entity.EmployeeID;
+import se.jocke.employee.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

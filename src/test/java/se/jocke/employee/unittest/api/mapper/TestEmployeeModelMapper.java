@@ -2,13 +2,9 @@ package se.jocke.employee.unittest.api.mapper;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.api.DepartmentModel;
-import se.jocke.department.api.mapper.DepartmentModelMapper;
-import se.jocke.department.entity.Department;
-import se.jocke.department.test.builder.DepartmentTestBuilder;
-import se.jocke.employee.old.api.EmployeeModel;
-import se.jocke.employee.old.api.mapper.EmployeeModelMapper;
-import se.jocke.employee.old.entity.Employee;
+import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.api.mapper.EmployeeModelMapper;
+import se.jocke.employee.entity.Employee;
 import se.jocke.employee.test.builder.EmployeeTestBuilder;
 
 public class TestEmployeeModelMapper {
