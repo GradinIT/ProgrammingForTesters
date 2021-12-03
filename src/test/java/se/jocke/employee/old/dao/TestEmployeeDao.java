@@ -1,4 +1,4 @@
-package se.jocke.employee.dao;
+package se.jocke.employee.old.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

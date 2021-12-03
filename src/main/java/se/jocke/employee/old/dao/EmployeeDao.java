@@ -1,4 +1,4 @@
-package se.jocke.employee.dao;
+package se.jocke.employee.old.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

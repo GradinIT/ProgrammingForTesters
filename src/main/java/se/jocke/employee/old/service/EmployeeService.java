@@ -1,6 +1,6 @@
-package se.jocke.employee.service;
+package se.jocke.employee.old.service;
 
-import se.jocke.employee.entity.Employee;
+import se.jocke.employee.old.entity.Employee;
 
 import java.util.List;
 
