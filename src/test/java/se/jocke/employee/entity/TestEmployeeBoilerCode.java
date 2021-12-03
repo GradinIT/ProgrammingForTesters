@@ -24,16 +24,4 @@ public class TestEmployeeBoilerCode {
         Assumptions.assumeTrue(ACTUAL_EMPLOYEE.equals(EXPECTED_EMPLOYEE));
         Assertions.assertEquals(ACTUAL_EMPLOYEE.hashCode(), EXPECTED_EMPLOYEE.hashCode());
     }
-
-    @Test
-    @DisplayName("Test Employee getters")
-    public void testGetterMethods() {
-        Assertions.assertAll(
-                () -> Assertions.assertEquals(ACTUAL_EMPLOYEE.getEmployeeId(), EXPECTED_EMPLOYEE.getEmployeeId()),
-                () -> Assertions.assertEquals(ACTUAL_EMPLOYEE.getFirstName(), EXPECTED_EMPLOYEE.getFirstName()),
-                () -> Assertions.assertEquals(ACTUAL_EMPLOYEE.getLastName(), EXPECTED_EMPLOYEE.getLastName()),
-                () -> Assertions.assertEquals(ACTUAL_EMPLOYEE.getSalary(), EXPECTED_EMPLOYEE.getSalary()),
-                () -> Assertions.assertEquals(ACTUAL_EMPLOYEE.getFullTime(), EXPECTED_EMPLOYEE.getFullTime()),
-                () -> Assertions.assertEquals(ACTUAL_EMPLOYEE.getDepartmentId(), EXPECTED_EMPLOYEE.getDepartmentId()));
-    }
 }
