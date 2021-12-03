@@ -1,6 +1,7 @@
 package se.jocke.employee.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.department.test.builder.DepartmentDatabaseEntryTestBuilder;
@@ -14,6 +15,10 @@ public class TestEmployeeDatabaseEntry {
         EmployeeDatabaseEntry employee = EmployeeDatabaseEntry.builder()
                 .employeeId(ENTRY.getEmployeeId())
                 .firstName(ENTRY.getFirstName())
+                .lastName(ENTRY.getLastName())
+                .salary(ENTRY.getSalary())
+                .fullTime(ENTRY.getFullTime())
+                .departmentId(ENTRY.getDepartmentId())
                 .build();
 
         Assertions.assertEquals(ENTRY,employee);
@@ -24,13 +29,13 @@ public class TestEmployeeDatabaseEntry {
         Assertions.assertEquals(EMPLOYEE_TO_STRING_VALUE,employee_to_string_value);
     }
     @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingFirstName() {
         Assertions.assertThrows(NullPointerException.class ,
                 () -> EmployeeDatabaseEntry.builder().firstName(ENTRY.getFirstName()).build());
 
     }
     @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingFirstName() {
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
         Assertions.assertThrows(NullPointerException.class ,
                 () -> EmployeeDatabaseEntry.builder().employeeId(ENTRY.getEmployeeId()).build());
 
