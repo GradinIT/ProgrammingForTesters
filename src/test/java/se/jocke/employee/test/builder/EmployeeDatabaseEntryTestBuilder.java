@@ -1,6 +1,6 @@
 package se.jocke.employee.test.builder;
 
-import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.employee.old.dao.EmployeeDatabaseEntry;
 
 import java.math.BigDecimal;
 

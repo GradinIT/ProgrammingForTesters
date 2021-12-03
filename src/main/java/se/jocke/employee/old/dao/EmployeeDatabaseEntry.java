@@ -1,37 +1,31 @@
-package se.jocke.employee.api;
+package se.jocke.employee.old.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@ParametersAreNonnullByDefault
+@Entity(name = "EMPLOYEE")
 @Builder
 @Getter
-@EqualsAndHashCode
+@Setter
 @ToString
-@AllArgsConstructor
+@EqualsAndHashCode
 @NoArgsConstructor
-public class EmployeeModel {
-
-    @Nonnull
+@AllArgsConstructor
+public class EmployeeDatabaseEntry {
+    @Id
     private Integer employeeId;
-    @Nonnull
     private String firstName;
-    @Nonnull
     private String lastName;
-    @Nonnull
     private BigDecimal salary;
-    @Nonnull
     private Boolean fullTime;
-    @Nonnull
     private Integer departmentId;
-
-
 }

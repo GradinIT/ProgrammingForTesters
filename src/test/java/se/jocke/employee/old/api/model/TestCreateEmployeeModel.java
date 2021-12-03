@@ -1,8 +1,8 @@
-package se.jocke.employee.api.model;
+package se.jocke.employee.old.api.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.old.api.EmployeeModel;
 import se.jocke.employee.test.builder.EmployeeModelTestBuilder;
 
 public class TestCreateEmployeeModel {

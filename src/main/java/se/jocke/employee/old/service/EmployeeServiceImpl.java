@@ -1,14 +1,14 @@
-package se.jocke.employee.service;
+package se.jocke.employee.old.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.jocke.common.aspects.TimeAndLogg;
-import se.jocke.employee.dao.EmployeeDao;
-import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.employee.old.dao.EmployeeDao;
+import se.jocke.employee.old.dao.EmployeeDatabaseEntry;
 import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.common.dao.EntityNotFoundException;
-import se.jocke.employee.dao.EmployeeDatabaseEntryMapper;
-import se.jocke.employee.entity.Employee;
+import se.jocke.employee.old.dao.EmployeeDatabaseEntryMapper;
+import se.jocke.employee.old.entity.Employee;
 
 import java.util.List;
 import java.util.Optional;

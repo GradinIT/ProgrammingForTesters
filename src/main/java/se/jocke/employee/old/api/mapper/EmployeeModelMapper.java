@@ -1,8 +1,8 @@
-package se.jocke.employee.api.mapper;
+package se.jocke.employee.old.api.mapper;
 
-import se.jocke.employee.api.EmployeeModel;
-import se.jocke.employee.entity.Employee;
-import se.jocke.employee.entity.EmployeeID;
+import se.jocke.employee.old.api.EmployeeModel;
+import se.jocke.employee.old.entity.Employee;
+import se.jocke.employee.old.entity.EmployeeID;
 
 public class EmployeeModelMapper {
     public static Employee map(EmployeeModel model) {
