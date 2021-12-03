@@ -53,10 +53,10 @@ public class TestEmployeeService {
     @Test
     public void testCreateEmployee() { //Test not working //
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
-
+        when(employeeDao.save(EMPLOYEE_DATABASE_ENTRY)).thenReturn(EmployeeDatabaseEntry.builder().build());
         Employee employee = systemBeingTested.createEmployee(EMPLOYEE);
         Assertions.assertAll(
-                () -> Assertions.assertEquals(employee, EMPLOYEE)
+                () -> Assertions.assertEquals(employee, EMPLOYEE_DATABASE_ENTRY)
 
         );
         verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
@@ -83,5 +83,10 @@ public class TestEmployeeService {
     public void EntityAlreadyInStorageException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
         Assertions.assertThrows(EntityAlreadyInStorageException.class,() -> systemBeingTested.createEmployee(EMPLOYEE));
+    }
+    @Test
+    public void EntityNotFoundException() {
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityAlreadyInStorageException.class,() -> systemBeingTested.removeEmployee(EMPLOYEE));
     }
 }
