@@ -18,8 +18,11 @@ import se.jocke.department.service.DepartmentServiceImpl;
 import se.jocke.department.test.builder.DepartmentDatabaseEntryTestBuilder;
 import se.jocke.department.test.builder.DepartmentTestBuilder;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -53,6 +56,7 @@ public class TestDepartmentService {
         when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.empty());
         Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.getDepartmentById(DEPARTMENT.getDepartmentId().getId()));
     }
+
     @Test
     public void testCreateDepartment() {
         when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.empty());
@@ -68,5 +72,37 @@ public class TestDepartmentService {
     public void testCreateDepartmentEntityAlreadyInStorageException() {
         when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.of(DEPARTMENT_DATABASE_ENTRY));
         Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> systemUnderTest.create(DEPARTMENT));
+    }
+    @Test
+    public void testRemoveDepartment() {
+        when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.of(DEPARTMENT_DATABASE_ENTRY));
+        doNothing().when(departmentDao).delete(DEPARTMENT_DATABASE_ENTRY);
+
+        Department department = systemUnderTest.remove(DEPARTMENT);
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(department),
+                () -> Assertions.assertEquals(DEPARTMENT, department)
+        );
+        verify(departmentDao,times(1)).delete(DEPARTMENT_DATABASE_ENTRY);
+    }
+
+    @Test
+    public void testRemoveDepartmentEntityNotFound() {
+        when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.remove(DEPARTMENT));
+    }
+
+
+    @Test
+    public void testGetAllDepartments() {
+        when(departmentDao.findAll()).thenReturn(Arrays.asList(DEPARTMENT_DATABASE_ENTRY));
+
+        List<Department> departments = systemUnderTest.getDepartments();
+
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(departments),
+                () -> Assertions.assertEquals(1, departments.size()),
+                () -> Assertions.assertTrue(departments.contains(DEPARTMENT))
+        );
     }
 }
