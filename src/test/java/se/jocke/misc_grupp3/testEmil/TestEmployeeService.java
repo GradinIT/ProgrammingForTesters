@@ -1,4 +1,4 @@
-package se.jocke.employee.service;
+package se.jocke.misc_grupp3.testEmil;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,11 +9,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.employee.entity.Employee;
+import se.jocke.employee.service.EmployeeService;
+import se.jocke.employee.service.EmployeeServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-
-import se.jocke.employee.entity.Employee;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
