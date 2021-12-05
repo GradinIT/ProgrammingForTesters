@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
+
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -26,11 +27,11 @@ public class TestEmployeeService {
     private EmployeeService systemUnderTest = new EmployeeServiceImpl();
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
     }
 
     @Test
-    public void findById(){
+    public void getEmployeeById() {
         when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
                 .employeeId(1)
                 .firstName("Runar")
@@ -55,6 +56,18 @@ public class TestEmployeeService {
 
     @Test
     public void getAllEmployees() {
+    }
+
+    @Test
+    public void existById() {
+    }
+
+    @Test
+    public void deleteEmployeeById() {
+    }
+
+    @Test
+    public void countAllEmployees() {
     }
 
     @Test
