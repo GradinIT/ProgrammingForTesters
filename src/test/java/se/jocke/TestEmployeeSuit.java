@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 @SelectPackages({
         "se.jocke.employee"
 })
-
 @ExcludePackages({
         "se.jocke.misc_grupp3"
 })
