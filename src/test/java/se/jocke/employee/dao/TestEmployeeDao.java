@@ -35,7 +35,6 @@ public class TestEmployeeDao {
     @Test
     @DisplayName("Test delete employee by ID from DB")
     public void testDeleteEmployeeById() {
-
     }
 
     @Test

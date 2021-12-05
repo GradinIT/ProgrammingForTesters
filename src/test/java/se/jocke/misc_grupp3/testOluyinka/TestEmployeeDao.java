@@ -18,7 +18,6 @@ public class TestEmployeeDao {
     @Test
     @DisplayName("Test find employee by ID in DB")
     public void testGetEmployeeById() {
-
     }
 
     @Test

@@ -57,7 +57,6 @@ public class TestEmployeeService {
 
     @Test
     public void getAllEmployees() {
-        //Test push 05dec - 1100
     }
 
     @Test
