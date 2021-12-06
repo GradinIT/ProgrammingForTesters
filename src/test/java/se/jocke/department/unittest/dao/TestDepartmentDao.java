@@ -41,7 +41,7 @@ public class TestDepartmentDao {
         List<DepartmentDatabaseEntry> departments = departmentDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(departments),
-                () -> assertEquals(5, departments.size())
+                () -> assertEquals(6, departments.size())
         );
     }
 }
