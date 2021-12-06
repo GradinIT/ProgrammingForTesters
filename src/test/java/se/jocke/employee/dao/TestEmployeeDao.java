@@ -10,6 +10,8 @@ import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.employee.entity.EmployeeID;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,14 @@ public class TestEmployeeDao {
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
                 () -> assertEquals("Runar", optionalEmployeeDatabaseEntry.get().getFirstName()),
-                () -> assertEquals(employeeId, optionalEmployeeDatabaseEntry.get().getEmployeeId())
+                () -> assertEquals(employeeId, optionalEmployeeDatabaseEntry.get().getEmployeeId()),
+                () -> assertEquals("Sopranos", optionalEmployeeDatabaseEntry.get().getLastName()),
+                () -> assertEquals(true, optionalEmployeeDatabaseEntry).get().getFulltime()),
+                () -> assertEquals(new BigDecimal(22.500, optionalEmployeeDatabaseEntry.get().getSalary().setScale(0, RoundingMode.HALF_UP)),
+
+
+
+
 
         );
     }
@@ -41,5 +50,6 @@ public class TestEmployeeDao {
                 () -> assertNotNull(employees),
                 () -> assertEquals(3,employees.size())
         );
+
     }
 }
