@@ -1,6 +1,7 @@
 package se.jocke.employee.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
-import se.jocke.department.dao.DepartmentDao;
-import se.jocke.department.dao.DepartmentDatabaseEntry;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -24,6 +21,7 @@ public class TestEmployeeDao {
     EmployeeDao employeeDao;
 
     @Test
+    @DisplayName("Test find employee by ID in DB")
     public void testGetEmployeeById() {
 
         Integer employeeId = 1;
@@ -40,37 +38,23 @@ public class TestEmployeeDao {
     }
 
     @Test
+    @DisplayName("Test get all employees from DB")
     public void testGetEmployees() {
 
     }
 
     @Test
-    public void testGetEmployeesByFullName() {
-
+    @DisplayName("Test employee exist by ID in DB")
+    public void employeeExistById() {
     }
 
     @Test
-    public void testGetEmployeeByFirstName() {
-
+    @DisplayName("Test delete employee by ID from DB")
+    public void testDeleteEmployeeById() {
     }
 
     @Test
-    public void testGetEmployeeByLastName() {
-
-    }
-
-    @Test
-    public void testGetEmployeesByFullTime() {
-
-    }
-
-    @Test
-    public void testGetEmployeeByDepartmentId() {
-
-    }
-
-    @Test
-    public void testGetAllDepartments() {
-
+    @DisplayName("Test delete ALL employees from DB")
+    public void testDeleteAllEmployees() {
     }
 }
