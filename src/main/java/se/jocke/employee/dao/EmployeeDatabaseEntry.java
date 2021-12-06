@@ -23,8 +23,8 @@ import java.math.BigDecimal;
 public class EmployeeDatabaseEntry {
     @Id
     private Integer employeeId;
-    private String firstName;
-    private String lastName;
+    private String firstName ;
+    private String lastName ;
     private BigDecimal salary;
     private Boolean fullTime;
     private Integer departmentId;

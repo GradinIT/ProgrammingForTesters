@@ -12,10 +12,11 @@ import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
@@ -34,9 +35,24 @@ public class TestEmployeeDao {
                 () -> assertEquals("Fagel", optionalEmployeeDatabaseEntry.get().getFirstName()),
                 () -> assertEquals(employeeId,optionalEmployeeDatabaseEntry.get().getEmployeeId()),
                 () -> assertEquals("Holk",optionalEmployeeDatabaseEntry.get().getLastName()),
-                () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime())
-                //() -> assertEquals(new BigDecimal(20000.00), optionalEmployeeDatabaseEntry.get().getSalary()),
-                //() -> assertEquals(String.format("%.2f",new BigDecimal(25000.00)), String.format("%.2f", optionalEmployeeDatabaseEntry.get().getSalary()))
+                () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime()),
+               // () -> assertEquals(new BigDecimal(20000.00), optionalEmployeeDatabaseEntry.get().getSalary())
+              //  () -> assertEquals(String.format("%.2f",new BigDecimal(25000.00)), String.format("%.2f", optionalEmployeeDatabaseEntry.get().getSalary()))
+
+                () -> assertEquals(new BigDecimal(25000.00) ,optionalEmployeeDatabaseEntry.get().getSalary().setScale(0, RoundingMode.HALF_UP))
         );
     }
+
+
+    @Test
+    public void testEmployeeList() {
+        List<EmployeeDatabaseEntry> employeelist  = employeeDao.findAll();
+        Assertions.assertAll(
+                () -> assertNotNull(employeelist),
+                () -> assertEquals(3, employeelist.size())
+        );
+    }
+
+
+
 }
