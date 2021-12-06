@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // @ExtendWith(SpringExtension.class)
@@ -24,10 +25,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEmployeeDao {
     @Autowired  //klister
+
     EmployeeDao employeeDao;
 
     @Test
     public void testGetEmployeeById() {
+
         // gör att vi kan jämföra employee med id 1 i employee-changelog
         Integer employeeId = 1;
         // skapar lista med värden från employee-changelog employeeId 1 ---
