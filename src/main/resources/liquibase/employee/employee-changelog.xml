@@ -16,8 +16,8 @@
     <changeSet id="add-data-employee" author="Joakim Gradin">
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">1</column>
-            <column name="FIRSTNAME">firstName1</column>
-            <column name="LASTNAME">lastName1</column>
+            <column name="FIRSTNAME">Fagel</column>
+            <column name="LASTNAME">Holk</column>
             <column name="FULLTIME">true</column>
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>
