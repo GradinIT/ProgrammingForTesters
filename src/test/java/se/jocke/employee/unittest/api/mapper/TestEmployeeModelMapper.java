@@ -10,6 +10,7 @@ import se.jocke.employee.test.builder.EmployeeTestBuilder;
 
 public class TestEmployeeModelMapper {
 
+
     private static final Employee EMPLOYEE = EmployeeTestBuilder.build();
     private static final EmployeeModel EMPLOYEE_MODEL = EmployeeModel.builder()
             .departmentId(EMPLOYEE.getDepartmentId())
@@ -37,7 +38,7 @@ public class TestEmployeeModelMapper {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertEquals(EMPLOYEE,employee); //EMPLOYEE_MODEL?
         Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(),employee.getDepartmentId());
-       Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()); // getId?
+        Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()); // getId?
         Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(), employee.getFullTime());
         Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(),employee.getSalary());
         Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(),employee.getFirstName());
