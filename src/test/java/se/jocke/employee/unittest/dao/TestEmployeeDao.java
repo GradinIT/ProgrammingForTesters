@@ -12,32 +12,45 @@ import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
+// @ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})  // för employee-changelog
 
 public class TestEmployeeDao {
-    @Autowired
+    @Autowired  //klister
     EmployeeDao employeeDao;
 
     @Test
     public void testGetEmployeeById() {
-        Integer employeeId = 1; // ?
+        // gör att vi kan jämföra employee med id 1 i employee-changelog
+        Integer employeeId = 1;
+        // skapar lista med värden från employee-changelog employeeId 1 ---
         Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(employeeId);
         Assertions.assertAll(
+                // kollar att det finns ett värde i optionalEmplyeeDatabaseEntry
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
+                // kollar att det inte är null i optanalEmplyeeDatabaseEntry
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
+                // Kollar att Fagel är värdet i firstname för EmployeeId 1
                 () -> assertEquals("Fagel", optionalEmployeeDatabaseEntry.get().getFirstName()),
+                // jämför att employeeId är samma som det vi hämtar employee-changelog
                 () -> assertEquals(employeeId,optionalEmployeeDatabaseEntry.get().getEmployeeId()),
+                // Kollar att Holk är värdet i lastname för EmpyeeId 1
                 () -> assertEquals("Holk",optionalEmployeeDatabaseEntry.get().getLastName()),
+                // Kollar att fulltime är true för EmployeeId 1
                 () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime()),
-                //() -> assertEquals(new BigDecimal(20000.00), optionalEmployeeDatabaseEntry.get().getSalary()),
-                () -> assertEquals(String.format("%.2f",new BigDecimal(25000.00)), String.format("%.2f", optionalEmployeeDatabaseEntry.get().getSalary()))
+
+               /* () -> assertEquals(String.format("%.2f",new BigDecimal(25000.00)),String.format("%.2f", optionalEmployeeDatabaseEntry.get().getSalary())),
+
+               // Gör int värdet 25000 till en BigDecimal 25000.00
+       */ () -> assertEquals(new BigDecimal(25000.00), optionalEmployeeDatabaseEntry.get().getSalary().setScale(0, RoundingMode.HALF_UP))
+              // hur funkar denna?  () -> assertEquals((double) 25000.00, optionalEmployeeDatabaseEntry.get().getSalary().setScale(1, RoundingMode.HALF_UP))
         );
     }
     @Test
