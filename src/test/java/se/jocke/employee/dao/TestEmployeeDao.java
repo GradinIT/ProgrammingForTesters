@@ -9,10 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
@@ -41,6 +43,11 @@ public class TestEmployeeDao {
     @Test
     @DisplayName("Test get all employees from DB")
     public void testGetEmployees() {
+        List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
+        Assertions.assertAll(
+                () -> assertNotNull(employees),
+                () -> assertEquals(3,employees.size())
+        );
 
     }
 
