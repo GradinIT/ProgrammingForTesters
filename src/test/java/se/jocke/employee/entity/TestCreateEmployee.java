@@ -2,6 +2,7 @@ package se.jocke.employee.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,6 +21,8 @@ public class TestCreateEmployee {
                 .build();
 
 
+        Assertions.assertFalse(StringUtils.isBlank(EMPLOYEE.getFirstName()));
+        Assertions.assertFalse(StringUtils.isBlank(EMPLOYEE.getLastName()));
         Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
         Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
         Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
@@ -35,8 +38,9 @@ public class TestCreateEmployee {
             Employee.builder().build();
         });
 
-
     }
+
+
 
     @Test
     public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
