@@ -3,7 +3,6 @@ package se.jocke.employee.unittest.api.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.api.EmployeeModel;
-import se.jocke.employee.api.mapper.EmployeeModelMapper;
 import se.jocke.employee.api.mapper.EmployeeModelsMapper;
 import se.jocke.employee.entity.Employee;
 import se.jocke.employee.test.builder.EmployeeModelTestBuilder;
