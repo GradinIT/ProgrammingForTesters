@@ -2,10 +2,10 @@ package se.jocke.employee.unittest.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+//import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.employee.dao.EmployeeDao;
