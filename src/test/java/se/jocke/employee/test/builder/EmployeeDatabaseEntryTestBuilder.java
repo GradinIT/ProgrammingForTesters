@@ -1,6 +1,5 @@
 package se.jocke.employee.test.builder;
 
-import se.jocke.employee.api.EmployeeModel;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 
 public class EmployeeDatabaseEntryTestBuilder {
