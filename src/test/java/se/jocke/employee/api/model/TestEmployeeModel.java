@@ -2,13 +2,14 @@ package se.jocke.employee.api.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import se.jocke.department.api.DepartmentModel;
 import se.jocke.employee.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.api.EmployeeModel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestCreateEmployeeModel {
+public class TestEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
 
@@ -33,9 +34,16 @@ public class TestCreateEmployeeModel {
     }
 
     @Test
-    public void testCreateEmployeeModelThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
-        });
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingFirstName() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
+
+    }
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build());
+
     }
 }
