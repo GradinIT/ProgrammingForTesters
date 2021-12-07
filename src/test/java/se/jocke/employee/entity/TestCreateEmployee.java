@@ -3,7 +3,6 @@ package se.jocke.employee.entity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.builder.EmployeeTestBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCreateEmployee {
@@ -35,5 +34,20 @@ public class TestCreateEmployee {
         Assertions.assertThrows(NullPointerException.class, () -> {
             Employee.builder().build();
         });
+
+
     }
-}
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
+        Assertions.assertThrows(NullPointerException.class ,
+                () -> Employee.builder().firstName(EMPLOYEE.getFirstName()).build());
+
+    }
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeFirstName() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> Employee.builder().departmentId(EMPLOYEE.getDepartmentId()).build());
+    }
+    }
+
