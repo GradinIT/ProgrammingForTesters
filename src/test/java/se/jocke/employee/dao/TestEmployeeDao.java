@@ -34,15 +34,13 @@ public class TestEmployeeDao {
                 () -> assertEquals("Runar", optionalEmployeeDatabaseEntry.get().getFirstName()),
                 () -> assertEquals(employeeId, optionalEmployeeDatabaseEntry.get().getEmployeeId()),
                 () -> assertEquals("Sopranos", optionalEmployeeDatabaseEntry.get().getLastName()),
-                () -> assertEquals(true, optionalEmployeeDatabaseEntry).get().getFulltime()),
-                () -> assertEquals(new BigDecimal(22.500, optionalEmployeeDatabaseEntry.get().getSalary().setScale(0, RoundingMode.HALF_UP)),
+                () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime()),
+                () -> assertEquals(new BigDecimal(25000), optionalEmployeeDatabaseEntry.get().getSalary().setScale(0, RoundingMode.HALF_UP)),
+                () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getDepartmentId()));
 
 
-
-
-
-        );
     }
+
     @Test
     public void testGetEmployees() {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
