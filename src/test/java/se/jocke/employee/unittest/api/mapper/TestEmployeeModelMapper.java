@@ -71,7 +71,7 @@ public class TestEmployeeModelMapper {
         //test that values of EMPLOYEE and employee are same or not.
         // EMPLOYEE are the values which we get at line 14.
         Assertions.assertEquals(EMPLOYEE,employee); //**EMPLOYEE_MODEL?**
-        Assertions.assertEquals(EMPLOYEE,employee);
+
 
         // test that DepartmentId in EMPLOYEE_MODEL is equal to DepartmentId in employee or not.
         Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(),employee.getDepartmentId());
