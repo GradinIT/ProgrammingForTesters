@@ -18,22 +18,27 @@ public class TestEmployeeDatabaseEntryMapper {
 
     @Test
     public void testEmployeeToDatabaseEntry() {
+        // vi skapar entry som mappar EmployeeTestBuilder (EMPLOYEE)
         EmployeeDatabaseEntry entry = EmployeeDatabaseEntryMapper.map(EMPLOYEE);
         Assertions.assertNotNull(entry);
+        //---
         Assertions.assertEquals(EMPLOYEE_DATABASE_ENTRY,entry);
     }
 
     @Test
-    public void testDatabaseEntryToEmployee() { //
+    public void testDatabaseEntryToEmployee() { // samma som förgående test fast tvärtom
         Employee employee = EmployeeDatabaseEntryMapper.map(EMPLOYEE_DATABASE_ENTRY);
         Assertions.assertNotNull(employee);
         Assertions.assertEquals(EMPLOYEE,employee);
     }
 
     @Test
-    public void testEntriesToDepartments() {  // förstå, ändra?
+    public void testEntriesToEmployees() {
+        // tar parametrarna ifrån EMPLOYEE och skapar en List
         List<Employee> EMPLOYEES = Arrays.asList(EMPLOYEE);
+        // skapar ENTRIES som är en list av EMPLOYEE_DATABASE_ENTRY
         List<EmployeeDatabaseEntry> ENTRIES = Arrays.asList(EMPLOYEE_DATABASE_ENTRY);
+        // Skapar employees som ärr ENTRIES som en map
         List<Employee> employees = EmployeeDatabaseEntryMapper.map(ENTRIES);
         Assertions.assertNotNull(employees);
         Assertions.assertEquals(EMPLOYEES,employees);
