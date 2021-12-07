@@ -35,6 +35,7 @@ public class TestEmployeeDao {
             () -> assertEquals(new BigDecimal(25000.00).stripTrailingZeros(), optionalEmployeeDatabaseEntry.get().getSalary().stripTrailingZeros()),
             () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
+        // Comment
     }
 
     @Test
