@@ -95,7 +95,7 @@ public class TestDepartmentService {
 
     @Test
     public void testGetAllDepartments() {
-        when(departmentDao.findAll()).thenReturn(Arrays.asList(DEPARTMENT_DATABASE_ENTRY));
+        when(departmentDao.findAll()).thenReturn(DepartmentDatabaseEntryTestBuilder.buildList());
 
         List<Department> departments = systemUnderTest.getDepartments();
 
