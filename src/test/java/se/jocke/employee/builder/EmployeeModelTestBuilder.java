@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class EmployeeModelTestBuilder {
     public static final EmployeeID EMPLOYEE_ID = EmployeeID.builder().id(1).build();
 
-    // Same as employee id 1 in employee-changelog.xml
+    // Same as employee id 1 in "employee-changelog.xml" file
     public static EmployeeModel.EmployeeModelBuilder builder() {
         return EmployeeModel.builder()
                 .employeeId(EMPLOYEE_ID.getId())
