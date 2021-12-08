@@ -80,6 +80,7 @@ public class TestEmployeeService {
                 () -> Assertions.assertNotNull(employee),
                 () -> Assertions.assertEquals(EMPLOYEE, employee));
 
+        verify(employeeDao,times(1)).delete(EMPLOYEE_DATABASE_ENTRY);
 }
 
 
