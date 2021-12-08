@@ -35,7 +35,7 @@ public class TestDepartmentDatabaseEntryMapper {
     public void testEntriesToDepartments() {
         List<Department> DEPARTMENTS = Arrays.asList(DEPARTMENT);
         List<DepartmentDatabaseEntry> ENTRIES = Arrays.asList(DEPARTMENT_DATABASE_ENTRY);
-        List<Department> departments = DepartmentDatabaseEntryMapper.map(ENTRIES);
+        List<Department> departments = DepartmentDatabaseEntryMapper.map(ENTRIES);  // görs till en lista. tryck på .map
         Assertions.assertNotNull(departments);
         Assertions.assertEquals(DEPARTMENTS,departments);
     }
