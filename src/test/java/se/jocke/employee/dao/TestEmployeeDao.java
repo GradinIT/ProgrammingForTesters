@@ -1,6 +1,7 @@
 package se.jocke.employee.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,13 +53,17 @@ public class TestEmployeeDao {
     }
 
     @Test
-    @DisplayName("Test employee exist by ID in DB")
-    public void employeeExistById() {
+    @DisplayName("Test delete employee by ID from DB")
+    public void testDeleteEmployeeById() {
     }
 
     @Test
-    @DisplayName("Test delete employee by ID from DB")
-    public void testDeleteEmployeeById() {
+    @DisplayName("Test employee exist by ID in DB")
+    public void employeeExistById() {
+        Integer employeeId = 3;
+        Optional<EmployeeDatabaseEntry> optionalEmployeeDatabaseEntry = employeeDao.findById(employeeId);
+        Assumptions.assumeTrue(employeeDao.count() > 0);
+        Assertions.assertEquals(employeeId, optionalEmployeeDatabaseEntry.get().getEmployeeId());
     }
 
     @Test
