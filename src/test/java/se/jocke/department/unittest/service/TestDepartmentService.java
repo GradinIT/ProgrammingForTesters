@@ -92,6 +92,23 @@ public class TestDepartmentService {
         Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.remove(DEPARTMENT));
     }
 
+    @Test
+    public void testUpdateDepartment() {
+        when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.of(DEPARTMENT_DATABASE_ENTRY));
+        when(departmentDao.save(DEPARTMENT_DATABASE_ENTRY)).thenReturn(DEPARTMENT_DATABASE_ENTRY);
+        Department department = systemUnderTest.update(DEPARTMENT);
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(department),
+                () -> Assertions.assertEquals(DEPARTMENT, department)
+        );
+        verify(departmentDao,times(1)).save(DEPARTMENT_DATABASE_ENTRY);
+    }
+    @Test
+    public void testUpdateDepartmentEntityNotFound() {
+        when(departmentDao.findById(DEPARTMENT.getDepartmentId().getId())).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.update(DEPARTMENT));
+    }
+
 
     @Test
     public void testGetAllDepartments() {
