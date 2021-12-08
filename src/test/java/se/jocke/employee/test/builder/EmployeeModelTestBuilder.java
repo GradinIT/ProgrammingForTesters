@@ -9,7 +9,7 @@ public class EmployeeModelTestBuilder {
                 .firstName(EmployeeTestFixture.firstName)
                 .lastName(EmployeeTestFixture.lastName)
                 .salary(EmployeeTestFixture.salary)
-                .fullTime(EmployeeTestFixture.fulltime)
+                .fullTime(EmployeeTestFixture.fullTime)
                 .departmentId(EmployeeTestFixture.departmentId)
                 .build();
 

@@ -46,7 +46,7 @@ public class TestEmployeeDao {
                 () -> assertEquals(employeeId,optionalEmployeeDatabaseEntry.get().getEmployeeId()),
                 // Kollar att Holk är värdet i lastname för EmpyeeId 1
                 () -> assertEquals("Holk",optionalEmployeeDatabaseEntry.get().getLastName()),
-                // Kollar att fulltime är true för EmployeeId 1
+                // Kollar att fullTime är true för EmployeeId 1
                 () -> assertEquals(true, optionalEmployeeDatabaseEntry.get().getFullTime()),
 
                /* () -> assertEquals(String.format("%.2f",new BigDecimal(25000.00)),String.format("%.2f", optionalEmployeeDatabaseEntry.get().getSalary())),
