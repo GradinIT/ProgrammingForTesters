@@ -1,5 +1,6 @@
 package se.jocke.department.unittest.dao;
 
+import io.cucumber.datatable.DataTable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -65,5 +66,24 @@ public class TestDepartmentDao {
         );
         departmentDao.delete(ENTRY);
         Assertions.assertEquals(Boolean.TRUE, departmentDao.findById(ENTRY.getDepartmentId()).isEmpty());
+    }
+    @Test
+    public void testUpdateDepartment() throws InterruptedException {
+        departmentDao.save(ENTRY);
+        Assertions.assertAll(
+                () -> assertEquals(Boolean.TRUE, departmentDao.findById(ENTRY.getDepartmentId()).isPresent()),
+                () -> assertEquals(ENTRY, departmentDao.findById(ENTRY.getDepartmentId()).get())
+        );
+        DepartmentDatabaseEntry update = DepartmentDatabaseEntry.builder()
+                .departmentId(ENTRY.getDepartmentId())
+                .departmentName("Tok")
+                .build();
+        departmentDao.save(update);
+        DepartmentDatabaseEntry updated = departmentDao.findById(ENTRY.getDepartmentId()).get();
+        Assertions.assertAll(
+                () -> assertEquals(Boolean.TRUE, departmentDao.findById(ENTRY.getDepartmentId()).isPresent()),
+                () -> assertEquals(update, updated)
+        );
+        departmentDao.delete(updated);
     }
 }
