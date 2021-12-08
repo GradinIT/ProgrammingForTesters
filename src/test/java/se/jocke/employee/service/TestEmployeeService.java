@@ -77,7 +77,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("Test remove employee by ID")
+    @DisplayName("Test remove employee by id")
     public void removeEmployeeById() {
         when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
         systemUnderTest.removeEmployee(employee);
@@ -91,7 +91,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("Test create employee - Happy Flow")
+    @DisplayName("Test create employee Happy Flow")
     public void createEmployeeHappyFlow() {
         // Emil
     }
