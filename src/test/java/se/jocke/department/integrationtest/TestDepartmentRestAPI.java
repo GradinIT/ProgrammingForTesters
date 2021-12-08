@@ -22,33 +22,33 @@ public class TestDepartmentRestAPI extends DepartmentTestClient {
 
 
     @When("^the client calls /department$")
-    public void getAll() throws Throwable {
+    public void getAll()  {
         departments = getAllDepartments();
     }
 
     @Then("^the client receives (\\d+) departments$")
-    public void theClientGotAllDepartments(int numberOfDepartments) throws Throwable {
+    public void theClientGotAllDepartments(int numberOfDepartments) {
         Assert.assertEquals(numberOfDepartments, departments.get().size());
     }
 
-    @When("^the client updates name for department to (.+)$")
-    public void updateNameOfDepartment(String departmentName) throws Throwable {
+    @When("^the client updates departmentname for department to (.+)$")
+    public void updateNameOfDepartment(String departmentName)  {
         updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
     }
 
-    @Then("the name is updated to (.+)$")
-    public void nameOfDepartmentIsUpdated(String departmentName) throws Throwable {
+    @Then("the departmentname is updated to (.+)$")
+    public void nameOfDepartmentIsUpdated(String departmentName)  {
         Optional<DepartmentModel> department = getDepartmentById(1);
         Assert.assertEquals(departmentName, department.get().getDepartmentName());
     }
 
     @When("^the client gets department (\\d+)$")
-    public void getTheDepartmentById(Integer departmentId) throws Throwable {
+    public void getTheDepartmentById(Integer departmentId)  {
         department = getDepartmentById(departmentId);
     }
 
-    @Then("^the name is$")
-    public void nameOfDepartmentIs() throws Throwable {
+    @Then("^the departmentname is$")
+    public void nameOfDepartmentIs()  {
         Assert.assertEquals("Coding", department.get().getDepartmentName());
     }
 

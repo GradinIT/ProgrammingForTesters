@@ -105,8 +105,8 @@ public class TestDepartmentService {
         verifyNoMoreInteractions(departmentDao);
     }
 
-    @Test
+  /*  @Test
     public void testRemoveDepartment() {
         systemUnderTest.remove(Department.builder().departmentName("hoahoa").departmentId(DepartmentId.builder().id(1).build()).build());
-    }
+    }*/
 }
