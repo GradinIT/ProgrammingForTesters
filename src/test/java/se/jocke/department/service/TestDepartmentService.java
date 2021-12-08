@@ -12,6 +12,7 @@ import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.department.builder.DepartmentTestBuilder;
 import se.jocke.department.entity.Department;
+import se.jocke.department.entity.DepartmentId;
 
 import java.util.Arrays;
 import java.util.List;
@@ -102,5 +103,10 @@ public class TestDepartmentService {
                 exception.getMessage());
         verify(departmentDao, times(1)).findById(any(Integer.class));
         verifyNoMoreInteractions(departmentDao);
+    }
+
+    @Test
+    public void testRemoveDepartment() {
+        systemUnderTest.remove(Department.builder().departmentName("hoahoa").departmentId(DepartmentId.builder().id(1).build()).build());
     }
 }
