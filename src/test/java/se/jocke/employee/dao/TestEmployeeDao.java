@@ -6,8 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import se.jocke.config.H2JpaConfig;
+import se.jocke.config.PersistenceConfig;
 import se.jocke.config.LiquibaseConfigurer;
+import se.jocke.config.PersistenceConfig;
 import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.employee.Builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.entity.EmployeeID;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
+@SpringBootTest(classes = {LiquibaseConfigurer.class, PersistenceConfig.class})
 public class TestEmployeeDao {
     @Autowired
     EmployeeDao employeeDao;
