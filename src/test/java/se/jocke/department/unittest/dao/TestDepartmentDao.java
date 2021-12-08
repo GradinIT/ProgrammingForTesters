@@ -68,7 +68,7 @@ public class TestDepartmentDao {
         Assertions.assertEquals(Boolean.TRUE, departmentDao.findById(ENTRY.getDepartmentId()).isEmpty());
     }
     @Test
-    public void testUpdateDepartment() throws InterruptedException {
+    public void testUpdateDepartment() {
         departmentDao.save(ENTRY);
         Assertions.assertAll(
                 () -> assertEquals(Boolean.TRUE, departmentDao.findById(ENTRY.getDepartmentId()).isPresent()),
