@@ -1,33 +1,49 @@
 package se.jocke.employee.api.mapper;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.api.EmployeeModel;
-import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.employee.entity.Employee;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEmployeeModelMapper {
-    private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
-    private final Employee EMPLOYEE = EmployeeTestBuilder.builder().build();
+
+    private static final Employee EMPLOYEE = EmployeeTestBuilder.builder().build(); // Bygg Employee hämtar hårdkodad employee från EmployeeTestFixture
+    private static final EmployeeModel EMPLOYEE_MODEL = EmployeeModel.builder()
+            .employeeId(EMPLOYEE.getEmployeeId().getId())
+            .firstName(EMPLOYEE.getFirstName())
+            .lastName(EMPLOYEE.getLastName())
+            .salary(EMPLOYEE.getSalary())
+            .fullTime(EMPLOYEE.getFullTime())
+            .departmentId(EMPLOYEE.getDepartmentId())
+            .build();
 
     @Test
-    public void testEmployeeToEmployeeModelMapping() {
-        EmployeeModel model = EmployeeModelMapper.map(EMPLOYEE);
-        Assertions.assertAll(
-                () -> assertEquals(EMPLOYEE.getEmployeeId().getId(), model.getEmployeeId()),
-                () -> assertEquals(EMPLOYEE.getFirstName(), model.getFirstName())
-        );
+    // test för källkod "public static EmployeeModel map(Employee employee)",
+    // får in Employee och ger EmployeeModel i retur
+    public void testThatEmployeeModelIsEqualToEmployee(){
+        EmployeeModel employeeModel = EmployeeModelMapper.map(EMPLOYEE);
+        Assertions.assertEquals(EMPLOYEE_MODEL,employeeModel);
+        Assertions.assertEquals(EMPLOYEE.getEmployeeId().getId(),employeeModel.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE.getFirstName(),employeeModel.getFirstName());
+        Assertions.assertEquals(EMPLOYEE.getLastName(),employeeModel.getLastName());
+        Assertions.assertEquals(EMPLOYEE.getSalary(),employeeModel.getSalary());
+        Assertions.assertEquals(EMPLOYEE.getFullTime(),employeeModel.getFullTime());
+        Assertions.assertEquals(EMPLOYEE.getDepartmentId(),employeeModel.getDepartmentId());
     }
 
     @Test
-    public void testEmployeeModelToEmployeeMapping() {
+    // test för källkod "public static Employee map(EmployeeModel model)",
+    // får in EmployeeModel och ger Employee i retur
+    public void testThatDepartmentIsEqualToDepartmentModel() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
-        Assertions.assertAll(
-                () -> assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employee.getEmployeeId().getId()),
-                () -> assertEquals(EMPLOYEE_MODEL.getFirstName(), employee.getFirstName())
-        );
+        Assertions.assertEquals(EMPLOYEE,employee);
+        Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(),employee.getEmployeeId().getId());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(),employee.getFirstName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getLastName(),employee.getLastName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(),employee.getSalary());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(),employee.getFullTime());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(),employee.getDepartmentId());
+
     }
 }
