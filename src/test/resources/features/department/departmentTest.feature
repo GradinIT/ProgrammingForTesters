@@ -1,7 +1,7 @@
 Feature: test department api
   Scenario: client gets all departments
     When the client calls /department
-    Then the client receives 5 departments
+    Then the client receives 6 departments
   Scenario: client updates departmentname for department 1
     When the client updates departmentname for department to Coding
     Then the departmentname is updated to Coding

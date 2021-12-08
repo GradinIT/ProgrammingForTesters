@@ -15,4 +15,21 @@ import java.util.Optional;
 public class TestEmployeeRestAPI extends EmployeeTestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
+
+
+
+    @When("the client calls \\/employee")
+    public void the_client_calls_employee() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+
+
+    @Then("the client receives {int} employees")
+    public void the_client_receives_employees(Integer int1) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
 }
