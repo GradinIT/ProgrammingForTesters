@@ -7,7 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import se.jocke.config.H2JpaConfig;
+import se.jocke.config.PersistenceConfig;
 import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
 import se.jocke.department.api.DepartmentModel;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, H2JpaConfig.class},
+@SpringBootTest(classes = {RestServiceApplication.class, LiquibaseConfigurer.class, PersistenceConfig.class},
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class DepartmentTestClient {
     private static final String BASE_URL = "http://localhost:8082/";

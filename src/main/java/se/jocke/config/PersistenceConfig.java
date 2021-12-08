@@ -22,7 +22,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = { "se.jocke.*" })
 @EntityScan("se.jocke.*")
 @EnableTransactionManagement
-public class H2JpaConfig {
+public class PersistenceConfig {
     @Bean
     public DataSource primaryDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
