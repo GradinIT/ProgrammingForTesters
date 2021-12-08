@@ -58,6 +58,36 @@ public class TestEmployeeDao {
                 () -> assertEquals(EMPLOYEE.getFullTime(), EmployeeDatabaseEntry.getFullTime()),
                 () -> assertEquals(EMPLOYEE.getSalary(), EmployeeDatabaseEntry.getSalary().setScale(0, RoundingMode.HALF_UP)),
                 () -> assertEquals(EMPLOYEE.getDepartmentId(), EmployeeDatabaseEntry.getDepartmentId()));
+        employeeDao.delete(EMPLOYEE);
+    }
+
+    @Test
+    public void testDeleteEmployee() {
+        employeeDao.save(EMPLOYEE);
+        Assertions.assertAll(
+                () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE.getEmployeeId()).isPresent()),
+                () -> assertEquals(EMPLOYEE,employeeDao.findById(EMPLOYEE.getEmployeeId()).get())
+        );
+        employeeDao.delete(EMPLOYEE);
+        Assertions.assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE.getEmployeeId()).isEmpty());
+    }
+    @Test
+    public void testUpdateEmployee() {
+        employeeDao.save(EMPLOYEE_DATABASE_ENTRY);
+        Assertions.assertAll(
+                () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE.getEmployeeId()).isPresent()),
+                () -> assertEquals(EMPLOYEE, employeeDao.findById(EMPLOYEE.getEmployeeId()).get())
+        );
+        EmployeeDatabaseEntry update = EmployeeDatabaseEntry.builder()
+                .employeeId(EMPLOYEE.getEmployeeId())
+                .firstName("InteRunar")
+                .build();
+        employeeDao.save(update);
+        EmployeeDatabaseEntry updated = employeeDao.findById(EMPLOYEE.getEmployeeId()).get();
+        Assertions.assertAll(
+                () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE.getEmployeeId()).isPresent()),
+                () -> assertEquals(update,updated)
+        );
     }
 
     @Test
