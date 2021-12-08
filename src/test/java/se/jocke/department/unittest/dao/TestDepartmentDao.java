@@ -24,19 +24,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = {LiquibaseConfigurer.class, PersistenceConfig.class})
 public class TestDepartmentDao {
     private final DepartmentDatabaseEntry ENTRY = DepartmentDatabaseEntryTestBuilder.build();
+
     @Autowired
     DepartmentDao departmentDao;
 
     @Test
     public void testGetDepartmentById() {
-        Integer departmetId = 1;
-        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(departmetId);
+        departmentDao.save(ENTRY);
+        Optional<DepartmentDatabaseEntry> optionalEmployeeDatabaseEntry = departmentDao.findById(ENTRY.getDepartmentId());
         Assertions.assertAll(
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
-                () -> assertEquals("Development", optionalEmployeeDatabaseEntry.get().getDepartmentName()),
-                () -> assertEquals(departmetId, optionalEmployeeDatabaseEntry.get().getDepartmentId())
+                () -> assertEquals(ENTRY.getDepartmentName(), optionalEmployeeDatabaseEntry.get().getDepartmentName()),
+                () -> assertEquals(ENTRY.getDepartmentId(), optionalEmployeeDatabaseEntry.get().getDepartmentId())
         );
+        departmentDao.delete(ENTRY);
     }
 
     @Test
