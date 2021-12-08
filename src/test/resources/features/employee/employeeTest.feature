@@ -11,6 +11,6 @@ Feature: test employee api
   Scenario: Delete Employee
     Given the employees
       | 88 | Socker-Conny | Slagträ | 12500.50 | false | 1 |
-      | 88 | Socker-Ronny | Känga | 12500.50 | true | 2 |
-      | 88 | Socker-Bonny | Knogjärn | 12500.50 | false | 3 |
+      | 89 | Socker-Ronny | Känga | 12500.50 | true | 2 |
+      | 90 | Socker-Bonny | Knogjärn | 12500.50 | false | 3 |
 
