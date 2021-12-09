@@ -95,7 +95,7 @@ public class TestEmployeeDao {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),
-                () -> assertEquals(3,employees.size())
+                () -> assertEquals(2,employees.size())
         );
 
     }
