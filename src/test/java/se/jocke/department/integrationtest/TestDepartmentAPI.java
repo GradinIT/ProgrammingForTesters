@@ -1,4 +1,4 @@
-package se.jocke.department.integrationtest;
+/*package se.jocke.department.integrationtest;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -85,3 +85,5 @@ public class TestDepartmentRestAPI extends DepartmentTestClient {
     }
 
 }
+
+*/

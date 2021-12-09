@@ -1,4 +1,4 @@
-package se.jocke.department.integrationtest;
+/*package se.jocke.department.integrationtest;
 
 
 import io.cucumber.junit.Cucumber;
@@ -10,3 +10,5 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = "classpath:features/department/departmentTest.feature")
 public class DepartmentIntegrationTest {
 }
+
+*/

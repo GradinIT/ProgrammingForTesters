@@ -23,15 +23,14 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void getAll() {
         employees = getAllEmployees();
     }
-
+    //@Then("the client receives {int} employees")
     @Then("^the client receives (\\d+) employees$")
     public void the_client_receives_employees (int numberOfEmployees) {
         Assert.assertEquals(numberOfEmployees, getAllEmployees().get().size());
     }
 
     @When("^the client gets (\\d+) employee $")
-    public void the_client_gets_employee(int id) {
-        employee = getEmployeeById(1);
+    public void the_client_gets_employee(Integer int1) {
     }
 
     @Then("^firstname is (.+)$")
