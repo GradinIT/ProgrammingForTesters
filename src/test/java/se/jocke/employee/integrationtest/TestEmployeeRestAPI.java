@@ -12,4 +12,15 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void the_client_receives_employees(Integer int1) {
     }
 
+    @When("the client updates firstName for employee to Bert")
+    public void the_client_updates_first_name_for_employee_to_bert() {
+    }
+
+
+    @Then("the firstName is updated to Bert")
+    public void the_first_name_is_updated_to_bert() {
+    }
+
+
+
 }

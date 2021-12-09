@@ -92,6 +92,8 @@ public class TestEmployeeService {
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(employee),
                 () -> Assertions.assertEquals(EMPLOYEE, employee));
+
+        verify(employeeDao, times(1)).save(EMPLOYEE_DATABASE_ENTRY);
     }
 
     @Test
@@ -105,17 +107,26 @@ public class TestEmployeeService {
                 () -> Assertions.assertEquals(1,employees.size()),
                 () -> Assertions.assertTrue(employees.contains(EMPLOYEE))
         );
+
+        verify(employeeDao, times(1)).findAll();
+
     }
     @Test
     public void testEmployeeFindByIDEntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
         Assertions.assertThrows(EntityNotFoundException.class, () -> systemBeingTested.getEmployeeById(EMPLOYEE.getEmployeeId().getId()));
+
+    verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
+
     }
 
     @Test
     public void testCreateEmployeeEntityAlreadyInStorageException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
         Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> systemBeingTested.createEmployee(EMPLOYEE));
+
+        verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
+
     }
 
     @Test
@@ -123,11 +134,16 @@ public class TestEmployeeService {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
         Assertions.assertThrows(EntityNotFoundException.class, () -> systemBeingTested.removeEmployee(EMPLOYEE));
 
+        verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
+
     }
 
     @Test
     public void testUpdateEmployeeEntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
         Assertions.assertThrows(EntityNotFoundException.class, () -> systemBeingTested.updateEmployee(EMPLOYEE));
+
+        verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
+
     }
 }
