@@ -2,12 +2,13 @@ package se.jocke.employee.unittest.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+//import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import se.jocke.config.H2JpaConfig;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import se.jocke.config.LiquibaseConfigurer;
+import se.jocke.config.PersistenceConfig;
 import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 
@@ -17,11 +18,10 @@ import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})  // för employee-changelog
+@SpringBootTest(classes = {LiquibaseConfigurer.class, PersistenceConfig.class})  // för employee-changelog
 
 public class TestEmployeeDao {
     @Autowired  //klister
