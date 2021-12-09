@@ -1,4 +1,4 @@
-package se.jocke.department.unittest.api.model;
+package se.jocke.employee.api.mapper;
 
 
 import org.junit.jupiter.api.Assertions;

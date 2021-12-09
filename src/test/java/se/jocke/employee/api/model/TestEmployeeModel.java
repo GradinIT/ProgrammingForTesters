@@ -38,6 +38,14 @@ public class TestEmployeeModel {
         Assertions.assertThrows(NullPointerException.class,
                 () -> EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
 
+
+    }
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingSalary() {
+        //Assertions.assertThrows(NullPointerException.class, () -> EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
+
+
     }
 
     @Test

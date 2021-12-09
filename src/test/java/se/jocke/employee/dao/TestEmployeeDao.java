@@ -30,7 +30,11 @@ public class TestEmployeeDao {
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertNotNull(optionalEmployeeDatabaseEntry.get()),
                 () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
+                () -> assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
+                //fortsätt med övriga assertEquals
                 () -> assertEquals(employeeId, optionalEmployeeDatabaseEntry.get().getEmployeeId())
+
+
         );
     }
 
