@@ -30,7 +30,8 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     }
 
     @When("^the client gets (\\d+) employee $")
-    public void the_client_gets_employee(Integer int1) {
+    public void the_client_gets_employee(int id) {
+        employee = getEmployeeById(1);
     }
 
     @Then("^firstname is (.+)$")
