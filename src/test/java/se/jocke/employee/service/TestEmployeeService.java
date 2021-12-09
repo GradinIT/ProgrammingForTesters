@@ -101,8 +101,6 @@ public class TestEmployeeService {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY)); // we find and return employee by employeeId
         when(employeeDao.save(EMPLOYEE_DATABASE_ENTRY)).thenReturn(EMPLOYEE_DATABASE_ENTRY); //  save and return EMPLOYEE_DATABASE_ENTRY
         Employee employee = systemUnderTest.updateEmployee(EMPLOYEE); //
-        System.out.println("employee: " + employee);
-        System.out.println("EMPLOYEE " +EMPLOYEE);
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(employee),
                 () -> Assertions.assertEquals(EMPLOYEE, employee)
@@ -110,7 +108,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void TODO_testUpdateEmployeeEntityNotFound(){
+    public void testUpdateEmployeeEntityNotFound(){
         // Update employee -
         // Error handling EntityNotFound if no employee present to do the update on
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty()); //thenReturn hårdkodat empty
@@ -122,14 +120,14 @@ public class TestEmployeeService {
         // removeEmployee,
         // Happy flow: Remove Employee, verify 1 time OK
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
-        doNothing().when(employeeDao).delete(EMPLOYEE_DATABASE_ENTRY); //doNothing() ???
+        doNothing().when(employeeDao).delete(EMPLOYEE_DATABASE_ENTRY); //doNothing därför att main-metoden är void
 
         Employee employee = systemUnderTest.removeEmployee(EMPLOYEE);
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(employee),
                 () -> Assertions.assertEquals(EMPLOYEE, employee)
         );
-        verify(employeeDao,times(1)).delete(EMPLOYEE_DATABASE_ENTRY);
+        verify(employeeDao,times(1)).delete(EMPLOYEE_DATABASE_ENTRY); // gör extra verify pga doNothing
     }
 
     @Test

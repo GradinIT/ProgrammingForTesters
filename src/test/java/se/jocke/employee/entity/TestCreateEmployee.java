@@ -20,9 +20,6 @@ public class TestCreateEmployee {
                 .employeeId(EMPLOYEE.getEmployeeId())
                 .build();
 
-
-        Assertions.assertFalse(StringUtils.isBlank(EMPLOYEE.getFirstName()));
-        Assertions.assertFalse(StringUtils.isBlank(EMPLOYEE.getLastName()));
         Assertions.assertEquals(EMPLOYEE.getFirstName(), employee.getFirstName());
         Assertions.assertEquals(EMPLOYEE.getDepartmentId(), employee.getDepartmentId());
         Assertions.assertEquals(EMPLOYEE.getEmployeeId(), employee.getEmployeeId());
@@ -33,25 +30,19 @@ public class TestCreateEmployee {
     }
 
     @Test
-    public void testCreateEmployeeThrowsException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            Employee.builder().build();
-        });
-
-    }
-
-
-
-    @Test
     public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
         Assertions.assertThrows(NullPointerException.class ,
                 () -> Employee.builder().firstName(EMPLOYEE.getFirstName()).build());
+        //sätt alla fält utom EmployeeId i buildern
 
     }
     @Test
     public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeFirstName() {
         Assertions.assertThrows(NullPointerException.class,
                 () -> Employee.builder().departmentId(EMPLOYEE.getDepartmentId()).build());
+        //TODO sätt alla fält utom employee FirstName i buildern
     }
+
+    // TODO lägg till nya @Test med alla fält-varianter
     }
 

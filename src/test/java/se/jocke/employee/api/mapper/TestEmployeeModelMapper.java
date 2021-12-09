@@ -2,6 +2,7 @@ package se.jocke.employee.api.mapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.builder.EmployeeModelTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.employee.entity.Employee;
 
@@ -9,14 +10,7 @@ import se.jocke.employee.entity.Employee;
 public class TestEmployeeModelMapper {
 
     private static final Employee EMPLOYEE = EmployeeTestBuilder.builder().build(); // Bygg Employee hämtar hårdkodad employee från EmployeeTestFixture
-    private static final EmployeeModel EMPLOYEE_MODEL = EmployeeModel.builder()
-            .employeeId(EMPLOYEE.getEmployeeId().getId())
-            .firstName(EMPLOYEE.getFirstName())
-            .lastName(EMPLOYEE.getLastName())
-            .salary(EMPLOYEE.getSalary())
-            .fullTime(EMPLOYEE.getFullTime())
-            .departmentId(EMPLOYEE.getDepartmentId())
-            .build();
+    private static final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
     @Test
     // test för källkod "public static EmployeeModel map(Employee employee)",
