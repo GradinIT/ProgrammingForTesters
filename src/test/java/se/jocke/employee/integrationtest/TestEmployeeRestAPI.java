@@ -29,5 +29,22 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     @Then("the firstname is updated to (.+)")
     public void the_firstname_is_updated_to_runar() {
     }
+    @When("the client calls findById")
+    public void the_client_calls_find_by_id() {
+    }
 
+    @Then("the client receives id {int}")
+    public void the_client_receives_id(Integer int1) {
+    }
+    @When("the client deletes employee {int}")
+    public void the_client_deletes_employee(Integer int1) {
+
+    }
+    @Then("the employee {int} is deleted")
+    public void the_employee_is_deleted(Integer int1) {
+    }
+    @Then("the error message is {int} : [{string}]")
+    public void the_error_message_is(Integer int1, String string) {
+
+}
 }
