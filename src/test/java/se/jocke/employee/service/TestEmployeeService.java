@@ -56,23 +56,28 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(1);
     }
 
-    //@Test
+    @Test
     public void deleteEmployeeById() {
-      when(employeeDao.findAll()).thenReturn(Arrays.asList(EmployeeDatabaseEntry.builder()
-
-                .employeeId(2)
+        Integer employeeID = 1;
+        when(employeeDao.findById(employeeID)).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
+                .employeeId(employeeID)
                 .firstName("Glen")
                 .lastName("Svensson")
                 .salary(new BigDecimal(40000))
                 .fullTime(true)
-                .departmentId(2)
+                .departmentId(1)
                 .build()));
 
-        List<Employee> employees = systemUnderTest.getAllEmployees(); // Skapar en lista med alla anställda
+        Employee employee = systemUnderTest.getEmployeeById(employeeID);
+        employeeDao.deleteById(employee.getEmployeeId().getId());
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verify(employeeDao, atLeastOnce()).deleteById(employeeID);
+
+        /*List<Employee> employees = systemUnderTest.getAllEmployees(); // Skapar en lista med alla anställda
         Assertions.assertEquals(1, employees.size());         // Kontrollerar att antalet i listan är förväntat
         systemUnderTest.removeEmployee(employees.get(0));             // Försöker ta bort anställd
         List<Employee> deletedEmployee = systemUnderTest.getAllEmployees(); // skapar ny lista med anställda
-        Assertions.assertEquals(0, deletedEmployee.size());         // kontrollerar att antalet i listan är förväntat
+        Assertions.assertEquals(0, deletedEmployee.size());    */     // kontrollerar att antalet i listan är förväntat
     }
 
     @Test
