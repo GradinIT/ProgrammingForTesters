@@ -5,9 +5,9 @@ Feature: test employee api
   Scenario: client updates firstname for employee 1
     When the client updates firstname for employee to Runar
     Then the firstname is updated to Runar
-  Scenario: Employee firstname is Runar
+  Scenario: client gets Employee 1
     When the client gets employee 1
-    Then firstname is Runar
+    Then employeename is Runar
   Scenario: Delete Employee
     Given the employees
       | 88 | Socker-Conny | Slagträ | 12500.50 | false | 1 |
