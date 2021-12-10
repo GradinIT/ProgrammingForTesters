@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import se.jocke.config.PersistenceConfig;
 import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
-import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.unittests.api.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.List;
