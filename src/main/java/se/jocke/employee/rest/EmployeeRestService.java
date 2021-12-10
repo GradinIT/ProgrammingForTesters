@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.jocke.employee.api.EmployeeModel;
-import se.jocke.employee.api.mapper.EmployeeModelMapper;
-import se.jocke.employee.api.mapper.EmployeeModelsMapper;
+import se.jocke.employee.unittests.api.EmployeeModel;
+import se.jocke.employee.unittests.api.mapper.EmployeeModelMapper;
+import se.jocke.employee.unittests.api.mapper.EmployeeModelsMapper;
 import se.jocke.employee.service.EmployeeService;
 
 import java.util.List;

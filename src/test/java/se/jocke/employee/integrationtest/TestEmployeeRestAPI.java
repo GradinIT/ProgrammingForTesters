@@ -8,12 +8,11 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.unittests.api.EmployeeModel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -38,7 +37,7 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         employee = getEmployeeById(getEmployee).get();
     }
 
-    @Then("employeename is (.+)$")
+    @Then("^employeename is (.+)$")
     public void employeename_is_runar(String employeeFirstName) {
 
         Assert.assertEquals(employeeFirstName, employee.getFirstName());
@@ -65,7 +64,7 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Assertions.assertEquals(firstName, employee.getFirstName());
     }
 
-    @Given("the employees")
+    @Given("^the employees$")
     public void the_employees(DataTable dataTable) {
         makeEmployeeList(dataTable.asList())
                 .stream()
