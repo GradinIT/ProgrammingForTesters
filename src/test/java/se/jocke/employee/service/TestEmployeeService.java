@@ -77,11 +77,12 @@ public class TestEmployeeService {
     }
 
     @Test
-    @DisplayName("Test remove employee by id")
+    @DisplayName("Test remove employee by ID")
     public void removeEmployeeById() {
         when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
         systemUnderTest.removeEmployee(employee);
-        verify(employeeDao, atLeastOnce()).findById(employee.getEmployeeId().getId());
+        verify(employeeDao, times(1)).findById(employee.getEmployeeId().getId());
+        verify(employeeDao, times(1)).delete(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
@@ -94,7 +95,22 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test create employee Happy Flow")
     public void createEmployeeHappyFlow() {
-        // Emil
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.empty());
+        when(employeeDao.save(any(EmployeeDatabaseEntry.class))).thenReturn(employeeDataBaseEntryBuilder(employee));
+
+        Employee createdEmployee = systemUnderTest.createEmployee(employee);
+
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(createdEmployee),
+                () -> Assertions.assertEquals(employee.getEmployeeId(), createdEmployee.getEmployeeId()),
+                () -> Assertions.assertEquals(employee.getFirstName(), createdEmployee.getFirstName()),
+                () -> Assertions.assertEquals(employee.getLastName(), createdEmployee.getLastName()),
+                () -> Assertions.assertEquals(employee.getSalary(), createdEmployee.getSalary()),
+                () -> Assertions.assertEquals(employee.getFullTime(), createdEmployee.getFullTime()),
+                () -> Assertions.assertEquals(employee.getDepartmentId(), createdEmployee.getDepartmentId()));
+
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verify(employeeDao, times(1)).save(any(EmployeeDatabaseEntry.class));
     }
 
     @Test
