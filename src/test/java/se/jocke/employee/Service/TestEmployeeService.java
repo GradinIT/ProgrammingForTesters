@@ -58,7 +58,7 @@ public class TestEmployeeService {
     }
 
     @Test
-    public void testCreateEmployee() { //Test not working //
+    public void testCreateEmployee() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
         when(employeeDao.save(EMPLOYEE_DATABASE_ENTRY)).thenReturn((EMPLOYEE_DATABASE_ENTRY));
         Employee employee = systemBeingTested.createEmployee(EMPLOYEE);

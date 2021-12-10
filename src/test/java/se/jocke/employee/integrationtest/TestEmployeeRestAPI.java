@@ -62,12 +62,12 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
     @Given("the employees")
     public void the_employees(DataTable dataTable) {
-        makeDepartmentList(dataTable.asList())
+        makeEmployeeList(dataTable.asList())
                 .stream()
                 .forEach( employeeModel -> createEmployee(employeeModel));
     }
 
-    private List<EmployeeModel> makeDepartmentList(List<String> given) {
+    private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> employeeModels = new ArrayList<>();
         for(int i = 0 ; i < given.size();) {
             employeeModels.add( EmployeeModel.builder()
