@@ -10,7 +10,8 @@ Feature: test employee api
     Then the lastname is updated to DéCoding
   Scenario: client gets employee 1
     When the client gets employee 1
-    Then  the name is
+    Then  the firstname is
+    And the lastname is
   Scenario: client updates firstname for employee 1
     When the client updates firstname for employee to firstName1
     Then the firstname is updated to firstName1

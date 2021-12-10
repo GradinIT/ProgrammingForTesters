@@ -1,6 +1,7 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -21,6 +22,7 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
     @When("^the client calls /employee$")
     public void getAll() {
+
         employees = getAllEmployees();
     }
     //@Then("the client receives {int} employees")
@@ -30,19 +32,26 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     }
 
     @When("^the client gets (\\d+) employee $")
-    public void the_client_gets_employee(Integer int1) {
+    public void the_client_gets_employee(Integer employeeId) {
+        employee = getEmployeeById(employeeId);
     }
 
-    @Then("^firstname is (.+)$")
-    public void firstname_is_runar() {
+    @Then("^the firstname is (.+)$")
+    public void firstname_is_employee1(String employeeName) {
+        Assert.assertEquals(employeeName, employee.get().getFirstName());
+    }
+
+    @And("^the lastname is (.+)$")
+    public void lastname_is_employee1(String employeeName) {
+        Assert.assertEquals(employeeName, employee.get().getLastName());
     }
 
     @When("^the client updates firstname for employee to (.+)$")
-    public void the_client_updates_firstname_for_employee_to_runar() {
+    public void the_client_updates_firstname_for_employee_to_Klas_Coding() {
     }
 
     @Then("^the firstname is updated to (.+)$")
-    public void the_firstname_is_updated_to_runar() {
+    public void the_firstname_is_updated_to_Klas_Coding() {
     }
 
     @Given("^the employees$")
