@@ -33,7 +33,10 @@ public class TestDepartmentRestAPI extends DepartmentTestClient {
 
     @When("^the client updates departmentname for department to (.+)$")
     public void updateNameOfDepartment(String departmentName)  {
-        updateDepartment(DepartmentModel.builder().departmentId(1).departmentName(departmentName).build());
+        updateDepartment(DepartmentModel.builder()
+        .departmentId(1)
+        .departmentName(departmentName)
+        .build());
     }
 
     @Then("the departmentname is updated to (.+)$")
