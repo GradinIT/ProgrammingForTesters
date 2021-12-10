@@ -49,21 +49,14 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test get employee by ID")
     public void getEmployeeById() {
-        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(EmployeeDatabaseEntry.builder()
-                .employeeId(1)
-                .firstName("Runar")
-                .lastName("Runarsson")
-                .salary(new BigDecimal(35000))
-                .fullTime(true)
-                .departmentId(1)
-                .build()));
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
 
         Employee employee = systemUnderTest.getEmployeeById(1);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
-                () -> Assertions.assertEquals("Runar", employee.getFirstName()),
-                () -> Assertions.assertEquals("Runarsson", employee.getLastName()),
-                () -> Assertions.assertEquals(new BigDecimal(35000), employee.getSalary()),
+                () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
+                () -> Assertions.assertEquals("LastName1", employee.getLastName()),
+                () -> Assertions.assertEquals(new BigDecimal(25000), employee.getSalary()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
