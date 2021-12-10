@@ -28,6 +28,7 @@ public class TestDepartmentDao {
     @Autowired
     DepartmentDao departmentDao;
 
+
     @Test
     public void testGetDepartmentById() {
         departmentDao.save(ENTRY);
