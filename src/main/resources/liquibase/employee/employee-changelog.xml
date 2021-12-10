@@ -13,11 +13,11 @@
             <column name="DEPARTMENTID" type="number"/>
         </createTable>
     </changeSet>
-    <changeSet id="add-data-employee" author="Joakim Gradin">
+    <changeSet id="add-data-employee" author="Magnus Tällgård">
         <insert tableName="EMPLOYEE">
             <column name="EMPLOYEEID">1</column>
-            <column name="FIRSTNAME">firstName1</column>
-            <column name="LASTNAME">lastName1</column>
+            <column name="FIRSTNAME">Runar</column>
+            <column name="LASTNAME">Sopranos</column>
             <column name="FULLTIME">true</column>
             <column name="SALARY">25000.00</column>
             <column name="DEPARTMENTID">1</column>

@@ -1,16 +1,16 @@
 Feature: test department api
   Scenario: client gets all departments
     When the client calls /department
-    Then the client receives 4 departments
-  Scenario: client updates name for department 1
-    When the client updates name for department to Coding
-    Then the name is updated to Coding
+    Then the client receives 6 departments
+  Scenario: client updates departmentname for department 1
+    When the client updates departmentname for department to Coding
+    Then the departmentname is updated to Coding
   Scenario: client gets Department 1
     When the client gets department 1
-    Then the name is
-  Scenario: client updates name for department 1
-    When the client updates name for department to Development
-    Then the name is updated to Development
+    Then departmentname is Coding
+  Scenario: client updates departmentname for department 1
+    When the client updates departmentname for department to Development
+    Then the departmentname is updated to Development
   Scenario: client deletes department
     Given the departments
       | 55 | Fun |

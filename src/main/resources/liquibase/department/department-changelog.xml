@@ -26,5 +26,15 @@
             <column name="DEPARTMENTID">1450</column>
             <column name="DEPARTMENTNAME">Printing</column>
         </insert>
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">666</column>
+            <column name="DEPARTMENTNAME">SejtanInHeaven</column>
+        </insert>
+    </changeSet>
+    <changeSet id="Magnus" author="Magnus Tällgård">
+        <insert tableName="DEPARTMENT">
+            <column name="DEPARTMENTID">666</column>
+            <column name="DEPARTMENTNAME">CodeClass</column>
+    </insert>
     </changeSet>
 </databaseChangeLog>
