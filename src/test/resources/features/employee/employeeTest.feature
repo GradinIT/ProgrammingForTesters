@@ -8,10 +8,13 @@ Feature: test employee api
   Scenario: client gets Employee 1
     When the client gets employee 1
     Then employeename is Runar
-  Scenario: Delete Employee
+  Scenario: Client delete Employee
     Given the employees
       | 88 | Socker-Conny | Slagträ | 12500.50 | false | 1 |
       | 89 | Socker-Ronny | Känga | 12500.50 | true | 2 |
       | 90 | Socker-Bonny | Knogjärn | 12500.50 | false | 3 |
-
-
+    When the client deletes employee 88
+    When the client deletes employee 89
+    When the client deletes employee 90
+    Then Employee 88 is deleted
+    And the error message is 404 : ["Entity with id 88 not found"]

@@ -1,17 +1,21 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.employee.api.EmployeeModel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class TestEmployeeRestAPI extends EmployeeTestClient {
@@ -63,12 +67,12 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
     @Given("the employees")
     public void the_employees(DataTable dataTable) {
-        makeDepartmentList(dataTable.asList())
+        makeEmployeeList(dataTable.asList())
                 .stream()
                 .forEach( employeeModel -> createEmployee(employeeModel));
     }
 
-    private List<EmployeeModel> makeDepartmentList(List<String> given) {
+    private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> employeeModels = new ArrayList<>();
         for(int i = 0 ; i < given.size();) {
             employeeModels.add( EmployeeModel.builder()
@@ -81,5 +85,22 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
                     .build());
         }
         return employeeModels;
+    }
+
+    @When("the client deletes employee {int}")
+    public void theClientDeletesEmployee(Integer employeeId) {
+        deleteEmployee(getEmployeeById(employeeId).get());}
+        private Throwable exceptionThatWasThrown;
+
+
+    @Then("Employee {int} is deleted")
+    public void employeeIsDeleted(Integer employeeId) {
+        exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
+            getEmployeeById(employeeId);
+        });
+    }
+    @And("the error message is {int} : [\"Entity with id {int} not found\"]")
+    public void checkErrorMessage(Integer errorCode, Integer employeeId) {
+        Assertions.assertEquals(errorCode + " : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
     }
 }
