@@ -12,8 +12,8 @@ public class TestEmployee {
     private static final Employee EMPLOYEE = EmployeeTestBuilder.build();
 
     @Test
-    //Testar att department blir skapat
-    public void testThatDepartmentIsCreated () {
+    //Testar att employee blir skapad
+    public void testThatEmployeeIsCreated () {
         //skapar employee med hjälp av employee buildern
         Employee employee = Employee.builder()
                 //hämtar alla parametrar i EPLOYEE in till employee
