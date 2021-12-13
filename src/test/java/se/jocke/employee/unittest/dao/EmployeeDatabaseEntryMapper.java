@@ -23,7 +23,7 @@ public class EmployeeDatabaseEntryMapper {
     }
 
     @Test
-    public void testDatabaseEntryToDepartment() {
+    public void testDatabaseEntryToEmployee() {
         Employee employee = se.jocke.employee.dao.EmployeeDatabaseEntryMapper.map(EMPLOYEE_DATABASE_ENTRY);
         Assertions.assertNotNull(employee);
         Assertions.assertEquals(EMPLOYEE,employee);
