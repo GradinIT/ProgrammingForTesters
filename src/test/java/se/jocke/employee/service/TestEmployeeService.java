@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import se.jocke.common.dao.EntityNotFoundException;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 import se.jocke.employee.entity.Employee;
@@ -49,24 +50,38 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test get employee by ID")
     public void getEmployeeById() {
-        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
+        Integer empID = employee.getEmployeeId().getId();
 
-        Employee employee = systemUnderTest.getEmployeeById(1);
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
+        Employee employee = systemUnderTest.getEmployeeById(empID);
+
         Assertions.assertAll(
-                () -> Assertions.assertEquals(1, employee.getEmployeeId().getId()),
+                () -> Assertions.assertEquals(1, empID),
                 () -> Assertions.assertEquals("firstName1", employee.getFirstName()),
                 () -> Assertions.assertEquals("LastName1", employee.getLastName()),
                 () -> Assertions.assertEquals(new BigDecimal(25000), employee.getSalary()),
                 () -> Assertions.assertEquals(true, employee.getFullTime()),
                 () -> Assertions.assertEquals(1, employee.getDepartmentId())
         );
-        verify(employeeDao, times(1)).findById(1);
+        verify(employeeDao, times(1)).findById(empID);
+    }
+
+    @Test
+    @DisplayName("Test get employee by ID")
+    public void getEmployeeByIdNotFound() {
+        // Emil
     }
 
     @Test
     @DisplayName("Test get all employees")
     public void getAllEmployees() {
         // Tim
+    }
+
+    @Test
+    @DisplayName("Test create employee")
+    public void createEmployee() {
+        // Vladde
     }
 
     @Test
@@ -79,10 +94,26 @@ public class TestEmployeeService {
     }
 
     @Test
+    @DisplayName("Test remove employee - not found")
+    public void removeEmployeeNotFound() {
+        when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.empty());
+        //when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.removeEmployee(employee));
+    }
+
+    @Test
     @DisplayName("Test update employee")
     public void updateEmployee() {
         // Oluyinka/Rasmus
         // båda gör en version - se om ni kommer till samma resultat
+    }
+
+    @Test
+    @DisplayName("Test update employee - not found")
+    public void updateEmployeeNotFound() {
+        when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.empty());
+        //when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.updateEmployee(employee));
     }
 
     @Test
