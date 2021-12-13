@@ -13,4 +13,16 @@ Feature: test employee api
       | 88 | Socker-Conny | Slagträ | 12500.50 | false | 1 |
       | 89 | Socker-Ronny | Känga | 12500.50 | true | 2 |
       | 90 | Socker-Bonny | Knogjärn | 12500.50 | false | 3 |
-
+    When the client deletes employee 90
+    Then the employee 90 is deleted
+    And  the error message is 404 : ["Entity with id 90 not found"]
+    When the client deletes employee 89
+    Then the employee 89 is deleted
+    And  the error message is 404 : ["Entity with id 89 not found"]
+    When the client deletes employee 88
+    Then the employee 88 is deleted
+    And  the error message is 404 : ["Entity with id 88 not found"]
+  Scenario: Create Employee
+    Given employee
+      | 666 | Belsebub | af Orm | 12500.50 | false | 1 |
+    Then the employee 666 exsists
