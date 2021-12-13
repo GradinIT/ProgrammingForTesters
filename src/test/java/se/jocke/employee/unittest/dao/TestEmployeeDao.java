@@ -82,15 +82,15 @@ public class TestEmployeeDao {
      */
     @Test
     public void testCreateEmployee() {
-        EmployeeDatabaseEntry EmployeeDatabaseEntry = employeeDao.save(ENTRY);
+        EmployeeDatabaseEntry employeeDatabaseEntry = employeeDao.save(ENTRY);
         Assertions.assertAll(
-                () -> assertNotNull(EmployeeDatabaseEntry.getEmployeeId()),
-                () -> assertEquals(ENTRY.getFirstName(), EmployeeDatabaseEntry.getFirstName()),
-                () -> assertEquals(ENTRY.getEmployeeId(), EmployeeDatabaseEntry.getEmployeeId()),
-                () -> assertEquals(ENTRY.getLastName(), EmployeeDatabaseEntry.getLastName()),
-                () -> assertEquals(ENTRY.getFullTime(), EmployeeDatabaseEntry.getFullTime()),
-                () -> assertEquals(ENTRY.getSalary(), EmployeeDatabaseEntry.getSalary().setScale(0, RoundingMode.HALF_UP)),
-                () -> assertEquals(ENTRY.getDepartmentId(), EmployeeDatabaseEntry.getDepartmentId()));
+                () -> assertNotNull(employeeDatabaseEntry.getEmployeeId()),
+                () -> assertEquals(ENTRY.getFirstName(), employeeDatabaseEntry.getFirstName()),
+                () -> assertEquals(ENTRY.getEmployeeId(), employeeDatabaseEntry.getEmployeeId()),
+                () -> assertEquals(ENTRY.getLastName(), employeeDatabaseEntry.getLastName()),
+                () -> assertEquals(ENTRY.getFullTime(), employeeDatabaseEntry.getFullTime()),
+                () -> assertEquals(ENTRY.getSalary(), employeeDatabaseEntry.getSalary().setScale(0, RoundingMode.HALF_UP)),
+                () -> assertEquals(ENTRY.getDepartmentId(), employeeDatabaseEntry.getDepartmentId()));
         employeeDao.delete(ENTRY);
     }
     @Test
