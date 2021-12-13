@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
+import se.jocke.employee.builder.EmployeeDataBaseEntryListBuilder;
 
 
 import java.math.BigDecimal;
@@ -31,7 +32,7 @@ public class TestEmployeeDao {
                 () -> assertTrue(optionalEmployeeDatabaseEntry.isPresent()),
                 () -> assertEquals(1, optionalEmployeeDatabaseEntry.get().getEmployeeId()),
                 () -> assertEquals("firstName1", optionalEmployeeDatabaseEntry.get().getFirstName()),
-                () -> assertEquals("lastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
+                () -> assertEquals("LastName1", optionalEmployeeDatabaseEntry.get().getLastName()),
                 () -> assertTrue(optionalEmployeeDatabaseEntry.get().getFullTime()),
                 () -> assertEquals(new BigDecimal(25000.00).stripTrailingZeros(), optionalEmployeeDatabaseEntry.get().getSalary().stripTrailingZeros()),
                 //() -> assertEquals(new BigDecimal(25000), optionalEmployeeDatabaseEntry.get().getSalary().setScale(0, RoundingMode.HALF_UP)),
@@ -59,19 +60,38 @@ public class TestEmployeeDao {
 
     @Test
     @DisplayName("Test delete employee by ID from DB")
-    public void testDeleteEmployeeById() {
-        Integer employeeId = 3;
-        Assumptions.assumeTrue(employeeDao.count() > 0);
-        Assertions.assertEquals(3, employeeDao.count());
-        employeeDao.deleteById(employeeId);
-        Assertions.assertEquals(2, employeeDao.count());
+    public void testCreateAndDeleteEmployeeById() {
+        Integer employeeId = 4;
+        Long numberOfEmp = employeeDao.count();
+
+        EmployeeDatabaseEntry newEmployee = EmployeeDatabaseEntry.builder()
+                .employeeId(employeeId)
+                .firstName("firstname4")
+                .lastName("lastname4")
+                .salary(new BigDecimal(25000))
+                .fullTime(true)
+                .build();
+        employeeDao.save(newEmployee);
+
+        Assertions.assertEquals(numberOfEmp + 1, employeeDao.count());
+        employeeDao.deleteById(4);
+        Assertions.assertEquals(numberOfEmp, employeeDao.count());
     }
 
     @Test
     @DisplayName("Test delete ALL employees from DB")
-    public void testDeleteAllEmployees() {
+    public void testCreateAndDeleteAllEmployees() {
+        Long numberOfEmployees = employeeDao.count();
+
+        // Delete all in list
         Assumptions.assumeTrue(employeeDao.count() > 0);
         employeeDao.deleteAll();
         Assertions.assertEquals(0, employeeDao.count());
+
+        // Create new list
+        List<EmployeeDatabaseEntry> newEmployees = EmployeeDataBaseEntryListBuilder.buildAllEmployeesList();
+        employeeDao.saveAll(newEmployees);
+
+        Assertions.assertEquals(numberOfEmployees, employeeDao.count());
     }
 }

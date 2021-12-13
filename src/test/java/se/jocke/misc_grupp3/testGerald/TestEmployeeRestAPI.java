@@ -25,40 +25,43 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     }
 
     public void updateNameOfEmployee(String employeeName) throws Throwable {
-        // Emil/Rasmus
     }
 
     public void nameOfEmployeeIsUpdated(String employeeName) throws Throwable {
-        // Emil/Rasmus
     }
 
     public void getTheEmployeeId(Integer employeeId) throws Throwable {
-        // Ramin
     }
 
     public void nameOfEmployeeIs() throws Throwable {
-        // Ramin
     }
 
     public void givenEmployees(DataTable employee) throws Throwable {
-        // Oluyinka/Tim
-    }
-
-    public void deleteEmployee(Integer employeeId) throws Throwable {
-        // Vladde
     }
 
 //    private List<EmployeeModel> makeEmployeeList(List<String> given) {
-            // Oluyinka/Tim
+//        List<EmployeeModel> emp = new ArrayList<>();
+//        for (int i = 0; i < given.size() - 1; i += 2) {
+//            emp.add(EmployeeModel.builder()
+//                    .employeeId(Integer.parseInt(given.get(i + 1)))
+//                    .firstName("" + i)
+//                    .lastName("" + i)
+//                    .fullTime(true)
+//                    .salary(new BigDecimal(25000))
+//                    .departmentId(i + 1)
+//                    .build());
+//        }
+//        return emp;
 //    }
 
-    private Throwable exceptionThatWasThrown;
+    public void deleteEmployee(Integer employeeId) throws Throwable {
+    }
+
+//    private Throwable exceptionThatWasThrown;
 
     public void employeeIsDeleted(Integer employeeId) throws Throwable {
-        // Vladde
     }
 
     public void checkErrorMessage(Integer errorCode, Integer employeeId) {
-        // Vladde
     }
 }
