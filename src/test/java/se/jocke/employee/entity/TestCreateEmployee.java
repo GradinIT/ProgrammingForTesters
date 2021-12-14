@@ -31,18 +31,68 @@ public class TestCreateEmployee {
 
     @Test
     public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
-        Assertions.assertThrows(NullPointerException.class ,
-                () -> Employee.builder().firstName(EMPLOYEE.getFirstName()).build());
-        //sätt alla fält utom EmployeeId i buildern
+        Assertions.assertThrows(NullPointerException.class,
+                () -> Employee.builder().firstName(EMPLOYEE.getFirstName())
+                        .lastName(EMPLOYEE.getLastName())
+                        .departmentId(EMPLOYEE.getDepartmentId())
+                        .salary(EMPLOYEE.getSalary())
+                        .fullTime(EMPLOYEE.getFullTime())
+                        .build());
 
     }
     @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeFirstName() {
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingFirstName() {
         Assertions.assertThrows(NullPointerException.class,
-                () -> Employee.builder().departmentId(EMPLOYEE.getDepartmentId()).build());
-        //TODO sätt alla fält utom employee FirstName i buildern
+                () -> Employee.builder().departmentId(EMPLOYEE.getDepartmentId())
+                        .lastName(EMPLOYEE.getLastName())
+                        .salary(EMPLOYEE.getSalary())
+                        .fullTime(EMPLOYEE.getFullTime())
+                        .employeeId(EMPLOYEE.getEmployeeId())
+                        .build());
+
+    }
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingLastName() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> Employee.builder().departmentId(EMPLOYEE.getDepartmentId())
+                        .firstName(EMPLOYEE.getFirstName())
+                        .salary(EMPLOYEE.getSalary())
+                        .fullTime(EMPLOYEE.getFullTime())
+                        .employeeId(EMPLOYEE.getEmployeeId())
+                        .build());
+    }
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingSalary() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> Employee.builder().departmentId(EMPLOYEE.getDepartmentId())
+                        .firstName(EMPLOYEE.getFirstName())
+                        .lastName(EMPLOYEE.getLastName())
+                        .fullTime(EMPLOYEE.getFullTime())
+                        .employeeId(EMPLOYEE.getEmployeeId())
+                        .build());
+    }
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingFullTime() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> Employee.builder().departmentId(EMPLOYEE.getDepartmentId())
+                        .firstName(EMPLOYEE.getFirstName())
+                        .lastName(EMPLOYEE.getLastName())
+                        .salary(EMPLOYEE.getSalary())
+                        .employeeId(EMPLOYEE.getEmployeeId())
+                        .build());
     }
 
-    // TODO lägg till nya @Test med alla fält-varianter
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingDepartmentId() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> Employee.builder().firstName(EMPLOYEE.getFirstName())
+                        .lastName(EMPLOYEE.getLastName())
+                        .fullTime(EMPLOYEE.getFullTime())
+                        .salary(EMPLOYEE.getSalary())
+                        .employeeId(EMPLOYEE.getEmployeeId())
+                        .build());
     }
+
+}
+
 
