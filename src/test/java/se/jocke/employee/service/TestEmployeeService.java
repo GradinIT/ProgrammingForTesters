@@ -104,8 +104,17 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test update employee")
     public void updateEmployee() {
-        // Oluyinka/Rasmus
-        // båda gör en version - se om ni kommer till samma resultat
+        EmployeeDatabaseEntry employeeDatabaseEntry = employeeDataBaseEntryBuilder(employee);
+
+        when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(employeeDatabaseEntry));
+        when(employeeDao.save(employeeDatabaseEntry)).thenReturn(employeeDatabaseEntry);
+        Employee updateEmployee = systemUnderTest.updateEmployee(employee);
+
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(employee),
+                () -> Assertions.assertEquals(employee, updateEmployee));
+
+        verify(employeeDao, times(1)).save(employeeDatabaseEntry);
     }
 
     @Test
