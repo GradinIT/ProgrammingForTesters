@@ -123,5 +123,17 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void the_error_message_is(Integer errorCode, Integer employeeId) {
         Assertions.assertEquals(errorCode + " : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
     }
+    @Given("employee")
+    public void employee(DataTable dataTable) {
+        makeDepartmentList(dataTable.asList())
+                .stream()
+                .forEach(employeeModel -> createEmployee(employeeModel));
+    }
+    @Then("the employee {int} exists")
+    public void the_employee_exists(Integer employeeId){
+        Optional<EmployeeModel> inDatabase = getEmployeeById(employeeId);
+        Assertions.assertEquals(Boolean.TRUE, inDatabase.isPresent());
+        deleteEmployee(inDatabase.get());
+    }
 }
 
