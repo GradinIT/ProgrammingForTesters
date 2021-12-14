@@ -93,7 +93,7 @@ public class TestEmployeeDao {
                 () -> assertEquals(ENTRY.getDepartmentId(), employeeDatabaseEntry.getDepartmentId()));
         employeeDao.delete(ENTRY);
     }
-  /*  @Test
+    @Test
     public void testDeleteEmployee() throws InterruptedException {
         employeeDao.save(ENTRY);
         Assertions.assertAll(
@@ -103,8 +103,6 @@ public class TestEmployeeDao {
         employeeDao.delete(ENTRY);
         Assertions.assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isEmpty());
     }
-
-   */
 
 
 
