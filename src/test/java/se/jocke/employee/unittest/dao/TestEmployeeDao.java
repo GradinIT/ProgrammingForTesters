@@ -61,12 +61,12 @@ public class TestEmployeeDao {
     }
 
     @Test
-   // @Order(1) kommentera bort @Order och ändra expected 3 till 2 för att testa
+   @Order(1)
     public void testGetEmployees (){
         List<EmployeeDatabaseEntry> employeeList = employeeDao.findAll();
         Assertions.assertAll(
                 ()-> assertNotNull(employeeList), // kollar att listan inte är null
-                () -> assertEquals(2, employeeList.size()) // förväntar oss 3 st employees i listan (i liquidbase changelog)
+                () -> assertEquals(3, employeeList.size()) // förväntar oss 3 st employees i listan (i liquidbase changelog)
         );
     }
     /*@Test
@@ -93,7 +93,7 @@ public class TestEmployeeDao {
                 () -> assertEquals(ENTRY.getDepartmentId(), employeeDatabaseEntry.getDepartmentId()));
         employeeDao.delete(ENTRY);
     }
-    @Test
+  /*  @Test
     public void testDeleteEmployee() throws InterruptedException {
         employeeDao.save(ENTRY);
         Assertions.assertAll(
@@ -103,6 +103,8 @@ public class TestEmployeeDao {
         employeeDao.delete(ENTRY);
         Assertions.assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isEmpty());
     }
+
+   */
 
 
 
