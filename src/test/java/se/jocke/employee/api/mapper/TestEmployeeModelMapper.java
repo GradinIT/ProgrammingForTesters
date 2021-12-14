@@ -25,7 +25,7 @@ public class TestEmployeeModelMapper {
     }
 
     @Test
-    public void testThatDepartmentIsEqualToDepartmentModel() {
+    public void testThatEmployeeIsEqualToEmployeeModel() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertEquals(EMPLOYEE,employee);
         Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(),employee.getEmployeeId().getId());
