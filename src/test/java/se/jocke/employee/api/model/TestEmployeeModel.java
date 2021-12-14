@@ -24,13 +24,14 @@ public class TestEmployeeModel {
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .build();
 
-        assertEquals(EMPLOYEE_MODEL.getFirstName(), employeeModel.getFirstName());
-        assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employeeModel.getDepartmentId());
-        assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employeeModel.getEmployeeId());
-        assertEquals(EMPLOYEE_MODEL.getLastName(), employeeModel.getLastName());
-        assertEquals(EMPLOYEE_MODEL.getSalary(), employeeModel.getSalary());
-        assertEquals(EMPLOYEE_MODEL.getFullTime(), employeeModel.getFullTime());
-        assertEquals(EMPLOYEE_MODEL,employeeModel);
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFirstName(), employeeModel.getFirstName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employeeModel.getDepartmentId());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getEmployeeId(), employeeModel.getEmployeeId());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getLastName(), employeeModel.getLastName());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(), employeeModel.getSalary());
+        Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(), employeeModel.getFullTime());
+        Assertions.assertEquals(EMPLOYEE_MODEL,employeeModel);
+        Assertions.assertEquals(EMPLOYEE_MODEL.toString(), employeeModel.toString());
     }
 
     @Test
