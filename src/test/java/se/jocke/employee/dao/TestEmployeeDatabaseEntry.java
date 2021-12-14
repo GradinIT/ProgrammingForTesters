@@ -1,9 +1,7 @@
 package se.jocke.employee.dao;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.dao.DepartmentDatabaseEntry;
 import se.jocke.employee.builder.EmployeeDatabaseEntryTestBuilder;
 
 public class TestEmployeeDatabaseEntry {

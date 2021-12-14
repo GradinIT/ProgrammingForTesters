@@ -2,12 +2,8 @@ package se.jocke.employee.api.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.api.DepartmentModel;
 import se.jocke.employee.api.EmployeeModel;
 import se.jocke.employee.builder.EmployeeModelTestBuilder;
-import se.jocke.employee.api.EmployeeModel;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();

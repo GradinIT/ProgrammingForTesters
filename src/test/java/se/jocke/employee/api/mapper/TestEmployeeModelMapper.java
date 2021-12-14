@@ -13,8 +13,6 @@ public class TestEmployeeModelMapper {
     private static final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.builder().build();
 
     @Test
-    // test för källkod "public static EmployeeModel map(Employee employee)",
-    // får in Employee och ger EmployeeModel i retur
     public void testThatEmployeeModelIsEqualToEmployee(){
         EmployeeModel employeeModel = EmployeeModelMapper.map(EMPLOYEE);
         Assertions.assertEquals(EMPLOYEE_MODEL,employeeModel);
@@ -27,8 +25,6 @@ public class TestEmployeeModelMapper {
     }
 
     @Test
-    // test för källkod "public static Employee map(EmployeeModel model)",
-    // får in EmployeeModel och ger Employee i retur
     public void testThatDepartmentIsEqualToDepartmentModel() {
         Employee employee = EmployeeModelMapper.map(EMPLOYEE_MODEL);
         Assertions.assertEquals(EMPLOYEE,employee);

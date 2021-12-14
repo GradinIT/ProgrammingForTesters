@@ -2,15 +2,9 @@ package se.jocke.employee.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import se.jocke.department.dao.DepartmentDatabaseEntry;
-import se.jocke.department.dao.DepartmentDatabaseEntryMapper;
-import se.jocke.department.entity.Department;
-import se.jocke.department.test.builder.DepartmentDatabaseEntryTestBuilder;
-import se.jocke.department.test.builder.DepartmentTestBuilder;
 import se.jocke.employee.builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.employee.entity.Employee;
-
 import java.util.Arrays;
 import java.util.List;
 
