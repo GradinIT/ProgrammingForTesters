@@ -1,6 +1,7 @@
 package se.jocke.employee.integrationtest;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class TestEmployeeRestAPI extends EmployeeTestClient {
 
-    @When("the client calls \\/employee")
+    @When("the client calls \\/employee$")
     public void the_client_calls_employee() {
     }
 
@@ -57,5 +58,36 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
                     .build());
         }
         return employeeModels;
+    }
+
+    @When("the client deletes employee {int}")
+    public void theClientDeletesEmployee(Integer employeeID) {
+    }
+
+    @And("the client gets error message {string}")
+    public void theClientGetsErrorMessage(String arg0) {
+        
+    }
+
+    @Then("the employee {int} is deleted")
+    public void theEmployeeIsDeleted(int arg0) {
+        
+    }
+
+    @And("the client gets message {string}")
+    public void theClientGetsMessage(String arg0) {
+        
+    }
+
+    @Then("the employee {int} exists")
+    public void theEmployeeExists(int arg0) {
+        
+    }
+
+    @Given("new employee")
+    public void newEmployee(DataTable dataTable) {
+        makeDepartmentList(dataTable.asList())
+                .stream()
+                .forEach(employeeModel -> createEmployee(employeeModel));
     }
 }
