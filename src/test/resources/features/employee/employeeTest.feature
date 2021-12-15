@@ -4,10 +4,15 @@ Feature: test employee api
     When the client calls /employee
     Then the client receives 3 employees
 
-  Scenario: client updates firstname for employee 1
-    When the client updates firstname for employee to Runar
+  Scenario: client updates firstname for employee 1 to Runar
+    When the client updates firstname for employee 1 to Runar
     Then the firstname is updated to Runar
 
+
+  Scenario: client updates lastname for employee 1 to
+    When the client updates lastname for employee 1 to Carola
+    Then the client updates lastname for employee 1 to Carola
+    
   Scenario: Employee firstname is Runar
     When the client gets employee 1
     Then firstname is Runar
@@ -19,7 +24,10 @@ Feature: test employee api
       | 90 | Socker-Bonny | Lastname | 12500.50 | false | 3 |
     When the client deletes employee 88
     Then the employee 88 is deleted
-    And the client gets error message "employee with ID 88 is not found"
+    And the error message is 404 : ["employee with ID 88 is not found"]
+
+
+
 
   Scenario: Create employee
       Given new employee

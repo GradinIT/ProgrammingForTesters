@@ -43,8 +43,7 @@ public class TestDepartmentRestAPI extends DepartmentTestClient {
     }
 
     @When("^the client gets department (\\d+)$")
-    public void getTheDepartmentById(Integer departmentId)  {
-        department = getDepartmentById(departmentId);
+    public void getTheDepartmentById(Integer departmentId)  { department = getDepartmentById(departmentId);
     }
 
     @Then("^departmentname is (.+)$")
