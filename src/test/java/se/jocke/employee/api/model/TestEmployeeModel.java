@@ -26,21 +26,14 @@ public class TestEmployeeModel {
         Assertions.assertEquals(EMPLOYEE_MODEL.getLastName(), employeeModel.getLastName());
         Assertions.assertEquals(EMPLOYEE_MODEL.getSalary(), employeeModel.getSalary());
         Assertions.assertEquals(EMPLOYEE_MODEL.getFullTime(), employeeModel.getFullTime());
-        Assertions.assertEquals(EMPLOYEE_MODEL,employeeModel);
+        Assertions.assertEquals(EMPLOYEE_MODEL, employeeModel);
         Assertions.assertEquals(EMPLOYEE_MODEL.toString(), employeeModel.toString());
     }
 
     @Test
     public void testThatNullPointerExceptionIsRaisedWhenNotProvidingFirstName() {
         Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
-
-
-    }
-
-    @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingSalary() {
-        //Assertions.assertThrows(NullPointerException.class, () -> EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
+                () -> EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build());
 
 
     }
@@ -48,7 +41,6 @@ public class TestEmployeeModel {
     @Test
     public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
         Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build());
-
+                () -> EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build());
     }
 }
