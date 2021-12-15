@@ -37,4 +37,5 @@ public class TestEmployeeDatabaseEntryMapper {
                 () -> assertEquals(EMPLOYEEDATABASEENTRY.getDepartmentId(), employee.getDepartmentId())
         );
     }
+
 }
