@@ -1,15 +1,19 @@
 package se.jocke.employee.unittests.dao;
 
+import liquibase.pro.packaged.L;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.unittests.Builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.unittests.Builder.EmployeeTestBuilder;
 import se.jocke.employee.unittests.entity.Employee;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestEmployeeDatabaseEntryMapper {
-    private final EmployeeDatabaseEntry EMPLOYEEDATABASEENTRY = EmployeeDatabaseEntryTestBuilder.build();
+    private final EmployeeDatabaseEntry EMPLOYEE_DATABASE_ENTRY = EmployeeDatabaseEntryTestBuilder.build();
     private final Employee EMPLOYEE = EmployeeTestBuilder.build();
 
     @Test
@@ -27,15 +31,24 @@ public class TestEmployeeDatabaseEntryMapper {
 
     @Test
     public void testEmployeeDatabaseEntryToEmployeeMapping() {
-        Employee employee = EmployeeDatabaseEntryMapper.map(EMPLOYEEDATABASEENTRY);
+        Employee employee = EmployeeDatabaseEntryMapper.map(EMPLOYEE_DATABASE_ENTRY);
         Assertions.assertAll(
-                () -> assertEquals(EMPLOYEEDATABASEENTRY.getEmployeeId(), employee.getEmployeeId().getId()),
-                () -> assertEquals(EMPLOYEEDATABASEENTRY.getFirstName(), employee.getFirstName()),
-                () -> assertEquals(EMPLOYEEDATABASEENTRY.getLastName(), employee.getLastName()),
-                () -> assertEquals(EMPLOYEEDATABASEENTRY.getSalary(), employee.getSalary()),
-                () -> assertEquals(EMPLOYEEDATABASEENTRY.getFullTime(), employee.getFullTime()),
-                () -> assertEquals(EMPLOYEEDATABASEENTRY.getDepartmentId(), employee.getDepartmentId())
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getEmployeeId(), employee.getEmployeeId().getId()),
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getFirstName(), employee.getFirstName()),
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getLastName(), employee.getLastName()),
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getSalary(), employee.getSalary()),
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getFullTime(), employee.getFullTime()),
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getDepartmentId(), employee.getDepartmentId())
         );
+    }
+
+    @Test
+    public void testEntriesToEmployees() {
+        List<Employee> EMPLOYEES = Arrays.asList(EMPLOYEE);
+        List<EmployeeDatabaseEntry> ENTRIES = Arrays.asList(EMPLOYEE_DATABASE_ENTRY);
+        List<Employee> employees = EmployeeDatabaseEntryMapper.map(ENTRIES);
+        Assertions.assertNotNull(employees);
+        Assertions.assertEquals(EMPLOYEES, employees);
     }
 
 }
