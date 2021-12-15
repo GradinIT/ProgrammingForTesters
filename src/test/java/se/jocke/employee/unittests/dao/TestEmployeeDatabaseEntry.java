@@ -32,39 +32,4 @@ public class TestEmployeeDatabaseEntry {
         String employee_to_string_value = employee.toString();
         Assertions.assertEquals(EMPLOYEE_TO_STRING_VALUE,employee_to_string_value);
     }
-    @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeDatabaseEntry.builder().firstName(ENTRY.getFirstName()).build());
-    }
-
-    @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeFirstName() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeDatabaseEntry.builder().employeeId(ENTRY.getEmployeeId()).build());
-    }
-
-    @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeLastName() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeDatabaseEntry.builder().employeeId(ENTRY.getEmployeeId()).build());
-    }
-
-    @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeSalary() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeDatabaseEntry.builder().employeeId(ENTRY.getEmployeeId()).build());
-    }
-
-    @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeFulltime() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeDatabaseEntry.builder().employeeId(ENTRY.getEmployeeId()).build());
-    }
-
-    @Test
-    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeDepartmentId() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> EmployeeDatabaseEntry.builder().employeeId(ENTRY.getEmployeeId()).build());
-    }
 }
