@@ -73,7 +73,9 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test get employee by ID")
     public void getEmployeeByIdNotFound() {
-        // Emil
+        when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.empty());
+        Assertions.assertThrows(EntityNotFoundException.class, () -> systemUnderTest.getEmployeeById(employee.getEmployeeId().getId()));
+        verify(employeeDao, times(1)).findById(employee.getEmployeeId().getId());
     }
 
     @Test
