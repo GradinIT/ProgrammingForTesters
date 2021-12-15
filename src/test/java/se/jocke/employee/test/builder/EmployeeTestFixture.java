@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public class EmployeeTestFixture {
 
-    public static final EmployeeID id = EmployeeID.builder().id(2).build();
+    public static final EmployeeID id = EmployeeID.builder().id(102).build();
     public static String firstName = "Fagel";
     public static String lastName = "Holk";
     public static BigDecimal salary = new BigDecimal("222222");

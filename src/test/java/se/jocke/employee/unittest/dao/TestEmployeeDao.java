@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, PersistenceConfig.class})  // för employee-changelog
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestEmployeeDao {
     private final EmployeeDatabaseEntry ENTRY = EmployeeDatabaseEntryTestBuilder.build();
     @Autowired  //klister
@@ -61,7 +60,6 @@ public class TestEmployeeDao {
     }
 
     @Test
-    @Order(1)
     public void testGetEmployees (){
         List<EmployeeDatabaseEntry> employeeList = employeeDao.findAll();
         Assertions.assertAll(
@@ -69,30 +67,17 @@ public class TestEmployeeDao {
                 () -> assertEquals(3, employeeList.size()) // förväntar oss 3 st employees i listan (i liquidbase changelog)
         );
     }
-    /*@Test
+
+    @Test
     public void testStoreEmployee() {
         employeeDao.save(ENTRY);
-
         Assertions.assertAll(
                 () -> assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isPresent()),
-                () -> assertEquals(ENTRY, employeeDao.findById(ENTRY.getEmployeeId()))
+                () ->assertEquals(ENTRY, employeeDao.findById(ENTRY.getEmployeeId()).get())
         );
         employeeDao.delete(ENTRY);
     }
-     */
-    @Test
-    public void testCreateEmployee() {
-        EmployeeDatabaseEntry employeeDatabaseEntry = employeeDao.save(ENTRY);
-        Assertions.assertAll(
-                () -> assertNotNull(employeeDatabaseEntry.getEmployeeId()),
-                () -> assertEquals(ENTRY.getFirstName(), employeeDatabaseEntry.getFirstName()),
-                () -> assertEquals(ENTRY.getEmployeeId(), employeeDatabaseEntry.getEmployeeId()),
-                () -> assertEquals(ENTRY.getLastName(), employeeDatabaseEntry.getLastName()),
-                () -> assertEquals(ENTRY.getFullTime(), employeeDatabaseEntry.getFullTime()),
-                () -> assertEquals(ENTRY.getSalary(), employeeDatabaseEntry.getSalary().setScale(0, RoundingMode.HALF_UP)),
-                () -> assertEquals(ENTRY.getDepartmentId(), employeeDatabaseEntry.getDepartmentId()));
-        employeeDao.delete(ENTRY);
-    }
+
     @Test
     public void testDeleteEmployee() throws InterruptedException {
         employeeDao.save(ENTRY);
@@ -103,6 +88,8 @@ public class TestEmployeeDao {
         employeeDao.delete(ENTRY);
         Assertions.assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isEmpty());
     }
+
+
 
 
 
