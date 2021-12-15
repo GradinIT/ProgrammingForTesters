@@ -47,9 +47,9 @@ public class TestDepartmentRestAPI extends DepartmentTestClient {
         department = getDepartmentById(departmentId);
     }
 
-    @Then("^departmentname is (.+)$")
-    public void nameOfDepartmentIs(String departmentName)  {
-        Assert.assertEquals(departmentName, department.get().getDepartmentName());
+    @Then("^the departmentname is$")
+    public void nameOfDepartmentIs()  {
+        Assert.assertEquals("Coding", department.get().getDepartmentName());
     }
 
     @Given("^the departments$")
