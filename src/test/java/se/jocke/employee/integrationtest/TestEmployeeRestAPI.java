@@ -6,7 +6,6 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
-
 import se.jocke.employee.api.EmployeeModel;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,10 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TestEmployeeRestAPI extends EmployeeTestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
-    @When("the client calls employee")
+
+
+    @When("^the client calls employee$")
     public void getAll() { employees = getAllEmployees();}
     // fungerar med {int} och utan $ och ^
-    @Then("^the client receives (\\d+) employees$")
+    @Then("the client receives {int} employees")
     public void the_client_receives_employees(int numberOfEmployees) {
         Assert.assertEquals(numberOfEmployees, employees.get().size());
     }
@@ -49,42 +50,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void firstname_is_runar(String employeeName) {
         Assert.assertEquals(employeeName, employee.get().getFirstName());
     }
-    /*
-    @Given("the employees")
-    public void the_employees(DataTable employees) {
-        List<EmployeeModel> listOfEmployees = makeEmployeeList(employees.asList());
-        listOfEmployees.stream().forEach(employee -> createEmployee(employee));
-    }
-
-    private List<EmployeeModel> makeEmployeeList(List<String> given) {
-        List<EmployeeModel> employeeModels = new ArrayList<>();
-        for (int i = 0; i < given.size() - 1; i += 2) { //kanske ändring
-            employeeModels.add(EmployeeModel.builder()
-                            .employeeId(Integer.parseInt(given.get(i))) //kanske ändring
-                            .firstName(given.get(i+1))
-                            .lastName(given.get(i+1))
-                            .salary(new BigDecimal(given.get(i+1)))
-                            .fullTime(Boolean.valueOf(given.get(i+1)))
-                            .departmentId(Integer.parseInt(given.get(i)))
-                    .build());
-        }
-        return employeeModels;
-    }
-
-
-
-
-
-
-
-    Blev över?
-    @When("the client calls findById")
-    public void the_client_calls_find_by_id() {
-    }
-    @Then("the client receives id {int}")
-    public void the_client_receives_id(Integer int1) {
-    }
-    */
 
     @Given("^the employees$")
     public void the_employees(DataTable dataTable) {
@@ -92,7 +57,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
                 .stream()
                 .forEach( employeeModel -> createEmployee(employeeModel));
     }
-
     private List<EmployeeModel> makeDepartmentList(List<String> given) {
         List<EmployeeModel> employeeModels = new ArrayList<>();
         for(int i = 0 ; i < given.size();) {
@@ -107,7 +71,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         }
         return employeeModels;
     }
-
     @When("the client deletes employee {int}")
     public void the_client_deletes_employee(Integer employeeId) {
         deleteEmployee(getEmployeeById(employeeId).get());
@@ -123,17 +86,4 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void the_error_message_is(Integer errorCode, Integer employeeId) {
         Assertions.assertEquals(errorCode + " : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
     }
-    @Given("employee")
-    public void employee(DataTable dataTable) {
-        makeDepartmentList(dataTable.asList())
-                .stream()
-                .forEach(employeeModel -> createEmployee(employeeModel));
-    }
-    @Then("the employee {int} exists")
-    public void the_employee_exists(Integer employeeId){
-        Optional<EmployeeModel> inDatabase = getEmployeeById(employeeId);
-        Assertions.assertEquals(Boolean.TRUE, inDatabase.isPresent());
-        deleteEmployee(inDatabase.get());
-    }
 }
-

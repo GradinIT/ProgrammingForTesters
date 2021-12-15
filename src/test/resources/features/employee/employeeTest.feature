@@ -23,7 +23,3 @@ Feature: test employee api
     And  the error message is 404 : ["Entity with id 89 not found"]
     Then the employee 90 is deleted
     And  the error message is 404 : ["Entity with id 90 not found"]
-    Scenario: Create Employee
-      Given employee
-      | 5 | Elite | Mustafa | 122121.50 | true | 1 |
-      Then the employee 5 exists
