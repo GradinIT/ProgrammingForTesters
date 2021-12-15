@@ -2,12 +2,12 @@ Feature: test department api
   Scenario: client gets all departments
     When the client calls /department
     Then the client receives 6 departments
-  Scenario: client updates departmentname for department 1
+  Scenario: client updates name for department 1
     When the client updates departmentname for department to Coding
     Then the departmentname is updated to Coding
   Scenario: client gets Department 1
     When the client gets department 1
-    Then departmentname is Coding
+    Then the departmentname is
   Scenario: client updates departmentname for department 1
     When the client updates departmentname for department to Development
     Then the departmentname is updated to Development

@@ -21,7 +21,7 @@ UnitTests:
 IntegrationTest:
     What tech have you made use of to create your integrationtest
 
-    Tell me in your own words ho the integration test runns
+    Tell me in your own words how the integration test runns
 
     example;
      first the server is started all test data is injected in the database ( describe what db you are using )
