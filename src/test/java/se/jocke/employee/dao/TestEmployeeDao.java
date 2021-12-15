@@ -1,7 +1,6 @@
 package se.jocke.employee.dao;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,6 @@ public class TestEmployeeDao {
     public void testGetEmployees() {
 
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
-        System.out.println(employees);
         Assertions.assertAll(
                 () -> assertNotNull(employees),
                 () -> assertEquals(3, employees.size())
