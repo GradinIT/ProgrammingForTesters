@@ -15,8 +15,12 @@ import se.jocke.employee.entity.Employee;
 import se.jocke.employee.dao.EmployeeDao;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -75,7 +79,13 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test get all employees")
     public void getAllEmployees() {
-        // Tim
+        when(employeeDao.findAll()).thenReturn(Arrays.asList(employeeDataBaseEntryBuilder(employee)));
+
+        List<Employee> employees = systemUnderTest.getAllEmployees();
+        Assertions.assertAll(
+                () -> assertNotNull(employees),
+                () -> assertEquals(1, employees.size())
+        );
     }
 
     @Test
