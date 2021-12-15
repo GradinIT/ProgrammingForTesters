@@ -46,15 +46,11 @@ public class TestEmployeeDao {
 
     @Test
     public void testCreateEmployee() {
-        EmployeeDatabaseEntry EmployeeDatabaseEntry = employeeDao.save(EMPLOYEE_DATABASE_ENTRY);
-        assertAll(
-                () -> assertNotNull(EmployeeDatabaseEntry.getEmployeeId()),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getFirstName(), EmployeeDatabaseEntry.getFirstName()),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getEmployeeId(), EmployeeDatabaseEntry.getEmployeeId()),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getLastName(), EmployeeDatabaseEntry.getLastName()),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getFullTime(), EmployeeDatabaseEntry.getFullTime()),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getSalary(), EmployeeDatabaseEntry.getSalary().setScale(0, RoundingMode.HALF_UP)),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getDepartmentId(), EmployeeDatabaseEntry.getDepartmentId()));
+        employeeDao.save(EMPLOYEE_DATABASE_ENTRY);
+        Assertions.assertAll(
+                () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).isPresent()),
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).get())
+                        );
         employeeDao.delete(EMPLOYEE_DATABASE_ENTRY);
     }
 
@@ -85,7 +81,7 @@ public class TestEmployeeDao {
                 () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).isPresent()),
                 () -> assertEquals(update,updated)
         );
-        employeeDao.delete(EMPLOYEE_DATABASE_ENTRY);
+        employeeDao.delete(updated);
     }
 
     @Test

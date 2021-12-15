@@ -29,14 +29,68 @@ public class TestCreateEmployeeModel {
 
     }
     @Test
-    public void testCreateDepartmentModelThrowsException() {
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
         Assertions.assertThrows(NullPointerException.class, () -> {
             EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
             EmployeeModel.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();
             EmployeeModel.builder().salary(EMPLOYEE_MODEL.getSalary()).build();
             EmployeeModel.builder().fullTime(EMPLOYEE_MODEL.getFullTime()).build();
+            EmployeeModel.builder().departmentId(EMPLOYEE_MODEL.getDepartmentId()).build();
+        });
+    }
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeFirstName() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
+            EmployeeModel.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();
+            EmployeeModel.builder().salary(EMPLOYEE_MODEL.getSalary()).build();
+            EmployeeModel.builder().fullTime(EMPLOYEE_MODEL.getFullTime()).build();
+            EmployeeModel.builder().departmentId(EMPLOYEE_MODEL.getDepartmentId()).build();
+        });
+    }
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeLastName() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
+            EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
+            EmployeeModel.builder().salary(EMPLOYEE_MODEL.getSalary()).build();
+            EmployeeModel.builder().fullTime(EMPLOYEE_MODEL.getFullTime()).build();
+            EmployeeModel.builder().departmentId(EMPLOYEE_MODEL.getDepartmentId()).build();
+        });
+    }
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingFulltime() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
+            EmployeeModel.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();
+            EmployeeModel.builder().salary(EMPLOYEE_MODEL.getSalary()).build();
             EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
             EmployeeModel.builder().departmentId(EMPLOYEE_MODEL.getDepartmentId()).build();
+        });
+    }
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingSalary() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
+            EmployeeModel.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();
+            EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
+            EmployeeModel.builder().fullTime(EMPLOYEE_MODEL.getFullTime()).build();
+            EmployeeModel.builder().departmentId(EMPLOYEE_MODEL.getDepartmentId()).build();
+        });
+    }
+
+    @Test
+    public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeDepartmentId() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            EmployeeModel.builder().employeeId(EMPLOYEE_MODEL.getEmployeeId()).build();
+            EmployeeModel.builder().lastName(EMPLOYEE_MODEL.getLastName()).build();
+            EmployeeModel.builder().salary(EMPLOYEE_MODEL.getSalary()).build();
+            EmployeeModel.builder().fullTime(EMPLOYEE_MODEL.getFullTime()).build();
+            EmployeeModel.builder().firstName(EMPLOYEE_MODEL.getFirstName()).build();
         });
     }
 }

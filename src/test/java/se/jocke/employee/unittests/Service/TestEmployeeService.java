@@ -66,6 +66,28 @@ public class TestEmployeeService {
         verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
     }
 
+    @Test
+    public void createEmployeeError() {
+        Employee employee = EmployeeTestBuilder.build();
+        when(employeeDao.findById(any(Integer.class))).thenReturn(Optional.of(
+                EmployeeDatabaseEntry.builder()
+                        .employeeId(employee.getEmployeeId().getId())
+                        .firstName(employee.getFirstName())
+                        .lastName(employee.getLastName())
+                        .fullTime(employee.getFullTime())
+                        .salary(employee.getSalary())
+                        .departmentId(employee.getDepartmentId())
+                        .build()
+        ));
+        Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> {
+            systemBeingTested.createEmployee(employee);
+        });
+        Assertions.assertEquals("Entity with id " + employee.getEmployeeId().getId() + " already in storage",
+                exception.getMessage());
+        verify(employeeDao, times(1)).findById(any(Integer.class));
+        verifyNoMoreInteractions(employeeDao);
+    }
+
    @Test
     public void testRemoveEmployee() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
