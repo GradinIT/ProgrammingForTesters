@@ -1,10 +1,8 @@
 package se.jocke.employee.unittests.dao;
 
-import io.cucumber.java.bs.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.unittests.Builder.EmployeeDatabaseEntryTestBuilder;
-import se.jocke.employee.unittests.entity.Employee;
 
 public class TestEmployeeDatabaseEntry {
     private static final EmployeeDatabaseEntry ENTRY = EmployeeDatabaseEntryTestBuilder.build();
