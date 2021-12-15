@@ -52,19 +52,19 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
     //Next Scenario: Employee firstname is "Runar"
     @When("the client gets employee {int}")
-    public void the_client_gets_employee(int employeeId) {
+    public void theClientGetsEmployee(int employeeId) {
 
         employee = getEmployeeById(employeeId);
     }
     @Then("firstname is {string}")
-    public void firstname_is_runar(String firstName) {
+    public void firstnameIs(String firstName) {
         Assertions.assertEquals(firstName,employee.get().getFirstName());
     }
     //Note: next Scenario to change back "Runar" to "firstName1" for employeeId 1 will reuse previous code
 
-    //Scenario: Delete Employee (not included in feature due to error)
+    //Scenario: Delete Employee
     @Given("the employees")
-    public void the_employees(DataTable dataTable) {
+    public void theEmployees(DataTable dataTable) {
         makeEmployeeList(dataTable.asList())
                 .stream()
                 .forEach( employeeModel -> createEmployee(employeeModel));
