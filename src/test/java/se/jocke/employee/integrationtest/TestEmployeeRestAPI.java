@@ -105,7 +105,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Assertions.assertEquals(errorCode + " : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
    }
 //  new Scenario: Create Employee
-//  NOTE re-watch zoom lecture from 2021-12-09, timestamp 0h 32min
 @Given("new employee")
 public void employee(DataTable dataTable) {
     makeEmployeeList(dataTable.asList())
@@ -116,7 +115,7 @@ public void employee(DataTable dataTable) {
     public void theEmployeeExists(Integer employeeId) {
         Optional<EmployeeModel> inDatabase = getEmployeeById(employeeId);
         Assertions.assertEquals(Boolean.TRUE,inDatabase.isPresent()); // we check that the new employee is present in the database
-        deleteEmployee(inDatabase.get()); // we delete the test-employee to restore the database. We need to add .get() since it cannot be an Optional
+        deleteEmployee(inDatabase.get()); // we delete the test-employee to restore the database.
 
     }
 }
