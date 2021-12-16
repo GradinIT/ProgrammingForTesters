@@ -4,14 +4,14 @@ Feature: test employee api
     When the client calls /employee
     Then the client receives 3 employees
 
-  Scenario: client updates firstname for employee 1 to Runar
-    When the client updates firstname for employee 1 to Runar
+  Scenario: client updates firstname for employee 1
+    When the client updates firstname for employee to Runar
     Then the firstname is updated to Runar
 
 
-  Scenario: client updates lastname for employee 1 to
-    When the client updates lastname for employee 1 to Carola
-    Then the client updates lastname for employee 1 to Carola
+  Scenario: client updates lastname for employee 1
+    When the client updates lastname for employee to Carola
+    Then the lastname is updated to Carola
     
   Scenario: Employee firstname is Runar
     When the client gets employee 1

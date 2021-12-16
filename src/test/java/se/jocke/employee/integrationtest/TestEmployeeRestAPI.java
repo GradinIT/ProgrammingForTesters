@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.department.api.DepartmentModel;
 import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.entity.Employee;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,9 +20,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends EmployeeTestClient {
-    List<EmployeeModel> employees;
-    List<EmployeeModel> employee;
-    EmployeeModel employeeModel;
+    private List<EmployeeModel> employees;
+    private EmployeeModel employee;
+    private EmployeeModel employeeModel;
 
     @When("the client calls \\/employee")
     public void the_client_calls_employee() {
@@ -44,20 +45,42 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
     }
 
-    /*@When("the client updates lastname for employee {int} to Runar")
-    public void the_client_updates_firstname_for_employee_to_runar(String arg1, String arg2) {
-        updateEmployee(EmployeeModel
-                .builder()
-                .employeeId(1)
+    @When("^the client updates firstname for employee to (.+)$")
+    public void the_client_updates_firstname_for_employee_to_runar(String employeeFirstName) {
+        employee = getEmployeeById(1).get();
+        EmployeeModel update = EmployeeModel.builder()
+                .departmentId(employee.getDepartmentId())
+                .employeeId(employee.getEmployeeId())
+                .lastName(employee.getLastName())
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
                 .firstName(employeeFirstName)
-                .lastName(employeeLastName)
-                .build());
-    }*/
+                .build();
+        employee = updateEmployee(update).get();
+    }
 
     @Then("the firstname is updated to (.+)$")
     public void the_firstname_is_updated_to_runar(String employeeFirstName) {
-        Optional<EmployeeModel> employee = getEmployeeById(1);
-        Assert.assertEquals(employeeFirstName, employee.get().getFirstName());
+        Assert.assertEquals(employeeFirstName, employee.getFirstName());
+    }
+
+    @When("^the client updates lastname for employee to (.+)$")
+    public void theClientUpdatesLastnameForEmployeeToCarola(String employeeLastName) {
+        employee = getEmployeeById(1).get();
+        EmployeeModel update = EmployeeModel.builder()
+                .departmentId(employee.getDepartmentId())
+                .employeeId(employee.getEmployeeId())
+                .lastName(employeeLastName)
+                .fullTime(employee.getFullTime())
+                .salary(employee.getSalary())
+                .firstName(employee.getFirstName())
+                .build();
+        employee = updateEmployee(update).get();
+    }
+
+    @Then("the lastname is updated to (.+)$")
+    public void the_lastname_is_updated_to_carola(String employeeLastName) {
+        Assert.assertEquals(employeeLastName, employee.getLastName());
     }
 
     @Given("the employees")
@@ -124,8 +147,5 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
                 .forEach(employeeModel -> createEmployee(employeeModel));
     }
 
-    @When("the client updates lastname for employee {int} to Carola")
-    public void theClientUpdatesLastnameForEmployeeToCarola(int arg0) {
-    }
 
 }
