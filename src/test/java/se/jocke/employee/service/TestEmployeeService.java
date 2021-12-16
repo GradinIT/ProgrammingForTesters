@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.common.dao.EntityNotFoundException;
 import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
@@ -161,6 +162,13 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test create employee error")
     public void createEmployeeError() {
-        // Ramin
+        when(employeeDao.findById(employee.getEmployeeId().getId())).thenReturn(Optional.of(employeeDataBaseEntryBuilder(employee)));
+        Throwable exception = Assertions.assertThrows(EntityAlreadyInStorageException.class, () -> {
+            systemUnderTest.createEmployee(employee);
+        });
+        Assertions.assertEquals("Entity with id " + employee.getEmployeeId().getId() + " already in storage",
+                exception.getMessage());
+        verify(employeeDao, times(1)).findById(employee.getEmployeeId().getId());
+        verifyNoMoreInteractions(employeeDao);
     }
 }
