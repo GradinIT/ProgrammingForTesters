@@ -14,6 +14,7 @@ import se.jocke.employee.builder.EmployeeTestBuilder;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 import se.jocke.employee.entity.Employee;
 import se.jocke.employee.dao.EmployeeDao;
+import se.jocke.employee.entity.EmployeeID;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -94,7 +95,21 @@ public class TestEmployeeService {
     @Test
     @DisplayName("Test create employee")
     public void createEmployee() {
-        // Vladde
+
+        Employee emp1 = Employee.builder()
+                .employeeId(EmployeeID.builder().id(4).build())
+                .firstName("firstname4")
+                .lastName("lastname4")
+                .salary(new BigDecimal(25000))
+                .fullTime(true)
+                .departmentId(4)
+                .build();
+
+        EmployeeDatabaseEntry newEmployeeDatabaseEntry = employeeDataBaseEntryBuilder(emp1);
+
+        when(employeeDao.save(newEmployeeDatabaseEntry)).thenReturn(newEmployeeDatabaseEntry);
+        systemUnderTest.createEmployee(emp1);
+        verify(employeeDao, times(1)).save(newEmployeeDatabaseEntry);
     }
 
     @Test
