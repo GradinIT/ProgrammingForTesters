@@ -29,10 +29,18 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Optional<List<EmployeeModel>> employeeModels = getAllEmployees();
         employees = employeeModels.get();
     }
-
     @Then("the client receives {int} employees")
     public void the_client_receives_employees(int expectedNumberOfEmployees) {
         Assert.assertEquals(expectedNumberOfEmployees, employees.size());
+    }
+
+    @When("the client asks for employee {int}")
+    public void the_client_asks_for_first_employee(Integer getEmployee){
+        employee = getEmployeeById(getEmployee).get();
+    }
+    @Then("^employeeName is (.+)$")
+    public void first_employee_is_then_runar(String employeeFirstName){
+        Assert.assertEquals(employeeFirstName, employee.getFirstName());
     }
 
     @When("the client gets employee {int}")
@@ -83,6 +91,14 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Assert.assertEquals(employeeLastName, employee.getLastName());
     }
 
+
+
+
+
+
+
+
+
     @Given("the employees")
     public void the_employees(DataTable dataTable) {
         makeDepartmentList(dataTable.asList())
@@ -117,16 +133,10 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         });
     }
 
-    @And("the client gets error message {string}")
-    public void the_error_message_is(Integer errorCode, String employeeID) {
-        Assertions.assertEquals(errorCode + ": [Entity with id"+employeeID+" not found]", exceptionThatWasThrown.getMessage());
+    @And("the error message is {int} : [\"Entity with id {int} not found\"]")
+    public void the_error_message_is(Integer errorCode, Integer employeeID) {
+        Assertions.assertEquals(errorCode + " : [Entity with id "+employeeID+" not found]", exceptionThatWasThrown.getMessage());
     }
-
-
-
-
-
-
 
 
 

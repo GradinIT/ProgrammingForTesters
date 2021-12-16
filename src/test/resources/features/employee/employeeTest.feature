@@ -13,9 +13,9 @@ Feature: test employee api
     When the client updates lastname for employee to Carola
     Then the lastname is updated to Carola
     
-  Scenario: Employee firstname is Runar
-    When the client gets employee 1
-    Then firstname is Runar
+  Scenario: client asks for employee 1
+    When the client asks for employee 1
+    Then employeeName is Runar
 
   Scenario: Delete Employee
     Given the employees
@@ -23,8 +23,15 @@ Feature: test employee api
       | 89 | Socker-Ronny | Jarnror | 12500.50 | true | 2 |
       | 90 | Socker-Bonny | Lastname | 12500.50 | false | 3 |
     When the client deletes employee 88
+    When the client deletes employee 89
+    When the client deletes employee 90
     Then the employee 88 is deleted
-    And the error message is 404 : ["employee with ID 88 is not found"]
+    And the error message is 404 : ["Entity with id 88 not found"]
+    Then the employee 89 is deleted
+    And the error message is 404 : ["Entity with id 89 not found"]
+    Then the employee 90 is deleted
+    And the error message is 404 : ["Entity with id 90 not found"]
+
 
 
 
