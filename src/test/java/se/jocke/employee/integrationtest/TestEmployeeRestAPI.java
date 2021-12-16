@@ -29,6 +29,7 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Optional<List<EmployeeModel>> employeeModels = getAllEmployees();
         employees = employeeModels.get();
     }
+
     @Then("the client receives {int} employees")
     public void the_client_receives_employees(int expectedNumberOfEmployees) {
         Assert.assertEquals(expectedNumberOfEmployees, employees.size());
@@ -38,6 +39,7 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void the_client_asks_for_first_employee(Integer getEmployee){
         employee = getEmployeeById(getEmployee).get();
     }
+
     @Then("^employeeName is (.+)$")
     public void first_employee_is_then_runar(String employeeFirstName){
         Assert.assertEquals(employeeFirstName, employee.getFirstName());
@@ -50,7 +52,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     @Then("firstname is (.+)")
     public void firstname_is_runar(String employeeFirstName) {
         Assert.assertEquals(employeeFirstName, employeeModel.getFirstName());
-
     }
 
     @When("^the client updates firstname for employee to (.+)$")
@@ -91,14 +92,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Assert.assertEquals(employeeLastName, employee.getLastName());
     }
 
-
-
-
-
-
-
-
-
     @Given("the employees")
     public void the_employees(DataTable dataTable) {
         makeDepartmentList(dataTable.asList())
@@ -138,8 +131,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Assertions.assertEquals(errorCode + " : [Entity with id "+employeeID+" not found]", exceptionThatWasThrown.getMessage());
     }
 
-
-
     @Then("the employee {int} exists")
     public void theEmployeeExists(int arg0) {
 
@@ -148,7 +139,6 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void theClientGetsMessage(String arg0) {
         
     }
-
 
     @Given("new employee")
     public void newEmployee(DataTable dataTable) {
