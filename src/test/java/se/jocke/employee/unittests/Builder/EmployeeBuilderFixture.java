@@ -1,9 +1,10 @@
 package se.jocke.employee.unittests.Builder;
 
 import lombok.experimental.SuperBuilder;
-import se.jocke.employee.unittests.entity.EmployeeID;
+import se.jocke.employee.entity.EmployeeID;
 
 import java.math.BigDecimal;
+
 @SuperBuilder
 public class EmployeeBuilderFixture {
     public static final String FIRSTNAME = "Runar";

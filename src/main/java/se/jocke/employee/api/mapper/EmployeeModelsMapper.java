@@ -1,8 +1,8 @@
-package se.jocke.employee.unittests.api.mapper;
+package se.jocke.employee.api.mapper;
 
 import lombok.EqualsAndHashCode;
-import se.jocke.employee.unittests.api.EmployeeModel;
-import se.jocke.employee.unittests.entity.Employee;
+import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.entity.Employee;
 
 import java.util.List;
 import java.util.stream.Collectors;

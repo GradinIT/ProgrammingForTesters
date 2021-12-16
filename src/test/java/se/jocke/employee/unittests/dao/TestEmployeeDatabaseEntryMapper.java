@@ -1,11 +1,12 @@
 package se.jocke.employee.unittests.dao;
 
-import liquibase.pro.packaged.L;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.employee.dao.EmployeeDatabaseEntryMapper;
 import se.jocke.employee.unittests.Builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.unittests.Builder.EmployeeTestBuilder;
-import se.jocke.employee.unittests.entity.Employee;
+import se.jocke.employee.entity.Employee;
 
 import java.util.Arrays;
 import java.util.List;

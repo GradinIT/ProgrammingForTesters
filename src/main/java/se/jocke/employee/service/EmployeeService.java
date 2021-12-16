@@ -1,6 +1,6 @@
 package se.jocke.employee.service;
 
-import se.jocke.employee.unittests.entity.Employee;
+import se.jocke.employee.entity.Employee;
 
 import java.util.List;
 

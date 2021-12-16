@@ -3,7 +3,7 @@ package se.jocke.employee.unittests.api.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import se.jocke.employee.unittests.Builder.EmployeeModelTestBuilder;
-import se.jocke.employee.unittests.api.EmployeeModel;
+import se.jocke.employee.api.EmployeeModel;
 
 public class TestCreateEmployeeModel {
     private final EmployeeModel EMPLOYEE_MODEL = EmployeeModelTestBuilder.build();
@@ -11,7 +11,7 @@ public class TestCreateEmployeeModel {
 
     @Test
     public void testCreateEmployeeModel() {
-        EmployeeModel employee =EmployeeModel.builder()
+        EmployeeModel employee = EmployeeModel.builder()
                 .employeeId(EMPLOYEE_MODEL.getEmployeeId())
                 .firstName(EMPLOYEE_MODEL.getFirstName())
                 .lastName(EMPLOYEE_MODEL.getLastName())
@@ -28,6 +28,7 @@ public class TestCreateEmployeeModel {
         Assertions.assertEquals(EMPLOYEE_MODEL.getDepartmentId(), employee.getDepartmentId());
 
     }
+
     @Test
     public void testThatNullPointerExceptionIsRaisedWhenNotProvidingEmployeeId() {
         Assertions.assertThrows(NullPointerException.class, () -> {

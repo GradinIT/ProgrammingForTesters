@@ -1,6 +1,6 @@
 package se.jocke.employee.unittests.Builder;
 
-import se.jocke.employee.unittests.api.EmployeeModel;
+import se.jocke.employee.api.EmployeeModel;
 
 public class EmployeeModelTestBuilderTwo {
     public static EmployeeModel build() {
