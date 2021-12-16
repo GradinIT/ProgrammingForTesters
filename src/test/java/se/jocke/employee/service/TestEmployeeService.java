@@ -17,11 +17,10 @@ import se.jocke.employee.entity.Employee;
 import se.jocke.employee.test.builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.test.builder.EmployeeTestBuilder;
 
+import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
@@ -69,5 +68,45 @@ public class TestEmployeeService {
         Assertions.assertThrows(EntityAlreadyInStorageException.class, ()-> systemUnderTest.createEmployee(EMPLOYEE));
     }
 
-    // TODO; test update , delete , getAll
+    //update
+    @Test
+    public void testUpdateEmployee(){
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
+        when(employeeDao.save(EMPLOYEE_DATABASE_ENTRY)).thenReturn(EMPLOYEE_DATABASE_ENTRY);
+        Employee employee = systemUnderTest.updateEmployee(EMPLOYEE);
+        Assertions.assertAll(
+                ()-> Assertions.assertNotNull(employee),
+                ()-> Assertions.assertEquals(EMPLOYEE, employee)
+        );
+        verify(employeeDao, times(1)).save(EMPLOYEE_DATABASE_ENTRY);
+    }
+
+    //delete
+    @Test
+    public void testDeleteEmployee(){
+        when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
+        doNothing().when(employeeDao).delete(EMPLOYEE_DATABASE_ENTRY);
+
+        Employee employee = systemUnderTest.removeEmployee(EMPLOYEE);
+        Assertions.assertAll(
+                ()-> Assertions.assertNotNull(employee),
+                ()-> Assertions.assertEquals(EMPLOYEE, employee)
+        );
+        verify(employeeDao, times(1)).delete(EMPLOYEE_DATABASE_ENTRY);
+    }
+
+    //getALL
+    @Test
+    public void testGetALlEmployees(){
+        when(employeeDao.findAll()).thenReturn(EmployeeDatabaseEntryTestBuilder.byggLista());
+
+        List<Employee> employees = systemUnderTest.getAllEmployees();
+
+        Assertions.assertAll(
+                ()-> Assertions.assertNotNull(employees),
+                ()-> Assertions.assertEquals(1, employees.size()),
+                ()-> Assertions.assertTrue(employees.contains(EMPLOYEE))
+        );
+    }
+
 }

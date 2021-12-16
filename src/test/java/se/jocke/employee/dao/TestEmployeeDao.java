@@ -10,6 +10,7 @@ import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.config.PersistenceConfig;
 import se.jocke.department.dao.DepartmentDao;
 import se.jocke.department.dao.DepartmentDatabaseEntry;
+import se.jocke.employee.test.builder.EmployeeDatabaseEntryTestBuilder;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {LiquibaseConfigurer.class, PersistenceConfig.class})
 public class TestEmployeeDao {
+    private final EmployeeDatabaseEntry ENTRY = EmployeeDatabaseEntryTestBuilder.bygg();
 
     @Autowired
     EmployeeDao employeeDao;
@@ -46,5 +48,28 @@ public class TestEmployeeDao {
                 () -> assertEquals(5, employees.size())
         );
     }
+
+    //Update
+    @Test
+    public void testUpdateEmployee(){
+        employeeDao.save(ENTRY);
+        Assertions.assertAll(
+                ()-> assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isPresent()),
+                ()-> assertEquals(ENTRY, employeeDao.findById(ENTRY.getEmployeeId()).get())
+        );
+        EmployeeDatabaseEntry update = EmployeeDatabaseEntry.builder()
+                .employeeId(ENTRY.getEmployeeId())
+                .firstName("Klas")
+                .lastName("Koding")
+                .build();
+        employeeDao.save(update);
+        EmployeeDatabaseEntry updated = employeeDao.findById(ENTRY.getEmployeeId()).get();
+        Assertions.assertAll(
+                () -> assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isPresent()),
+                ()-> assertEquals(update, updated)
+        );
+        employeeDao.delete(updated);
+    }
+
     //TODO: test findAll , update & create ( a.k.a save ) , test delete
 }
