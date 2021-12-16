@@ -4,7 +4,14 @@
 [Quick Start ](#QuickStart)  
 [Lektioner](#Lektioner)
 
-This project is made by me in order to teach testing and test development
+This project is made by me in order to teach testing and test development.
+In order to benefit from this course the student should have:
+1. A good understanding of how to install software in windows, linux or mac.
+2. A good understanding of how to add and modify environment variables such as PATH
+3. A good understanding of the Java programming language
+4. Know how to compile code and solve compile errors
+5. Have a understanding regarding modern Integrated Development Environments ( IDE )
+
 <a name="QuickStart"/>
 ##Quick Start 
 
@@ -25,6 +32,7 @@ This project is made by me in order to teach testing and test development
 10. run mvn clean install 
 11. try to solve any errors
 <a name="Lektioner"/>
+    
 ##Lektioner
 
 1. [Java Grund](https://toggleon.wordpress.com/2010/05/12/grundlaggande-objektorientering-i-java-inledning-och-syntax/)
