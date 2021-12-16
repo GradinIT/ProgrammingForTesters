@@ -46,4 +46,5 @@ public class TestEmployeeDao {
                 () -> assertEquals(5, employees.size())
         );
     }
+    //TODO: test findAll , update & create ( a.k.a save ) , test delete
 }
