@@ -1,4 +1,5 @@
 package se.jocke.employee.integrationtest;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,23 +8,30 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
 import se.jocke.employee.api.EmployeeModel;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestEmployeeRestAPI extends EmployeeTestClient {
     Optional<List<EmployeeModel>> employees = null;
     Optional<EmployeeModel> employee = null;
 
 
     @When("^the client calls employee$")
-    public void getAll() { employees = getAllEmployees();}
+    public void getAll() {
+        employees = getAllEmployees();
+    }
+
     // fungerar med {int} och utan $ och ^
     @Then("the client receives {int} employees")
     public void the_client_receives_employees(int numberOfEmployees) {
         Assert.assertEquals(numberOfEmployees, employees.get().size());
     }
+
     @When("^the client updates firstname for employee (\\d+) to (.+)$")
     public void the_client_updates_firstname_for_employee_to_runar(Integer employeeId, String firstName) {
         employee = Optional.of(getEmployeeById(employeeId).get());
@@ -37,15 +45,18 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
                 .build();
         employee = Optional.of(updateEmployee(update).get());
     }
+
     @Then("the firstname is updated to (.+)$")
     public void the_firstname_is_updated_to_runar(String firstName) {
         Optional<EmployeeModel> employee = getEmployeeById(1);
         Assert.assertEquals(firstName, employee.get().getFirstName());
     }
+
     @When("^the client gets employee (\\d+)$")
     public void the_client_gets_employee(Integer employeeId) {
         employee = getEmployeeById(employeeId);
     }
+
     @Then("^firstname is (.+)$")
     public void firstname_is_runar(String employeeName) {
         Assert.assertEquals(employeeName, employee.get().getFirstName());
@@ -55,12 +66,13 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void the_employees(DataTable dataTable) {
         makeDepartmentList(dataTable.asList())
                 .stream()
-                .forEach( employeeModel -> createEmployee(employeeModel));
+                .forEach(employeeModel -> createEmployee(employeeModel));
     }
+
     private List<EmployeeModel> makeDepartmentList(List<String> given) {
         List<EmployeeModel> employeeModels = new ArrayList<>();
-        for(int i = 0 ; i < given.size();) {
-            employeeModels.add( EmployeeModel.builder()
+        for (int i = 0; i < given.size(); ) {
+            employeeModels.add(EmployeeModel.builder()
                     .employeeId(Integer.valueOf(given.get(i++)))
                     .firstName(given.get(i++))
                     .lastName(given.get(i++))
@@ -71,19 +83,23 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         }
         return employeeModels;
     }
+
     @When("the client deletes employee {int}")
     public void the_client_deletes_employee(Integer employeeId) {
         deleteEmployee(getEmployeeById(employeeId).get());
     }
+
     private Throwable exceptionThatWasThrown;
+
     @Then("the employee {int} is deleted")
     public void the_employee_is_deleted(Integer employeeId) {
         exceptionThatWasThrown = assertThrows(HttpClientErrorException.class, () -> {
             getEmployeeById(employeeId);
         });
     }
+
     @Then("the error message is {int} : [\"Entity with id {int} not found\"]")
     public void the_error_message_is(Integer errorCode, Integer employeeId) {
-        Assertions.assertEquals(errorCode + " : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
+        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
 }
