@@ -1,12 +1,12 @@
 package se.jocke.employee.unittests.Builder;
 
 import lombok.experimental.SuperBuilder;
-import se.jocke.employee.unittests.entity.EmployeeID;
+import se.jocke.employee.entity.EmployeeID;
 
 import java.math.BigDecimal;
+
 @SuperBuilder
-public class EmployeeBuilderFixtureTwo
- {
+public class EmployeeBuilderFixtureTwo {
     public static final String FIRSTNAME = "Carola";
     public static final String LASTNAME = "Corleone";
     public static final Integer DEPARTMENTID = 1;

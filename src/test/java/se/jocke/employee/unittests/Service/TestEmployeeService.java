@@ -12,9 +12,9 @@ import se.jocke.common.dao.EntityAlreadyInStorageException;
 import se.jocke.common.dao.EntityNotFoundException;
 import se.jocke.employee.unittests.Builder.EmployeeDatabaseEntryTestBuilder;
 import se.jocke.employee.unittests.Builder.EmployeeTestBuilder;
-import se.jocke.employee.unittests.dao.EmployeeDao;
-import se.jocke.employee.unittests.dao.EmployeeDatabaseEntry;
-import se.jocke.employee.unittests.entity.Employee;
+import se.jocke.employee.dao.EmployeeDao;
+import se.jocke.employee.dao.EmployeeDatabaseEntry;
+import se.jocke.employee.entity.Employee;
 import se.jocke.employee.service.EmployeeService;
 import se.jocke.employee.service.EmployeeServiceImpl;
 
@@ -88,18 +88,18 @@ public class TestEmployeeService {
         verifyNoMoreInteractions(employeeDao);
     }
 
-   @Test
+    @Test
     public void testRemoveEmployee() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.of(EMPLOYEE_DATABASE_ENTRY));
         doNothing().when(employeeDao).delete(EMPLOYEE_DATABASE_ENTRY);
 
         Employee employee = systemBeingTested.removeEmployee(EMPLOYEE);
-        Assertions.assertAll   (
+        Assertions.assertAll(
                 () -> Assertions.assertNotNull(employee),
                 () -> Assertions.assertEquals(EMPLOYEE, employee));
 
-        verify(employeeDao,times(1)).delete(EMPLOYEE_DATABASE_ENTRY);
-}
+        verify(employeeDao, times(1)).delete(EMPLOYEE_DATABASE_ENTRY);
+    }
 
 
     @Test
@@ -122,19 +122,20 @@ public class TestEmployeeService {
 
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(employees),
-                () -> Assertions.assertEquals(1,employees.size()),
+                () -> Assertions.assertEquals(1, employees.size()),
                 () -> Assertions.assertTrue(employees.contains(EMPLOYEE))
         );
 
         verify(employeeDao, times(1)).findAll();
 
     }
+
     @Test
     public void testEmployeeFindByIDEntityNotFoundException() {
         when(employeeDao.findById(EMPLOYEE.getEmployeeId().getId())).thenReturn(Optional.empty());
         Assertions.assertThrows(EntityNotFoundException.class, () -> systemBeingTested.getEmployeeById(EMPLOYEE.getEmployeeId().getId()));
 
-    verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
+        verify(employeeDao, times(1)).findById(EMPLOYEE.getEmployeeId().getId());
 
     }
 

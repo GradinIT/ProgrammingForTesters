@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.web.client.HttpClientErrorException;
-import se.jocke.employee.unittests.api.EmployeeModel;
+import se.jocke.employee.api.EmployeeModel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,11 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestEmployeeRestAPI extends EmployeeTestClient {
     private List<EmployeeModel> employees;
-    private  EmployeeModel employee;
+    private EmployeeModel employee;
 
 
     @When("the client calls \\/employee")
-    public void the_client_calls_employee() { employees = getAllEmployees().get();
+    public void the_client_calls_employee() {
+        employees = getAllEmployees().get();
     }
 
     @Then("the client receives {int} employees")
@@ -59,7 +60,7 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     }
 
     @Then("^the firstname is updated to (.+)$")
-    public void the_firstname_is_updated_to_runar( String firstName) {
+    public void the_firstname_is_updated_to_runar(String firstName) {
 
         Assertions.assertEquals(firstName, employee.getFirstName());
     }
@@ -68,13 +69,13 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
     public void the_employees(DataTable dataTable) {
         makeEmployeeList(dataTable.asList())
                 .stream()
-                .forEach( employeeModel -> createEmployee(employeeModel));
+                .forEach(employeeModel -> createEmployee(employeeModel));
     }
 
     private List<EmployeeModel> makeEmployeeList(List<String> given) {
         List<EmployeeModel> employeeModels = new ArrayList<>();
-        for(int i = 0 ; i < given.size();) {
-            employeeModels.add( EmployeeModel.builder()
+        for (int i = 0; i < given.size(); ) {
+            employeeModels.add(EmployeeModel.builder()
                     .employeeId(Integer.valueOf(given.get(i++)))
                     .firstName(given.get(i++))
                     .lastName(given.get(i++))
@@ -88,8 +89,10 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
     @When("the client deletes employee {int}")
     public void theClientDeletesEmployee(Integer employeeId) {
-        deleteEmployee(getEmployeeById(employeeId).get());}
-        private Throwable exceptionThatWasThrown;
+        deleteEmployee(getEmployeeById(employeeId).get());
+    }
+
+    private Throwable exceptionThatWasThrown;
 
 
     @Then("Employee {int} is deleted")
@@ -98,8 +101,9 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
             getEmployeeById(employeeId);
         });
     }
+
     @And("the error message is {int} : [\"Entity with id {int} not found\"]")
     public void checkErrorMessage(Integer errorCode, Integer employeeId) {
-        Assertions.assertEquals(errorCode + " : [Entity with id "+employeeId+" not found]", exceptionThatWasThrown.getMessage());
+        Assertions.assertEquals(errorCode + " : [Entity with id " + employeeId + " not found]", exceptionThatWasThrown.getMessage());
     }
 }

@@ -1,10 +1,10 @@
 package se.jocke.employee.unittests.Builder;
 
-import se.jocke.employee.unittests.entity.Employee;
+import se.jocke.employee.entity.Employee;
 
 public class EmployeeTestBuilderTwo {
     public static Employee build() {
-        return   Employee.builder()
+        return Employee.builder()
                 .employeeId(EmployeeBuilderFixtureTwo.EMPLOYEE_ID)
                 .firstName(EmployeeBuilderFixtureTwo.FIRSTNAME)
                 .lastName(EmployeeBuilderFixtureTwo.LASTNAME)

@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import se.jocke.config.PersistenceConfig;
 import se.jocke.config.LiquibaseConfigurer;
+import se.jocke.employee.dao.EmployeeDao;
+import se.jocke.employee.dao.EmployeeDatabaseEntry;
 import se.jocke.employee.unittests.Builder.EmployeeDatabaseEntryTestBuilder;
 
 import java.math.RoundingMode;
@@ -36,7 +38,7 @@ public class TestEmployeeDao {
                 () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getFirstName(), optionalEmployeeDatabaseEntry.get().getFirstName()),
                 () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getEmployeeId(), optionalEmployeeDatabaseEntry.get().getEmployeeId()),
                 () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getLastName(), optionalEmployeeDatabaseEntry.get().getLastName()),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getFullTime(),optionalEmployeeDatabaseEntry.get().getFullTime()),
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getFullTime(), optionalEmployeeDatabaseEntry.get().getFullTime()),
                 () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getSalary(), optionalEmployeeDatabaseEntry.get().getSalary().setScale(0, RoundingMode.HALF_UP)),
                 () -> assertEquals(EMPLOYEE_DATABASE_ENTRY.getDepartmentId(), optionalEmployeeDatabaseEntry.get().getDepartmentId()));
         employeeDao.delete(EMPLOYEE_DATABASE_ENTRY);
@@ -50,7 +52,7 @@ public class TestEmployeeDao {
         Assertions.assertAll(
                 () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).isPresent()),
                 () -> assertEquals(EMPLOYEE_DATABASE_ENTRY, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).get())
-                        );
+        );
         employeeDao.delete(EMPLOYEE_DATABASE_ENTRY);
     }
 
@@ -59,11 +61,12 @@ public class TestEmployeeDao {
         employeeDao.save(EMPLOYEE_DATABASE_ENTRY);
         assertAll(
                 () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).isPresent()),
-                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY,employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).get())
+                () -> assertEquals(EMPLOYEE_DATABASE_ENTRY, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).get())
         );
         employeeDao.delete(EMPLOYEE_DATABASE_ENTRY);
         assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).isEmpty());
     }
+
     @Test
     public void testUpdateEmployee() {
         employeeDao.save(EMPLOYEE_DATABASE_ENTRY);
@@ -79,7 +82,7 @@ public class TestEmployeeDao {
         EmployeeDatabaseEntry updated = employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).get();
         assertAll(
                 () -> assertEquals(Boolean.TRUE, employeeDao.findById(EMPLOYEE_DATABASE_ENTRY.getEmployeeId()).isPresent()),
-                () -> assertEquals(update,updated)
+                () -> assertEquals(update, updated)
         );
         employeeDao.delete(updated);
     }
@@ -89,7 +92,7 @@ public class TestEmployeeDao {
         List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
         Assertions.assertAll(
                 () -> assertNotNull(employees),
-                () -> assertEquals(3,employees.size())
+                () -> assertEquals(3, employees.size())
         );
 
     }

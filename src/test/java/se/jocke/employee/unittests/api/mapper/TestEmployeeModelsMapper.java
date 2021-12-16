@@ -3,12 +3,13 @@ package se.jocke.employee.unittests.api.mapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import se.jocke.employee.api.mapper.EmployeeModelsMapper;
 import se.jocke.employee.unittests.Builder.EmployeeModelTestBuilder;
 import se.jocke.employee.unittests.Builder.EmployeeModelTestBuilderTwo;
 import se.jocke.employee.unittests.Builder.EmployeeTestBuilder;
 import se.jocke.employee.unittests.Builder.EmployeeTestBuilderTwo;
-import se.jocke.employee.unittests.api.EmployeeModel;
-import se.jocke.employee.unittests.entity.Employee;
+import se.jocke.employee.api.EmployeeModel;
+import se.jocke.employee.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class TestEmployeeModelsMapper {
         Assertions.assertTrue(expectedModelList.containsAll(actualModelsList));
 
     }
+
     @Test
     public void testNullOnEmployeeModelsMapper() {
 

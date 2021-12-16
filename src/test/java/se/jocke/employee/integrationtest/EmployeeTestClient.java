@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import se.jocke.config.PersistenceConfig;
 import se.jocke.config.LiquibaseConfigurer;
 import se.jocke.RestServiceApplication;
-import se.jocke.employee.unittests.api.EmployeeModel;
+import se.jocke.employee.api.EmployeeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,31 +27,35 @@ public class EmployeeTestClient {
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.DELETE,
                 null);
-        EmployeeModel result = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.DELETE, requestEntity, EmployeeModel.class).getBody();
+        EmployeeModel result = restTemplate.exchange(BASE_URL + "employee/", HttpMethod.DELETE, requestEntity, EmployeeModel.class).getBody();
         return Optional.of(result);
     }
+
     public static Optional<EmployeeModel> createEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
-        EmployeeModel result = restTemplate.postForObject(BASE_URL+"employee/", employeeModel, EmployeeModel.class);
+        EmployeeModel result = restTemplate.postForObject(BASE_URL + "employee/", employeeModel, EmployeeModel.class);
         return Optional.of(result);
     }
+
     public static Optional<EmployeeModel> updateEmployee(EmployeeModel employeeModel) {
         RestTemplate restTemplate = new RestTemplate();
         RequestEntity<EmployeeModel> requestEntity = new RequestEntity<EmployeeModel>(employeeModel, HttpMethod.PUT, null);
-        ResponseEntity<EmployeeModel> response = restTemplate.exchange(BASE_URL+"employee/", HttpMethod.PUT, requestEntity, EmployeeModel.class);
+        ResponseEntity<EmployeeModel> response = restTemplate.exchange(BASE_URL + "employee/", HttpMethod.PUT, requestEntity, EmployeeModel.class);
         return Optional.of(response.getBody());
     }
+
     public static Optional<EmployeeModel> getEmployeeById(Integer employeeId) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/" + employeeId,
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL + "employee/" + employeeId,
                 HttpMethod.GET,
                 null,
                 EmployeeModel.class);
         return Optional.ofNullable(EmployeeModel.class.cast(responseEntity.getBody()));
     }
+
     public static Optional<List<EmployeeModel>> getAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL+"employee/",
+        ResponseEntity responseEntity = restTemplate.exchange(BASE_URL + "employee/",
                 HttpMethod.GET,
                 null,
                 List.class);
