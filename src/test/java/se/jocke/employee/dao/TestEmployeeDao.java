@@ -71,5 +71,26 @@ public class TestEmployeeDao {
         employeeDao.delete(updated);
     }
 
-    //TODO: test findAll , update & create ( a.k.a save ) , test delete
+
+    //delete
+    @Test
+    public void testDeleteEmployee(){
+        employeeDao.save(ENTRY);
+        Assertions.assertAll(
+                ()-> assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isPresent()),
+                ()-> assertEquals(ENTRY, employeeDao.findById(ENTRY.getEmployeeId()).get())
+        );
+        employeeDao.delete(ENTRY);
+        Assertions.assertEquals(Boolean.TRUE, employeeDao.findById(ENTRY.getEmployeeId()).isEmpty());
+    }
+
+    //findAll
+    @Test
+    public void testFindAllEmployees(){
+        List<EmployeeDatabaseEntry> employees = employeeDao.findAll();
+        Assertions.assertAll(
+                ()-> assertNotNull(employees),
+                ()-> assertEquals(3, employees.size())
+        );
+    }
 }

@@ -8,7 +8,6 @@ Feature: test employee api
     When the client updates firstname for employee to Runar
     Then the firstname is updated to Runar
 
-
   Scenario: client updates lastname for employee 1
     When the client updates lastname for employee to Carola
     Then the lastname is updated to Carola
@@ -31,10 +30,6 @@ Feature: test employee api
     And the error message is 404 : ["Entity with id 89 not found"]
     Then the employee 90 is deleted
     And the error message is 404 : ["Entity with id 90 not found"]
-
-
-
-
 
   Scenario: Create employee
       Given new employee
