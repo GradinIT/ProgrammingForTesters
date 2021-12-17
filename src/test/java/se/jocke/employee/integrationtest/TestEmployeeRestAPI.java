@@ -133,13 +133,10 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
     @Then("the employee {int} exists")
     public void theEmployeeExists(int arg0) {
-
     }
     @And("the client gets message {string}")
     public void theClientGetsMessage(String arg0) {
-        
     }
-
     @Given("new employee")
     public void newEmployee(DataTable dataTable) {
         makeDepartmentList(dataTable.asList())
