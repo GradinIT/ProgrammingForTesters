@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -22,10 +23,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class EmployeeDatabaseEntry {
     @Id
-    private Integer employeeId;
-    private String firstName;
-    private String lastName;
-    private BigDecimal salary;
-    private Boolean fullTime;
-    private Integer departmentId;
+    private @NonNull Integer employeeId;
+    private @NonNull String firstName;
+    private @NonNull String lastName;
+    private @NonNull BigDecimal salary;
+    private @NonNull Boolean fullTime;
+    private @NonNull Integer departmentId;
 }

@@ -2,7 +2,7 @@ package se.jocke.employee.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.jocke.common.aspects.TimeAndLogg;
+import se.jocke.common.aspects.annotation.TimeAndLogg;
 import se.jocke.employee.dao.EmployeeDao;
 import se.jocke.employee.dao.EmployeeDatabaseEntry;
 import se.jocke.common.dao.EntityAlreadyInStorageException;

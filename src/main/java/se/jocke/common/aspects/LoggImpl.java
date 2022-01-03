@@ -11,16 +11,13 @@ import se.jocke.common.util.GenericToStringBuilder;
 
 @Aspect
 @Configuration
-public class TimeAndLoggImpl extends BaseLogger{
+public class LoggImpl extends BaseLogger{
 
-    @Around("@annotation(se.jocke.common.aspects.annotation.TimeAndLogg)")
+    @Around("@annotation(se.jocke.common.aspects.annotation.Logg)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         logMethodeAndParameters(joinPoint);
         try {
-            long startTime = System.currentTimeMillis();
             Object returnValue = logResult(joinPoint.proceed());
-            long timeTaken = System.currentTimeMillis() - startTime;
-            logTimeSpent("Time Taken by {} is {} ms", joinPoint, timeTaken);
             return returnValue;
         } catch (Throwable throwable) {
             logException(throwable);
@@ -28,7 +25,4 @@ public class TimeAndLoggImpl extends BaseLogger{
         }
 
     }
-
-
-
 }
