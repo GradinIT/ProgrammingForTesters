@@ -131,18 +131,14 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
         Assertions.assertEquals(errorCode + " : [Entity with id "+employeeID+" not found]", exceptionThatWasThrown.getMessage());
     }
 
-    @Then("the employee {int} exists")
-    public void theEmployeeExists(int arg0) {
-    }
-    @And("the client gets message {string}") // Det kommer inget meddelande om att employee skapats. git
-    public void theClientGetsMessage(String arg0) {
-    }
     @Given("new employee")
     public void newEmployee(DataTable dataTable) {
         makeDepartmentList(dataTable.asList())
                 .stream()
                 .forEach(employeeModel -> createEmployee(employeeModel));
     }
-
+    @Then("the employee {int} exists")
+    public void theEmployeeExists(int arg0) {
+    }
 
 }

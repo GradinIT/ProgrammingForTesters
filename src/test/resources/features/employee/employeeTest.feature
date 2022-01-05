@@ -35,6 +35,5 @@ Feature: test employee api
       Given new employee
         | 91 | Klas | Kodning | 12500.50 | true | 1 |
       Then the employee 91 exists
-      And the client gets message "employee 91 is created"
 
 
