@@ -85,7 +85,7 @@ public class TestEmployeeDao {
 
     @Test
     @DisplayName("Test delete and restore ALL employees in DB")
-    public void testCreateAndDeleteAllEmployees() {
+    public void testDeleteAndRestoreAllEmployees() {
         // Get number of DB entries
         Long numberOfEmployees = employeeDao.count();
         // Create new list with existing employee
