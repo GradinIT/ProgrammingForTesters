@@ -2,6 +2,7 @@ package se.jocke.department.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import se.jocke.common.aspects.annotation.Logg;
 import se.jocke.common.aspects.annotation.TimeAndLogg;
 import se.jocke.department.dao.DepartmentDao;
 import se.jocke.department.dao.DepartmentDatabaseEntry;
@@ -17,12 +18,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentDao departmentDao;
 
-    @TimeAndLogg
+    @Logg
     public List<Department> getDepartments() {
         return DepartmentDatabaseEntryMapper.map(departmentDao.findAll());
     }
 
-    @TimeAndLogg
+    @Logg
     public Department getDepartmentById(Integer departmentId) {
         Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(departmentId);
         if (departmentDatabaseEntry.isPresent())
@@ -30,7 +31,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         throw new EntityNotFoundException(departmentId);
     }
 
-    @TimeAndLogg
+    @Logg
     public Department create(Department department) {
         Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId().getId());
         if(departmentDatabaseEntry.isPresent())
@@ -38,7 +39,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return DepartmentDatabaseEntryMapper.map(departmentDao.save(DepartmentDatabaseEntryMapper.map(department)));
     }
 
-    @TimeAndLogg
+    @Logg
     public Department update(Department department) {
         Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId().getId());
         if(departmentDatabaseEntry.isPresent())
@@ -46,7 +47,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         throw new EntityNotFoundException(department.getDepartmentId().getId());
     }
 
-    @TimeAndLogg
+    @Logg
     public Department remove(Department department) {
         Optional<DepartmentDatabaseEntry> departmentDatabaseEntry = departmentDao.findById(department.getDepartmentId().getId());
         if(departmentDatabaseEntry.isPresent()) {

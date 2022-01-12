@@ -4,6 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.CodeSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import se.jocke.common.util.GenericToStringBuilder;
 
 public class BaseLogger {
@@ -17,8 +18,9 @@ public class BaseLogger {
         CodeSignature methodSignature = (CodeSignature) joinPoint.getSignature();
         String[] sigParamNames = methodSignature.getParameterNames();
         Object[] params = joinPoint.getArgs();
-
-        LOGGER.info(joinPoint.getTarget().getClass() + "." + joinPoint.getSignature().getName());
+        String method = String.format("%s.%s",joinPoint.getTarget().getClass() ,joinPoint.getSignature().getName());
+        LOGGER.info(method);
+        MDC.put("api-method",method);
         for (int i = 0; i < params.length; ++i) {
             LOGGER.info(String.format("param %s = %s", sigParamNames[i], params[i]));
         }
@@ -30,6 +32,8 @@ public class BaseLogger {
     }
 
     void logTimeSpent(String s, ProceedingJoinPoint joinPoint, long timeTaken) {
+        String method = String.format("%s.%s",joinPoint.getTarget().getClass() ,joinPoint.getSignature().getName());
+        MDC.put("api-method",method);
         LOGGER.info(s,joinPoint,timeTaken);
     }
 }
