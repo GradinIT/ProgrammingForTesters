@@ -3,7 +3,7 @@ Feature: test employee api
     When the client calls /employee
     Then the client receives 3 employees
   Scenario: client updates firstname for employee 1
-    When the client updates firstname for employee to Runar
+    When the client updates firstname for employee to InteRunar
     Then the firstname is updated to Runar
   Scenario: client gets Employee 1
     When the client gets employee 1

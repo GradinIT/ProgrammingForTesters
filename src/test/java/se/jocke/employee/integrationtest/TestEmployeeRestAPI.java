@@ -46,7 +46,7 @@ public class TestEmployeeRestAPI extends EmployeeTestClient {
 
 
     @When("^the client updates firstname for employee to (.+)$")
-    public void the_client_updates_firstname_for_employee_to_runar(String employeeFirstName) {
+    public void the_client_updates_firstname_for_employee_to_interunar(String employeeFirstName) {
         employee = getEmployeeById(1).get();
         EmployeeModel update = EmployeeModel.builder()
                 .departmentId(employee.getDepartmentId())
