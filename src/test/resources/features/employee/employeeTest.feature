@@ -4,10 +4,10 @@ Feature: test employee api
     Then the client receives 3 employees
   Scenario: client updates firstname for employee 1
     When the client updates firstname for employee to InteRunar
-    Then the firstname is updated to Runar
+    Then the firstname is updated to InteRunar
   Scenario: client gets Employee 1
     When the client gets employee 1
-    Then employeename is Runar
+    Then employeename is InteRunar
   Scenario: Client delete Employee
     Given the employees
       | 88 | Socker-Conny | Slagträ | 12500.50 | false | 1 |
