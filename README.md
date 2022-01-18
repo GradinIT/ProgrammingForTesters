@@ -6,7 +6,7 @@
 [Lektioner](#Lektioner)
 
 
-This project is made by me in order to teach testing and test development
+This project is made by me in order to teach testing and test development by Joakim Gradin
 <a name="QuickStart"/>
 ##Quick Start 
 
