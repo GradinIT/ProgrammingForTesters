@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import se.jocke.SpringTestConfig;
 import se.jocke.config.H2JpaConfig;
 import se.jocke.config.LiquibaseConfigurer;
 
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class})
+@SpringBootTest(classes = {LiquibaseConfigurer.class, H2JpaConfig.class, SpringTestConfig.class})
 public class TestDepartmentDao {
     @Autowired
     DepartmentDao departmentDao;

@@ -1,5 +1,7 @@
 package se.jocke.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,19 +25,15 @@ import java.util.Properties;
 @EntityScan("se.jocke.*")
 @EnableTransactionManagement
 public class H2JpaConfig {
-    @Bean
-    public DataSource primaryDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("sa");
-        return dataSource;
-    }
+
+    @Autowired
+    @Qualifier("primaryDataSource")
+    private DataSource dataSource;
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(primaryDataSource());
+        em.setDataSource(dataSource);
         em.setPackagesToScan(new String[] { "se.jocke.*" });
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
