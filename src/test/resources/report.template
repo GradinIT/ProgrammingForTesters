@@ -16,7 +16,7 @@ UnitTests:
     .
 
     - UnitTestSuite
-        The Test Suite runns ....
+        The Test Suite runs ....
 
 IntegrationTest:
     What tech have you made use of to create your integrationtest
